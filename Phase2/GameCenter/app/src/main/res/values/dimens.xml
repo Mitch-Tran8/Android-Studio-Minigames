@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="lenacustum">840dp</dimen>
+    <dimen name="lenacustum1">700dp</dimen>
+    <dimen name="lenacustum2">600dp</dimen>
+    <dimen name="lenacustum3">400dp</dimen>
+    <dimen name="lenacustom">480</dimen>
+</resources>

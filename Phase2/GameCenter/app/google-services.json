@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "525817891932",
+    "firebase_url": "https://phase1-7173e.firebaseio.com",
+    "project_id": "phase1-7173e",
+    "storage_bucket": "phase1-7173e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525817891932:android:0c64e367ef4fcb24",
+        "android_client_info": {
+          "package_name": "phase1.gamecenter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "525817891932-c4m6cupnm4ubtih82ms1r67m2606h22m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNoA_-FeHqvE0jkjUlSgFY0tisuX4utdY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
