@@ -27,7 +27,7 @@
         <activity android:name=".SlidingTileMainPageActivity" />
         <activity android:name=".BoardComplexity" />
         <activity android:name=".UserScoreBoard" />
-        <activity android:name=".SetMaxUndoMoves"></activity>
+        <activity android:name=".DifficultyLevel"></activity>
     </application>
 
 </manifest>

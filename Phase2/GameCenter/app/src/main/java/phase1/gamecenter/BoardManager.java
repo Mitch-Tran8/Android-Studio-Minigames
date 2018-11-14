@@ -148,15 +148,15 @@ class BoardManager implements Serializable {
      */
     boolean puzzleSolved() {
         boolean solved = true;
-//        int lastId = 1;
-//
-//        for (Tile tile : board) {
-//            if (tile.getId() == lastId) {
-//                lastId++;
-//            } else {
-//                solved = false;
-//            }
-//        }
+        int lastId = 1;
+
+        for (Tile tile : board) {
+            if (tile.getId() == lastId) {
+                lastId++;
+            } else {
+                solved = false;
+            }
+        }
         if (Board.NUM_COLS == 3 && solved) {
             score = 50 - numOfMoves;
         } else if (Board.NUM_COLS == 4 && solved) {
@@ -212,6 +212,9 @@ class BoardManager implements Serializable {
      */
 
     boolean isValidUndo() {
+        if (maxUndoTimes == 0){
+            return false;
+        }
         return isValidUndo;
     }
 
@@ -229,6 +232,13 @@ class BoardManager implements Serializable {
                 isValidUndo = false;
             }
         }
+    }
+
+    /**
+     * sets the maximum undo times
+     */
+    void setMaxUndoTimes(int times){
+        maxUndoTimes = times;
     }
 
     /**
