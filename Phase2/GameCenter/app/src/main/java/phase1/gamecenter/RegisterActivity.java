@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,8 +20,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Register activity class. Allow the user to make a new account and save info onto firebase
@@ -61,6 +60,12 @@ public class RegisterActivity extends AppCompatActivity {
     private GameManager games;
     private Game game;
 
+    /**
+     * Regex expression for password strength: must be at least 6 characters long and have one letter
+     * and on number.
+     */
+    String passwordPattern = "(?=.*[0-9])(?=.*[a-zA-Z])[0-9a-zA-Z]{6,}";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,43 +98,50 @@ public class RegisterActivity extends AppCompatActivity {
      * This registers the user and saves their information in firebase
      */
     private void startRegister() {
-
         final String name = nameField.getText().toString().trim();
         final String email = emailField.getText().toString().trim();
         final String password = passwordField.getText().toString().trim();
 
         if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(email)) {
+            if (Patterns.EMAIL_ADDRESS.matcher(email).matches() && password.matches(passwordPattern)) {
 
-            /**
-             * create new user
-             */
-            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<com.google.firebase.auth.AuthResult> task) {
-                    if (task.isSuccessful()) {
+                /**
+                 * create new user
+                 */
+                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<com.google.firebase.auth.AuthResult> task) {
+                        if (task.isSuccessful()) {
 
-                        String user_id = mAuth.getCurrentUser().getUid();
+                            String user_id = mAuth.getCurrentUser().getUid();
 
+                            User users = new User(email, name, games);
+                            databaseReference.child(user_id).setValue(users);
+                            databaseReference.child(user_id).child("Game Collection").setValue(games);
 
-                        User users = new User(email, name, games);
-                        databaseReference.child(user_id).setValue(users);
-                        databaseReference.child(user_id).child("Game Collection").setValue(games);
+                            Log.d(RegisterActivity.class.getSimpleName(), "Authentication successful");
 
-                        Log.d(RegisterActivity.class.getSimpleName(), "Authentication successful");
+                            Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+                            startActivity(i);
 
-                        Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
-                        startActivity(i);
-
-                    } else {
-                        Toast.makeText(RegisterActivity.this, "Authentication failed.",
-                                Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(RegisterActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
-            });
+                });
 
-
+            } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches() && !password.matches(passwordPattern)) {
+                emailField.setError("Please enter a valid email address!");
+                passwordField.setError("Password must be at least 6 characters long and contain at least one letter and one number.");
+            }
+            else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                emailField.setError("Please enter a valid email address!");
+            }
+            else if(!password.matches(passwordPattern)) {
+                passwordField.setError("Password must be at least 6 characters long and contain at least one letter and one number.");
+            }
         }
-
     }
 
     /**
