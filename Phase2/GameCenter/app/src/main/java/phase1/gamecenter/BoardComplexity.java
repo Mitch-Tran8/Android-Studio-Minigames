@@ -32,6 +32,7 @@ public class BoardComplexity extends AppCompatActivity {
      * The main save file.
      */
     public static final String SAVE_FILENAME = "save_file.ser";
+
     /**
      * A temporary save file.
      */
@@ -114,7 +115,7 @@ public class BoardComplexity extends AppCompatActivity {
             public void onClick(View view) {
                 boardManager = new BoardManager(4, 4);
                 saveToFile(TEMP_SAVE_FILENAME);
-                switchToGame();
+                switchToDifficulty();
 
             }
         });
@@ -141,7 +142,7 @@ public class BoardComplexity extends AppCompatActivity {
             public void onClick(View view) {
                 boardManager = new BoardManager(5, 5);
                 saveToFile(TEMP_SAVE_FILENAME);
-                switchToGame();
+                switchToDifficulty();
             }
         });
 
@@ -153,7 +154,7 @@ public class BoardComplexity extends AppCompatActivity {
             public void onClick(View view) {
                 boardManager = new BoardManager(3, 3);
                 saveToFile(TEMP_SAVE_FILENAME);
-                switchToGame();
+                switchToDifficulty();
             }
 
         });
@@ -161,10 +162,10 @@ public class BoardComplexity extends AppCompatActivity {
     }
 
     /**
-     * Switch to the GameActivity view to play the game.
+     * Switch to the DifficultyLevel view to play the game.
      */
-    private void switchToGame() {
-        Intent tmp = new Intent(BoardComplexity.this, GameActivity.class);
+    private void switchToDifficulty() {
+        Intent tmp = new Intent(BoardComplexity.this, DifficultyLevel.class);
         saveToFile(StartingActivity.TEMP_SAVE_FILENAME);
         tmp.putExtra("user_id", user_id);
         startActivity(tmp);

@@ -33,7 +33,7 @@ public class GameActivity extends AppCompatActivity implements Observer, Seriali
     /**
      * The board manager.
      */
-    private phase1.gamecenter.BoardManager boardManager;
+    private BoardManager boardManager;
 
     /**
      * The buttons to display.
