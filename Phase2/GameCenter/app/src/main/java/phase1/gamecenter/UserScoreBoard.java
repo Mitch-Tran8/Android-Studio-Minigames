@@ -22,6 +22,9 @@ public class UserScoreBoard extends AppCompatActivity implements Serializable {
 
     public ArrayList<Object> topScoreList;
 
+    //public String userId;
+    public String userEmail;
+
     /**
      * The user's scoreboard will display the top 5 overall rankings and their personal top 5
      * rankings.
@@ -40,8 +43,13 @@ public class UserScoreBoard extends AppCompatActivity implements Serializable {
         Bundle data = getIntent().getBundleExtra("scoresBundle");
         this.scoreList = (ArrayList<Object>) data.getSerializable("scoreList");
         this.topScoreList = (ArrayList<Object>) data.getSerializable("topScoreList");
+        //this.userId = (String) data.getSerializable("userId");
+        this.userEmail = (String) data.getSerializable("userEmail");
 
         //----------Populating User Scoreboard---------
+
+        TextView userScoreBoard = findViewById(R.id.userScoreBoard);
+        userScoreBoard.setText(userEmail + " 's Scoreboard");
 
         if (scoreList.size() > 0) {
             scoreOne = findViewById(R.id.score_one);

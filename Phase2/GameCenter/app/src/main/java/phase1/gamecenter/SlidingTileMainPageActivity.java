@@ -29,7 +29,9 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
      */
     public static final String FILE_NAME = "save_current_score.ser";
 
-    public static final String SCORE_FILE = "score_file.ser";
+    //public static final String SCORE_FILE = "score_file.ser";
+    public static final String SCORE_FILE_2 = "score_file_2.ser";
+
 
     public static final String TOP_SCORE_FILE = "top_score_file.ser";
 
@@ -92,8 +94,8 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
                 readScores(FILE_NAME);
                 FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                 if (userList.size() != 0) {
-                    if (SCORE_FILE != null){
-                        readScoreList(SCORE_FILE);
+                    if (SCORE_FILE_2 != null){
+                        readScoreList(SCORE_FILE_2);
                         readTopScoreList(TOP_SCORE_FILE);
                     }
 
@@ -101,7 +103,7 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
                     for (int i = 0; i == userList.size() - 1; i++) {
                         if (userList.get(i).getUserEmail().equals(firebaseUser.getEmail())) {
                             userScoreBoard.scoreList.add(userList.get(i).getGameScore()); //create users score list
-                            saveScoreList(SCORE_FILE);
+                            saveScoreList(SCORE_FILE_2);
                         }
                     }
 
@@ -163,6 +165,8 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
                 Bundle scoresBundle = new Bundle();
                 scoresBundle.putSerializable("scoreList", userScoreBoard.scoreList);
                 scoresBundle.putSerializable("topScoreList", userScoreBoard.topScoreList);
+                scoresBundle.putSerializable("userEmail", firebaseUser.getEmail());
+                //scoresBundle.putSerializable("userId", user_id);
                 intent.putExtra("scoresBundle", scoresBundle);
                 startActivity(intent);
 
