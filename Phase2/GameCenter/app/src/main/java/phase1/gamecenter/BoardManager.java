@@ -128,8 +128,174 @@ class BoardManager implements Serializable {
         }
 
         Collections.shuffle(tiles);
+
+        while (!(solvableBoard(tiles, Board.NUM_ROWS))) { //while board is not solvable, keep shuffling the tiles
+            Collections.shuffle(tiles);
+        }
         this.board = new Board(tiles);
     }
+
+    /**
+     * Returns whether or not the Board is solvable
+     *
+     * @return whether the board is solvable or not
+     */
+    public boolean solvableBoard(List<Tile> tiles, int boardRows) {
+        int inversions = countInversions(tiles);
+        int blankTileRow = getBlankTileRow(tiles);
+
+        if (boardRows % 2 == 1) {
+            if (inversions % 2 == 0) { //odd board + even inversions
+                return true;
+            }
+        }
+
+        if (boardRows % 2 == 0) { //even board
+            if (inversions % 2 == 1 && blankTileRow % 2 == 0) { //odd inversions + even BT row
+                return true;
+            }
+
+            if (inversions % 2 == 0 && blankTileRow % 2 == 1) { //even inversions + odd BT row
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns the number of inversion in the board's tiles
+     *
+     * @param tiles the tiles of the board
+     * @return number of inversions in the board's tiles
+     */
+    public int countInversions(List<Tile> tiles) {
+        int inversions = 0;
+
+        ArrayList<Integer> tilesValues = getTilesValues(tiles);
+
+        for (int i = 0; i <= tilesValues.size() - 1; i++) {
+            for (int j = i + 1; j <= tilesValues.size() - 1; j++) {
+                if (tilesValues.get(i) > tilesValues.get(j)) {
+                    inversions++;
+                }
+            }
+        }
+
+        return inversions;
+    }
+
+    /**
+     * Return an arraylist of the integer values of the board's tiles in order
+     *
+     * @param tiles List of tiles that board will be populated with
+     * @return arraylist of the integer values of the tiles in order
+     */
+    public ArrayList<Integer> getTilesValues(List<Tile> tiles) { //UNITTEST OKAY!
+
+        ArrayList<Integer> tilesValues = new ArrayList<>();
+
+        //---create arraylist with integer values of board's tiles in order, while skipping the blank tile
+
+        if (tiles.size() == 9) {  //3x3 board, blank tile has id = 9
+            for (Tile x : tiles) {
+                if (x.getId() != 9) {
+                    tilesValues.add(x.getId());
+                }
+            }
+        }
+
+        if (tiles.size() == 16) { //4x4 board
+            for (Tile x : tiles) {
+                if (x.getId() != 16) {
+                    tilesValues.add(x.getId());
+                }
+            }
+        }
+
+        if (tiles.size() == 25) { //5x5 board
+            for (Tile x : tiles) {
+                if (x.getId() != 25) {
+                    tilesValues.add(x.getId());
+                }
+            }
+        }
+
+        return tilesValues;
+
+    }
+
+    /**
+     * Return the row of the blank tile in the board counting from the bottom of the board
+     *
+     * @return the row of the blank tile in the board
+     */
+    public int getBlankTileRow(List<Tile> tiles) { //UNIT TEST OKAY CONFIRMED
+        int blankTileIndex = indexBlankTile(tiles);
+
+        if (tiles.size() == 9) {
+            if (blankTileIndex >= 6) {
+                return 1;
+            } else if (blankTileIndex >= 3) {
+                return 2;
+            } else {
+                return 3;
+            }
+        }
+
+        if (tiles.size() == 16) {
+            if (blankTileIndex >= 12) {
+                return 1;
+            } else if (blankTileIndex >= 8) {
+                return 2;
+            } else if (blankTileIndex >= 4) {
+                return 3;
+            } else {
+                return 4;
+            }
+        }
+
+        if (tiles.size() == 25) {
+            if (blankTileIndex >= 20) {
+                return 1;
+            } else if (blankTileIndex >= 15) {
+                return 2;
+            } else if (blankTileIndex >= 10) {
+                return 3;
+            } else if (blankTileIndex >= 5) {
+                return 4;
+            } else {
+                return 5;
+            }
+        }
+        return 0; //never will be this case...
+    }
+
+    public int indexBlankTile(List<Tile> tiles) { //UNIT TEST CONFIRMED WORKS OKAY
+        int blankTileIndex;
+        int i = 0;
+
+        if (tiles.size() == 9) {
+            while (i <= tiles.size() - 1 && tiles.get(i).getId() != 9) {
+                i++;
+            }
+        }
+
+        if (tiles.size() == 16) {
+            while (i <= tiles.size() - 1 && tiles.get(i).getId() != 16) {
+                i++;
+            }
+        }
+
+        if (tiles.size() == 25) {
+            while (i <= tiles.size() - 1 && tiles.get(i).getId() != 25) {
+                i++;
+            }
+        }
+        blankTileIndex = i;
+        return blankTileIndex;
+    }
+
 
     /**
      * returns the number of moves made
