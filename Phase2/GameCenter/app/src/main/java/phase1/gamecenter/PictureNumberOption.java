@@ -26,7 +26,7 @@ public class PictureNumberOption extends AppCompatActivity {
         number_button = findViewById(R.id.number_button);
         picture_button = findViewById(R.id.picture_button);
 
-        /**
+        /*
          * activate number button
          * If number button clicked, take user to number game's BoardComplexity page
          */
@@ -38,7 +38,7 @@ public class PictureNumberOption extends AppCompatActivity {
             }
         });
 
-        /**
+        /*
          * activate picture button
          * If picture button clicked, take user to upload a picture page from their photo gallery
          */

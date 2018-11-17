@@ -40,6 +40,7 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
      */
     Button startButton;
     Button rankingsButton;
+    Button backButton;
 
     /**
      * The current user's scoreboard
@@ -279,6 +280,19 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Back button from the game to the main page
+     */
+    @Override
+    public void onBackPressed() {
+        GameCenterMainActivity gameCentre= new GameCenterMainActivity();
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        Intent intent = new Intent(SlidingTileMainPageActivity.this, GameCenterMainActivity.class);
+
+        startActivity(intent); //GO TO GAME CENTRE
     }
 }
 
