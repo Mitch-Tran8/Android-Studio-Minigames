@@ -1,9 +1,6 @@
 package phase1.gamecenter;
 
-import android.widget.Toast;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -59,11 +56,12 @@ class BoardManager implements Serializable {
      */
     private boolean isValidUndo;
 
+
     /**
      * Manage a board that has been pre-populated.
      *
-     * @param board the board
      */
+    BoardManager(){}
     public BoardManager(Board board, int score) {
         this.board = board;
         this.score = score;
@@ -136,7 +134,7 @@ class BoardManager implements Serializable {
     }
 
     /**
-     * Returns whether or not the Board is solvable
+     * Returns whether or not the ColourBoard is solvable
      *
      * @return whether the board is solvable or not
      */
