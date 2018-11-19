@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,6 +28,10 @@ public class LoginActivity extends AppCompatActivity {
      * The login button
      */
     Button loginButton;
+    /**
+     * The progress bar
+     */
+    ProgressBar mProgressBar;
     /**
      * The register button that leads to the register page
      */
@@ -55,6 +60,8 @@ public class LoginActivity extends AppCompatActivity {
 
         loginButton = findViewById(R.id.login_button);
         go_to_register_button = findViewById(R.id.go_to_register_button);
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar2);
+        mProgressBar.setVisibility(View.GONE);
         emailField = findViewById(R.id.login_email);
         passwordField = findViewById(R.id.login_password);
         mAuth = FirebaseAuth.getInstance();
@@ -63,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
          * activate register button
          * If register button clicked, take user to RegisterActivity page
          */
+
         go_to_register_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            mProgressBar.setVisibility(View.VISIBLE);
 
                             user_id = mAuth.getCurrentUser().getUid();
                             Toast.makeText(LoginActivity.this, "Login Succesful", Toast.LENGTH_LONG).show();
@@ -104,6 +113,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+
 
 
 }

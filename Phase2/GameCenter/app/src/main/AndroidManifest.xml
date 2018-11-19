@@ -28,7 +28,8 @@
         <activity android:name=".BoardComplexity" />
         <activity android:name=".UserScoreBoard" />
         <activity android:name="ColourGameActivity" />
-        <activity android:name="ColourStartingActivity"></activity>
+        <activity android:name="ColourStartingActivity">
+        </activity>
         <activity android:name=".Profile" />
         <activity android:name=".DifficultyLevel" />
     </application>
