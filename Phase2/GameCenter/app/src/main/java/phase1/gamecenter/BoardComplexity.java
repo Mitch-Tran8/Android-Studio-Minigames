@@ -23,7 +23,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
- * Board Complexity Activity
+ * ColourBoard Complexity Activity
  */
 public class BoardComplexity extends AppCompatActivity {
 

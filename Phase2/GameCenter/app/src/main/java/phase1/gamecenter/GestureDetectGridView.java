@@ -27,6 +27,7 @@ public class GestureDetectGridView extends GridView {
     private float mTouchX;
     private float mTouchY;
     private BoardManager boardManager;
+    private ColourBoardManager colourBoardManager;
 
     public GestureDetectGridView(Context context) {
         super(context);
@@ -105,6 +106,10 @@ public class GestureDetectGridView extends GridView {
 
     public void setBoardManager(BoardManager boardManager) {
         this.boardManager = boardManager;
+        mController.setBoardManager(boardManager);
+    }
+    public void setBoardManager(ColourBoardManager boardManager) {
+        this.colourBoardManager = boardManager;
         mController.setBoardManager(boardManager);
     }
 }

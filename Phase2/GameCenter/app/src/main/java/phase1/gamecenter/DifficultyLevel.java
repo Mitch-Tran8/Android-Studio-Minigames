@@ -120,7 +120,7 @@ public class DifficultyLevel extends AppCompatActivity {
     }
 
     /**
-     * Switch to the GameActivity view to play the game.
+     * Switch to the ColourGameActivity view to play the game.
      */
     private void switchToGame() {
         Intent tmp = new Intent(DifficultyLevel.this, GameActivity.class);

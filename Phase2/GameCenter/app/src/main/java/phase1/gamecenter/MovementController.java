@@ -13,6 +13,7 @@ public class MovementController {
      * The BoardManager that MovementController is controlling.
      */
     private BoardManager boardManager = null;
+    private ColourBoardManager colourBoardManager = null;
 
     /**
      * The MovementController
@@ -27,6 +28,9 @@ public class MovementController {
     public void setBoardManager(BoardManager boardManager) {
         this.boardManager = boardManager;
     }
+    public void setBoardManager(ColourBoardManager boardManager) {
+        this.colourBoardManager = boardManager;
+    }
 
     /**
      * Processing a tap movement.
@@ -35,16 +39,31 @@ public class MovementController {
      * @param display
      */
     public void processTapMovement(Context context, int position, boolean display) {
-        if (boardManager.isValidTap(position)) {
-            boardManager.touchMove(position);
-            if (boardManager.puzzleSolved()) {
-                String score = Integer.toString(boardManager.getScore());
-                Toast.makeText(context, "YOU WIN! Score: " + score, Toast.LENGTH_LONG).show();
-                //gameActivity.switchToMain();
+        if(boardManager != null) {
+            if (boardManager.isValidTap(position)) {
+                boardManager.touchMove(position);
+                if (boardManager.puzzleSolved()) {
+                    String score = Integer.toString(boardManager.getScore());
+                    Toast.makeText(context, "YOU WIN! Score: " + score, Toast.LENGTH_LONG).show();
+                    //gameActivity.switchToMain();
 
+                }
+            } else {
+                Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();
+            if (colourBoardManager.isValidTap(position)) {
+                colourBoardManager.touchMove(position);
+                if (colourBoardManager.puzzleSolved()) {
+                    //ToDo: implement a getScore method in ColourBoardManager and print the score when you win
+                    //String score = Integer.toString(colourBoardManager.getScore());
+                    Toast.makeText(context, "YOU WIN! Score: " , Toast.LENGTH_LONG).show();
+                    //gameActivity.switchToMain();
+
+                }
+            } else {
+                Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

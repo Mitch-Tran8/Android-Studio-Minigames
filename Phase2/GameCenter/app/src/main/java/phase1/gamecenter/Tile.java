@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 
 /**
- * A Tile in a sliding tiles puzzle.
+ * A ColourTile in a sliding tiles puzzle.
  */
 public class Tile implements Comparable<Tile>, Serializable {
 
@@ -41,7 +41,7 @@ public class Tile implements Comparable<Tile>, Serializable {
     }
 
     /**
-     * A Tile with id and background. The background may not have a corresponding image.
+     * A ColourTile with id and background. The background may not have a corresponding image.
      *
      * @param id         the id
      * @param background the background
@@ -51,6 +51,7 @@ public class Tile implements Comparable<Tile>, Serializable {
         this.background = background;
     }
 
+    public Tile(){}
     /**
      * A tile with a background id; look up and set the id.
      *

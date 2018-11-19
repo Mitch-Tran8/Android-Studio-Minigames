@@ -12,23 +12,28 @@ import java.util.List;
 /**
  * The sliding tiles board.
  */
-public class Board extends Observable implements Serializable, Iterable<Tile> {
+public class ColourBoard extends Observable implements Serializable, Iterable<ColourTile> {
+
+
+    public static final String up = "up";
+    public static final String down = "down";
+    public static final String left = "left";
+    public static final String right = "right";
 
     /**
      * The number of rows.
      */
-    static int NUM_ROWS;
+    final static int NUM_ROWS = 4;
 
     /**
      * The number of rows.
      */
-    static int NUM_COLS;
+    final static int NUM_COLS = 4;
 
     /**
      * The tiles on the board in row-major order.
      */
-    private Tile[][] tiles = new Tile[NUM_ROWS][NUM_COLS];
-
+    private ColourTile[][] tiles = new ColourTile[NUM_ROWS][NUM_COLS];
 
     /**
      * A new board of tiles in row-major order.
@@ -36,11 +41,11 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      *
      * @param tiles the tiles for the board
      */
-    Board(List<Tile> tiles) {
-        Iterator<Tile> iter = tiles.iterator();
+    ColourBoard(List<ColourTile> tiles) {
+        Iterator<ColourTile> iter = tiles.iterator();
 
-        for (int row = 0; row != Board.NUM_ROWS; row++) {
-            for (int col = 0; col != Board.NUM_COLS; col++) {
+        for (int row = 0; row != ColourBoard.NUM_ROWS; row++) {
+            for (int col = 0; col != ColourBoard.NUM_COLS; col++) {
                 this.tiles[row][col] = iter.next();
             }
         }
@@ -62,7 +67,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      * @param col the tile column
      * @return the tile at (row, col)
      */
-    Tile getTile(int row, int col) {
+    ColourTile getTile(int row, int col) {
         return tiles[row][col];
     }
 
@@ -76,8 +81,8 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      */
     void swapTiles(int row1, int col1, int row2, int col2) {
 
-        Tile tile1 = getTile(row1, col1);
-        Tile tile2 = getTile(row2, col2);
+        ColourTile tile1 = getTile(row1, col1);
+        ColourTile tile2 = getTile(row2, col2);
 
         tiles[row1][col1] = tile2;
         tiles[row2][col2] = tile1;
@@ -85,6 +90,8 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         setChanged();
         notifyObservers();
     }
+
+
 
     @Override
     public String toString() {
@@ -95,7 +102,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
 
     @Override
     @NonNull
-    public Iterator<Tile> iterator() {
+    public Iterator<ColourTile> iterator() {
         return new BoardIterator();
     }
 
@@ -104,7 +111,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
      * The sliding tiles board iterator.
      * Subclass to the board class.
      */
-    private class BoardIterator implements Iterator<Tile> {
+    private class BoardIterator implements Iterator<ColourTile> {
 
         private int nextColumn = 0;
         int row = 0;
@@ -115,12 +122,12 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         }
 
         @Override
-        public Tile next() {
+        public ColourTile next() {
             if (!hasNext()) {
                 return null;
             }
 
-            Tile current = getTile(row, nextColumn);
+            ColourTile current = getTile(row, nextColumn);
 
             if (nextColumn == NUM_COLS - 1) {
                 row++;

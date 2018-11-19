@@ -9,17 +9,14 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
-
 /**
  * The initial activity for the sliding puzzle tile game.
  */
-public class StartingActivity extends AppCompatActivity {
+public class ColourStartingActivity extends AppCompatActivity {
 
     /**
      * The main save file.
@@ -32,19 +29,18 @@ public class StartingActivity extends AppCompatActivity {
     /**
      * The board manager.
      */
-    private BoardManager boardManager;
+    private ColourBoardManager boardManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boardManager = new BoardManager(4, 4);
+        boardManager = new ColourBoardManager();
         saveToFile(TEMP_SAVE_FILENAME);
 
         setContentView(R.layout.activity_starting_);
         addStartButtonListener();
         addLoadButtonListener();
         addSaveButtonListener();
-        addRankingsButtonListener();
     }
 
     /**
@@ -55,7 +51,7 @@ public class StartingActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boardManager = new BoardManager(4, 4);
+                boardManager = new ColourBoardManager();
                 switchToGame();
             }
         });
@@ -106,18 +102,6 @@ public class StartingActivity extends AppCompatActivity {
         Toast.makeText(this, "Game Saved", Toast.LENGTH_SHORT).show();
     }
 
-    private void addRankingsButtonListener() {
-        Button rankingsButton = findViewById(R.id.RankingsButton);
-        rankingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), UserScoreBoard.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-    }
-
     /**
      * Read the temporary board from disk.
      */
@@ -131,8 +115,8 @@ public class StartingActivity extends AppCompatActivity {
      * Switch to the ColourGameActivity view to play the game.
      */
     private void switchToGame() {
-        Intent tmp = new Intent(this, GameActivity.class);
-        saveToFile(StartingActivity.TEMP_SAVE_FILENAME);
+        Intent tmp = new Intent(this, ColourGameActivity.class);
+        saveToFile(ColourStartingActivity.TEMP_SAVE_FILENAME);
         startActivity(tmp);
     }
 
@@ -147,7 +131,7 @@ public class StartingActivity extends AppCompatActivity {
             InputStream inputStream = this.openFileInput(fileName);
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
-                boardManager = (BoardManager) input.readObject();
+                boardManager = (ColourBoardManager) input.readObject();
                 inputStream.close();
             }
         } catch (FileNotFoundException e) {
@@ -169,7 +153,6 @@ public class StartingActivity extends AppCompatActivity {
             ObjectOutputStream outputStream = new ObjectOutputStream(
                     this.openFileOutput(fileName, MODE_PRIVATE));
             outputStream.writeObject(boardManager);
-
             outputStream.close();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
