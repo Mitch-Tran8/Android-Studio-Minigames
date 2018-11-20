@@ -56,6 +56,9 @@ class BoardManager implements Serializable {
      */
     private boolean isValidUndo;
 
+    static int NUM_ROWS;
+    static int NUM_COLS;
+
 
     /**
      * Manage a board that has been pre-populated.
@@ -102,14 +105,17 @@ class BoardManager implements Serializable {
     BoardManager(int row, int col) {
         Board.NUM_COLS = col;
         Board.NUM_ROWS = row;
-        if (col == 3) {
+        NUM_COLS= col;
+        NUM_ROWS = row;
+
+        if (Board.NUM_COLS == 3) {
             setComplexity("3x3");
         }
-        if (col == 4) {
+        if (Board.NUM_COLS == 4) {
             setComplexity("4x4");
         }
 
-        if (col == 5) {
+        if (Board.NUM_COLS == 5) {
             setComplexity("5x5");
 
         }

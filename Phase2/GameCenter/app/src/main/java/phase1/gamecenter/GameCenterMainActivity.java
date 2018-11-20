@@ -47,7 +47,7 @@ public class GameCenterMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game_center_main);
         slidingtilesbutton = findViewById(R.id.slidingtilesbutton);
         colourTilesButton = findViewById(R.id.colourtilesbutton);
-        profileButton = findViewById(R.id.profile_button);
+        logoutButton = findViewById(R.id.logoutPageButton);
 
         /*
          * Activate sliding tiles button
@@ -76,14 +76,6 @@ public class GameCenterMainActivity extends AppCompatActivity {
         /*
          * Activate profile button
          */
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(GameCenterMainActivity.this, Profile.class);
-                i.putExtra("user_id", user_id);
-                startActivity(i);
-            }
-        });
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override

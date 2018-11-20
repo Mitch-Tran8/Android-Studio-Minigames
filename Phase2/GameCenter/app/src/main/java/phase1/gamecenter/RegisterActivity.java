@@ -78,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
         passwordField = (EditText) findViewById(R.id.passwordField);
         emailField = (EditText) findViewById(R.id.emailField);
         register_button = (Button) findViewById(R.id.register_button);
-        game = new Game("Sliding tiles", "null", "null");
+        game = new Game("Sliding tiles", 4, 4);
         games = new GameManager(game);
 
 

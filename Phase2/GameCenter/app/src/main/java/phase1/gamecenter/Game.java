@@ -5,29 +5,29 @@ public class Game<T> {
     /**
      * The current game state
      */
-    private T gameState;
+    private String gameName;
 
     /**
      * The current game score
      */
-    private T gameScore;
+    private T first;
 
     /**
      * The game's name
      */
-    private String gameName;
+    private T second;
 
     /**
      * A game
      *
      * @param gameName  the game's name
-     * @param gameState the game's current state
-     * @param gameScore the game's score
+     * @param first
+     * @param second
      */
-    public Game(String gameName, T gameState, T gameScore) {
-        this.gameState = gameState;
-        this.gameScore = gameScore;
+    public Game(String gameName, T first, T second) {
         this.gameName = gameName;
+        this.first = first;
+        this.second = second;
     }
 
     /**
@@ -35,8 +35,8 @@ public class Game<T> {
      *
      * @return the game's score
      */
-    public T getScore() {
-        return gameScore;
+    public T getFirst() {
+        return first;
     }
 
     /**
@@ -44,8 +44,8 @@ public class Game<T> {
      *
      * @return the game's state
      */
-    public T getGameState() {
-        return gameState;
+    public T getSecond() {
+        return second;
     }
 
     /**

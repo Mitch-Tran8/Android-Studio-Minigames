@@ -67,14 +67,6 @@ public class GameActivity extends AppCompatActivity implements Observer, Seriali
     public static ArrayList<EmailAndScore> saveList = new ArrayList<>();
 
     /**
-     * Constants for swiping directions. Should be an enum, probably.
-     */
-    public static final int UP = 1;
-    public static final int DOWN = 2;
-    public static final int LEFT = 3;
-    public static final int RIGHT = 4;
-
-    /**
      * Save button
      */
     private Button saveButton;
@@ -203,8 +195,8 @@ public class GameActivity extends AppCompatActivity implements Observer, Seriali
         Board board = boardManager.getBoard();
         int nextPos = 0;
         for (Button b : tileButtons) {
-            int row = nextPos / Board.NUM_ROWS;
-            int col = nextPos % Board.NUM_COLS;
+            int row = nextPos / board.NUM_ROWS;
+            int col = nextPos % board.NUM_COLS;
             b.setBackgroundResource(board.getTile(row, col).getBackground());
             nextPos++;
         }
@@ -232,6 +224,9 @@ public class GameActivity extends AppCompatActivity implements Observer, Seriali
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
                 boardManager = (BoardManager) input.readObject();
+                Board.NUM_ROWS = boardManager.NUM_ROWS;
+                Board.NUM_COLS = boardManager.NUM_COLS;
+
                 inputStream.close();
             }
         } catch (FileNotFoundException e) {
