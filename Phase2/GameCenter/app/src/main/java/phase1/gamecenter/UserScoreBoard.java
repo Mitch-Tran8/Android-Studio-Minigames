@@ -12,7 +12,7 @@ import android.content.Intent;
 
 public class
 UserScoreBoard extends AppCompatActivity implements Serializable {
-    
+
     public ArrayList<Object> scoreList;
 
     public ArrayList<Object> topScoreList;
@@ -68,7 +68,6 @@ UserScoreBoard extends AppCompatActivity implements Serializable {
         }
         int integer = 0;
         for (int i = 0; i < num1;) {
-            System.out.println(topScoreList.get(i));
             int name_id = getResources().getIdentifier("top_score_user" + integer, "id", getPackageName());
             int score_id = getResources().getIdentifier("top_score" + integer, "id", getPackageName());
             TextView textView = (TextView) findViewById(name_id);
