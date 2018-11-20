@@ -56,6 +56,10 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (mAuth.getInstance().getCurrentUser() != null) {
+            startActivity(new Intent(LoginActivity.this, GameCenterMainActivity.class));
+            finish();
+        }
         setContentView(R.layout.activity_login);
 
         loginButton = findViewById(R.id.login_button);
@@ -74,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         go_to_register_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mProgressBar.setVisibility(View.VISIBLE);
                 Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(i);
             }
@@ -88,6 +93,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+
                 mFirebaseAuth.signInWithEmailAndPassword(emailField.getText().toString(), passwordField.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -113,7 +119,5 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
-
-
 
 }
