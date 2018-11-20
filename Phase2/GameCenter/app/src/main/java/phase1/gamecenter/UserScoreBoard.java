@@ -10,14 +10,9 @@ import android.widget.TextView;
 import android.content.Intent;
 
 
-public class UserScoreBoard extends AppCompatActivity implements Serializable {
-
-    public TextView topScoreUser1, topScoreUser2, topScoreUser3, topScoreUser4, topScoreUser5;
-
-    public TextView scoreOne, scoreTwo, scoreThree, scoreFour, scoreFive;
-
-    public TextView topScoreOne, topScoreTwo, topScoreThree, topScoreFour, topScoreFive;
-
+public class
+UserScoreBoard extends AppCompatActivity implements Serializable {
+    
     public ArrayList<Object> scoreList;
 
     public ArrayList<Object> topScoreList;
@@ -39,7 +34,6 @@ public class UserScoreBoard extends AppCompatActivity implements Serializable {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rankings_screen);
-
         Bundle data = getIntent().getBundleExtra("scoresBundle");
         this.scoreList = (ArrayList<Object>) data.getSerializable("scoreList");
         this.topScoreList = (ArrayList<Object>) data.getSerializable("topScoreList");
@@ -51,62 +45,38 @@ public class UserScoreBoard extends AppCompatActivity implements Serializable {
         TextView userScoreBoard = findViewById(R.id.userScoreBoard);
         userScoreBoard.setText(userEmail + " 's Scoreboard");
 
-        if (scoreList.size() > 0) {
-            scoreOne = findViewById(R.id.score_one);
-            scoreOne.setText((scoreList.get(0)).toString());
+        int num = 0;
+        if (scoreList.size() <= 5) {
+            num = scoreList.size();
         }
-        if (scoreList.size() > 1) {
-            scoreTwo = findViewById(R.id.score_two);
-            scoreTwo.setText((scoreList.get(1)).toString());
+        else{
+            num = 5;
         }
-        if (scoreList.size() > 2) {
-            scoreThree = findViewById(R.id.score_three);
-            scoreThree.setText((scoreList.get(2)).toString());
-        }
-        if (scoreList.size() > 3) {
-            scoreFour = findViewById(R.id.score_four);
-            scoreFour.setText((scoreList.get(3)).toString());
-        }
-        if (scoreList.size() > 4) {
-            scoreFive = findViewById(R.id.score_five);
-            scoreFive.setText((scoreList.get(4)).toString());
+        for (int i = 0; i < num; i++) {
+            int id = getResources().getIdentifier("score" + i, "id", getPackageName());
+            TextView textView = (TextView) findViewById(id);
+            textView.setText(scoreList.get(i).toString());
         }
 
         //-----------Populating Game Scoreboard----------
-        if (topScoreList.size() > 0) {
-            topScoreUser1 = findViewById(R.id.top_score_user1);
-            topScoreUser1.setText((topScoreList.get(0)).toString());
-
-            topScoreOne = findViewById(R.id.top_score_one);
-            topScoreOne.setText((topScoreList.get(1)).toString());
+        int num1 = 0;
+        if (topScoreList.size() <= 10) {
+            num1 = topScoreList.size();
         }
-        if (topScoreList.size() > 2) {
-            topScoreUser2 = findViewById(R.id.top_score_user2);
-            topScoreUser2.setText((topScoreList.get(2)).toString());
-
-            topScoreTwo = findViewById(R.id.top_score_two);
-            topScoreTwo.setText((topScoreList.get(3)).toString());
+        else{
+            num1 = 10;
         }
-        if (topScoreList.size() > 4) {
-            topScoreUser3 = findViewById(R.id.top_score_user3);
-            topScoreUser3.setText((topScoreList.get(4)).toString());
-
-            topScoreThree = findViewById(R.id.top_score_three);
-            topScoreThree.setText((topScoreList.get(5)).toString());
-        }
-        if (topScoreList.size() > 6) {
-            topScoreUser4 = findViewById(R.id.top_score_user4);
-            topScoreUser4.setText((topScoreList.get(6)).toString());
-
-            topScoreFour = findViewById(R.id.top_score_four);
-            topScoreFour.setText((topScoreList.get(7)).toString());
-        }
-        if (topScoreList.size() > 8) {
-            topScoreUser5 = findViewById(R.id.top_score_user5);
-            topScoreUser5.setText((topScoreList.get(8)).toString());
-
-            topScoreFive = findViewById(R.id.top_score_five);
-            topScoreFive.setText((topScoreList.get(9)).toString());
+        int integer = 0;
+        for (int i = 0; i < num1;) {
+            System.out.println(topScoreList.get(i));
+            int name_id = getResources().getIdentifier("top_score_user" + integer, "id", getPackageName());
+            int score_id = getResources().getIdentifier("top_score" + integer, "id", getPackageName());
+            TextView textView = (TextView) findViewById(name_id);
+            textView.setText(topScoreList.get(i).toString());
+            textView = (TextView) findViewById(score_id);
+            textView.setText(topScoreList.get(i + 1).toString());
+            i+=2;
+            integer+=1;
         }
     }
 
