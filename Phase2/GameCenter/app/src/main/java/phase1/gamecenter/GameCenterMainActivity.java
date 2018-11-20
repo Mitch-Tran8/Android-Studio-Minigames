@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 /**
  * Game Center Activity.
  */
+
 public class GameCenterMainActivity extends AppCompatActivity {
 
     /**

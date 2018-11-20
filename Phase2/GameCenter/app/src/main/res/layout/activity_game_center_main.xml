@@ -59,4 +59,16 @@
         app:layout_constraintVertical_bias="1.0"
         tools:srcCompat="@tools:sample/avatars[14]" />
 
+    <Button
+        android:id="@+id/colourtilesbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Colour Tiles"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/slidingtilesbutton" />
+
 </android.support.constraint.ConstraintLayout>
