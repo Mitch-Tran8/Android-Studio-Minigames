@@ -28,7 +28,7 @@ import java.util.Observer;
 /**
  * The game activity.
  */
-public class GameActivity extends AppCompatActivity implements Observer, Serializable {
+public class  GameActivity extends AppCompatActivity implements Observer, Serializable {
 
     /**
      * The board manager.

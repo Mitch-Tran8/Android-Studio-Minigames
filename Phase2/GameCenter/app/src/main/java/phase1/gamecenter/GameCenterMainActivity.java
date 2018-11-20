@@ -27,6 +27,11 @@ public class GameCenterMainActivity extends AppCompatActivity {
      */
     ImageButton profileButton;
 
+    /*
+     * the profile button
+     */
+    ImageButton colortileButton;
+
     /**
      * Logout page button
      */
@@ -48,7 +53,6 @@ public class GameCenterMainActivity extends AppCompatActivity {
         slidingtilesbutton = findViewById(R.id.slidingtilesbutton);
         colourTilesButton = findViewById(R.id.colourtilesbutton);
         logoutButton = findViewById(R.id.logoutPageButton);
-
         /*
          * Activate sliding tiles button
          */
