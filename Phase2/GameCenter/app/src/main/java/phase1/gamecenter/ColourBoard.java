@@ -91,8 +91,6 @@ public class ColourBoard extends Observable implements Serializable, Iterable<Co
         notifyObservers();
     }
 
-
-
     @Override
     public String toString() {
         return "ColourBoard{" +

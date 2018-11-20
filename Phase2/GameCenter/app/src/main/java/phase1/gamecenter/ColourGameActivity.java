@@ -4,8 +4,10 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,7 +19,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * The game activity.
+ * The game activity with.
  */
 public class ColourGameActivity extends AppCompatActivity implements Observer {
 
@@ -30,6 +32,11 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
      * The buttons to display.
      */
     private ArrayList<Button> tileButtons;
+
+    /**
+     * Save button
+     */
+    private Button saveButton;
 
     /**
      * Constants for swiping directions. Should be an enum, probably.
@@ -59,6 +66,8 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
         loadFromFile(ColourStartingActivity.TEMP_SAVE_FILENAME);
         createTileButtons(this);
         setContentView(R.layout.activity_main);
+        addSaveButtonListener();
+
 
         // Add View to activity
         gridView = findViewById(R.id.grid);
@@ -112,6 +121,22 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
             b.setBackgroundResource(board.getTile(row, col).getBackground());
             nextPos++;
         }
+    }
+
+    /**
+     * Activate the save button
+     */
+    private void addSaveButtonListener() {
+        saveButton = findViewById(R.id.save_button);
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveToFile(BoardComplexity.TEMP_SAVE_FILENAME);
+                Toast.makeText(ColourGameActivity.this, "Succesfully saved", Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
 
     /**

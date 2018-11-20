@@ -27,8 +27,8 @@
 
     <ImageButton
         android:id="@+id/slidingtilesbutton"
-        android:layout_width="259dp"
-        android:layout_height="256dp"
+        android:layout_width="173dp"
+        android:layout_height="167dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -37,10 +37,10 @@
         android:fadingEdge="horizontal|vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.11"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.532"
+        app:layout_constraintVertical_bias="0.426"
         app:srcCompat="@drawable/sliding_logo" />
 
     <ImageButton
@@ -58,5 +58,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         tools:srcCompat="@tools:sample/avatars[14]" />
+
+    <ImageButton
+        android:id="@+id/colorTileGame_Button"
+        android:layout_width="103dp"
+        android:layout_height="107dp"
+        tools:layout_editor_absoluteX="231dp"
+        tools:layout_editor_absoluteY="365dp"
+        tools:srcCompat="@tools:sample/backgrounds/scenic[15]" />
 
 </android.support.constraint.ConstraintLayout>

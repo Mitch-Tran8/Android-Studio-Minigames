@@ -22,6 +22,11 @@ public class GameCenterMainActivity extends AppCompatActivity {
      */
     ImageButton profileButton;
 
+    /*
+     * the profile button
+     */
+    ImageButton colortileButton;
+
     /**
      * The current user's Id
      *
@@ -37,6 +42,7 @@ public class GameCenterMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game_center_main);
         slidingtilesbutton = findViewById(R.id.slidingtilesbutton);
         profileButton = findViewById(R.id.profile_button);
+        colortileButton = findViewById(R.id.colorTileGame_Button);
 
         /*
          * Activate sliding tiles button
@@ -45,6 +51,18 @@ public class GameCenterMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(GameCenterMainActivity.this, SlidingTileMainPageActivity.class);
+                i.putExtra("user_id", user_id);
+                startActivity(i);
+            }
+        });
+
+        /*
+         * Activate color tiles game button
+         */
+        colortileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(GameCenterMainActivity.this, ColourStartingActivity.class);
                 i.putExtra("user_id", user_id);
                 startActivity(i);
             }
