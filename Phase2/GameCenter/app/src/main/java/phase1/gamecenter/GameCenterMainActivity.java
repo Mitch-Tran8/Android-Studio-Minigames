@@ -10,12 +10,17 @@ import android.widget.ImageButton;
 /**
  * Game Center Activity.
  */
+
 public class GameCenterMainActivity extends AppCompatActivity {
 
     /**
      * Sliding tiles button that leads to sliding tiles game.
      */
     ImageButton slidingtilesbutton;
+    /**
+     * Colour tiles button that leads to the colour tiles game
+     */
+    Button colourTilesButton;
 
     /*
      * the profile button
@@ -26,6 +31,11 @@ public class GameCenterMainActivity extends AppCompatActivity {
      * the profile button
      */
     ImageButton colortileButton;
+
+    /**
+     * Logout page button
+     */
+    Button logoutButton;
 
     /**
      * The current user's Id
@@ -41,6 +51,7 @@ public class GameCenterMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_center_main);
         slidingtilesbutton = findViewById(R.id.slidingtilesbutton);
+        colourTilesButton = findViewById(R.id.colourtilesbutton);
         profileButton = findViewById(R.id.profile_button);
         colortileButton = findViewById(R.id.colorTileGame_Button);
 
@@ -51,6 +62,18 @@ public class GameCenterMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(GameCenterMainActivity.this, SlidingTileMainPageActivity.class);
+                i.putExtra("user_id", user_id);
+                startActivity(i);
+            }
+        });
+
+        /**
+         * Activate the colour tiles button
+         */
+        colourTilesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(GameCenterMainActivity.this, ColourStartingActivity.class);
                 i.putExtra("user_id", user_id);
                 startActivity(i);
             }
@@ -76,6 +99,14 @@ public class GameCenterMainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(GameCenterMainActivity.this, Profile.class);
                 i.putExtra("user_id", user_id);
+                startActivity(i);
+            }
+        });
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(GameCenterMainActivity.this, LogoutActivity.class);
                 startActivity(i);
             }
         });

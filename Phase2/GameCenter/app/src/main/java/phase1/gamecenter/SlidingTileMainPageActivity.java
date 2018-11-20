@@ -27,13 +27,11 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
     /**
      * The save scores file.
      */
-    public static final String FILE_NAME = "save_current_score.ser";
+    public static final String FILE_NAME = "save_current_score13.ser";
 
-    //public static final String SCORE_FILE = "score_file.ser";
-    public static final String SCORE_FILE_2 = "score_file_2.ser";
+    public static final String SCORE_FILE_2 = "score_file13.ser";
 
-
-    public static final String TOP_SCORE_FILE = "top_score_file.ser";
+    public static final String TOP_SCORE_FILE = "top_score_file13.ser";
 
     /**
      * The buttons to display
@@ -110,55 +108,35 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
 
                     //GAME SCOREBOARD
                     for (int i = 0; i == userList.size() - 1; i++) {
-
-                        if (userScoreBoard.topScoreList.size() <= 10) {
-
-                            if (userScoreBoard.topScoreList.size() == 0) {
+                        if (userScoreBoard.topScoreList.size() == 0) {
+                            userScoreBoard.topScoreList.add(userList.get(i).getUserEmail());
+                            userScoreBoard.topScoreList.add(userList.get(i).getGameScore());
+                            saveTopScoreList(TOP_SCORE_FILE);
+                        }else if (userScoreBoard.topScoreList.size() >= 1) {
+                            int oddInt = 1;
+                            while (oddInt < userScoreBoard.topScoreList.size() && (Integer) userScoreBoard.topScoreList.get(oddInt) >=
+                                    userList.get(0).getGameScore()) {
+                                oddInt += 2;
+                            }
+                            if (oddInt > userScoreBoard.topScoreList.size()) {
                                 userScoreBoard.topScoreList.add(userList.get(i).getUserEmail());
                                 userScoreBoard.topScoreList.add(userList.get(i).getGameScore());
+                                if (userScoreBoard.topScoreList.size() > 10){
+                                    userScoreBoard.topScoreList.remove(11);
+                                    userScoreBoard.topScoreList.remove(10);
+                                }
                                 saveTopScoreList(TOP_SCORE_FILE);
-                            } else if (userScoreBoard.topScoreList.size() < 3) {
-                                if ((Integer) userScoreBoard.topScoreList.get(1) >=
-                                        userList.get(i).getGameScore()) {
-                                    userScoreBoard.topScoreList.add(userList.get(i).getUserEmail());
-                                    userScoreBoard.topScoreList.add(userList.get(i).getGameScore());
-                                    saveTopScoreList(TOP_SCORE_FILE);
-                                } else {
-                                    userScoreBoard.topScoreList.add(0, userList.get(i).getUserEmail());
-                                    userScoreBoard.topScoreList.add(1, userList.get(i).getGameScore());
-                                    saveTopScoreList(TOP_SCORE_FILE);
+                            }else {
+                                userScoreBoard.topScoreList.add(oddInt - 1, userList.get(i).getUserEmail());
+                                userScoreBoard.topScoreList.add(oddInt, userList.get(i).getGameScore());
+                                if (userScoreBoard.topScoreList.size() > 10){
+                                    userScoreBoard.topScoreList.remove(11);
+                                    userScoreBoard.topScoreList.remove(10);
                                 }
-                            } else if (userScoreBoard.topScoreList.size() >= 3) {
-                                int oddInt = 1;
-                                while (oddInt < userScoreBoard.topScoreList.size() && (Integer) userScoreBoard.topScoreList.get(oddInt) >=
-                                        userList.get(0).getGameScore()) {
-                                    oddInt += 2;
-                                }
-                                if (oddInt > userScoreBoard.topScoreList.size()) {
-                                    userScoreBoard.topScoreList.add(userList.get(i).getUserEmail());
-                                    userScoreBoard.topScoreList.add(userList.get(i).getGameScore());
-                                    saveTopScoreList(TOP_SCORE_FILE);
-                                } else {
-                                    userScoreBoard.topScoreList.add(oddInt - 1, userList.get(i).getUserEmail());
-                                    userScoreBoard.topScoreList.add(oddInt, userList.get(i).getGameScore());
-                                    saveTopScoreList(TOP_SCORE_FILE);
-                                }
+                                saveTopScoreList(TOP_SCORE_FILE);
                             }
-                        } else {
-                            int oddInteger = 1;
-                            while ((Integer) userScoreBoard.topScoreList.get(oddInteger) >=
-                                    userList.get(i).getGameScore() && oddInteger <= 9) {
-                                oddInteger += 2;
-                            }
-                            userScoreBoard.topScoreList.add(oddInteger - 1, userList.get(i).getUserEmail());
-                            userScoreBoard.topScoreList.add(oddInteger, userList.get(i).getGameScore());
-                            userScoreBoard.topScoreList.remove(11);
-                            userScoreBoard.topScoreList.remove(10);
-                            saveTopScoreList(TOP_SCORE_FILE);
-
                         }
                     }
-                    System.out.println(userScoreBoard.scoreList);
                     Collections.sort(userScoreBoard.scoreList, Collections.reverseOrder());
                 }
 
