@@ -28,6 +28,11 @@ public class GameCenterMainActivity extends AppCompatActivity {
     ImageButton profileButton;
 
     /**
+     * Logout page button
+     */
+    Button logoutButton;
+
+    /**
      * The current user's Id
      *
      * @param user_id
@@ -76,6 +81,14 @@ public class GameCenterMainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(GameCenterMainActivity.this, Profile.class);
                 i.putExtra("user_id", user_id);
+                startActivity(i);
+            }
+        });
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(GameCenterMainActivity.this, LogoutActivity.class);
                 startActivity(i);
             }
         });
