@@ -17,12 +17,12 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
     /**
      * The number of rows.
      */
-    static int NUM_ROWS = 3;
+    static int NUM_ROWS;
 
     /**
      * The number of rows.
      */
-    static int NUM_COLS = 3;
+    static int NUM_COLS;
 
     /**
      * The tiles on the board in row-major order.

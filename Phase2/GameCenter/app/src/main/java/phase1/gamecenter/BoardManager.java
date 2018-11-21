@@ -1,11 +1,25 @@
 package phase1.gamecenter;
 
+import android.support.annotation.NonNull;
+import android.util.Pair;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 
@@ -62,9 +76,10 @@ class BoardManager implements Serializable {
 
     /**
      * Manage a board that has been pre-populated.
-     *
      */
-    BoardManager(){}
+    BoardManager() {
+    }
+
     public BoardManager(Board board, int score) {
         this.board = board;
         this.score = score;
@@ -105,7 +120,7 @@ class BoardManager implements Serializable {
     BoardManager(int row, int col) {
         Board.NUM_COLS = col;
         Board.NUM_ROWS = row;
-        NUM_COLS= col;
+        NUM_COLS = col;
         NUM_ROWS = row;
 
         if (Board.NUM_COLS == 3) {
@@ -318,15 +333,26 @@ class BoardManager implements Serializable {
      */
     boolean puzzleSolved() {
         boolean solved = true;
-        int lastId = 1;
-
-        for (Tile tile : board) {
-            if (tile.getId() == lastId) {
-                lastId++;
-            } else {
-                solved = false;
-            }
+//        int lastId = 1;
+//
+//        for (Tile tile : board) {
+//            if (tile.getId() == lastId) {
+//                lastId++;
+//            } else {
+//                solved = false;
+//            }
+//        }
+        if (solved) {
+            updateScore(solved);
+            updateScoreboard();
         }
+        return solved;
+    }
+
+    /**
+     * update current score
+     */
+    private void updateScore(boolean solved) {
         if (Board.NUM_COLS == 3 && solved) {
             score = 50 - numOfMoves;
         } else if (Board.NUM_COLS == 4 && solved) {
@@ -334,16 +360,55 @@ class BoardManager implements Serializable {
         } else if (Board.NUM_COLS == 5 && solved) {
             score = 250 - numOfMoves;
         }
+    }
 
-        if (solved) {
-            try {
-                createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
+    /**
+     * update scoreboard for the user
+     */
+
+    private void updateScoreboard() {
+        final String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(user_id).child("Game Collection").child("Sliding tiles");
+
+        ref.child("userscores").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Long longScore = new Long(score);
+                ArrayList<Long> scores = new ArrayList<Long>();
+                ArrayList<Long> newScores = new ArrayList<Long>();
+                HashMap <String, Long> map = (HashMap<String, Long>) dataSnapshot.getValue();
+                for (HashMap.Entry <String, Long> entry: map.entrySet()){
+                    scores.add(entry.getValue());
+                }
+                Collections.sort(scores, Collections.reverseOrder());
+
+                for (int i = 0; i < scores.size(); i++) {
+                    Long compare = scores.get(i);
+                    if (compare < longScore) {
+                        newScores.add(longScore);
+                        newScores.add(compare);
+                        for (int a = i+1 ; a < scores.size(); a++){
+                            Long comp = scores.get(a);
+                            newScores.add(comp);
+                        }
+                        break;
+                    }
+                    else {newScores.add(compare);}
+                }
+
+                for (int i = 0; i < scores.size(); i++) {
+                    String position = "score" + String.valueOf(i + 1);
+                    ref.child("userscores").child(position).setValue(newScores.get(i));
+
+                }
             }
 
-        }
-        return solved;
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void createNewFile() throws IOException {
@@ -378,11 +443,12 @@ class BoardManager implements Serializable {
 
     /**
      * returns if undo is valid
+     *
      * @return if undo is valid
      */
 
     boolean isValidUndo() {
-        if (maxUndoTimes == 0){
+        if (maxUndoTimes == 0) {
             return false;
         }
         return isValidUndo;
@@ -407,7 +473,7 @@ class BoardManager implements Serializable {
     /**
      * sets the maximum undo times
      */
-    void setMaxUndoTimes(int times){
+    void setMaxUndoTimes(int times) {
         maxUndoTimes = times;
     }
 

@@ -288,8 +288,6 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
         emailAndScore = new EmailAndScore(firebaseUser.getEmail(), boardManager.getScore());
         this.slidingTileMainPageActivity.userList.add(emailAndScore);
 
-        saveScores(SlidingTileMainPageActivity.FILE_NAME); //SAVE USER AND SCORE TO THE FILE - STATIC SO WILL BE STORED THERE
-
         Intent intent = new Intent(GameActivity.this, SlidingTileMainPageActivity.class);
 
         startActivity(intent); //GO TO SLIDING TILE MAIN PAGE

@@ -10,6 +10,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -27,12 +28,12 @@
         <activity android:name=".SlidingTileMainPageActivity" />
         <activity android:name=".BoardComplexity" />
         <activity android:name=".UserScoreBoard" />
-        <activity android:name="ColourGameActivity" />
-        <activity android:name="ColourStartingActivity">
-        </activity>
+        <activity android:name=".ColourGameActivity" />
+        <activity android:name=".ColourStartingActivity" />
         <activity android:name=".Profile" />
         <activity android:name=".DifficultyLevel" />
-        <activity android:name=".LogoutActivity"/>
+        <activity android:name=".LogoutActivity" />
+        <activity android:name=".UserScoreBoardActivity"></activity>
     </application>
 
 </manifest>
