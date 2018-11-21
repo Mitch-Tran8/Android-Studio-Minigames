@@ -93,6 +93,15 @@ class BoardManager implements Serializable {
     }
 
     /**
+     * Return the complexity
+     * This one
+     * @return Complexity
+     */
+    public String returnComplexity() {
+        return complexity;
+    }
+
+    /**
      * Return the current board.
      */
     Board getBoard() {
@@ -319,8 +328,9 @@ class BoardManager implements Serializable {
     boolean puzzleSolved() {
         boolean solved = true;
         int lastId = 1;
+        score = 400;
 
-        for (Tile tile : board) {
+        /*for (Tile tile : board) {
             if (tile.getId() == lastId) {
                 lastId++;
             } else {
@@ -342,7 +352,7 @@ class BoardManager implements Serializable {
                 e.printStackTrace();
             }
 
-        }
+        }*/
         return solved;
     }
 

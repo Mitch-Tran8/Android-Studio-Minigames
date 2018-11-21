@@ -33,6 +33,11 @@
         <activity android:name=".Profile" />
         <activity android:name=".DifficultyLevel" />
         <activity android:name=".LogoutActivity"/>
+        <activity android:name=".RankingsActivity" />
+        <activity android:name=".Scoreboard3x3" />
+        <activity android:name=".Scoreboard4x4" />
+        <activity android:name=".Scoreboard5x5" />
+
     </application>
 
 </manifest>
