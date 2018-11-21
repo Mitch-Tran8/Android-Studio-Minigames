@@ -32,8 +32,10 @@
             android:shadowDy="4"
             android:shadowRadius="4"
             android:text="Connect 5 Most Wins"
+            android:backgroundTint="#2C3E50"
+            android:textColor="#33A8FF"
             android:fontFamily="sans-serif-smallcaps"
-            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/edit_button_style_two"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -143,8 +145,10 @@
             android:layout_gravity="center_horizontal"
             android:layout_span="2"
             android:text="Longest Consecutive Wins"
+            android:backgroundTint="#2C3E50"
+            android:textColor="#33A8FF"
             android:fontFamily="sans-serif-smallcaps"
-            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/edit_button_style_two"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -264,8 +268,10 @@
             android:layout_gravity="center_horizontal"
             android:layout_span="2"
             android:text="User Scoreboard"
+            android:backgroundTint="#2C3E50"
+            android:textColor="#33A8FF"
             android:fontFamily="sans-serif-smallcaps"
-            android:textColor="@color/colorPrimaryDark"
+            android:background="@drawable/edit_button_style_two"
             android:textSize="24sp"
             android:textStyle="bold" />
 

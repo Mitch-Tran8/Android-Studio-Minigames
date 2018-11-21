@@ -32,8 +32,10 @@
             android:shadowDy="4"
             android:shadowRadius="4"
             android:text="Connect 3 Most Wins"
+            android:background="@drawable/edit_button_style_two"
+            android:backgroundTint="#2C3E50"
             android:fontFamily="sans-serif-smallcaps"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="#33A8FF"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -48,7 +50,7 @@
             android:id="@+id/most_wins_user0"
             android:layout_width="149dp"
             android:layout_height="match_parent"
-            android:layout_gravity="end"
+            android:layout_gravity="center"
             android:textSize="18sp" />
 
         <TextView
@@ -63,7 +65,7 @@
 
         <TextView
             android:id="@+id/most_wins_user1"
-            android:layout_gravity="end"
+            android:layout_gravity="center"
             android:textSize="18sp" />
 
         <TextView
@@ -79,7 +81,7 @@
 
         <TextView
             android:id="@+id/most_wins_user2"
-            android:layout_gravity="end"
+            android:layout_gravity="center"
             android:textSize="18sp" />
 
         <TextView
@@ -95,7 +97,7 @@
 
         <TextView
             android:id="@+id/most_wins_user3"
-            android:layout_gravity="end"
+            android:layout_gravity="center"
             android:textSize="18sp" />
 
         <TextView
@@ -111,7 +113,7 @@
 
         <TextView
             android:id="@+id/most_wins_user4"
-            android:layout_gravity="end"
+            android:layout_gravity="center"
             android:textSize="18sp" />
 
         <TextView
@@ -143,8 +145,10 @@
             android:layout_gravity="center_horizontal"
             android:layout_span="2"
             android:text="Longest Consecutive Wins"
+            android:background="@drawable/edit_button_style_two"
+            android:backgroundTint="#2C3E50"
             android:fontFamily="sans-serif-smallcaps"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="#33A8FF"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -159,7 +163,7 @@
 
         <TextView
             android:id="@+id/top_consecutive_user0"
-            android:layout_gravity="end"
+            android:layout_gravity="center"
             android:textSize="18sp" />
 
         <TextView
@@ -177,7 +181,7 @@
 
         <TextView
             android:id="@+id/top_consecutive_user1"
-            android:layout_gravity="end"
+            android:layout_gravity="center"
             android:textSize="18sp" />
 
         <TextView
@@ -195,7 +199,7 @@
 
         <TextView
             android:id="@+id/top_consecutive_user2"
-            android:layout_gravity="end"
+            android:layout_gravity="center"
             android:textSize="18sp" />
 
         <TextView
@@ -213,7 +217,7 @@
 
         <TextView
             android:id="@+id/top_consecutive_user3"
-            android:layout_gravity="end"
+            android:layout_gravity="center"
             android:textSize="18sp" />
 
         <TextView
@@ -231,7 +235,7 @@
 
         <TextView
             android:id="@+id/top_consecutive_user4"
-            android:layout_gravity="end"
+            android:layout_gravity="center"
             android:textSize="18sp" />
 
         <TextView
@@ -264,8 +268,10 @@
             android:layout_gravity="center_horizontal"
             android:layout_span="2"
             android:text="User Scoreboard"
+            android:background="@drawable/edit_button_style_two"
+            android:backgroundTint="#2C3E50"
             android:fontFamily="sans-serif-smallcaps"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="#33A8FF"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -280,6 +286,7 @@
 
         <TextView
             android:text="Win Total"
+            android:textColor="#33A8FF"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:textSize="18sp" />
@@ -306,6 +313,7 @@
 
         <TextView
             android:text="Longest Consecutive Wins"
+            android:textColor="#33A8FF"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:textSize="18sp" />
