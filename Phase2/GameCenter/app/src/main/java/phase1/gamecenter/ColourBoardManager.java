@@ -186,22 +186,24 @@ class ColourBoardManager implements Serializable {
         int firstTapRow = firstTap / ColourBoard.NUM_ROWS;
         int firstTapCol = firstTap % ColourBoard.NUM_COLS;
 
-        if (row == firstTapRow && col == firstTapCol){
-            return false;
-        }
-        else if (row == firstTapRow){
-            if (col -firstTapCol == 1){
-                return true;
-            }
-            else return firstTapCol - col == 1;
-        }
-        else if (firstTapCol == col){
-            if (row - firstTapRow == 1){
-                return true;
-            }
-            else return firstTapRow - row == 1;
-        }
-        return false;
+        return (row != firstTapRow && col != firstTapCol);
+
+//        if (row == firstTapRow && col == firstTapCol){
+//            return false;
+//        }
+//        else if (row == firstTapRow){
+//            if (col -firstTapCol == 1){
+//                return true;
+//            }
+//            else return firstTapCol - col == 1;
+//        }
+//        else if (firstTapCol == col){
+//            if (row - firstTapRow == 1){
+//                return true;
+//            }
+//            else return firstTapRow - row == 1;
+//        }
+//        return false;
     }
 
     /**

@@ -20,7 +20,7 @@ public class GameCenterMainActivity extends AppCompatActivity {
     /**
      * Colour tiles button that leads to the colour tiles game
      */
-    Button colourTilesButton;
+    ImageButton colourTilesButton;
 
     /*
      * the profile button
@@ -65,7 +65,7 @@ public class GameCenterMainActivity extends AppCompatActivity {
             }
         });
 
-        /**
+        /*
          * Activate the colour tiles button
          */
         colourTilesButton.setOnClickListener(new View.OnClickListener() {
@@ -78,12 +78,13 @@ public class GameCenterMainActivity extends AppCompatActivity {
         });
 
         /*
-         * Activate profile button
+         * Activate the logoutButton
          */
-
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setContentView(R.layout.activity_game_center_main);
+
                 Intent i = new Intent(GameCenterMainActivity.this, LogoutActivity.class);
                 startActivity(i);
             }

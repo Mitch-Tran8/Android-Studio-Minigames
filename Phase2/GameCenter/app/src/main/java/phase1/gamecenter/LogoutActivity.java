@@ -19,10 +19,8 @@ public class LogoutActivity extends AppCompatActivity {
 
     /**
      * button that leads user to the login page after they signed out.
-     * @param loginPageButton
      */
     Button loginPageButton;
-    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +28,5 @@ public class LogoutActivity extends AppCompatActivity {
         FirebaseAuth.getInstance().signOut();
         Toast.makeText(LogoutActivity.this, "Logout Succesful", Toast.LENGTH_LONG).show();
         setContentView(R.layout.activity_login);
-
     }
-
-
 }
