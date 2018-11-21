@@ -52,8 +52,10 @@
         android:text="Colour Tiles"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.733"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/slidingtilesbutton" />
+        app:layout_constraintTop_toBottomOf="@+id/slidingtilesbutton"
+        app:layout_constraintVertical_bias="0.219" />
 
     <Button
         android:id="@+id/logoutPageButton"
@@ -69,13 +71,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.015" />
-
-    <ImageButton
-        android:id="@+id/colorTileGame_Button"
-        android:layout_width="103dp"
-        android:layout_height="107dp"
-        tools:layout_editor_absoluteX="231dp"
-        tools:layout_editor_absoluteY="365dp"
-        tools:srcCompat="@tools:sample/backgrounds/scenic[15]" />
 
 </android.support.constraint.ConstraintLayout>
