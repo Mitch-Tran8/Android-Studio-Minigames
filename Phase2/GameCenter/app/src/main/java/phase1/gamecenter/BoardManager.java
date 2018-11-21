@@ -71,7 +71,6 @@ class BoardManager implements Serializable {
         undoneTimes = 0;
         maxUndoTimes = 3;
         isValidUndo = true;
-
     }
 
     /**
@@ -346,6 +345,9 @@ class BoardManager implements Serializable {
         return solved;
     }
 
+    /*
+     * creates a new file
+     */
     private void createNewFile() throws IOException {
         File file = new File(BoardComplexity.TEMP_SAVE_FILENAME);
         file.createNewFile();
@@ -380,7 +382,6 @@ class BoardManager implements Serializable {
      * returns if undo is valid
      * @return if undo is valid
      */
-
     boolean isValidUndo() {
         if (maxUndoTimes == 0){
             return false;
@@ -439,13 +440,10 @@ class BoardManager implements Serializable {
         return this.moveStack;
     }
 
-    /**
-     * Autosaves the board and report data to game's hashMap after every three moves
-     */
 
     /**
      * Helper function for touchMove, returns the row and column as an array of the blank tile
-     * closest too the tile provided
+     * closest to the tile provided
      *
      * @param row     the row of tile provided
      * @param col     the column of the tile provided

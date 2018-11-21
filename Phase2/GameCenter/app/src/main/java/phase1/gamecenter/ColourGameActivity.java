@@ -19,7 +19,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * The game activity with.
+ * The game activity with the goal to connect the biggest possible blob of colour tiles.
  */
 public class ColourGameActivity extends AppCompatActivity implements Observer {
 
