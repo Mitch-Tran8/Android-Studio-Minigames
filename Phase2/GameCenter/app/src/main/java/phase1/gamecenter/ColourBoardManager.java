@@ -1,9 +1,12 @@
 package phase1.gamecenter;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
@@ -14,6 +17,31 @@ class ColourBoardManager implements Serializable {
      * The board being managed.
      */
     private ColourBoard board;
+
+    /**
+     * the score
+     */
+    private int score;
+
+    /**
+     * the number of moves taken
+     */
+    private int numOfMoves;
+
+    /**
+     * A temporary save file.
+     */
+    public static final String TEMP_SAVE_FILENAME = "save_file_tmp.ser";
+
+    /**
+     * The stack that stocks all previous moves
+     */
+    private Stack<int[]> moveStack;
+
+    /**
+     * the first tap
+     */
+    private int firstTap;
 
     /**
      * Manage a board that has been pre-populated.
@@ -43,6 +71,7 @@ class ColourBoardManager implements Serializable {
 
         Collections.shuffle(tiles);
         this.board = new ColourBoard(tiles);
+        this.firstTap = 0;
     }
 
     /**
@@ -51,33 +80,130 @@ class ColourBoardManager implements Serializable {
      * @return whether the tiles are in row-major order
      */
     boolean puzzleSolved() {
-        boolean solved = true;
-        int lastId = 1;
+        boolean solved = (rowSolved() || colSolved());
 
-        for (ColourTile tile : board) {
-            if (tile.getId() == lastId) {
-                lastId++;
-            } else {
-                solved = false;
+        if (solved) {
+            try {
+                createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+
         }
         return solved;
+    }
+
+    /*
+     * creates a new file
+     */
+    private void createNewFile() throws IOException {
+        File file = new File(TEMP_SAVE_FILENAME);
+        file.createNewFile();
+    }
+
+    /**
+     * Helper function to puzzleSolved, returns whether all tiles of each row are of the same colour
+     * @return whether all tiles of each row are of the same colour
+     */
+    private boolean rowSolved(){
+        int currRow = 0;
+        int currCol = 1;
+        int currBackground = board.getTiles()[0][0].getBackground();
+
+        //checks whether all tiles in a row are in the same colour
+        while (currRow < 4) {
+            for (ColourTile tile : board.getTiles()[currRow]){
+                if (tile.getBackground() != currBackground){
+                    return false;
+                }
+            }
+            currRow++;
+            currBackground = board.getTiles()[currRow][currCol].getBackground();
+        }
+        score = 100-numOfMoves;
+        return true;
+    }
+
+    /**
+     * Helper function to puzzleSolved, returns whether all tiles of each column are of the same colour
+     * @return whether all tiles of each column are of the same colour
+     */
+    private boolean colSolved(){
+        int currRow = 1;
+        int currCol = 0;
+        int currBackground = board.getTiles()[0][0].getBackground();
+
+        //checks whether all tiles in a column are in the same colour
+        while(currCol < 4){
+            while (currRow < 4){
+                if (board.getTiles()[currRow][currCol].getBackground() != currBackground){
+                    return false;
+                }
+                currRow++;
+            }
+            currCol++;
+            currRow = 1;
+            currBackground = board.getTiles()[currCol][0].getBackground();
+        }
+        return true;
+    }
+
+    /**
+     * returns the score
+     */
+    int getScore(){
+        return score;
     }
 
     /**
      * Return whether any of the four surrounding tiles is the blank tile.
      *
-     * @param position the tile to check
      * @return whether the tile at position is surrounded by a blank tile
+     */
+    boolean hasFirstTap() {
+        return firstTap != 0;
+    }
+
+    /**
+     * sets the first tap's position to position
+     * @param position the position
+     */
+    void setFirstTap(int position){
+        this.firstTap = position;
+    }
+
+    /**
+     * Return whether any of the four surrounding tiles is the first tile.
+     *
+     * @param position the tile to check
+     * @return whether the tile at position is next to the first tile
      */
     boolean isValidTap(int position) {
 
-        int row = position / ColourBoard.NUM_COLS;
+        int row = position / ColourBoard.NUM_ROWS;
         int col = position % ColourBoard.NUM_COLS;
-        int blankId = board.numTiles();
 
-        ColourTile blank = board.getTile(getBlankTile(row, col, blankId)[0], getBlankTile(row, col, blankId)[1]);
-        return (blank.getId() == blankId && blank != board.getTile(row, col));
+        int firstTapRow = firstTap / ColourBoard.NUM_ROWS;
+        int firstTapCol = firstTap % ColourBoard.NUM_COLS;
+
+        return (row != firstTapRow && col != firstTapCol);
+
+//        if (row == firstTapRow && col == firstTapCol){
+//            return false;
+//        }
+//        else if (row == firstTapRow){
+//            if (col -firstTapCol == 1){
+//                return true;
+//            }
+//            else return firstTapCol - col == 1;
+//        }
+//        else if (firstTapCol == col){
+//            if (row - firstTapRow == 1){
+//                return true;
+//            }
+//            else return firstTapRow - row == 1;
+//        }
+//        return false;
     }
 
     /**
@@ -89,38 +215,12 @@ class ColourBoardManager implements Serializable {
 
         int row = position / ColourBoard.NUM_ROWS;
         int col = position % ColourBoard.NUM_COLS;
-        int blankId = board.numTiles();
-        int[] blank = getBlankTile(row, col, blankId);
 
-        board.swapTiles(row, col, blank[0], blank[1]);
-    }
+        int firstTapRow = firstTap / ColourBoard.NUM_ROWS;
+        int firstTapCol = firstTap % ColourBoard.NUM_COLS;
 
-    /**
-     * Helper function for touchMove, returns the row and column as an array of the blank tile
-     * closest too the tile provided
-     *
-     * @param row     the row of tile provided
-     * @param col     the column of the tile provided
-     * @param blankId the id of the blank tile(known to be the largest id)
-     * @return the row and column of the blank tile closest too the tile provided as an int[]
-     */
-    private int[] getBlankTile(int row, int col, int blankId) {
-
-        int blankRow = row;
-        int blankCol = col;
-
-        if (row > 0 && board.getTile(row - 1, col).getId() == blankId) {
-            blankRow--;
-        } else if (row < ColourBoard.NUM_ROWS - 1 && board.getTile(row + 1, col).getId() == blankId) {
-            blankRow++;
-        }
-        if (col < ColourBoard.NUM_COLS - 1 && board.getTile(row, col + 1).getId() == blankId) {
-            blankCol++;
-        } else if (col > 0 && board.getTile(row, col - 1).getId() == blankId) {
-            blankCol--;
-        }
-
-        return new int[]{blankRow, blankCol};
+        board.swapTiles(row, col, firstTapRow, firstTapCol);
+        numOfMoves++;
     }
 
 }

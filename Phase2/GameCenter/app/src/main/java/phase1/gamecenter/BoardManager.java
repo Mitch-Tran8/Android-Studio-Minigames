@@ -108,6 +108,15 @@ class BoardManager implements Serializable {
     }
 
     /**
+     * Return the complexity
+     * This one
+     * @return Complexity
+     */
+    public String returnComplexity() {
+        return complexity;
+    }
+
+    /**
      * Return the current board.
      */
     Board getBoard() {
@@ -411,6 +420,9 @@ class BoardManager implements Serializable {
         });
     }
 
+    /*
+     * creates a new file
+     */
     private void createNewFile() throws IOException {
         File file = new File(BoardComplexity.TEMP_SAVE_FILENAME);
         file.createNewFile();
@@ -505,13 +517,10 @@ class BoardManager implements Serializable {
         return this.moveStack;
     }
 
-    /**
-     * Autosaves the board and report data to game's hashMap after every three moves
-     */
 
     /**
      * Helper function for touchMove, returns the row and column as an array of the blank tile
-     * closest too the tile provided
+     * closest to the tile provided
      *
      * @param row     the row of tile provided
      * @param col     the column of the tile provided

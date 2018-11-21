@@ -1,6 +1,7 @@
 package phase1.gamecenter;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,7 +21,7 @@ public class GameCenterMainActivity extends AppCompatActivity {
     /**
      * Colour tiles button that leads to the colour tiles game
      */
-    Button colourTilesButton;
+    ImageButton colourTilesButton;
 
     /*
      * the profile button
@@ -38,11 +39,23 @@ public class GameCenterMainActivity extends AppCompatActivity {
     Button logoutButton;
 
     /**
+     * the menu view
+     */
+    View menuView;
+
+    /**
+     * The menu button
+     */
+    FloatingActionButton menuButton;
+
+    /**
      * The current user's Id
      *
      * @param user_id
      */
     private String user_id;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +66,28 @@ public class GameCenterMainActivity extends AppCompatActivity {
         slidingtilesbutton = findViewById(R.id.slidingtilesbutton);
         colourTilesButton = findViewById(R.id.colourtilesbutton);
         logoutButton = findViewById(R.id.logoutPageButton);
+        menuView = findViewById(R.id.menuView);
+        menuButton = findViewById(R.id.menuButton);
+        menuView.setVisibility(View.GONE);
+        logoutButton.setVisibility(View.GONE);
+
+        /**
+         * Activate the menu button
+         */
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(menuView.getVisibility() == View.GONE) {
+                    menuView.setVisibility(View.VISIBLE);
+                    logoutButton.setVisibility(View.VISIBLE);
+                } else {
+                    menuView.setVisibility(View.GONE);
+                    logoutButton.setVisibility(View.GONE);
+                }
+            }
+
+        });
+
         /*
          * Activate sliding tiles button
          */
@@ -65,7 +100,7 @@ public class GameCenterMainActivity extends AppCompatActivity {
             }
         });
 
-        /**
+        /*
          * Activate the colour tiles button
          */
         colourTilesButton.setOnClickListener(new View.OnClickListener() {
@@ -78,12 +113,13 @@ public class GameCenterMainActivity extends AppCompatActivity {
         });
 
         /*
-         * Activate profile button
+         * Activate the logoutButton
          */
-
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setContentView(R.layout.activity_game_center_main);
+
                 Intent i = new Intent(GameCenterMainActivity.this, LogoutActivity.class);
                 startActivity(i);
             }

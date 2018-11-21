@@ -31,43 +31,37 @@ public class ColourStartingActivity extends AppCompatActivity {
      */
     private ColourBoardManager boardManager;
 
+    Button rankingsButton;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         boardManager = new ColourBoardManager();
         saveToFile(TEMP_SAVE_FILENAME);
-
-        setContentView(R.layout.activity_starting_);
+        setContentView(R.layout.activity_connect_numbers_main_page);
         addStartButtonListener();
-        addLoadButtonListener();
-        addSaveButtonListener();
+
+        rankingsButton = findViewById(R.id.rankings_button);
+        rankingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ColourStartingActivity.this, ColourRankingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     /**
      * Activate the start button.
      */
     private void addStartButtonListener() {
-        Button startButton = findViewById(R.id.StartButton);
+        Button startButton = findViewById(R.id.start_game_button);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boardManager = new ColourBoardManager();
-                switchToGame();
-            }
-        });
-    }
-
-    /**
-     * Activate the load button.
-     */
-    private void addLoadButtonListener() {
-        Button loadButton = findViewById(R.id.LoadButton);
-        loadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFromFile(SAVE_FILENAME);
-                saveToFile(TEMP_SAVE_FILENAME);
-                makeToastLoadedText();
                 switchToGame();
             }
         });
@@ -79,22 +73,6 @@ public class ColourStartingActivity extends AppCompatActivity {
     private void makeToastLoadedText() {
         Toast.makeText(this, "Loaded Game", Toast.LENGTH_SHORT).show();
     }
-
-    /**
-     * Activate the save button.
-     */
-    private void addSaveButtonListener() {
-        Button saveButton = findViewById(R.id.SaveButton);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveToFile(SAVE_FILENAME);
-                saveToFile(TEMP_SAVE_FILENAME);
-                makeToastSavedText();
-            }
-        });
-    }
-
     /**
      * Display that a game was saved successfully.
      */

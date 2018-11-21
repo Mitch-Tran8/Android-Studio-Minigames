@@ -28,8 +28,9 @@ public class LogoutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(LogoutActivity.this, LoginActivity.class));
         Toast.makeText(LogoutActivity.this, "Logout Succesful", Toast.LENGTH_LONG).show();
-        setContentView(R.layout.activity_login);
+
 
     }
 

@@ -48,8 +48,7 @@ UserScoreBoard extends AppCompatActivity implements Serializable {
         int num = 0;
         if (scoreList.size() <= 5) {
             num = scoreList.size();
-        }
-        else{
+        } else {
             num = 5;
         }
         for (int i = 0; i < num; i++) {
@@ -62,20 +61,19 @@ UserScoreBoard extends AppCompatActivity implements Serializable {
         int num1 = 0;
         if (topScoreList.size() <= 10) {
             num1 = topScoreList.size();
-        }
-        else{
+        } else {
             num1 = 10;
         }
         int integer = 0;
-        for (int i = 0; i < num1;) {
+        for (int i = 0; i < num1; ) {
             int name_id = getResources().getIdentifier("top_score_user" + integer, "id", getPackageName());
             int score_id = getResources().getIdentifier("top_score" + integer, "id", getPackageName());
             TextView textView = (TextView) findViewById(name_id);
             textView.setText(topScoreList.get(i).toString());
             textView = (TextView) findViewById(score_id);
             textView.setText(topScoreList.get(i + 1).toString());
-            i+=2;
-            integer+=1;
+            i += 2;
+            integer += 1;
         }
     }
 

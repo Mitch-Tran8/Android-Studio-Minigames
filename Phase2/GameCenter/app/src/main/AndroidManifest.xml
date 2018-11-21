@@ -34,6 +34,18 @@
         <activity android:name=".DifficultyLevel" />
         <activity android:name=".LogoutActivity" />
         <activity android:name=".UserScoreBoardActivity"></activity>
+        <activity android:name=".LogoutActivity"/>
+        <activity android:name=".RankingsActivity" />
+        <activity android:name=".ColourRankingsActivity" />
+        <activity android:name=".ColourScoreBoard3x3" />
+        <activity android:name=".ColourScoreBoard4x4" />
+        <activity android:name=".ColourScoreBoard5x5" />
+
+        <activity android:name=".Scoreboard3x3" />
+        <activity android:name=".Scoreboard4x4" />
+        <activity android:name=".Scoreboard5x5" />
+
+
     </application>
 
 </manifest>

@@ -72,6 +72,14 @@ public class ColourBoard extends Observable implements Serializable, Iterable<Co
     }
 
     /**
+     * returns the tiles
+     * @return tiles
+     */
+    ColourTile[][] getTiles() {
+        return tiles;
+    }
+
+    /**
      * Swap the tiles at (row1, col1) and (row2, col2)
      *
      * @param row1 the first tile row
