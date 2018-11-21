@@ -2,6 +2,7 @@
 package phase1.gamecenter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.widget.Toast;
 
 /**
@@ -39,6 +40,8 @@ public class MovementController {
      * @param display
      */
     public void processTapMovement(Context context, int position, boolean display) {
+
+        // tap movements on the board manager
         if(boardManager != null) {
             if (boardManager.isValidTap(position)) {
                 boardManager.touchMove(position);
@@ -46,35 +49,37 @@ public class MovementController {
                     String score = Integer.toString(boardManager.getScore());
                     Toast.makeText(context, "YOU WIN! Score: " + score, Toast.LENGTH_LONG).show();
                     //gameActivity.switchToMain();
-
-                }
-            } else {
-                Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            if (colourBoardManager.isValidTap(position)) {
-                colourBoardManager.touchMove(position);
-                if (colourBoardManager.puzzleSolved()) {
-                    //ToDo: implement a getScore method in ColourBoardManager and print the score when you win
-                    //String score = Integer.toString(colourBoardManager.getScore());
-                    Toast.makeText(context, "YOU WIN! Score: " , Toast.LENGTH_LONG).show();
-                    //gameActivity.switchToMain();
-
                 }
             } else {
                 Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();
             }
         }
-    }
 
-    /**
-     * Undoing a move.
-     */
-    public void processUndoMovement(Context context){
-        if (boardManager.isValidUndo()){
-            boardManager.undo();
+        // tap movements on the colourboard manager
+        else {
+            if (colourBoardManager.hasFirstTap()) {
+                if (colourBoardManager.isValidTap(position)){
+                    colourBoardManager.touchMove(position);
+                    colourBoardManager.setFirstTap(0);
 
+                    Toast.makeText(context, "Swapped successfully", Toast.LENGTH_SHORT).show();
+
+                    if (colourBoardManager.puzzleSolved()) {
+                        //ToDo: implement a getScore method in ColourBoardManager and print the score when you win
+                        String score = Integer.toString(colourBoardManager.getScore());
+                        Toast.makeText(context, "YOU WIN! Score: " + score, Toast.LENGTH_LONG).show();
+//                        gameActivity.switchToMain();
+                    }
+                }
+                else {
+                    Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();
+                    colourBoardManager.setFirstTap(0);
+                }
+
+            } else {
+                colourBoardManager.setFirstTap(position);
+                Toast.makeText(context, "Select a tile to swap", Toast.LENGTH_SHORT).show();
+            }
         }
     }
-
 }
