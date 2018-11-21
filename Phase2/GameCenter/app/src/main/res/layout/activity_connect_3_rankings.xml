@@ -11,16 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="49dp">
 
-        <TextView
-            android:layout_width="163dp"
-            android:layout_height="match_parent"
-            android:text="" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="49dp">
-
         <TextView android:text="" />
     </TableRow>
 
@@ -30,14 +20,6 @@
 
         <TextView android:text="" />
     </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="49dp">
-
-        <TextView android:text="" />
-    </TableRow>
-
 
     <TableRow>
 
@@ -45,12 +27,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_span="2"
-            android:background="@drawable/button_style"
-            android:text="Game Scoreboard"
+            android:shadowColor="@color/common_google_signin_btn_text_dark_default"
+            android:shadowDx="4"
+            android:shadowDy="4"
+            android:shadowRadius="4"
+            android:text="Connect 3 Most Wins"
+            android:fontFamily="sans-serif-smallcaps"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="24sp"
-            android:textStyle="bold"
-            tools:background="@color/colorAccent" />
+            android:textStyle="bold" />
 
         <TextView />
 
@@ -60,14 +45,14 @@
     <TableRow android:layout_height="37dp">
 
         <TextView
-            android:id="@+id/top_score_user0"
+            android:id="@+id/most_wins_user0"
             android:layout_width="149dp"
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/top_score0"
+            android:id="@+id/most_wins0"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:textSize="18sp" />
@@ -77,12 +62,12 @@
     <TableRow android:layout_height="37dp">
 
         <TextView
-            android:id="@+id/top_score_user1"
+            android:id="@+id/most_wins_user1"
             android:layout_gravity="end"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/top_score1"
+            android:id="@+id/most_wins1"
             android:layout_gravity="center"
             android:textSize="18sp" />
 
@@ -93,12 +78,12 @@
         android:layout_height="76dp">
 
         <TextView
-            android:id="@+id/top_score_user2"
+            android:id="@+id/most_wins_user2"
             android:layout_gravity="end"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/top_score2"
+            android:id="@+id/most_wins2"
             android:layout_gravity="center"
             android:textSize="18sp" />
 
@@ -109,12 +94,12 @@
         android:layout_height="49dp">
 
         <TextView
-            android:id="@+id/top_score_user3"
+            android:id="@+id/most_wins_user3"
             android:layout_gravity="end"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/top_score3"
+            android:id="@+id/most_wins3"
             android:layout_gravity="center"
             android:textSize="18sp" />
 
@@ -125,12 +110,12 @@
         android:layout_height="49dp">
 
         <TextView
-            android:id="@+id/top_score_user4"
+            android:id="@+id/most_wins_user4"
             android:layout_gravity="end"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/top_score4"
+            android:id="@+id/most_wins4"
             android:layout_width="155dp"
             android:layout_gravity="center"
             android:textSize="18sp" />
@@ -151,18 +136,110 @@
         <TextView android:text="" />
     </TableRow>
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="49dp">
+    <TableRow>
 
-        <TextView android:text="" />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_span="2"
+            android:text="Longest Consecutive Wins"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView />
+
     </TableRow>
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="49dp">
+        android:layout_height="37dp"
+        android:gravity="center">
 
-        <TextView android:text="" />
+        <TextView
+            android:id="@+id/top_consecutive_user0"
+            android:layout_gravity="end"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/top_consecutive0"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:textSize="18sp" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/top_consecutive_user1"
+            android:layout_gravity="end"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/top_consecutive1"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:textSize="18sp" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/top_consecutive_user2"
+            android:layout_gravity="end"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/top_consecutive2"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:textSize="18sp" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/top_consecutive_user3"
+            android:layout_gravity="end"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/top_consecutive3"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:textSize="18sp" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/top_consecutive_user4"
+            android:layout_gravity="end"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/top_consecutive4"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:textSize="18sp" />
+
     </TableRow>
 
     <TableRow
@@ -186,16 +263,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_span="2"
-            android:background="@drawable/button_style"
             android:text="User Scoreboard"
+            android:fontFamily="sans-serif-smallcaps"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="24sp"
-            android:textStyle="bold"
-            tools:background="@color/colorAccent" />
+            android:textStyle="bold" />
 
         <TextView />
 
-
     </TableRow>
 
     <TableRow
@@ -204,7 +279,8 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/score0"
+            android:text="Win Total"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:textSize="18sp" />
 
@@ -216,7 +292,8 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/score1"
+            android:id="@+id/wins0"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:textSize="18sp" />
 
@@ -228,7 +305,8 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/score2"
+            android:text="Longest Consecutive Wins"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:textSize="18sp" />
 
@@ -240,20 +318,8 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/score3"
-            android:layout_gravity="center"
-            android:textSize="18sp" />
-
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="37dp"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/score4"
-            android:layout_width="155dp"
+            android:id="@+id/consecutive0"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:textSize="18sp" />
 
