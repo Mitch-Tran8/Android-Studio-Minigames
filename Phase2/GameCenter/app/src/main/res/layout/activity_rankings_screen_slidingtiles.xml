@@ -8,7 +8,7 @@
     <Button
         android:id="@+id/rankings_3x3"
         android:layout_width="wrap_content"
-        android:layout_height="80"
+        android:layout_height="80dp"
         android:backgroundTint="@color/colorPrimary"
         android:fontFamily="sans-serif-smallcaps"
         android:text="3x3 Board Rankings"
@@ -23,7 +23,7 @@
     <Button
         android:id="@+id/rankings_4x4"
         android:layout_width="wrap_content"
-        android:layout_height="80"
+        android:layout_height="80dp"
         android:backgroundTint="@color/colorPrimary"
         android:fontFamily="sans-serif-smallcaps"
         android:text="4x4 Board Rankings"
@@ -38,7 +38,7 @@
     <Button
         android:id="@+id/rankings_5x5"
         android:layout_width="wrap_content"
-        android:layout_height="80"
+        android:layout_height="80dp"
         android:backgroundTint="@color/colorPrimary"
         android:fontFamily="sans-serif-smallcaps"
         android:text="5x5 Board Rankings"
