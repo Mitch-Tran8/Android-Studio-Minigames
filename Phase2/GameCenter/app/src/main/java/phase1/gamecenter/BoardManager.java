@@ -83,17 +83,15 @@ class BoardManager implements Serializable {
 
     /**
      * Manage a board that has been pre-populated.
+     *
      */
-    BoardManager() {
-    }
-
+    BoardManager(){}
     public BoardManager(Board board, int score) {
         this.board = board;
         this.score = score;
         undoneTimes = 0;
         maxUndoTimes = 3;
         isValidUndo = true;
-
     }
 
     /**

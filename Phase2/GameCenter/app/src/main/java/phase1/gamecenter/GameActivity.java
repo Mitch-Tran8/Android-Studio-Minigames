@@ -135,7 +135,6 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
 
     }
 
-
     /**
      * Activate the undo button.
      */

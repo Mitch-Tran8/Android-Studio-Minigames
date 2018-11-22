@@ -1,6 +1,13 @@
+/*
+Timer adapted from:
+https://stackoverflow.com/a/17486406
+ */
+
 package phase1.gamecenter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +24,14 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+
+import android.app.Activity;
+import android.os.Handler;
+import android.widget.TextView;
+import java.util.Timer;
+import java.util.TimerTask;
+
+
 
 /**
  * The game activity with the goal to connect the biggest possible blob of colour tiles.
@@ -46,8 +61,14 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
     public static final int LEFT = 3;
     public static final int RIGHT = 4;
 
-    // Grid View and calculated column height and width based on device size
+    /**
+     * Grid View and calculated column height and width based on device size
+     */
     private GestureDetectGridView gridView;
+
+    /**
+     * the column width and height
+     */
     private static int columnWidth, columnHeight;
 
     /**
@@ -65,7 +86,7 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
         super.onCreate(savedInstanceState);
         loadFromFile(ColourStartingActivity.TEMP_SAVE_FILENAME);
         createTileButtons(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_colourmain);
         addSaveButtonListener();
 
 
@@ -90,6 +111,50 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
                         display();
                     }
                 });
+        setTheTimer();
+    }
+
+    /**
+     * Helper function of the timer to onCreate
+     */
+    void setTheTimer(){
+        /*
+        Timer adapted from:
+        https://stackoverflow.com/a/17486406
+        */
+        //Declare the timer
+        Timer t = new Timer();
+        //Set the schedule function and rate
+        t.scheduleAtFixedRate(new TimerTask() {
+
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void run() {
+                        int seconds = boardManager.getSeconds();
+                        int minutes = boardManager.getMinutes();
+                        TextView tv = (TextView) findViewById(R.id.editText);
+                        tv.setText(String.valueOf(minutes)+":"+String.valueOf(seconds));
+                        seconds -= 1;
+
+                        if(seconds == 0 && minutes != 0) {
+                            seconds=60;
+                            minutes=minutes-1;
+                            tv.setText(String.valueOf(minutes)+":"+String.valueOf(seconds));
+                        }
+                        else if (seconds == 0){
+                            Toast.makeText(ColourGameActivity.this, "Time's up, try again", Toast.LENGTH_LONG).show();
+                            saveToFile(ColourBoardManager.TEMP_SAVE_FILENAME);
+                            Intent tmp = new Intent(ColourGameActivity.this, ColourTileRoundsActivity.class);
+                            startActivity(tmp);
+                        }
+                    }
+                });
+            }
+        }, 0, 1000);
     }
 
     /**
