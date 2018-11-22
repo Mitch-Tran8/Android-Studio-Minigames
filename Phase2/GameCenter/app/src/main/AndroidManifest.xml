@@ -46,6 +46,11 @@
 
 
         <activity android:name=".ColourTileRoundsActivity"/>
+        <activity android:name=".ConnectFourMainActivity" />
+        <activity android:name=".ConnectFourStartingActivity" />
+        <activity android:name=".ConnectFourPlayersActivity" />
+
+
     </application>
 
 </manifest>
