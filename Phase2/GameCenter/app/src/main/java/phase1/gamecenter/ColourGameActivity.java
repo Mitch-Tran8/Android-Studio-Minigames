@@ -1,3 +1,8 @@
+/*
+Timer adapted from:
+https://stackoverflow.com/a/17486406
+ */
+
 package phase1.gamecenter;
 
 import android.content.Context;
@@ -53,11 +58,17 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
     public static final int LEFT = 3;
     public static final int RIGHT = 4;
 
-    // Grid View and calculated column height and width based on device size
+    /**
+     * Grid View and calculated column height and width based on device size
+     */
     private GestureDetectGridView gridView;
+
+    /**
+     * the column width and height
+     */
     private static int columnWidth, columnHeight;
-    int seconds;
-    int minutes;
+    private int seconds;
+    private int minutes;
 
     /**
      * Set up the background image for each button based on the master list
@@ -125,10 +136,9 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
                         seconds -= 1;
 
                         if(seconds == 0 && minutes != 0) {
-                            tv.setText(String.valueOf(minutes)+":"+String.valueOf(seconds));
-
                             seconds=60;
                             minutes=minutes-1;
+                            tv.setText(String.valueOf(minutes)+":"+String.valueOf(seconds));
                         }
                         else if (seconds == 0 && minutes == 0){
                             Toast.makeText(ColourGameActivity.this, "Time's up, try again", Toast.LENGTH_LONG).show();
