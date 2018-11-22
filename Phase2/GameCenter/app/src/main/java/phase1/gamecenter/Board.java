@@ -2,6 +2,13 @@ package phase1.gamecenter;
 
 import android.support.annotation.NonNull;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.Observable;
 
 import java.io.Serializable;
@@ -14,15 +21,17 @@ import java.util.List;
  */
 public class Board extends Observable implements Serializable, Iterable<Tile> {
 
-    /**
-     * The number of rows.
-     */
-    static int NUM_ROWS = 3;
 
     /**
      * The number of rows.
      */
-    static int NUM_COLS = 3;
+    static int NUM_ROWS;
+
+    /**
+     * The number of rows.
+     */
+    static int NUM_COLS;
+
 
     /**
      * The tiles on the board in row-major order.

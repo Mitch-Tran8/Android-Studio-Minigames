@@ -2,12 +2,15 @@ package phase1.gamecenter;
 
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Observable;
 
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * The sliding tiles board.
@@ -23,12 +26,12 @@ public class ColourBoard extends Observable implements Serializable, Iterable<Co
     /**
      * The number of rows.
      */
-    final static int NUM_ROWS = 4;
+    static int NUM_ROWS;
 
     /**
      * The number of rows.
      */
-    final static int NUM_COLS = 4;
+    static int NUM_COLS;
 
     /**
      * The tiles on the board in row-major order.

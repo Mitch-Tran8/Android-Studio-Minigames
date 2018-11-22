@@ -225,7 +225,7 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
                 ObjectInputStream input = new ObjectInputStream(inputStream);
                 boardManager = (BoardManager) input.readObject();
                 Board.NUM_ROWS = boardManager.NUM_ROWS;
-                Board.NUM_COLS = boardManager.NUM_COLS;
+                Board.NUM_COLS =boardManager.NUM_COLS;
 
                 inputStream.close();
             }

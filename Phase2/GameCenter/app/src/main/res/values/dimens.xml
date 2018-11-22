@@ -5,4 +5,5 @@
     <dimen name="lenacustum2">600dp</dimen>
     <dimen name="lenacustum3">400dp</dimen>
     <dimen name="lenacustom">480</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

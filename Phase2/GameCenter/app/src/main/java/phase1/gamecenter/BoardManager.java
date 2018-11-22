@@ -371,7 +371,7 @@ class BoardManager implements Serializable {
     boolean isValidTap(int position) {
 
         int row = position / Board.NUM_ROWS;
-        int col = position % Board.NUM_COLS;
+        int col = position % Board.NUM_ROWS;
         int blankId = board.numTiles();
 
         Tile blank = board.getTile(getBlankTile(row, col, blankId)[0], getBlankTile(row, col, blankId)[1]);
