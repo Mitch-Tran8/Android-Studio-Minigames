@@ -62,12 +62,12 @@ class ColourBoardManager implements Serializable {
     /**
      * countdown timer's seconds
      */
-    private int seconds = 30;
+    private int seconds;
 
     /**
      * countdown timer's minutes
      */
-    private int minutes = 0;
+    private int minutes;
 
     /**
      * Manage a new shuffled board.

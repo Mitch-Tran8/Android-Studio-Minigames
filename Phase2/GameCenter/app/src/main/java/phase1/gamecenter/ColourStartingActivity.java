@@ -59,42 +59,13 @@ public class ColourStartingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boardManager = new ColourBoardManager(3);
         saveToFile(TEMP_SAVE_FILENAME);
 
         setContentView(R.layout.activity_starting_);
         addStartButtonListener();
         addLoadButtonListener();
         addSaveButtonListener();
-
-//        timerTextView = (TextView) findViewById(R.id.timerTextView);
-//
-//        Button b = (Button) findViewById(R.id.button);
-//        b.setText("start");
-//        b.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                Button b = (Button) v;
-//                if (b.getText().equals("stop")) {
-//                    timerHandler.removeCallbacks(timerRunnable);
-//                    b.setText("start");
-//                } else {
-//                    startTime = System.currentTimeMillis();
-//                    timerHandler.postDelayed(timerRunnable, 0);
-//                    b.setText("stop");
-//                }
-//            }
-//        });
     }
-
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        timerHandler.removeCallbacks(timerRunnable);
-//        Button b = (Button)findViewById(R.id.button);
-//        b.setText("start");
-//    }
 
     /**
      * Activate the start button.
@@ -104,7 +75,6 @@ public class ColourStartingActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boardManager = new ColourBoardManager(3);
                 switchToGame();
             }
         });

@@ -58,8 +58,8 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
     // Grid View and calculated column height and width based on device size
     private GestureDetectGridView gridView;
     private static int columnWidth, columnHeight;
-    public int seconds = 30;
-    public int minutes = 0;
+    int seconds;
+    int minutes;
 
     /**
      * Set up the background image for each button based on the master list
@@ -85,6 +85,7 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
         gridView.setNumColumns(ColourBoard.NUM_COLS);
         gridView.setBoardManager(boardManager);
         boardManager.getBoard().addObserver(this);
+
         // Observer sets up desired dimensions as well as calls our display function
         gridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -103,6 +104,8 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
                 });
         //Declare the timer
         Timer t = new Timer();
+        seconds = boardManager.getSeconds();
+        minutes = boardManager.getMinutes();
         //Set the schedule function and rate
         t.scheduleAtFixedRate(new TimerTask() {
 
@@ -113,7 +116,7 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
                     @Override
                     public void run() {
                         TextView tv = (TextView) findViewById(R.id.editText);
-                        tv.setText(String.valueOf(minutes)+":"+String.valueOf(seconds));
+                        tv.setText(String.valueOf(minutes)+":"+ String.valueOf(seconds));
                         seconds -= 1;
 
                         if(seconds == 0 && minutes != 0) {
@@ -122,7 +125,7 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
                             seconds=60;
                             minutes=minutes-1;
                         }
-                        else if (seconds == 0){
+                        else if (seconds == 0 && minutes == 0){
                             Toast.makeText(ColourGameActivity.this, "Time's up, try again", Toast.LENGTH_LONG).show();
                             saveToFile(ColourBoardManager.TEMP_SAVE_FILENAME);
                             Intent tmp = new Intent(ColourGameActivity.this, ColourTileRoundsActivity.class);
