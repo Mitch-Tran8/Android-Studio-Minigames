@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import android.app.Activity;
-import android.os.Handler;
 import android.widget.TextView;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -102,6 +100,13 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
                         display();
                     }
                 });
+        setTheTimer();
+    }
+
+    /**
+     * helper function to set the timer
+     */
+    void setTheTimer(){
         //Declare the timer
         Timer t = new Timer();
         seconds = boardManager.getSeconds();
