@@ -13,6 +13,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import android.app.Activity;
+import android.os.Handler;
+import android.widget.TextView;
+
 /**
  * The initial activity for the sliding puzzle tile game.
  */
@@ -31,37 +36,91 @@ public class ColourStartingActivity extends AppCompatActivity {
      */
     private ColourBoardManager boardManager;
 
-    Button rankingsButton;
+    TextView timerTextView;
+    long startTime = 0;
 
+    //runs without a timer by reposting this handler at the end of the runnable
+    Handler timerHandler = new Handler();
+    Runnable timerRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            long millis = System.currentTimeMillis() - startTime;
+            int seconds = (int) (millis / 1000);
+            int minutes = seconds / 60;
+            seconds = seconds % 60;
+
+            timerTextView.setText(String.format("%d:%02d", minutes, seconds));
+
+            timerHandler.postDelayed(this, 500);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boardManager = new ColourBoardManager();
+        boardManager = new ColourBoardManager(3);
         saveToFile(TEMP_SAVE_FILENAME);
-        setContentView(R.layout.activity_connect_numbers_main_page);
+
+        setContentView(R.layout.activity_starting_);
         addStartButtonListener();
+        addLoadButtonListener();
+        addSaveButtonListener();
 
-        rankingsButton = findViewById(R.id.rankings_button);
-        rankingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ColourStartingActivity.this, ColourRankingsActivity.class);
-                startActivity(intent);
-            }
-        });
-
+//        timerTextView = (TextView) findViewById(R.id.timerTextView);
+//
+//        Button b = (Button) findViewById(R.id.button);
+//        b.setText("start");
+//        b.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                Button b = (Button) v;
+//                if (b.getText().equals("stop")) {
+//                    timerHandler.removeCallbacks(timerRunnable);
+//                    b.setText("start");
+//                } else {
+//                    startTime = System.currentTimeMillis();
+//                    timerHandler.postDelayed(timerRunnable, 0);
+//                    b.setText("stop");
+//                }
+//            }
+//        });
     }
+
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        timerHandler.removeCallbacks(timerRunnable);
+//        Button b = (Button)findViewById(R.id.button);
+//        b.setText("start");
+//    }
 
     /**
      * Activate the start button.
      */
     private void addStartButtonListener() {
-        Button startButton = findViewById(R.id.start_game_button);
+        Button startButton = findViewById(R.id.StartButton);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boardManager = new ColourBoardManager();
+                boardManager = new ColourBoardManager(3);
+                switchToGame();
+            }
+        });
+    }
+
+    /**
+     * Activate the load button.
+     */
+    private void addLoadButtonListener() {
+        Button loadButton = findViewById(R.id.LoadButton);
+        loadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFromFile(SAVE_FILENAME);
+                saveToFile(TEMP_SAVE_FILENAME);
+                makeToastLoadedText();
                 switchToGame();
             }
         });
@@ -73,6 +132,22 @@ public class ColourStartingActivity extends AppCompatActivity {
     private void makeToastLoadedText() {
         Toast.makeText(this, "Loaded Game", Toast.LENGTH_SHORT).show();
     }
+
+    /**
+     * Activate the save button.
+     */
+    private void addSaveButtonListener() {
+        Button saveButton = findViewById(R.id.SaveButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveToFile(SAVE_FILENAME);
+                saveToFile(TEMP_SAVE_FILENAME);
+                makeToastSavedText();
+            }
+        });
+    }
+
     /**
      * Display that a game was saved successfully.
      */

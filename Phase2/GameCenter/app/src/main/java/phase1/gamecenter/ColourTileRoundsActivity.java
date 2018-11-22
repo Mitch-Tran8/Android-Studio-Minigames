@@ -54,6 +54,11 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
     Button round3Button;
 
     /**
+     * The round3 button
+     */
+    Button round10Button;
+
+    /**
      * the board manager
      */
     private ColourBoardManager boardManager;
@@ -65,6 +70,7 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
         round1Button = findViewById(R.id.round1_button);
         round2Button = findViewById(R.id.round2_button);
         round3Button = findViewById(R.id.round3_button);
+        round10Button = findViewById(R.id.round10_button);
 
         /**
          * Activate the button for round 1
@@ -72,7 +78,7 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
         round1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToRound(3,3);
+                switchToRound(3, 1, 0);
             }
 
         });
@@ -83,7 +89,7 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
         round2Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToRound(3,3);
+                switchToRound(3, 0, 40);
             }
 
         });
@@ -94,7 +100,18 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
         round3Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToRound(3,3);
+                switchToRound(3, 0, 20);
+            }
+
+        });
+
+        /**
+         * Activate the button for round 10
+         */
+        round10Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToRound(5, 2, 0);
             }
 
         });
@@ -104,8 +121,8 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
     /**
      * Switch to the round/level that the user selects.
      */
-    private void switchToRound(int row, int col) {
-        boardManager = new ColourBoardManager(row,col);
+    private void switchToRound(int complexity, int minute, int second) {
+        boardManager = new ColourBoardManager(complexity, minute, second);
         saveToFile(TEMP_SAVE_FILENAME);
         Intent tmp = new Intent(ColourTileRoundsActivity.this, ColourGameActivity.class);
         startActivity(tmp);

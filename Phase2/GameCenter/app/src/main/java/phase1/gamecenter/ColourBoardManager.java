@@ -13,7 +13,6 @@ import java.util.Stack;
  */
 class ColourBoardManager implements Serializable {
 
-
     /**
      * The board being managed.
      */
@@ -33,13 +32,6 @@ class ColourBoardManager implements Serializable {
      * A temporary save file.
      */
     public static final String TEMP_SAVE_FILENAME = "save_file_tmp.ser";
-
-
-    /**
-     * complexity of the board
-     */
-    private int complexity;
-
 
     /**
      * The stack that stocks all previous moves
@@ -67,46 +59,68 @@ class ColourBoardManager implements Serializable {
         return board;
     }
 
-    private void setComplexity(int complex) {
-        this.complexity = complex;
-    }
+    /**
+     * countdown timer's seconds
+     */
+    private int seconds = 30;
+
+    /**
+     * countdown timer's minutes
+     */
+    private int minutes = 0;
 
     /**
      * Manage a new shuffled board.
      */
-    ColourBoardManager() {
+    ColourBoardManager(int complexity, int minute, int second) {
         List<ColourTile> tiles = new ArrayList<>();
-        final int numTiles = ColourBoard.NUM_ROWS * ColourBoard.NUM_COLS;
-        for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-            tiles.add(new ColourTile(tileNum));
+        int tileNum;
+        int numTiles;
+        seconds = second;
+        minutes = minute;
+
+        if (complexity == 3) {
+            tileNum = 0;
+            ColourBoard.NUM_COLS = 3;
+            ColourBoard.NUM_ROWS = 3;
+            numTiles = 10;
         }
 
-        Collections.shuffle(tiles);
-        this.board = new ColourBoard(tiles);
-    }
-
-    ColourBoardManager(int row, int col) {
-        ColourBoard.NUM_COLS = col;
-        ColourBoard.NUM_ROWS = row;
-
-        List<ColourTile> tiles = new ArrayList<>();
-        this.moveStack = new Stack<>();
-
-
-        final int numTiles = ColourBoard.NUM_COLS * ColourBoard.NUM_ROWS;
-        for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-            tiles.add(new ColourTile(tileNum));
+        else if (complexity == 4) {
+            tileNum = 9;
+            ColourBoard.NUM_COLS = 4;
+            ColourBoard.NUM_ROWS = 4;
+            numTiles = 26;
         }
 
+        else {
+            tileNum = 25;
+            ColourBoard.NUM_COLS = 5;
+            ColourBoard.NUM_ROWS = 5;
+            numTiles = 51;
+        }
+
+        for (++tileNum; tileNum != numTiles; tileNum++) {
+            tiles.add(new ColourTile(tileNum));
+        }
         Collections.shuffle(tiles);
-
         this.board = new ColourBoard(tiles);
+        this.firstTap = 0;
     }
 
-    private int getComplexity() {
-        return complexity;
+    /**
+     * getter for minutes
+     */
+    int getMinutes(){
+        return minutes;
     }
 
+    /**
+     * getter for seconds
+     */
+    int getSeconds(){
+        return seconds;
+    }
 
     /**
      * Return whether the tiles are in row-major order.
@@ -145,14 +159,14 @@ class ColourBoardManager implements Serializable {
         int currBackground = board.getTiles()[0][0].getBackground();
 
         //checks whether all tiles in a row are in the same colour
-        while (currRow < 3) {
+        while (currRow < (Board.NUM_ROWS-1)) {
             for (ColourTile tile : board.getTiles()[currRow]){
                 if (tile.getBackground() != currBackground){
                     return false;
                 }
             }
             currRow++;
-            currBackground = board.getTiles()[currRow][currCol].getId();
+            currBackground = board.getTiles()[currRow][currCol].getBackground();
         }
         score = 100-numOfMoves;
         return true;

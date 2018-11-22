@@ -106,7 +106,6 @@ public class BoardComplexity extends AppCompatActivity {
          */
         loadButton = findViewById(R.id.load_game_button);
 
-
         /*
          * activate 4x4 button
          */
@@ -126,8 +125,6 @@ public class BoardComplexity extends AppCompatActivity {
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                Board.NUM_ROWS = 4;
-                Board.NUM_COLS = 4;
                 Intent tmp = new Intent(BoardComplexity.this, GameActivity.class);
                 tmp.putExtra("user_id", user_id);
                 startActivity(tmp);
