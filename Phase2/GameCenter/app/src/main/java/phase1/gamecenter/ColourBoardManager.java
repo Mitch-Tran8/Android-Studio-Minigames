@@ -60,13 +60,24 @@ class ColourBoardManager implements Serializable {
     }
 
     /**
+     * countdown timer's seconds
+     */
+    private int seconds = 30;
+
+    /**
+     * countdown timer's minutes
+     */
+    private int minutes = 0;
+
+    /**
      * Manage a new shuffled board.
      */
-    ColourBoardManager(int complexity) {
+    ColourBoardManager(int complexity, int minute, int second) {
         List<ColourTile> tiles = new ArrayList<>();
         int tileNum;
         int numTiles;
-
+        seconds = second;
+        minutes = minute;
 
         if (complexity == 3) {
             tileNum = 0;
@@ -95,6 +106,20 @@ class ColourBoardManager implements Serializable {
         Collections.shuffle(tiles);
         this.board = new ColourBoard(tiles);
         this.firstTap = 0;
+    }
+
+    /**
+     * getter for minutes
+     */
+    int getMinutes(){
+        return minutes;
+    }
+
+    /**
+     * getter for seconds
+     */
+    int getSeconds(){
+        return seconds;
     }
 
     /**

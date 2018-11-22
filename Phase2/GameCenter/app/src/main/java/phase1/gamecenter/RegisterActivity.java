@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Pair;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 
 /**
@@ -78,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
         passwordField = (EditText) findViewById(R.id.passwordField);
         emailField = (EditText) findViewById(R.id.emailField);
         register_button = (Button) findViewById(R.id.register_button);
-        game = new Game("Sliding tiles", 4, 4);
+        game = new Game("Sliding Tiles", 4, 4);
         games = new GameManager(game);
 
 
@@ -116,10 +119,20 @@ public class RegisterActivity extends AppCompatActivity {
                             String user_id = mAuth.getCurrentUser().getUid();
 
                             User users = new User(email, name, games);
+                            ArrayList scores = new ArrayList();
+                            scores.add(new Pair<>("score1", 0));
+                            scores.add(new Pair<>("score2", 0));
+                            scores.add(new Pair<>("score3", 0));
+                            scores.add(new Pair<>("score4", 0));
+                            scores.add(new Pair<>("score5", 0));
                             databaseReference.child(user_id).setValue(users);
                             databaseReference.child(user_id).child("Game Collection").setValue(games);
+                            DatabaseReference ref = databaseReference.child(user_id).child("Game Collection").child("Sliding tiles").child("userscores");
+                            for (int i = 1; i < 6; i++){
+                                ref.child("score"+ String.valueOf(i)).setValue(0);
+                            }
 
-                            Log.d(RegisterActivity.class.getSimpleName(), "Authentication successful");
+                                    Log.d(RegisterActivity.class.getSimpleName(), "Authentication successful");
 
                             Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(i);

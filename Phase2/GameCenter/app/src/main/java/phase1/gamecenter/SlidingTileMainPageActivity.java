@@ -25,25 +25,13 @@ import java.util.Collections;
 public class SlidingTileMainPageActivity extends AppCompatActivity implements Serializable {
 
     /**
-     * The save scores file.
-     */
-    public static final String FILE_NAME = "save_current_score13.ser";
-
-    public static final String SCORE_FILE_2 = "score_file13.ser";
-
-    public static final String TOP_SCORE_FILE = "top_score_file13.ser";
-
-    /**
      * The buttons to display
      */
     Button startButton;
-    Button rankingsButton;
+    Button userRankingsButton;
+    Button leaderboardButton;
     Button backButton;
 
-    /**
-     * The current user's scoreboard
-     */
-    public static UserScoreBoard userScoreBoard = new UserScoreBoard();
 
     /**
      * Emails and scores of userList
@@ -70,7 +58,8 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
         user_id = i.getStringExtra("user_id");
         setContentView(R.layout.activity_sliding_tile_main_page);
         startButton = findViewById(R.id.start_game_button);
-        rankingsButton = findViewById(R.id.RankingsButton);
+        leaderboardButton = findViewById(R.id.LeaderboardButton);
+        userRankingsButton = findViewById(R.id.UserRankingButton);
 
         /**
          * Activate start button
@@ -84,185 +73,36 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
             }
         });
 
+//        /**
+//         * Activate current user rankings button
+//         */
+//        leaderboardButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(SlidingTileMainPageActivity.this, CurrentUserScoreboard.class);
+//                i.putExtra("name", "slidingtiles");
+//                startActivity(i);
+//            }
+//        });
+
         /**
-         * Activate rankings button
+         * Activate leaderboard rankings button
          */
-        rankingsButton.setOnClickListener(new View.OnClickListener() {
+        userRankingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                readScores(FILE_NAME);
-                FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-                if (userList.size() != 0) {
-                    if (SCORE_FILE_2 != null){
-                        readScoreList(SCORE_FILE_2);
-                        readTopScoreList(TOP_SCORE_FILE);
-                    }
-
-                    //USER SCOREBOARD
-                    for (int i = 0; i == userList.size() - 1; i++) {
-                        if (userList.get(i).getUserEmail().equals(firebaseUser.getEmail())) {
-                            userScoreBoard.scoreList.add(userList.get(i).getGameScore()); //create users score list
-                            saveScoreList(SCORE_FILE_2);
-                        }
-                    }
-
-                    //GAME SCOREBOARD
-                    for (int i = 0; i == userList.size() - 1; i++) {
-                        if (userScoreBoard.topScoreList.size() == 0) {
-                            userScoreBoard.topScoreList.add(userList.get(i).getUserEmail());
-                            userScoreBoard.topScoreList.add(userList.get(i).getGameScore());
-                            saveTopScoreList(TOP_SCORE_FILE);
-                        }else if (userScoreBoard.topScoreList.size() >= 1) {
-                            int oddInt = 1;
-                            while (oddInt < userScoreBoard.topScoreList.size() && (Integer) userScoreBoard.topScoreList.get(oddInt) >=
-                                    userList.get(0).getGameScore()) {
-                                oddInt += 2;
-                            }
-                            if (oddInt > userScoreBoard.topScoreList.size()) {
-                                userScoreBoard.topScoreList.add(userList.get(i).getUserEmail());
-                                userScoreBoard.topScoreList.add(userList.get(i).getGameScore());
-                                if (userScoreBoard.topScoreList.size() > 10){
-                                    userScoreBoard.topScoreList.remove(11);
-                                    userScoreBoard.topScoreList.remove(10);
-                                }
-                                saveTopScoreList(TOP_SCORE_FILE);
-                            }else {
-                                userScoreBoard.topScoreList.add(oddInt - 1, userList.get(i).getUserEmail());
-                                userScoreBoard.topScoreList.add(oddInt, userList.get(i).getGameScore());
-                                if (userScoreBoard.topScoreList.size() > 10){
-                                    userScoreBoard.topScoreList.remove(11);
-                                    userScoreBoard.topScoreList.remove(10);
-                                }
-                                saveTopScoreList(TOP_SCORE_FILE);
-                            }
-                        }
-                    }
-                    Collections.sort(userScoreBoard.scoreList, Collections.reverseOrder());
-                }
-
-                Intent intent = new Intent(SlidingTileMainPageActivity.this, UserScoreBoard.class);
-                Bundle scoresBundle = new Bundle();
-                scoresBundle.putSerializable("scoreList", userScoreBoard.scoreList);
-                scoresBundle.putSerializable("topScoreList", userScoreBoard.topScoreList);
-                scoresBundle.putSerializable("userEmail", firebaseUser.getEmail());
-                //scoresBundle.putSerializable("userId", user_id);
-                intent.putExtra("scoresBundle", scoresBundle);
-                startActivity(intent);
+            public void onClick(View v) {
+                Intent i = new Intent(SlidingTileMainPageActivity.this, UserScoreBoardActivity.class);
+                i.putExtra("game", "slidingtiles");
+                i.putExtra("user_id", user_id );
+                startActivity(i);
 
             }
-        });
-    }
+        });}
 
-    /**
-     * Read the scores from a file
-     *
-     * @param fileName file to read scores from
-     */
-    public void readScores(String fileName) {
 
-        try {
-            InputStream in = this.openFileInput(fileName);
-            if (in != null) {
-                ObjectInputStream input = new ObjectInputStream(in);
-                ArrayList<EmailAndScore> UserListFromFile = (ArrayList<EmailAndScore>) input.readObject();
-                input.close();
-                this.userList = UserListFromFile;
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-    /**
-     * Save the scoreList to fileName
-     *
-     * @param fileName file to save scoreList to
-     */
-    public void saveScoreList(String fileName) {
-        try
-        {
-            ObjectOutputStream out = new ObjectOutputStream(this.openFileOutput(fileName, MODE_PRIVATE));
-            out.writeObject(userScoreBoard.scoreList);
-            out.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    /**
-     * Save the topScoreList to fileName
-     *
-     * @param fileName file to save topScoreList to
-     */
-    public void saveTopScoreList(String fileName) {
-        try
-        {
-            ObjectOutputStream out = new ObjectOutputStream(this.openFileOutput(fileName, MODE_PRIVATE));
-            out.writeObject(userScoreBoard.topScoreList);
-            out.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    /**
-     * Read the scoreList from fileName
-     *
-     * @param fileName file to read scoreList from
-     */
-    public void readScoreList(String fileName) {
-
-        try {
-            InputStream in = this.openFileInput(fileName);
-            if (in != null) {
-                ObjectInputStream input = new ObjectInputStream(in);
-                ArrayList<Object> ScoreListFromFile = (ArrayList<Object>) input.readObject();
-                input.close();
-                userScoreBoard.scoreList = ScoreListFromFile;
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-    /**
-     * Read the topScoreList from fileName
-     *
-     * @param fileName file to read topScoreList from
-     */
-    public void readTopScoreList(String fileName) {
-
-        try {
-            InputStream in = this.openFileInput(fileName);
-            if (in != null) {
-                ObjectInputStream input = new ObjectInputStream(in);
-                ArrayList<Object> TopScoreListFromFile = (ArrayList<Object>) input.readObject();
-                input.close();
-                userScoreBoard.topScoreList = TopScoreListFromFile;
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Back button from the game to the main page
-     */
+        /**
+         * Back button from the game to the main page
+         */
     @Override
     public void onBackPressed() {
         GameCenterMainActivity gameCentre= new GameCenterMainActivity();

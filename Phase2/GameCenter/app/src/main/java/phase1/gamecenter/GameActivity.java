@@ -135,7 +135,6 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
 
     }
 
-
     /**
      * Activate the undo button.
      */
@@ -225,7 +224,7 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
                 ObjectInputStream input = new ObjectInputStream(inputStream);
                 boardManager = (BoardManager) input.readObject();
                 Board.NUM_ROWS = boardManager.NUM_ROWS;
-                Board.NUM_COLS = boardManager.NUM_COLS;
+                Board.NUM_COLS =boardManager.NUM_COLS;
 
                 inputStream.close();
             }
@@ -287,8 +286,6 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         emailAndScore = new EmailAndScore(firebaseUser.getEmail(), boardManager.getScore());
         this.slidingTileMainPageActivity.userList.add(emailAndScore);
-
-        saveScores(SlidingTileMainPageActivity.FILE_NAME); //SAVE USER AND SCORE TO THE FILE - STATIC SO WILL BE STORED THERE
 
         Intent intent = new Intent(GameActivity.this, SlidingTileMainPageActivity.class);
 

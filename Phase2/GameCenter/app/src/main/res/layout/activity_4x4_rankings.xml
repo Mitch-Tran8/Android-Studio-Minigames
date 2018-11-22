@@ -45,7 +45,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_span="2"
-            android:text="Sliding Tiles 4x4 Scoreboard"
+            android:shadowColor="@color/common_google_signin_btn_text_dark_default"
+            android:shadowDx="4"
+            android:shadowDy="4"
+            android:shadowRadius="4"
+            android:text="SLIDING TILES 4x4 SCOREBOARD"
             android:fontFamily="sans-serif-smallcaps"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="24sp"
@@ -66,7 +70,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/top_score_one"
+            android:id="@+id/top_score_1"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:textSize="18sp" />
@@ -81,7 +85,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/top_score_two"
+            android:id="@+id/top_score_2"
             android:layout_gravity="center"
             android:textSize="18sp" />
 
@@ -97,7 +101,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/top_score_three"
+            android:id="@+id/top_score_3"
             android:layout_gravity="center"
             android:textSize="18sp" />
 
@@ -113,7 +117,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/top_score_four"
+            android:id="@+id/top_score_4"
             android:layout_gravity="center"
             android:textSize="18sp" />
 
@@ -129,7 +133,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/top_score_five"
+            android:id="@+id/top_score_5"
             android:layout_width="155dp"
             android:layout_gravity="center"
             android:textSize="18sp" />
@@ -202,7 +206,7 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/score_one"
+            android:id="@+id/score_1"
             android:layout_gravity="center"
             android:textSize="18sp" />
 
@@ -214,7 +218,7 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/score_two"
+            android:id="@+id/score_2"
             android:layout_gravity="center"
             android:textSize="18sp" />
 
@@ -226,7 +230,7 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/score_three"
+            android:id="@+id/score_3"
             android:layout_gravity="center"
             android:textSize="18sp" />
 
@@ -238,7 +242,7 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/score_four"
+            android:id="@+id/score_4"
             android:layout_gravity="center"
             android:textSize="18sp" />
 
@@ -250,7 +254,7 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/score_five"
+            android:id="@+id/score_5"
             android:layout_width="155dp"
             android:layout_gravity="center"
             android:textSize="18sp" />
