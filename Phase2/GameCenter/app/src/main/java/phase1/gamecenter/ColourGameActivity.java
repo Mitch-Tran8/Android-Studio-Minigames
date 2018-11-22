@@ -1,5 +1,11 @@
+/*
+Timer adapted from:
+https://stackoverflow.com/a/17486406
+ */
+
 package phase1.gamecenter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -55,11 +61,15 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
     public static final int LEFT = 3;
     public static final int RIGHT = 4;
 
-    // Grid View and calculated column height and width based on device size
+    /**
+     * Grid View and calculated column height and width based on device size
+     */
     private GestureDetectGridView gridView;
+
+    /**
+     * the column width and height
+     */
     private static int columnWidth, columnHeight;
-    public int seconds = 30;
-    public int minutes = 0;
 
     /**
      * Set up the background image for each button based on the master list
@@ -101,6 +111,17 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
                         display();
                     }
                 });
+        setTheTimer();
+    }
+
+    /**
+     * Helper function of the timer to onCreate
+     */
+    void setTheTimer(){
+        /*
+        Timer adapted from:
+        https://stackoverflow.com/a/17486406
+        */
         //Declare the timer
         Timer t = new Timer();
         //Set the schedule function and rate
@@ -110,17 +131,19 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
             public void run() {
                 runOnUiThread(new Runnable() {
 
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void run() {
+                        int seconds = boardManager.getSeconds();
+                        int minutes = boardManager.getMinutes();
                         TextView tv = (TextView) findViewById(R.id.editText);
                         tv.setText(String.valueOf(minutes)+":"+String.valueOf(seconds));
                         seconds -= 1;
 
                         if(seconds == 0 && minutes != 0) {
-                            tv.setText(String.valueOf(minutes)+":"+String.valueOf(seconds));
-
                             seconds=60;
                             minutes=minutes-1;
+                            tv.setText(String.valueOf(minutes)+":"+String.valueOf(seconds));
                         }
                         else if (seconds == 0){
                             Toast.makeText(ColourGameActivity.this, "Time's up, try again", Toast.LENGTH_LONG).show();
