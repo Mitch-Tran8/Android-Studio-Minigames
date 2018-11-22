@@ -104,8 +104,6 @@ class BoardManager implements Serializable {
     BoardManager(int row, int col) {
         Board.NUM_COLS = col;
         Board.NUM_ROWS = row;
-        NUM_COLS= col;
-        NUM_ROWS = row;
 
         if (Board.NUM_COLS == 3) {
             setComplexity("3x3");

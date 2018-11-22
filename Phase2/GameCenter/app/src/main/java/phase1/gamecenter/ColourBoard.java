@@ -23,12 +23,12 @@ public class ColourBoard extends Observable implements Serializable, Iterable<Co
     /**
      * The number of rows.
      */
-    final static int NUM_ROWS = 4;
+    static int NUM_ROWS = 4;
 
     /**
      * The number of rows.
      */
-    final static int NUM_COLS = 4;
+    static int NUM_COLS = 4;
 
     /**
      * The tiles on the board in row-major order.

@@ -62,13 +62,36 @@ class ColourBoardManager implements Serializable {
     /**
      * Manage a new shuffled board.
      */
-    ColourBoardManager() {
+    ColourBoardManager(int complexity) {
         List<ColourTile> tiles = new ArrayList<>();
-        final int numTiles = ColourBoard.NUM_ROWS * ColourBoard.NUM_COLS;
-        for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-            tiles.add(new ColourTile(tileNum));
+        int tileNum;
+        int numTiles;
+
+
+        if (complexity == 3) {
+            tileNum = 0;
+            ColourBoard.NUM_COLS = 3;
+            ColourBoard.NUM_ROWS = 3;
+            numTiles = 10;
         }
 
+        else if (complexity == 4) {
+            tileNum = 9;
+            ColourBoard.NUM_COLS = 4;
+            ColourBoard.NUM_ROWS = 4;
+            numTiles = 26;
+        }
+
+        else {
+            tileNum = 25;
+            ColourBoard.NUM_COLS = 5;
+            ColourBoard.NUM_ROWS = 5;
+            numTiles = 51;
+        }
+
+        for (++tileNum; tileNum != numTiles; tileNum++) {
+            tiles.add(new ColourTile(tileNum));
+        }
         Collections.shuffle(tiles);
         this.board = new ColourBoard(tiles);
         this.firstTap = 0;
@@ -111,7 +134,7 @@ class ColourBoardManager implements Serializable {
         int currBackground = board.getTiles()[0][0].getBackground();
 
         //checks whether all tiles in a row are in the same colour
-        while (currRow < 4) {
+        while (currRow < (Board.NUM_ROWS-1)) {
             for (ColourTile tile : board.getTiles()[currRow]){
                 if (tile.getBackground() != currBackground){
                     return false;
@@ -186,24 +209,24 @@ class ColourBoardManager implements Serializable {
         int firstTapRow = firstTap / ColourBoard.NUM_ROWS;
         int firstTapCol = firstTap % ColourBoard.NUM_COLS;
 
-        return (row != firstTapRow && col != firstTapCol);
+//        return (row != firstTapRow && col != firstTapCol);
 
-//        if (row == firstTapRow && col == firstTapCol){
-//            return false;
-//        }
-//        else if (row == firstTapRow){
-//            if (col -firstTapCol == 1){
-//                return true;
-//            }
-//            else return firstTapCol - col == 1;
-//        }
-//        else if (firstTapCol == col){
-//            if (row - firstTapRow == 1){
-//                return true;
-//            }
-//            else return firstTapRow - row == 1;
-//        }
-//        return false;
+        if (row == firstTapRow && col == firstTapCol){
+            return false;
+        }
+        else if (row == firstTapRow){
+            if (col -firstTapCol == 1){
+                return true;
+            }
+            else return firstTapCol - col == 1;
+        }
+        else if (firstTapCol == col){
+            if (row - firstTapRow == 1){
+                return true;
+            }
+            else return firstTapRow - row == 1;
+        }
+        return false;
     }
 
     /**

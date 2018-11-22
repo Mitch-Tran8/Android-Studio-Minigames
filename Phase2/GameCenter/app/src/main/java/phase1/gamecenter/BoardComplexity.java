@@ -106,7 +106,6 @@ public class BoardComplexity extends AppCompatActivity {
          */
         loadButton = findViewById(R.id.load_game_button);
 
-
         /*
          * activate 4x4 button
          */

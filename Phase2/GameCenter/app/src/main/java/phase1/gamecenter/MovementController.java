@@ -68,6 +68,7 @@ public class MovementController {
                         //ToDo: implement a getScore method in ColourBoardManager and print the score when you win
                         String score = Integer.toString(colourBoardManager.getScore());
                         Toast.makeText(context, "YOU WIN! Score: " + score, Toast.LENGTH_LONG).show();
+
 //                        gameActivity.switchToMain();
                     }
                 }
