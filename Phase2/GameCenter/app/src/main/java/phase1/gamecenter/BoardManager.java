@@ -70,8 +70,15 @@ class BoardManager implements Serializable {
      */
     private boolean isValidUndo;
 
-    static int NUM_ROWS;
-    static int NUM_COLS;
+    /**
+     * The columns of the board, the board manager is managing
+     */
+    private int columns;
+
+    /**
+     * The rows of the board, the board manager is managing
+     */
+    private int rows;
 
 
     /**
@@ -129,8 +136,8 @@ class BoardManager implements Serializable {
     BoardManager(int row, int col) {
         Board.NUM_COLS = col;
         Board.NUM_ROWS = row;
-        NUM_COLS = col;
-        NUM_ROWS = row;
+        columns = col;
+        rows = row;
 
         if (Board.NUM_COLS == 3) {
             setComplexity("3x3");
@@ -324,6 +331,19 @@ class BoardManager implements Serializable {
         return blankTileIndex;
     }
 
+    /**
+     * returns the number of columns the board manager is managing
+     * @return number of columns
+     */
+    protected int getColumns() {
+        return columns;
+    }
+
+    /**
+     * returns the number of rows the board manager is managing
+     * @return number of rows
+     */
+    protected int getRows(){return rows;}
 
     /**
      * returns the number of moves made

@@ -75,6 +75,11 @@ public class UserScoreBoardActivity extends AppCompatActivity {
 
     private void showScores(){
 
+        TextView textViewName = findViewById(R.id.UserNameTitle);
+        textViewName.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+
+        FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+
         TextView textView1 = findViewById(R.id.text1);
         textView1.setText(String.valueOf(userScores.get(0)));
 
