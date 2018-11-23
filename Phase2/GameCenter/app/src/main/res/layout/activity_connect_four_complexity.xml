@@ -3,47 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SlidingTileMainPageActivity">
+    android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/start_game_button"
-        android:layout_width="280dp"
-        android:layout_height="116dp"
+        android:id="@+id/artificial_intel_button"
+        android:layout_width="278dp"
+        android:layout_height="76dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="1dp"
         android:background="@drawable/edit_text_style"
-        android:fontFamily="sans-serif-smallcaps"
-        android:text="Start Game"
+        android:backgroundTint="@color/connectFourBoard"
+        android:fontFamily="casual"
+        android:text="One Player"
         android:textSize="30dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.562" />
+        app:layout_constraintVertical_bias="0.332" />
 
     <Button
-        android:id="@+id/rankings_button"
-        android:layout_width="280dp"
-        android:layout_height="78dp"
+        android:id="@+id/two_player_button"
+        android:layout_width="278dp"
+        android:layout_height="76dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="3dp"
-        android:backgroundTintMode="src_over"
+        android:layout_marginBottom="1dp"
         android:background="@drawable/edit_text_style"
-        android:elevation="@dimen/lenacustum3"
-        android:fontFamily="sans-serif-smallcaps"
-        android:text="Rankings"
+        android:backgroundTint="@color/connectFourBoard"
+        android:fontFamily="casual"
+        android:text="Two Players"
         android:textSize="30dp"
-        android:visibility="visible"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.293" />
-
+        app:layout_constraintVertical_bias="0.567" />
 
 </android.support.constraint.ConstraintLayout>

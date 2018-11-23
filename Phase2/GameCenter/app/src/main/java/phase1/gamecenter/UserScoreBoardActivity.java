@@ -40,6 +40,9 @@ public class UserScoreBoardActivity extends AppCompatActivity {
      */
     private void getUserScores(){
         final String user_id = getUserId();
+        TextView userScoreboard = findViewById(R.id.userScoreBoard);
+        String userScoreboardTitle = user_id + "'s SCOREBOARD";
+        userScoreboard.setText(userScoreboardTitle);
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(user_id).child("Game Collection").child("Sliding tiles");
         ref.child("userscores").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

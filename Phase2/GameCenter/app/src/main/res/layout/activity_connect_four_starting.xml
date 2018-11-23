@@ -8,63 +8,41 @@
 
     <Button
         android:id="@+id/start_game_button"
-        android:layout_width="280dp"
-        android:layout_height="116dp"
+        android:layout_width="278dp"
+        android:layout_height="76dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="1dp"
         android:background="@drawable/edit_text_style"
+        android:backgroundTint="@color/connectFourBoard"
         android:fontFamily="sans-serif-smallcaps"
         android:text="Start Game"
         android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.69" />
+        app:layout_constraintVertical_bias="0.339" />
 
     <Button
-        android:id="@+id/UserRankingButton"
-        android:layout_width="280dp"
-        android:layout_height="78dp"
+        android:id="@+id/rankings_button"
+        android:layout_width="214dp"
+        android:layout_height="64dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="3dp"
+        android:layout_marginBottom="1dp"
         android:background="@drawable/edit_text_style"
-        android:backgroundTintMode="src_over"
-        android:elevation="@dimen/lenacustum3"
+        android:backgroundTint="@color/colorPrimary"
         android:fontFamily="sans-serif-smallcaps"
-        android:text="User Scoreboard"
+        android:text="Rankings"
         android:textSize="30dp"
-        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.391" />
-
-    <Button
-        android:id="@+id/LeaderboardButton"
-        android:layout_width="280dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="3dp"
-        android:background="@drawable/edit_text_style"
-        android:backgroundTintMode="src_over"
-        android:elevation="@dimen/lenacustum3"
-        android:fontFamily="sans-serif-smallcaps"
-        android:text="Leaderboard"
-        android:textSize="30dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.146" />
-
+        app:layout_constraintVertical_bias="0.562" />
 
 </android.support.constraint.ConstraintLayout>
