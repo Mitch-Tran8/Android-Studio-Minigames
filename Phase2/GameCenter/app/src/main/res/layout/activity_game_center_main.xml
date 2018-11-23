@@ -105,6 +105,28 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.326" />
 
+    <Button
+        android:id="@+id/rankingsButton"
+        android:layout_width="295dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/edit_text_style"
+        android:backgroundTint="#FDD692"
+        android:fontFamily="@font/andika"
+        android:text="Rankings"
+        android:textColor="#f1a451"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.465"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.47" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="89dp"
@@ -127,15 +149,16 @@
         android:id="@+id/menuButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:translationZ="10dp"
-        android:layout_marginTop="@dimen/fab_margin"
-        android:clickable="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
         android:backgroundTint="#F7B267"
+        android:clickable="true"
+        android:text="options"
+        android:translationZ="10dp"
+        app:elevation="@dimen/fab_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:rippleColor="#FDD692"
-        app:srcCompat="@drawable/expand" />
+        app:rippleColor="#FDD692" />
 
     <view
         android:id="@+id/menuView"
@@ -147,9 +170,33 @@
         android:layout_marginBottom="2dp"
         android:background="#abe49948"
         android:layout="@drawable/edit_text_style"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.493" />
+
+    <TextView
+        android:id="@+id/menuText"
+        android:layout_width="101dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/andika"
+        android:text="Options"
+        android:textAllCaps="true"
+        android:textColor="#FDD692"
+        android:textSize="18sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/logoutPageButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.232"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>

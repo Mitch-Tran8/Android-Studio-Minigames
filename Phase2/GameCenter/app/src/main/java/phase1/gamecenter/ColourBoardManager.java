@@ -182,8 +182,8 @@ class ColourBoardManager implements Serializable {
         int currBackground = board.getTiles()[0][0].getBackground();
 
         //checks whether all tiles in a column are in the same colour
-        while(currCol < 4){
-            while (currRow < 4){
+        while(currCol < (Board.NUM_COLS-1)){
+            while (currRow < (Board.NUM_ROWS-1)){
                 if (board.getTiles()[currRow][currCol].getBackground() != currBackground){
                     return false;
                 }
@@ -191,7 +191,7 @@ class ColourBoardManager implements Serializable {
             }
             currCol++;
             currRow = 1;
-            currBackground = board.getTiles()[currCol][0].getBackground();
+            currBackground = board.getTiles()[0][currCol].getBackground();
         }
         return true;
     }
@@ -234,7 +234,6 @@ class ColourBoardManager implements Serializable {
         int firstTapRow = firstTap / ColourBoard.NUM_ROWS;
         int firstTapCol = firstTap % ColourBoard.NUM_COLS;
 
-//        return (row != firstTapRow && col != firstTapCol);
 
         if (row == firstTapRow && col == firstTapCol){
             return false;
