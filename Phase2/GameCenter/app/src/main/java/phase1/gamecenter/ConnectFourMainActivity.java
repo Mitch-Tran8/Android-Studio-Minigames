@@ -56,6 +56,15 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      */
     private TextView draws;
 
+    //private TextView rounds;
+
+    /**
+     * Round number of the game.
+     */
+    private int round;
+    private int player1RoundsWon;
+    private int player2RoundsWon;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,13 +89,19 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
         buttonReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for (int i = 0; i < 5; i++) {
-                    for (int j = 0; j < 5; j++) {
-                        buttons[i][j].setText("");
+
+                if (!gameOver()) {
+                    for (int i = 0; i < 5; i++) {
+                        for (int j = 0; j < 5; j++) {
+                            buttons[i][j].setText("");
+                        }
                     }
+                    moves = 0;
+                    player1Turn = true;
                 }
-                moves = 0;
-                player1Turn = true;
+                else {
+                    Toast.makeText(getApplicationContext(), "Game Over. Please refresh the game.", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -111,35 +126,51 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
 
     @Override
     public void onClick(View v) {
-        if (!((Button) v).getText().toString().equals("")) {//checks if button contains empty string, if X or O then already used
-            Toast.makeText(this, "Invalid move! Please choose another spot.", Toast.LENGTH_LONG).show();
-        }
-
-        if (player1Turn) {
-            ((Button) v).setTextColor(Color.parseColor("#FFE35A7F"));
-            ((Button) v).setText("X");
-        } else {
-            ((Button) v).setTextColor(Color.parseColor("#FFE79024"));
-            ((Button) v).setText("O");
-        }
-        moves++;
         if (gameOver()) {
-            if (player1Turn) {
-                player1points++;
-                Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_LONG).show();
-                updatePoints();
-            } else {
-                player2points++;
-                Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_LONG).show();
-                updatePoints();
+            Toast.makeText(this, "Game Over. Please refresh the game.", Toast.LENGTH_LONG).show();
 
-            }
-        } else if (moves == 25) {
-            ties++;
-            Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
-            updatePoints();
         } else {
-            player1Turn = !player1Turn;
+            if (matchOver()) {
+                Toast.makeText(this, "Match over. Please start a new match", Toast.LENGTH_LONG).show();
+            } else {
+                if (!((Button) v).getText().toString().equals("")) {//checks if button contains empty string, if X or O then already used
+                    Toast.makeText(this, "Invalid move! Please choose another spot.", Toast.LENGTH_LONG).show();
+                }
+
+                if (player1Turn) {
+                    ((Button) v).setTextColor(Color.parseColor("#FFE35A7F"));
+                    ((Button) v).setText("X");
+                } else {
+                    ((Button) v).setTextColor(Color.parseColor("#FFE79024"));
+                    ((Button) v).setText("O");
+                }
+                moves++;
+                if (matchOver()) {
+                    if (player1Turn) {
+                        player1points = player1points + 5;
+                        player2points = player2points - 3;
+                        player1RoundsWon++;
+                        round++;
+                        Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_LONG).show();
+                        updatePoints();
+                    } else {
+                        player2points = player2points + 5;
+                        player1points = player1points - 3;
+                        player2RoundsWon++;
+                        round++;
+                        Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_LONG).show();
+                        updatePoints();
+
+                    }
+                } else if (moves == 25) {
+                    ties++;
+                    round++;
+                    Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
+                    updatePoints();
+                } else {
+                    player1Turn = !player1Turn;
+                }
+            }
         }
     }
 
@@ -149,6 +180,23 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      * @return whether the game is over.
      */
     private boolean gameOver() {
+
+        if (player1RoundsWon == 3 || player2RoundsWon == 3) {
+            return true;
+        }
+        if (round == 6) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Return whether the connect four game is over, that is, if a player has made four in a row.
+     *
+     * @return whether the game is over.
+     */
+    private boolean matchOver() {
         String[][] board = new String[5][5];
 
         for (int i = 0; i < 5; i++) {
@@ -157,11 +205,13 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
             }
         }
 
-        if (checkRows(board) || checkColumns(board) || checkAscendingDiagonals(board) || checkDescendingDiagonals(board)) {
+        if ( (checkRows(board) || checkColumns(board) || checkAscendingDiagonals(board) || checkDescendingDiagonals(board))) {
             return true;
         }
         return false;
     }
+
+
 
     /**
      * Return whether or not there is a 4 in a row.
@@ -278,8 +328,8 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      * Update TextView with the scores of each player.
      */
     private void updatePoints() {
-        scorePlayer1.setText("Player 1: " + player1points);
-        scorePlayer2.setText("Player 2: " + player2points);
+        scorePlayer1.setText("Player 1: " + player1RoundsWon);
+        scorePlayer2.setText("Player 2: " + player2RoundsWon);
         draws.setText("Draws: " + ties);
     }
 

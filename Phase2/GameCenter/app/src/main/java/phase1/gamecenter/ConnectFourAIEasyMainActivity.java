@@ -2,6 +2,7 @@ package phase1.gamecenter;
 
 import java.util.Random;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -29,7 +30,7 @@ public class ConnectFourAIEasyMainActivity extends AppCompatActivity implements 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_connect_four_ai);
+        setContentView(R.layout.activity_connect_four_bubbles);
         scorePlayer1 = findViewById(R.id.scorePlayer1);
         aiPlayer = findViewById(R.id.aiPlayer);
         Button buttonReset = findViewById(R.id.button_reset);
@@ -82,7 +83,9 @@ public class ConnectFourAIEasyMainActivity extends AppCompatActivity implements 
         if (!((Button) v).getText().toString().equals("")) {//checks if button contains empty string, if X or O then already used
             Toast.makeText(this, "Invalid move!", Toast.LENGTH_LONG).show();
         }
+        ((Button) v).setTextColor(Color.parseColor("#FFE35A7F"));
         ((Button) v).setText("X");
+
         if (gameOver()) {
             if (player1Turn) {
                 player1Wins();
@@ -96,7 +99,10 @@ public class ConnectFourAIEasyMainActivity extends AppCompatActivity implements 
                 i = RANDOM.nextInt(4);
                 j = RANDOM.nextInt(4);
             } while (!buttons[i][j].getText().toString().equals(""));
+
+            (buttons[i][j]).setTextColor(Color.parseColor("#FFE79024"));
             (buttons[i][j]).setText("O");
+
             if (gameOver()) {
                 if (!player1Turn) {
                     aiWins();
