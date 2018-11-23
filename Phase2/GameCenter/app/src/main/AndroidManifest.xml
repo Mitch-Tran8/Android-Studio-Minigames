@@ -36,7 +36,6 @@
         <activity android:name=".UserScoreBoardActivity" />
         <activity android:name=".ColourRankingsActivity" />
         <activity android:name=".ColourScoreBoard3x3" />
-        <activity android:name=".ColourScoreBoard4x4" />
         <activity android:name=".ColourScoreBoard5x5" />
 
         <activity android:name=".Scoreboard3x3" />
@@ -48,7 +47,8 @@
         <activity android:name=".ConnectFourMainActivity" />
         <activity android:name=".ConnectFourStartingActivity" />
         <activity android:name=".ConnectFourPlayersActivity" />
-
+        <activity android:name=".ConnectFourRankingsMainActivity" />
+        <activity android:name=".ConnectFourRankings2PlayersActivity" />
 
         <activity android:name=".LeaderboardActivity"></activity>
     </application>

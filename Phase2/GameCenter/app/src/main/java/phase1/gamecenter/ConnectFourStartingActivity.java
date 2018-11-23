@@ -34,13 +34,13 @@ public class ConnectFourStartingActivity extends AppCompatActivity {
             }
         });
 
-        /*rankings.setOnClickListener(new View.OnClickListener() {
+        rankings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ConnectFourStartingActivity.this, ConnectFourPlayersActivity.class);
+                Intent intent = new Intent(ConnectFourStartingActivity.this, ConnectFourRankingsMainActivity.class);
                 startActivity(intent);
             }
-        });*/
+        });
 
     }
 }
