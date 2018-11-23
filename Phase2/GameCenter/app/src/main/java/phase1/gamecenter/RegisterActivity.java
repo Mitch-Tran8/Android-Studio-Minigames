@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -117,6 +118,9 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             String user_id = mAuth.getCurrentUser().getUid();
+                            FirebaseUser currUser = mAuth.getCurrentUser();
+                            UserProfileChangeRequest changeRequest = new UserProfileChangeRequest.Builder().setDisplayName(name).build();
+                            currUser.updateProfile(changeRequest);
 
                             User users = new User(email, name, games);
                             ArrayList scores = new ArrayList();
@@ -125,6 +129,7 @@ public class RegisterActivity extends AppCompatActivity {
                             scores.add(new Pair<>("score3", 0));
                             scores.add(new Pair<>("score4", 0));
                             scores.add(new Pair<>("score5", 0));
+
                             databaseReference.child(user_id).setValue(users);
                             databaseReference.child(user_id).child("Game Collection").setValue(games);
                             DatabaseReference ref = databaseReference.child(user_id).child("Game Collection").child("Sliding tiles").child("userscores");

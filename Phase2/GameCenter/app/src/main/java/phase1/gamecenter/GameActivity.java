@@ -111,7 +111,7 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
 
         // Add View to activity
         gridView = findViewById(R.id.grid);
-        gridView.setNumColumns(Board.NUM_COLS);
+        gridView.setNumColumns(boardManager.getColumns());
         gridView.setBoardManager(boardManager);
 
         boardManager.getBoard().addObserver(this);
@@ -125,8 +125,8 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
                         int displayWidth = gridView.getMeasuredWidth();
                         int displayHeight = gridView.getMeasuredHeight();
 
-                        columnWidth = displayWidth / Board.NUM_COLS;
-                        columnHeight = displayHeight / Board.NUM_ROWS;
+                        columnWidth = displayWidth / boardManager.getColumns();
+                        columnHeight = displayHeight / boardManager.getRows();
 
                         display();
                     }
@@ -178,8 +178,8 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
     private void createTileButtons(Context context) {
         Board board = boardManager.getBoard();
         tileButtons = new ArrayList<>();
-        for (int row = 0; row != Board.NUM_ROWS; row++) {
-            for (int col = 0; col != Board.NUM_COLS; col++) {
+        for (int row = 0; row != boardManager.getRows(); row++) {
+            for (int col = 0; col != boardManager.getColumns(); col++) {
                 Button tmp = new Button(context);
                 tmp.setBackgroundResource(board.getTile(row, col).getBackground());
                 this.tileButtons.add(tmp);
@@ -194,8 +194,8 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
         Board board = boardManager.getBoard();
         int nextPos = 0;
         for (Button b : tileButtons) {
-            int row = nextPos / board.NUM_ROWS;
-            int col = nextPos % board.NUM_COLS;
+            int row = nextPos / boardManager.getRows();
+            int col = nextPos % boardManager.getColumns();
             b.setBackgroundResource(board.getTile(row, col).getBackground());
             nextPos++;
         }
@@ -223,8 +223,6 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
                 boardManager = (BoardManager) input.readObject();
-                Board.NUM_ROWS = boardManager.NUM_ROWS;
-                Board.NUM_COLS =boardManager.NUM_COLS;
 
                 inputStream.close();
             }

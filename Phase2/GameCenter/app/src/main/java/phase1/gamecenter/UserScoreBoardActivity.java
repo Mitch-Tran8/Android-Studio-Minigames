@@ -40,12 +40,14 @@ public class UserScoreBoardActivity extends AppCompatActivity {
      */
     private void getUserScores(){
         final String user_id = getUserId();
+        TextView userScoreboard = findViewById(R.id.userScoreBoard);
+        String userScoreboardTitle = user_id + "'s SCOREBOARD";
+        userScoreboard.setText(userScoreboardTitle);
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(user_id).child("Game Collection").child("Sliding tiles");
         ref.child("userscores").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<Long> scores = new ArrayList<Long>();
-                ArrayList<String> users = new ArrayList<String>();
                 HashMap<String, Long> map = (HashMap<String, Long>) dataSnapshot.getValue();
                 for (HashMap.Entry <String, Long> entry: map.entrySet()){
                     scores.add(entry.getValue());
@@ -74,6 +76,9 @@ public class UserScoreBoardActivity extends AppCompatActivity {
     }
 
     private void showScores(){
+
+        TextView textViewName = findViewById(R.id.UserNameTitle);
+        textViewName.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
 
         TextView textView1 = findViewById(R.id.text1);
         textView1.setText(String.valueOf(userScores.get(0)));

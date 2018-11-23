@@ -36,9 +36,21 @@
         <activity android:name=".UserScoreBoardActivity"></activity>
         <activity android:name=".ColourRankingsActivity" />
         <activity android:name=".ColourScoreBoard3x3" />
-        <activity android:name=".ColourScoreBoard4x4" />
         <activity android:name=".ColourScoreBoard5x5" />
         <activity android:name=".ColourTileRoundsActivity"/>
+        <activity android:name=".ConnectFourMainActivity" />
+        <activity android:name=".ConnectNumbersStartingActivity" />
+        <activity android:name=".ConnectFourPlayersActivity" />
+        <activity android:name=".ConnectFourAIEasyMainActivity" />
+        <activity android:name=".ConnectNumbersSelectActivity" />
+        <activity android:name=".ConnectThreeAIEasyMainActivity" />
+        <activity android:name=".ConnectThreeMainActivity" />
+        <activity android:name=".ConnectThreePlayersActivity" />
+        <activity android:name=".ConnectThreeDifficultyActivity" />
+        <activity android:name=".ConnectFourDifficultyActivity" />
+
+
+        <activity android:name=".LeaderboardActivity"/>
 
         <meta-data
             android:name="preloaded_fonts"
