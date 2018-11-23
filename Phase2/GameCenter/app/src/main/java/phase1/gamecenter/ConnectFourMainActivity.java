@@ -55,14 +55,19 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      * TextView that shows the number of ties.
      */
     private TextView draws;
-
-    //private TextView rounds;
-
     /**
      * Round number of the game.
      */
     private int round;
+
+    /**
+     * Number of rounds won by player 1.
+     */
     private int player1RoundsWon;
+
+    /**
+     * Number of rounds won by player 2.
+     */
     private int player2RoundsWon;
 
     @Override
@@ -98,9 +103,12 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
                     }
                     moves = 0;
                     player1Turn = true;
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "Game Over. Please refresh the game.", Toast.LENGTH_LONG).show();
+                } else {
+                    if (player1RoundsWon == 3) {
+                        Toast.makeText(getApplicationContext(), "Game Over. Player 1 wins! Please refresh the game.", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Game Over. Player 2 wins! Please refresh the game.", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
@@ -127,51 +135,74 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
     @Override
     public void onClick(View v) {
         if (gameOver()) {
-            Toast.makeText(this, "Game Over. Please refresh the game.", Toast.LENGTH_LONG).show();
-
+            if (player1RoundsWon == 3) {
+                Toast.makeText(this, "Game Over. Player 1 wins! Please start a new game.", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Game Over. Player 2 wins! Please start a new game.", Toast.LENGTH_LONG).show();
+            }
         } else {
             if (matchOver()) {
-                Toast.makeText(this, "Match over. Please start a new match", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Match over. Please start a new match.", Toast.LENGTH_LONG).show();
             } else {
                 if (!((Button) v).getText().toString().equals("")) {//checks if button contains empty string, if X or O then already used
                     Toast.makeText(this, "Invalid move! Please choose another spot.", Toast.LENGTH_LONG).show();
-                }
-
-                if (player1Turn) {
-                    ((Button) v).setTextColor(Color.parseColor("#FFE35A7F"));
-                    ((Button) v).setText("X");
                 } else {
-                    ((Button) v).setTextColor(Color.parseColor("#FFE79024"));
-                    ((Button) v).setText("O");
-                }
-                moves++;
-                if (matchOver()) {
                     if (player1Turn) {
-                        player1points = player1points + 5;
-                        player2points = player2points - 3;
-                        player1RoundsWon++;
-                        round++;
-                        Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_LONG).show();
-                        updatePoints();
+                        ((Button) v).setTextColor(Color.parseColor("#FFE35A7F"));
+                        ((Button) v).setText("X");
                     } else {
-                        player2points = player2points + 5;
-                        player1points = player1points - 3;
-                        player2RoundsWon++;
-                        round++;
-                        Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_LONG).show();
-                        updatePoints();
-
+                        ((Button) v).setTextColor(Color.parseColor("#FFE79024"));
+                        ((Button) v).setText("O");
                     }
-                } else if (moves == 25) {
-                    ties++;
-                    round++;
-                    Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
-                    updatePoints();
-                } else {
-                    player1Turn = !player1Turn;
+                    moves++;
+                    if (matchOver()) {
+                        if (player1Turn) {
+                            player1Wins();
+                        } else {
+                            player2Wins();
+                        }
+                    } else if (moves == 25) {
+                        tie();
+                    } else {
+                        player1Turn = !player1Turn;
+                    }
                 }
             }
         }
+    }
+
+    /**
+     * Tie in the game.
+     */
+    private void tie() {
+        ties++;
+        round++;
+        Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
+        updatePoints();
+    }
+
+    /**
+     * Player 2 wins the match, update scores.
+     */
+    private void player2Wins() {
+        player2points = player2points + 5;
+        player1points = player1points - 3;
+        player2RoundsWon++;
+        round++;
+        Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_LONG).show();
+        updatePoints();
+    }
+
+    /**
+     * Player 1 wins the match, update scores.
+     */
+    private void player1Wins() {
+        player1points = player1points + 5;
+        player2points = player2points - 3;
+        player1RoundsWon++;
+        round++;
+        Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_LONG).show();
+        updatePoints();
     }
 
     /**
@@ -180,14 +211,9 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      * @return whether the game is over.
      */
     private boolean gameOver() {
-
         if (player1RoundsWon == 3 || player2RoundsWon == 3) {
             return true;
         }
-        if (round == 6) {
-            return true;
-        }
-
         return false;
     }
 
@@ -205,13 +231,11 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
             }
         }
 
-        if ( (checkRows(board) || checkColumns(board) || checkAscendingDiagonals(board) || checkDescendingDiagonals(board))) {
+        if ((checkRows(board) || checkColumns(board) || checkAscendingDiagonals(board) || checkDescendingDiagonals(board))) {
             return true;
         }
         return false;
     }
-
-
 
     /**
      * Return whether or not there is a 4 in a row.
