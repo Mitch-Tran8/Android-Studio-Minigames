@@ -6,9 +6,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * Class controlling the option to pick AI or Two Player connect four game mode.
+ */
+
 public class ConnectFourPlayersActivity extends AppCompatActivity {
 
+    /**
+     * Button for the option to play against AI.
+     */
     Button artificialIntel;
+
+    /**
+     * Button for the two player game option.
+     */
     Button twoPlayers;
 
     @Override

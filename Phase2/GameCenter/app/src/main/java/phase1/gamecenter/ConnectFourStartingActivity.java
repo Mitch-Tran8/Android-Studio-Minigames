@@ -8,7 +8,14 @@ import android.widget.Button;
 
 public class ConnectFourStartingActivity extends AppCompatActivity {
 
+    /**
+     * Button that allows user to start the connect four game.
+     */
     Button startGame;
+
+    /**
+     * Button that allows the user to view rankings for the connect four game.
+     */
     Button rankings;
 
     @Override

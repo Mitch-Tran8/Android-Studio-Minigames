@@ -17,12 +17,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="54dp"
-            android:layout_marginTop="47dp"
+            android:layout_marginStart="31dp"
+            android:layout_marginTop="49dp"
             android:fontFamily="sans-serif-condensed"
             android:text="Player 1: 0"
             android:textColor="@color/connectFourScores"
-            android:textSize="30sp" />
+            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/scorePlayer2"
@@ -30,12 +30,26 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/scorePlayer1"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="228dp"
-            android:layout_marginTop="-41dp"
+            android:layout_marginStart="275dp"
+            android:layout_marginTop="-35dp"
             android:fontFamily="sans-serif-condensed"
             android:text="Player 2: 0"
             android:textColor="@color/connectFourScores"
-            android:textSize="30sp" />
+            android:textSize="25sp" />
+
+
+        <TextView
+            android:id="@+id/draws"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="163dp"
+            android:layout_marginTop="49dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Draws: 0"
+            android:textColor="@color/connectFourScores"
+            android:textSize="25sp" />
 
         <Button
             android:id="@+id/button_reset"
@@ -114,21 +128,6 @@
             android:backgroundTint="@color/connectFourBoard"
             android:textSize="60sp"
             tools:backgroundTint="@color/connectFourBoard" />
-        <!--
-        <Button
-            android:id="@+id/button_05"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textSize="60sp" />
-
-        <Button
-            android:id="@+id/button_06"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textSize="60sp" />
--->
 
     </LinearLayout>
 
@@ -181,21 +180,6 @@
             android:backgroundTint="@color/connectFourBoard"
             android:textSize="60sp"
             tools:backgroundTint="@color/connectFourBoard" />
-
-        <!--
-                <Button
-                    android:id="@+id/button_15"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textSize="60sp" />
-
-                <Button
-                    android:id="@+id/button_16"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textSize="60sp" />-->
 
     </LinearLayout>
 

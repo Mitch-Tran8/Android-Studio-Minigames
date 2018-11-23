@@ -1,6 +1,7 @@
 package phase1.gamecenter;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -8,24 +9,52 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-
 public class ConnectFourMainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    /**
+     * 2D array of buttons, representing the connect four game board.
+     */
     private Button[][] buttons = new Button[5][5];
 
+    /**
+     * Boolean representing if it is player 1's turn.
+     */
     private boolean player1Turn = true;
 
+    /**
+     * The number of moves made on the connect four board.
+     */
     private int moves;
 
+    /**
+     * The number of rounds player 1 has won.
+     */
     private int player1points;
+
+    /**
+     * The number of rounds player 2 has won.
+     */
     private int player2points;
 
+    /**
+     * The number of games tied.
+     */
+    private int ties;
+
+    /**
+     * TextView that shows the number of rounds player 1 has won.
+     */
     private TextView scorePlayer1;
+
+    /**
+     * TextView that shows the number of rounds player 1 has won.
+     */
     private TextView scorePlayer2;
 
+    /**
+     * TextView that shows the number of ties.
+     */
+    private TextView draws;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +62,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
         setContentView(R.layout.activity_connect_four);
         scorePlayer1 = findViewById(R.id.scorePlayer1);
         scorePlayer2 = findViewById(R.id.scorePlayer2);
+        draws = findViewById(R.id.draws);
         Button buttonReset = findViewById(R.id.button_reset);
         Button gameReset = findViewById(R.id.button_reset_game);
 
@@ -52,8 +82,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
             public void onClick(View view) {
                 for (int i = 0; i < 5; i++) {
                     for (int j = 0; j < 5; j++) {
-                        buttons[i][j].setText("");
-                    }
+                        buttons[i][j].setText(""); }
                 }
                 moves = 0;
                 player1Turn = true;
@@ -66,14 +95,14 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
             public void onClick(View view) {
                 for (int i = 0; i < 5; i++) {
                     for (int j = 0; j < 5; j++) {
-                        buttons[i][j].setText("");
-                    }
+                        buttons[i][j].setText(""); }
                 }
                 moves = 0;
                 player1Turn = true;
                 player1points = 0;
                 player2points = 0;
-                updatePointsText();
+                ties = 0;
+                updatePoints();
             }
         });
     }
@@ -81,15 +110,15 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
     @Override
     public void onClick(View v) {
         if (!((Button) v).getText().toString().equals("")) {//checks if button contains empty string, if X or O then already used
-            Toast.makeText(this, "Invalid move!", Toast.LENGTH_LONG).show();
-        }
+            Toast.makeText(this, "Invalid move!", Toast.LENGTH_LONG).show(); }
 
         if (player1Turn) {
-            ((Button) v).setText("X");
-        }
+            ((Button) v).setTextColor(Color.parseColor("#FFE35A7F"));
+            ((Button) v).setText("X"); }
+
         else {
-            ((Button) v).setText("O");
-        }
+            ((Button) v).setTextColor(Color.parseColor("#FFE79024"));
+            ((Button) v).setText("O"); }
 
         moves++;
         if (gameOver()) {
@@ -105,6 +134,10 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
         }
     }
 
+    /**
+     * Return whether the connect four game is over, that is, if a player has made four in a row.
+     * @return whether the game is over.
+     */
     private boolean gameOver() {
         String[][] board = new String[5][5];
 
@@ -211,37 +244,45 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
         return false;
     }
 
+    /**
+     * Update player1's points and score when player 1 wins the round.
+     */
     private void player1Wins() {
         player1points++;
         Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_LONG).show();
-        updatePointsText();
+        updatePoints();
     }
-
+    /**
+     * Update player2's points and score when player 2 wins the round.
+     */
     private void player2Wins() {
         player2points++;
         Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_LONG).show();
-        updatePointsText();
-    }
-    private void tie() {
-        Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
+        updatePoints();
     }
 
-    private void updatePointsText() {
+    /**
+     * Show a message when there is a tie.
+     */
+    private void tie() {
+        ties++;
+        Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
+        updatePoints();
+    }
+
+    /**
+     * Update TextView with the scores of each player.
+     */
+    private void updatePoints() {
         scorePlayer1.setText("Player 1: " + player1points);
         scorePlayer2.setText("Player 2: " + player2points);
+        draws.setText("Draws: " + ties);
 
     }
 
-    private void resetBoard() {
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                buttons[i][j].setText("");
-            }
-        }
-        moves = 0;
-        player1Turn = true;
-    }
-
+    /**
+     * Return to the connect four starting page.
+     */
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(ConnectFourMainActivity.this, ConnectFourStartingActivity.class);
