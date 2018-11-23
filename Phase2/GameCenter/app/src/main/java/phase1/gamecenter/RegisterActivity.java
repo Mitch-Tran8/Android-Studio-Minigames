@@ -131,7 +131,6 @@ public class RegisterActivity extends AppCompatActivity {
                             scores.add(new Pair<>("score5", 0));
 
                             databaseReference.child(user_id).setValue(users);
-                            databaseReference.child(user_id).child("Game Collection").setValue(games);
                             DatabaseReference ref = databaseReference.child(user_id).child("Game Collection").child("Sliding tiles").child("userscores");
                             for (int i = 1; i < 6; i++){
                                 ref.child("score"+ String.valueOf(i)).setValue(0);
