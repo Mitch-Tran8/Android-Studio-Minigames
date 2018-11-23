@@ -372,6 +372,7 @@ class BoardManager implements Serializable {
         if (solved) {
             updateScore(solved);
             updateScoreboard();
+            updateLeadeBoard();
         }
         return solved;
     }
@@ -390,52 +391,21 @@ class BoardManager implements Serializable {
     }
 
     /**
-     * update scoreboard for the user
+     * update scoreboard for the user for sliding tiles
      */
 
     private void updateScoreboard() {
-        final String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(user_id).child("Game Collection").child("Sliding tiles");
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(getScore());
+        sbu.updateUserScoreBoard();
+    }
 
-        ref.child("userscores").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Long longScore = new Long(score);
-                ArrayList<Long> scores = new ArrayList<Long>();
-                ArrayList<Long> newScores = new ArrayList<Long>();
-                HashMap <String, Long> map = (HashMap<String, Long>) dataSnapshot.getValue();
-                for (HashMap.Entry <String, Long> entry: map.entrySet()){
-                    scores.add(entry.getValue());
-                }
-                Collections.sort(scores, Collections.reverseOrder());
-
-                for (int i = 0; i < scores.size(); i++) {
-                    Long compare = scores.get(i);
-                    if (compare < longScore) {
-                        newScores.add(longScore);
-                        newScores.add(compare);
-                        for (int a = i+1 ; a < scores.size(); a++){
-                            Long comp = scores.get(a);
-                            newScores.add(comp);
-                        }
-                        break;
-                    }
-                    else {newScores.add(compare);}
-                }
-
-                for (int i = 0; i < scores.size(); i++) {
-                    String position = "score" + String.valueOf(i + 1);
-                    ref.child("userscores").child(position).setValue(newScores.get(i));
-
-                }
-            }
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+    /**
+     * update scoreboard for leaderboard of sliding tiles
+     *
+     */
+    private void updateLeadeBoard(){
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(getScore());
+        sbu.updateLeaderBoard();
     }
 
     /*

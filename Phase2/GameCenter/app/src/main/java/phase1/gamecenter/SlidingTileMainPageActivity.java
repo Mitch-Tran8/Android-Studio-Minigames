@@ -73,17 +73,17 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
             }
         });
 
-//        /**
-//         * Activate current user rankings button
-//         */
-//        leaderboardButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(SlidingTileMainPageActivity.this, CurrentUserScoreboard.class);
-//                i.putExtra("name", "slidingtiles");
-//                startActivity(i);
-//            }
-//        });
+        /**
+         * Activate current user rankings button
+         */
+        leaderboardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SlidingTileMainPageActivity.this, LeaderboardActivity.class);
+                i.putExtra("name", "slidingtiles");
+                startActivity(i);
+            }
+        });
 
         /**
          * Activate leaderboard rankings button
