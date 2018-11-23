@@ -82,7 +82,8 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
             public void onClick(View view) {
                 for (int i = 0; i < 5; i++) {
                     for (int j = 0; j < 5; j++) {
-                        buttons[i][j].setText(""); }
+                        buttons[i][j].setText("");
+                    }
                 }
                 moves = 0;
                 player1Turn = true;
@@ -95,7 +96,8 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
             public void onClick(View view) {
                 for (int i = 0; i < 5; i++) {
                     for (int j = 0; j < 5; j++) {
-                        buttons[i][j].setText(""); }
+                        buttons[i][j].setText("");
+                    }
                 }
                 moves = 0;
                 player1Turn = true;
@@ -110,25 +112,32 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
     @Override
     public void onClick(View v) {
         if (!((Button) v).getText().toString().equals("")) {//checks if button contains empty string, if X or O then already used
-            Toast.makeText(this, "Invalid move!", Toast.LENGTH_LONG).show(); }
+            Toast.makeText(this, "Invalid move! Please choose another spot.", Toast.LENGTH_LONG).show();
+        }
 
         if (player1Turn) {
             ((Button) v).setTextColor(Color.parseColor("#FFE35A7F"));
-            ((Button) v).setText("X"); }
-
-        else {
+            ((Button) v).setText("X");
+        } else {
             ((Button) v).setTextColor(Color.parseColor("#FFE79024"));
-            ((Button) v).setText("O"); }
-
+            ((Button) v).setText("O");
+        }
         moves++;
         if (gameOver()) {
             if (player1Turn) {
-                player1Wins();
-            } else{
-                player2Wins();
+                player1points++;
+                Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_LONG).show();
+                updatePoints();
+            } else {
+                player2points++;
+                Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_LONG).show();
+                updatePoints();
+
             }
         } else if (moves == 25) {
-            tie();
+            ties++;
+            Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
+            updatePoints();
         } else {
             player1Turn = !player1Turn;
         }
@@ -136,6 +145,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
 
     /**
      * Return whether the connect four game is over, that is, if a player has made four in a row.
+     *
      * @return whether the game is over.
      */
     private boolean gameOver() {
@@ -155,6 +165,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
 
     /**
      * Return whether or not there is a 4 in a row.
+     *
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 4 in a row.
      */
@@ -175,18 +186,19 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
 
     /**
      * Return whether or not there is a 4 in a column.
+     *
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 4 in a column
      */
     private boolean checkColumns(String[][] board) {
         for (int i = 0; i < 5; i++) {
             if (board[0][i].equals(board[1][i]) && board[0][i].equals(board[2][i]) &&
-                    board[0][i].equals(board[3][i])&& !board[0][i].equals("")) {
+                    board[0][i].equals(board[3][i]) && !board[0][i].equals("")) {
                 return true;
             }
 
             if (board[1][i].equals(board[2][i]) && board[1][i].equals(board[3][i]) &&
-                    board[1][i].equals(board[4][i])&& !board[1][i].equals("")) {
+                    board[1][i].equals(board[4][i]) && !board[1][i].equals("")) {
                 return true;
             }
         }
@@ -195,6 +207,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
 
     /**
      * Return whether or not there is a 4 in an ascending diagonal pattern.
+     *
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 4 in a ascending diagonal.
      */
@@ -202,25 +215,34 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
 
         if (board[3][0].equals(board[2][1]) &&
                 board[3][0].equals(board[1][2]) &&
-                board[3][0].equals(board[0][3]) && !board[3][0].equals("")) { return true; }
+                board[3][0].equals(board[0][3]) && !board[3][0].equals("")) {
+            return true;
+        }
 
         if (board[4][0].equals(board[3][1]) &&
                 board[4][0].equals(board[2][2]) &&
-                board[4][0].equals(board[1][3]) && !board[4][0].equals("")) { return true; }
+                board[4][0].equals(board[1][3]) && !board[4][0].equals("")) {
+            return true;
+        }
 
         if (board[3][1].equals(board[2][2]) &&
                 board[3][1].equals(board[1][3]) &&
-                board[3][1].equals(board[0][4]) && !board[3][1].equals("")) { return true; }
+                board[3][1].equals(board[0][4]) && !board[3][1].equals("")) {
+            return true;
+        }
 
         if (board[4][1].equals(board[3][2]) &&
                 board[4][1].equals(board[2][3]) &&
-                board[4][1].equals(board[1][4]) && !board[4][1].equals("")) { return true; }
+                board[4][1].equals(board[1][4]) && !board[4][1].equals("")) {
+            return true;
+        }
 
         return false;
     }
 
     /**
      * Return whether or not there is a 4 in an descending diagonal pattern.
+     *
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 4 in a descending diagonal.
      */
@@ -228,46 +250,28 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
 
         if (board[1][0].equals(board[2][1]) &&
                 board[1][0].equals(board[3][2]) &&
-                board[1][0].equals(board[4][3]) && !board[1][0].equals("")) { return true; }
+                board[1][0].equals(board[4][3]) && !board[1][0].equals("")) {
+            return true;
+        }
 
         if (board[0][0].equals(board[1][1]) &&
                 board[0][0].equals(board[2][2]) &&
-                board[0][0].equals(board[3][3]) && !board[0][0].equals("")) { return true; }
+                board[0][0].equals(board[3][3]) && !board[0][0].equals("")) {
+            return true;
+        }
 
         if (board[1][1].equals(board[2][2]) &&
                 board[1][1].equals(board[3][3]) &&
-                board[1][1].equals(board[4][4]) && !board[1][1].equals("")) { return true; }
+                board[1][1].equals(board[4][4]) && !board[1][1].equals("")) {
+            return true;
+        }
 
         if (board[0][1].equals(board[1][2]) &&
                 board[0][1].equals(board[2][3]) &&
-                board[0][1].equals(board[3][4]) && !board[0][1].equals("")) { return true; }
+                board[0][1].equals(board[3][4]) && !board[0][1].equals("")) {
+            return true;
+        }
         return false;
-    }
-
-    /**
-     * Update player1's points and score when player 1 wins the round.
-     */
-    private void player1Wins() {
-        player1points++;
-        Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_LONG).show();
-        updatePoints();
-    }
-    /**
-     * Update player2's points and score when player 2 wins the round.
-     */
-    private void player2Wins() {
-        player2points++;
-        Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_LONG).show();
-        updatePoints();
-    }
-
-    /**
-     * Show a message when there is a tie.
-     */
-    private void tie() {
-        ties++;
-        Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
-        updatePoints();
     }
 
     /**
@@ -277,7 +281,6 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
         scorePlayer1.setText("Player 1: " + player1points);
         scorePlayer2.setText("Player 2: " + player2points);
         draws.setText("Draws: " + ties);
-
     }
 
     /**

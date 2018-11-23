@@ -110,7 +110,7 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
     @Override
     public void onClick(View v) {
         if (!((Button) v).getText().toString().equals("")) {//checks if button contains empty string, if X or O then already used
-            Toast.makeText(this, "Invalid move!", Toast.LENGTH_LONG).show(); }
+            Toast.makeText(this, "Invalid move! Please choose another spot.", Toast.LENGTH_LONG).show(); }
 
         if (player1Turn) {
             ((Button) v).setTextColor(Color.parseColor("#FFE35A7F"));
@@ -123,12 +123,18 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
         moves++;
         if (gameOver()) {
             if (player1Turn) {
-                player1Wins();
-            } else{
-                player2Wins();
+                player1points++;
+                Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_LONG).show();
+                updatePoints(); }
+            else{
+                player2points++;
+                Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_LONG).show();
+                updatePoints();
             }
         } else if (moves == 9) {
-            tie();
+            ties++;
+            Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
+            updatePoints();
         } else {
             player1Turn = !player1Turn;
         }
@@ -205,32 +211,6 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
         return (board[0][0].equals(board[1][1]) &&
                 board[0][0].equals(board[2][2]) &&
                 !board[0][0].equals(""));
-    }
-
-    /**
-     * Update player1's points and score when player 1 wins the round.
-     */
-    private void player1Wins() {
-        player1points++;
-        Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_LONG).show();
-        updatePoints();
-    }
-    /**
-     * Update player2's points and score when player 2 wins the round.
-     */
-    private void player2Wins() {
-        player2points++;
-        Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_LONG).show();
-        updatePoints();
-    }
-
-    /**
-     * Show a message when there is a tie.
-     */
-    private void tie() {
-        ties++;
-        Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
-        updatePoints();
     }
 
     /**
