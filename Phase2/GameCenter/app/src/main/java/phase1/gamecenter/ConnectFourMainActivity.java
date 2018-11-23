@@ -59,7 +59,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_connect_four);
+        setContentView(R.layout.activity_connect_four_bubbles);
         scorePlayer1 = findViewById(R.id.scorePlayer1);
         scorePlayer2 = findViewById(R.id.scorePlayer2);
         draws = findViewById(R.id.draws);

@@ -59,7 +59,7 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_connect_three);
+        setContentView(R.layout.activity_connect_three_bubbles);
         scorePlayer1 = findViewById(R.id.scorePlayer1);
         scorePlayer2 = findViewById(R.id.scorePlayer2);
         draws = findViewById(R.id.draws);
