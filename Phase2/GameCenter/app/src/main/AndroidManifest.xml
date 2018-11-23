@@ -46,11 +46,18 @@
 
         <activity android:name=".ColourTileRoundsActivity"/>
         <activity android:name=".ConnectFourMainActivity" />
-        <activity android:name=".ConnectFourStartingActivity" />
+        <activity android:name=".ConnectNumbersStartingActivity" />
         <activity android:name=".ConnectFourPlayersActivity" />
+        <activity android:name=".ConnectFourAIEasyMainActivity" />
+        <activity android:name=".ConnectNumbersSelectActivity" />
+        <activity android:name=".ConnectThreeAIEasyMainActivity" />
+        <activity android:name=".ConnectThreeMainActivity" />
+        <activity android:name=".ConnectThreePlayersActivity" />
+        <activity android:name=".ConnectThreeDifficultyActivity" />
+        <activity android:name=".ConnectFourDifficultyActivity" />
 
 
-        <activity android:name=".LeaderboardActivity"></activity>
+        <activity android:name=".LeaderboardActivity"/>
     </application>
 
 </manifest>

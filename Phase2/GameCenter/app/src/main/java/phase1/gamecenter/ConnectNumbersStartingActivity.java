@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-public class ConnectFourStartingActivity extends AppCompatActivity {
+public class ConnectNumbersStartingActivity extends AppCompatActivity {
 
     /**
      * Button that allows user to start the connect four game.
@@ -21,7 +21,7 @@ public class ConnectFourStartingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_connect_four_starting);
+        setContentView(R.layout.activity_connect_numbers_starting);
 
         startGame = findViewById(R.id.start_game_button);
         rankings = findViewById(R.id.rankings_button);
@@ -29,7 +29,7 @@ public class ConnectFourStartingActivity extends AppCompatActivity {
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ConnectFourStartingActivity.this, ConnectFourPlayersActivity.class);
+                Intent intent = new Intent(ConnectNumbersStartingActivity.this, ConnectNumbersSelectActivity.class);
                 startActivity(intent);
             }
         });
@@ -37,7 +37,7 @@ public class ConnectFourStartingActivity extends AppCompatActivity {
         /*rankings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ConnectFourStartingActivity.this, ConnectFourPlayersActivity.class);
+                Intent intent = new Intent(ConnectNumbersStartingActivity.this, ConnectFourPlayersActivity.class);
                 startActivity(intent);
             }
         });*/

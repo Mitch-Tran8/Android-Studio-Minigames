@@ -33,7 +33,7 @@ public class ConnectFourPlayersActivity extends AppCompatActivity {
 /*        artificialIntel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ConnectFourStartingActivity.this, ConnectFourMainActivity.class);
+                Intent intent = new Intent(ConnectNumbersStartingActivity.this, ConnectFourMainActivity.class);
                 startActivity(intent);
             }
         });*/
@@ -42,6 +42,15 @@ public class ConnectFourPlayersActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ConnectFourPlayersActivity.this, ConnectFourMainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        artificialIntel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ConnectFourPlayersActivity.this, ConnectFourDifficultyActivity.class);
                 startActivity(intent);
             }
         });

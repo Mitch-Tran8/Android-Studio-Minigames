@@ -285,7 +285,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      */
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ConnectFourMainActivity.this, ConnectFourStartingActivity.class);
+        Intent intent = new Intent(ConnectFourMainActivity.this, ConnectNumbersStartingActivity.class);
         startActivity(intent);
     }
 

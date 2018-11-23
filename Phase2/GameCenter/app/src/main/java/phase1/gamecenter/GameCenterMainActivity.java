@@ -124,7 +124,7 @@ public class GameCenterMainActivity extends AppCompatActivity {
         connectFourButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(GameCenterMainActivity.this, ConnectFourStartingActivity.class);
+                Intent i = new Intent(GameCenterMainActivity.this, ConnectNumbersStartingActivity.class);
                 i.putExtra("user_id", user_id);
                 startActivity(i);
             }
