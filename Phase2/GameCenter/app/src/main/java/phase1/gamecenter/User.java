@@ -54,10 +54,19 @@ public class User<T> {
         this.email = email;
     }
 
+    /**
+     * returns the name of user
+     * @return name
+     */
+
     public String getName() {
         return name;
     }
 
+    /**
+     * sets user name
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }

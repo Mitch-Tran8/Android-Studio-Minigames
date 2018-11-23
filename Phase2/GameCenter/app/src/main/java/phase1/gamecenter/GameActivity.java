@@ -40,37 +40,6 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
      */
     private ArrayList<Button> tileButtons;
 
-    /**
-     * The current user's Id
-     */
-    private String user_id;
-
-    /**
-     * Firebase auth
-     */
-    private FirebaseAuth mAuth;
-
-    /**
-     * Firebase database
-     */
-    private DatabaseReference databaseReference;
-
-    /**
-     * current user's most recent gamestate
-     */
-    private String gameState;
-
-    public SlidingTileMainPageActivity slidingTileMainPageActivity;
-
-    public EmailAndScore emailAndScore;
-
-    public static ArrayList<EmailAndScore> saveList = new ArrayList<>();
-
-    /**
-     * Save button
-     */
-    private Button saveButton;
-
 
     // Grid View and calculated column height and width based on device size
     private GestureDetectGridView gridView;
@@ -80,11 +49,14 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
      * Set up the background image for each button based on the master list
      * of positions, and then call the adapter to set the view.
      */
-    // Display
     public void display() {
         updateTileButtons();
         gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
     }
+
+    /**
+     * saves the game every 3 moves
+     */
 
     public void autoSave(){
         int numMoves = boardManager.getNumOfMoves();
@@ -93,15 +65,9 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
         }
     }
 
-    public GameActivity(){this.saveList = new ArrayList<>();}
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent i = getIntent();
-        user_id = i.getStringExtra("user_id");
-        mAuth = FirebaseAuth.getInstance();
-
         loadFromFile(BoardComplexity.TEMP_SAVE_FILENAME);
         createTileButtons(this);
         setContentView(R.layout.activity_main);
@@ -113,8 +79,8 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
         gridView = findViewById(R.id.grid);
         gridView.setNumColumns(boardManager.getColumns());
         gridView.setBoardManager(boardManager);
-
         boardManager.getBoard().addObserver(this);
+
         // Observer sets up desired dimensions as well as calls our display function
         gridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -131,8 +97,6 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
                         display();
                     }
                 });
-
-
     }
 
     /**
@@ -158,7 +122,7 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
      * Activate the save button
      */
     private void addSaveButtonListener() {
-        saveButton = findViewById(R.id.save_button);
+        Button saveButton = findViewById(R.id.save_button);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -256,37 +220,13 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
         display();
     }
 
-    /**
-     * Save the scores to fileName
-     *
-     * @param fileName file to save scores to
-     */
-    public void saveScores(String fileName) {
-//        FileOutputStream fos = null;
-        try
-        {
-            ObjectOutputStream out = new ObjectOutputStream(this.openFileOutput(fileName, MODE_PRIVATE));
-            out.writeObject(slidingTileMainPageActivity.userList);
-            out.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Back button from the game to the main page
      */
     @Override
     public void onBackPressed() {
-        slidingTileMainPageActivity = new SlidingTileMainPageActivity();
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        emailAndScore = new EmailAndScore(firebaseUser.getEmail(), boardManager.getScore());
-        this.slidingTileMainPageActivity.userList.add(emailAndScore);
-
         Intent intent = new Intent(GameActivity.this, SlidingTileMainPageActivity.class);
+        startActivity(intent);
+}}
 
-        startActivity(intent); //GO TO SLIDING TILE MAIN PAGE
-    }
-}
