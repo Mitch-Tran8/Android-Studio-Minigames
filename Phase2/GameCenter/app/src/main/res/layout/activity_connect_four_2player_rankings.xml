@@ -31,7 +31,7 @@
             android:shadowDx="4"
             android:shadowDy="4"
             android:shadowRadius="4"
-            android:text="Connect 4 Most Wins"
+            android:text="Connect 4 Most Wins in 2P"
             android:backgroundTint="#2C3E50"
             android:textColor="#33A8FF"
             android:fontFamily="sans-serif-smallcaps"
@@ -144,7 +144,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_span="2"
-            android:text="Longest Consecutive Wins"
+            android:text="Highest Scores"
             android:backgroundTint="#2C3E50"
             android:textColor="#33A8FF"
             android:fontFamily="sans-serif-smallcaps"
@@ -285,6 +285,7 @@
         android:gravity="center">
 
         <TextView
+            android:textColor="#33A8FF"
             android:text="Win Total"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -311,7 +312,8 @@
         android:gravity="center">
 
         <TextView
-            android:text="Longest Consecutive Wins"
+            android:textColor="#33A8FF"
+            android:text="Score"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:textSize="18sp" />

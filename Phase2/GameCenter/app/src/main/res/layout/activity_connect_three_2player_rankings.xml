@@ -31,7 +31,7 @@
             android:shadowDx="4"
             android:shadowDy="4"
             android:shadowRadius="4"
-            android:text="Connect 3 Most Wins"
+            android:text="Connect 3 Most Wins In 2P"
             android:background="@drawable/edit_button_style_two"
             android:backgroundTint="#2C3E50"
             android:fontFamily="sans-serif-smallcaps"
@@ -144,7 +144,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_span="2"
-            android:text="Longest Consecutive Wins"
+            android:text="Highest Scores"
             android:background="@drawable/edit_button_style_two"
             android:backgroundTint="#2C3E50"
             android:fontFamily="sans-serif-smallcaps"
@@ -312,7 +312,7 @@
         android:gravity="center">
 
         <TextView
-            android:text="Longest Consecutive Wins"
+            android:text="Score"
             android:textColor="#33A8FF"
             android:layout_height="match_parent"
             android:layout_gravity="center"
