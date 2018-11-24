@@ -8,5 +8,5 @@
     <color name="connectFourScores">#6d5f80</color>
     <color name="connectFourX">#e35a7f</color>
     <color name="connectFourO">#e79024</color>
-
+    <color name="connectFourTransparent">#00ffffff</color>
 </resources>

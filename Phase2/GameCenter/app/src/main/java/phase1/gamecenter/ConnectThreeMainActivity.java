@@ -91,7 +91,43 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
             }
         }
 
-        //reset to NEW ROUND
+        //reset to NEW ROUND using button
+        buttonResetListener(buttonReset);
+        //reset the GAME using button
+        gameResetListener(gameReset);
+    }
+
+    /**
+     * On click listener for the game reset button -> reset the game.
+     * @param gameReset game reset button.
+     */
+    private void gameResetListener(Button gameReset) {
+        gameReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        buttons[i][j].setText("");
+                    }
+                }
+                moves = 0;
+                roundsPlayed = 0;
+                player1Turn = true;
+                player1points = 0;
+                player2points = 0;
+                player1RoundsWon = 0;
+                player2RoundsWon = 0;
+                ties = 0;
+                updatePoints();
+            }
+        });
+    }
+
+    /**
+     * On click listener for the reset match button -> make a new match.
+     * @param buttonReset
+     */
+    private void buttonResetListener(Button buttonReset) {
         buttonReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,28 +149,6 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
                         Toast.makeText(getApplicationContext(), "Game Over. TIE! Please start a new game.", Toast.LENGTH_LONG).show();
                     }
                 }
-            }
-        });
-
-
-        //reset the GAME
-        gameReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                for (int i = 0; i < 3; i++) {
-                    for (int j = 0; j < 3; j++) {
-                        buttons[i][j].setText("");
-                    }
-                }
-                moves = 0;
-                roundsPlayed = 0;
-                player1Turn = true;
-                player1points = 0;
-                player2points = 0;
-                player1RoundsWon = 0;
-                player2RoundsWon = 0;
-                ties = 0;
-                updatePoints();
             }
         });
     }
@@ -163,10 +177,14 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
      */
     private void processMove(Button v) {
         if (player1Turn) {
-            v.setTextColor(Color.parseColor("#FFE35A7F"));
+            //v.setTextColor(Color.parseColor("#FFE35A7F"));
+            v.setTextColor(Color.parseColor("#00ffffff"));
+            v.setBackgroundResource(R.drawable.sunglass_smiley);
             v.setText("X");
         } else {
-            v.setTextColor(Color.parseColor("#FFE79024"));
+            //v.setTextColor(Color.parseColor("#FFE79024"));
+            v.setTextColor(Color.parseColor("#00ffffff"));
+            v.setBackgroundResource(R.drawable.crazy_face);
             v.setText("O");
         }
         moves++;
