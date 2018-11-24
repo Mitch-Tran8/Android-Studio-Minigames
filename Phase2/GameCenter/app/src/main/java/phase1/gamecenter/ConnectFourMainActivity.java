@@ -66,6 +66,11 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      */
     private int player2RoundsWon;
 
+    /**
+     * Number of the rounds of the game played.
+     */
+    private int roundsPlayed;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,8 +107,10 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
                 } else {
                     if (player1RoundsWon == 3) {
                         Toast.makeText(getApplicationContext(), "Game Over. Player 1 wins! Please refresh the game.", Toast.LENGTH_LONG).show();
-                    } else {
+                    } else if (player2RoundsWon == 3) {
                         Toast.makeText(getApplicationContext(), "Game Over. Player 2 wins! Please refresh the game.", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Game Over. TIE! Please start a new game.", Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -119,11 +126,14 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
                     }
                 }
                 moves = 0;
+                roundsPlayed = 0;
                 player1Turn = true;
                 player1points = 0;
                 player2points = 0;
+                player1RoundsWon = 0;
+                player2RoundsWon = 0;
                 ties = 0;
-                updatePoints();
+                updateRoundsWon();
             }
         });
     }
@@ -131,11 +141,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
     @Override
     public void onClick(View v) {
         if (gameOver()) {
-            if (player1RoundsWon == 3) {
-                Toast.makeText(this, "Game Over. Player 1 wins! Please start a new game.", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(this, "Game Over. Player 2 wins! Please start a new game.", Toast.LENGTH_LONG).show();
-            }
+            gameOverMessage();
         } else {
             if (matchOver()) {
                 Toast.makeText(this, "Match over. Please start a new match.", Toast.LENGTH_LONG).show();
@@ -143,27 +149,49 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
                 if (!((Button) v).getText().toString().equals("")) {//checks if button contains empty string, if X or O then already used
                     Toast.makeText(this, "Invalid move! Please choose another spot.", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (player1Turn) {
-                        ((Button) v).setTextColor(Color.parseColor("#FFE35A7F"));
-                        ((Button) v).setText("X");
-                    } else {
-                        ((Button) v).setTextColor(Color.parseColor("#FFE79024"));
-                        ((Button) v).setText("O");
-                    }
-                    moves++;
-                    if (matchOver()) {
-                        if (player1Turn) {
-                            player1Wins();
-                        } else {
-                            player2Wins();
-                        }
-                    } else if (moves == 25) {
-                        tie();
-                    } else {
-                        player1Turn = !player1Turn;
-                    }
+                    processMove((Button) v);
                 }
             }
+        }
+    }
+
+    /**
+     * Process the move of the current player.
+     *
+     * @param v The button pressed by the current player.
+     */
+    private void processMove(Button v) {
+        if (player1Turn) {
+            v.setTextColor(Color.parseColor("#FFE35A7F"));
+            v.setText("X");
+        } else {
+            v.setTextColor(Color.parseColor("#FFE79024"));
+            v.setText("O");
+        }
+        moves++;
+        if (matchOver()) {
+            if (player1Turn) {
+                player1Wins();
+            } else {
+                player2Wins();
+            }
+        } else if (moves == 25) {
+            tie();
+        } else {
+            player1Turn = !player1Turn;
+        }
+    }
+
+    /**
+     * Displays the toast message when the game is over.
+     */
+    private void gameOverMessage() {
+        if (player1RoundsWon == 3) {
+            Toast.makeText(this, "Game Over. Player 1 wins! Please start a new game.", Toast.LENGTH_LONG).show();
+        } else if (player2RoundsWon == 3) {
+            Toast.makeText(this, "Game Over. Player 2 wins! Please start a new game.", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Game Over. TIE! Please start a new game.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -172,8 +200,9 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      */
     private void tie() {
         ties++;
+        roundsPlayed++;
         Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
-        updatePoints();
+        updateRoundsWon();
     }
 
     /**
@@ -183,8 +212,9 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
         player2points = player2points + 5;
         player1points = player1points - 3;
         player2RoundsWon++;
+        roundsPlayed++;
         Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_LONG).show();
-        updatePoints();
+        updateRoundsWon();
     }
 
     /**
@@ -194,8 +224,9 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
         player1points = player1points + 5;
         player2points = player2points - 3;
         player1RoundsWon++;
+        roundsPlayed++;
         Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_LONG).show();
-        updatePoints();
+        updateRoundsWon();
     }
 
     /**
@@ -204,7 +235,8 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      * @return whether the game is over.
      */
     private boolean gameOver() {
-        return (player1RoundsWon == 3 || player2RoundsWon == 3) ; }
+        return (player1RoundsWon == 3 || player2RoundsWon == 3 || roundsPlayed == 5);
+    }
 
     /**
      * Return whether the connect four game is over, that is, if a player has made four in a row.
@@ -219,11 +251,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
                 board[i][j] = buttons[i][j].getText().toString(); //go thru all buttons and set their XO text
             }
         }
-
-        if ((checkRows(board) || checkColumns(board) || checkAscendingDiagonals(board) || checkDescendingDiagonals(board))) {
-            return true;
-        }
-        return false;
+        return (checkRows(board) || checkColumns(board) || checkAscendingDiagonals(board) || checkDescendingDiagonals(board));
     }
 
     /**
@@ -340,14 +368,14 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
     /**
      * Update TextView with the scores of each player.
      */
-    private void updatePoints() {
+    private void updateRoundsWon() {
         scorePlayer1.setText("Player 1: " + player1RoundsWon);
         scorePlayer2.setText("Player 2: " + player2RoundsWon);
         draws.setText("Draws: " + ties);
     }
 
     /**
-     * Return to the connect four starting page.
+     * Return to the connect numbers starting page.
      */
     @Override
     public void onBackPressed() {
