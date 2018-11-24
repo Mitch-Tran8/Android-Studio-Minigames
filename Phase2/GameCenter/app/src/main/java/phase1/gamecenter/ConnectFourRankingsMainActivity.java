@@ -28,6 +28,8 @@ public class ConnectFourRankingsMainActivity extends AppCompatActivity {
         artificialIntelRankings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(ConnectFourRankingsMainActivity.this, ConnectFourRankings1PlayerActivity.class);
+                startActivity(intent);
             }
         });
     }
