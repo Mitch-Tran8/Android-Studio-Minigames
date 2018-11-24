@@ -27,12 +27,12 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
     private int moves;
 
     /**
-     * The number of rounds player 1 has won.
+     * The number of points player 1 has won.
      */
     private int player1points;
 
     /**
-     * The number of rounds player 2 has won.
+     * The number of points player 2 has won.
      */
     private int player2points;
 
@@ -55,10 +55,6 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      * TextView that shows the number of ties.
      */
     private TextView draws;
-    /**
-     * Round number of the game.
-     */
-    private int round;
 
     /**
      * Number of rounds won by player 1.
@@ -145,7 +141,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
                 Toast.makeText(this, "Match over. Please start a new match.", Toast.LENGTH_LONG).show();
             } else {
                 if (!((Button) v).getText().toString().equals("")) {//checks if button contains empty string, if X or O then already used
-                    Toast.makeText(this, "Invalid move! Please choose another spot.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Invalid move! Please choose another spot.", Toast.LENGTH_SHORT).show();
                 } else {
                     if (player1Turn) {
                         ((Button) v).setTextColor(Color.parseColor("#FFE35A7F"));
@@ -176,7 +172,6 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      */
     private void tie() {
         ties++;
-        round++;
         Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
         updatePoints();
     }
@@ -188,7 +183,6 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
         player2points = player2points + 5;
         player1points = player1points - 3;
         player2RoundsWon++;
-        round++;
         Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_LONG).show();
         updatePoints();
     }
@@ -200,7 +194,6 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
         player1points = player1points + 5;
         player2points = player2points - 3;
         player1RoundsWon++;
-        round++;
         Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_LONG).show();
         updatePoints();
     }
@@ -211,11 +204,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      * @return whether the game is over.
      */
     private boolean gameOver() {
-        if (player1RoundsWon == 3 || player2RoundsWon == 3) {
-            return true;
-        }
-        return false;
-    }
+        return (player1RoundsWon == 3 || player2RoundsWon == 3) ; }
 
     /**
      * Return whether the connect four game is over, that is, if a player has made four in a row.
