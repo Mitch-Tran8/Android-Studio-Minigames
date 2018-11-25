@@ -6,21 +6,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-public class ConnectFourRankingsMainActivity extends AppCompatActivity {
+public class ConnectThreeRankingsMainActivity extends AppCompatActivity {
     Button twoPlayersRankings;
     Button artificialIntelRankings;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_connect_four_ranking_mainscreen);
+        setContentView(R.layout.activity_connect_three_rankings_main);
         twoPlayersRankings = findViewById(R.id.two_players_rankings_button);
         artificialIntelRankings = findViewById(R.id.artificial_intel_rankings_button);
 
         twoPlayersRankings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ConnectFourRankingsMainActivity.this, ConnectFourRankings2PlayersActivity.class);
+                Intent intent = new Intent(ConnectThreeRankingsMainActivity.this, ConnectThreeRankings2PlayersActivity.class);
                 startActivity(intent);
             }
         });
@@ -28,7 +28,7 @@ public class ConnectFourRankingsMainActivity extends AppCompatActivity {
         artificialIntelRankings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ConnectFourRankingsMainActivity.this, ConnectFourRankings1PlayerActivity.class);
+                Intent intent = new Intent(ConnectThreeRankingsMainActivity.this, ConnectThreeRankings1PlayerActivity.class);
                 startActivity(intent);
             }
         });

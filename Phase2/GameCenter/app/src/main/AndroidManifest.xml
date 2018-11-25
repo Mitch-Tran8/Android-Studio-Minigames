@@ -48,6 +48,13 @@
         <activity android:name=".ConnectThreePlayersActivity" />
         <activity android:name=".ConnectThreeDifficultyActivity" />
         <activity android:name=".ConnectFourDifficultyActivity" />
+        <activity android:name=".ConnectNumbersRankingsActivity" />
+        <activity android:name=".ConnectThreeRankingsMainActivity" />
+        <activity android:name=".ConnectFourRankingsMainActivity" />
+        <activity android:name=".ConnectFourRankings1PlayerActivity"/>
+        <activity android:name=".ConnectFourRankings2PlayersActivity"/>
+        <activity android:name=".ConnectThreeRankings1PlayerActivity"/>
+        <activity android:name=".ConnectThreeRankings2PlayersActivity"/>
 
 
         <activity android:name=".LeaderboardActivity"/>
