@@ -13,7 +13,7 @@ public class ConnectThreeRankingsMainActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_connect_three_rankings_main);
+        setContentView(R.layout.activity_connect_three_rankings_mainscreen);
         twoPlayersRankings = findViewById(R.id.two_players_rankings_button);
         artificialIntelRankings = findViewById(R.id.artificial_intel_rankings_button);
 
