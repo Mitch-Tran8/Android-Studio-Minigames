@@ -108,6 +108,7 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {
                         buttons[i][j].setText("");
+                        buttons[i][j].setBackgroundResource(R.drawable.circle_button);
                     }
                 }
                 moves = 0;
@@ -136,6 +137,7 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
                     for (int i = 0; i < 3; i++) {
                         for (int j = 0; j < 3; j++) {
                             buttons[i][j].setText("");
+                            buttons[i][j].setBackgroundResource(R.drawable.circle_button);
                         }
                     }
                     moves = 0;

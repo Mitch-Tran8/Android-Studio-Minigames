@@ -108,6 +108,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
                 for (int i = 0; i < 5; i++) {
                     for (int j = 0; j < 5; j++) {
                         buttons[i][j].setText("");
+                        buttons[i][j].setBackgroundResource(R.drawable.circle_button);
                     }
                 }
                 moves = 0;
@@ -136,6 +137,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
                     for (int i = 0; i < 5; i++) {
                         for (int j = 0; j < 5; j++) {
                             buttons[i][j].setText("");
+                            buttons[i][j].setBackgroundResource(R.drawable.circle_button);
                         }
                     }
                     moves = 0;
