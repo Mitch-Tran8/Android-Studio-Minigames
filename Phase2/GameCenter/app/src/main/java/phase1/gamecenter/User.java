@@ -16,7 +16,7 @@ public class User<T> {
     /**
      * The user's generic game score.
      */
-    private GameManager allGames;
+
 
     /**
      * A new user.
@@ -24,20 +24,11 @@ public class User<T> {
      *
      * @param email    the tiles for the board
      * @param name     the user's name
-     * @param allGames all of the user's games
      */
-    public User(String email, String name, GameManager allGames) {
+    public User(String email, String name) {
         this.email = email;
         this.name = name;
-        this.allGames = allGames;
 
-    }
-
-    /**
-     * Returns the score for user's gameName's score.
-     */
-    public GameManager getAllGames(T gameName) {
-        return this.allGames;
     }
 
     /**

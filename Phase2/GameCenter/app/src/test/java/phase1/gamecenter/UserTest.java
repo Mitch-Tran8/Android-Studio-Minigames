@@ -4,8 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class UserTest {
-    GameManager testerGM = new GameManager();
-    User user = new User("testing@gmail.com", "tester", testerGM);
+    User user = new User("testing@gmail.com", "tester");
 
     @Test
     public void testGetEmail() {

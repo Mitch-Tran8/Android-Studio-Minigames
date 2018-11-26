@@ -20,10 +20,10 @@
         android:fadingEdge="horizontal|vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.854"
+        app:layout_constraintHorizontal_bias="0.895"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.521"
+        app:layout_constraintVertical_bias="0.417"
         app:srcCompat="@drawable/new_colourlogo" />
 
     <TextView
@@ -43,10 +43,10 @@
         android:typeface="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.133" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/slidingtilesbutton"
@@ -60,10 +60,10 @@
         android:fadingEdge="horizontal|vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintHorizontal_bias="0.085"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.52"
+        app:layout_constraintVertical_bias="0.41"
         app:srcCompat="@drawable/sliding_logo" />
 
     <ImageButton
@@ -81,7 +81,7 @@
         app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.904"
+        app:layout_constraintVertical_bias="0.778"
         app:srcCompat="@drawable/tic_logo" />
 
     <Button
@@ -101,10 +101,32 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.326" />
+        app:layout_constraintVertical_bias="0.847" />
+
+    <Button
+        android:id="@+id/rankingsButton"
+        android:layout_width="295dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/edit_text_style"
+        android:backgroundTint="#FDD692"
+        android:fontFamily="@font/andika"
+        android:text="Rankings"
+        android:textColor="#f1a451"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.983" />
 
     <TextView
         android:id="@+id/textView"
@@ -128,15 +150,16 @@
         android:id="@+id/menuButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:translationZ="10dp"
-        android:layout_marginTop="@dimen/fab_margin"
-        android:clickable="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
         android:backgroundTint="#F7B267"
+        android:clickable="true"
+        android:text="options"
+        android:translationZ="10dp"
+        app:elevation="@dimen/fab_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:rippleColor="#FDD692"
-        app:srcCompat="@drawable/expand" />
+        app:rippleColor="#FDD692" />
 
     <view
         android:id="@+id/menuView"
@@ -148,9 +171,33 @@
         android:layout_marginBottom="2dp"
         android:background="#abe49948"
         android:layout="@drawable/edit_text_style"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.493" />
+
+    <TextView
+        android:id="@+id/menuText"
+        android:layout_width="101dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/andika"
+        android:text="Options"
+        android:textAllCaps="true"
+        android:textColor="#FDD692"
+        android:textSize="18sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/logoutPageButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.277"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>

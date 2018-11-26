@@ -20,11 +20,23 @@ public class ConnectFourAIEasyMainActivity extends AppCompatActivity implements 
 
     private int moves;
 
+    private int ties;
+
     private int player1points;
+
     private int aipoints;
 
     private TextView scorePlayer1;
+
     private TextView aiPlayer;
+
+    private TextView draws;
+
+    private int player1RoundsWon;
+
+    private int aiRoundsWon;
+
+    private int roundsPlayed;
 
 
     @Override
@@ -33,6 +45,7 @@ public class ConnectFourAIEasyMainActivity extends AppCompatActivity implements 
         setContentView(R.layout.activity_connect_four_ai);
         scorePlayer1 = findViewById(R.id.scorePlayer1);
         aiPlayer = findViewById(R.id.aiPlayer);
+        draws = findViewById(R.id.draws);
         Button buttonReset = findViewById(R.id.button_reset);
         Button gameReset = findViewById(R.id.button_reset_game);
 
@@ -46,21 +59,17 @@ public class ConnectFourAIEasyMainActivity extends AppCompatActivity implements 
             }
         }
 
-        //reset to NEW ROUND
-        buttonReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                for (int i = 0; i < 5; i++) {
-                    for (int j = 0; j < 5; j++) {
-                        buttons[i][j].setText("");
-                    }
-                }
-                moves = 0;
-                player1Turn = true;
-            }
-        });
+        //reset to NEW ROUND using button
+        buttonResetListener(buttonReset);
+        //reset the GAME using button
+        gameResetListener(gameReset);
+    }
 
-        //reset the GAME
+    /**
+     * On click listener for the game reset button -> reset the game.
+     * @param gameReset game reset button.
+     */
+    private void gameResetListener(Button gameReset) {
         gameReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,25 +79,55 @@ public class ConnectFourAIEasyMainActivity extends AppCompatActivity implements 
                     }
                 }
                 moves = 0;
+                roundsPlayed = 0;
                 player1Turn = true;
                 player1points = 0;
-                aipoints = 0;
-                updatePointsText();
+                player1RoundsWon = 0;
+                aiRoundsWon = 0;
+                ties = 0;
+                updatePoints();
+            }
+        });
+    }
+
+    /**
+     * On click listener for the reset match button -> make a new match.
+     * @param buttonReset
+     */
+    private void buttonResetListener(Button buttonReset) {
+        buttonReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (!gameOver()) {
+                    for (int i = 0; i < 5; i++) {
+                        for (int j = 0; j < 5; j++) {
+                            buttons[i][j].setText("");
+                        }
+                    }
+                    moves = 0;
+                    player1Turn = true;
+                } else {
+                    if (player1RoundsWon == 3) {
+                        Toast.makeText(getApplicationContext(), "Game Over. Player 1 wins! Please start a new game.", Toast.LENGTH_LONG).show();
+                    } else if (aiRoundsWon == 3){
+                        Toast.makeText(getApplicationContext(), "Game Over. AI wins! Please start a new game.", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Game Over. TIE! Please start a new game.", Toast.LENGTH_LONG).show();
+                    }
+                }
             }
         });
     }
 
     @Override
     public void onClick(View v) {
-        if (!((Button) v).getText().toString().equals("")) {//checks if button contains empty string, if X or O then already used
-            Toast.makeText(this, "Invalid move!", Toast.LENGTH_LONG).show();
-        }
         if (((Button) v).getText().toString().equals("")){
 
             ((Button) v).setTextColor(Color.parseColor("#FFE35A7F"));
             ((Button) v).setText("X");
-            
-            if (gameOver()) {
+
+            if (matchOver()) {
                 if (player1Turn) {
                     player1Wins();
                 }
@@ -97,7 +136,7 @@ public class ConnectFourAIEasyMainActivity extends AppCompatActivity implements 
                 player1Turn = false;
                 int i;
                 int j;
-                if (moves < 12) {
+                if (moves < 12){
                     do {
                         i = RANDOM.nextInt(5);
                         j = RANDOM.nextInt(5);
@@ -106,7 +145,7 @@ public class ConnectFourAIEasyMainActivity extends AppCompatActivity implements 
                     (buttons[i][j]).setTextColor(Color.parseColor("#FFE79024"));
                     (buttons[i][j]).setText("O");
 
-                    if (gameOver()) {
+                    if (matchOver()) {
                         if (!player1Turn) {
                             aiWins();
                         }
@@ -116,14 +155,55 @@ public class ConnectFourAIEasyMainActivity extends AppCompatActivity implements 
         }
 
         moves++;
-         if (moves == 13) {
+        if (moves == 13) {
             tie();
         }else {
-             player1Turn = true;
-         }
+            player1Turn = true;
+        }
+    }
+
+    /**
+     * Displays the toast message when the game is over.
+     */
+    private void gameOverMessage() {
+        if (player1RoundsWon == 3) {
+            Toast.makeText(this, "Game Over. Player 1 wins! Please start a new game.", Toast.LENGTH_LONG).show();
+        } else if (aiRoundsWon == 3) {
+            Toast.makeText(this, "Game Over. Player 2 wins! Please start a new game.", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Game Over. TIE! Please start a new game.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void player1Wins() {
+        player1points = player1points + 5;
+        aipoints = aipoints - 3;
+        player1RoundsWon++;
+        roundsPlayed++;
+        Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_LONG).show();
+        updatePoints();
+    }
+
+    private void aiWins() {
+        aipoints = aipoints + 5;
+        player1points = player1points - 3;
+        aiRoundsWon++;
+        roundsPlayed++;
+        Toast.makeText(this, "AI wins!", Toast.LENGTH_LONG).show();
+        updatePoints();
+    }
+    private void tie() {
+        ties++;
+        roundsPlayed++;
+        Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
+        updatePoints();
     }
 
     private boolean gameOver() {
+        return (player1RoundsWon == 3 || aiRoundsWon == 3 || roundsPlayed == 5);
+    }
+
+    private boolean matchOver() {
         String[][] board = new String[5][5];
 
         for (int i = 0; i < 5; i++) {
@@ -132,10 +212,7 @@ public class ConnectFourAIEasyMainActivity extends AppCompatActivity implements 
             }
         }
 
-        if (checkRows(board) || checkColumns(board) || checkAscendingDiagonals(board) || checkDescendingDiagonals(board)) {
-            return true;
-        }
-        return false;
+        return (checkRows(board) || checkColumns(board) || checkAscendingDiagonals(board) || checkDescendingDiagonals(board));
     }
 
     /**
@@ -229,35 +306,10 @@ public class ConnectFourAIEasyMainActivity extends AppCompatActivity implements 
         return false;
     }
 
-    private void player1Wins() {
-        player1points++;
-        Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_LONG).show();
-        updatePointsText();
-    }
-
-    private void aiWins() {
-        aipoints++;
-        Toast.makeText(this, "AI wins!", Toast.LENGTH_LONG).show();
-        updatePointsText();
-    }
-    private void tie() {
-        Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
-    }
-
-    private void updatePointsText() {
-        scorePlayer1.setText("Player 1: " + player1points);
-        aiPlayer.setText("AI: " + aipoints);
-
-    }
-
-    private void resetBoard() {
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                buttons[i][j].setText("");
-            }
-        }
-        moves = 0;
-        player1Turn = true;
+    private void updatePoints() {
+        scorePlayer1.setText("Player 1: " + player1RoundsWon);
+        aiPlayer.setText("AI: " + aiRoundsWon);
+        draws.setText("Draws: " + ties);
     }
 
     @Override
