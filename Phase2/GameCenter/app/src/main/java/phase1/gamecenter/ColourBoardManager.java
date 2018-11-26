@@ -43,6 +43,10 @@ class ColourBoardManager implements Serializable {
      * the first tap
      */
     private int firstTap;
+    /**
+     * original time
+     */
+    private int originalSeconds;
 
     /**
      * Manage a board that has been pre-populated.
@@ -88,6 +92,7 @@ class ColourBoardManager implements Serializable {
         int tileNum;
         int numTiles;
         seconds = second;
+        originalSeconds = second;
         minutes = minute;
         matched= new Stack();
 
@@ -148,8 +153,11 @@ class ColourBoardManager implements Serializable {
             }
 
         }
+
         return solved;
     }
+
+
 
     /*
      * creates a new file
@@ -186,7 +194,10 @@ class ColourBoardManager implements Serializable {
                     if (matchedNum == 3) {
                         matched.push(currCol);
                         matched.push(currRow);
-                        score = 100 - numOfMoves;
+                        if(originalSeconds == 20){score+=3;}
+                        else if(originalSeconds==40){score+=2;}
+                        else{score+=1;}
+
                         return true;
                     }
                 }

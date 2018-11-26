@@ -87,7 +87,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
 
     @Override
     public String toString() {
-        return "ColourBoard{" +
+        return "Board{" +
                 "tiles=" + Arrays.toString(tiles) +
                 '}';
     }

@@ -395,7 +395,7 @@ class BoardManager implements Serializable {
      */
 
     private void updateScoreboard() {
-        ScoreBoardUpdater sbu = new ScoreBoardUpdater(getScore());
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(getScore(), "Sliding tiles");
         sbu.updateUserScoreBoard();
     }
 
@@ -404,7 +404,7 @@ class BoardManager implements Serializable {
      *
      */
     private void updateLeadeBoard(){
-        ScoreBoardUpdater sbu = new ScoreBoardUpdater(getScore());
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(getScore(), "Sliding tiles");
         sbu.updateLeaderBoard();
     }
 

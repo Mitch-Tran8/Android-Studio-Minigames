@@ -269,8 +269,9 @@
 
     <TextView
         android:id="@+id/instructions_title"
-        android:layout_width="262dp"
-        android:layout_height="wrap_content"
+        android:layout_width="324dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:elevation="@dimen/lenacustum"
@@ -279,7 +280,7 @@
         android:inputType="textPersonName"
         android:text="How To Play Colour Tiles:"
         android:textColor="#E2D4D3"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/instructions"
         app:layout_constraintEnd_toEndOf="parent"
