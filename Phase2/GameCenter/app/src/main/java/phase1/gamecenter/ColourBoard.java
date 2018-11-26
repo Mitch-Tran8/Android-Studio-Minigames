@@ -23,17 +23,17 @@ public class ColourBoard extends Observable implements Serializable, Iterable<Co
     /**
      * The number of rows.
      */
-    static int NUM_ROWS;
+    private int NUM_ROWS;
 
     /**
      * The number of rows.
      */
-    static int NUM_COLS;
+    private int NUM_COLS;
 
     /**
      * The tiles on the board in row-major order.
      */
-    private ColourTile[][] tiles = new ColourTile[NUM_ROWS][NUM_COLS];
+    private ColourTile[][] tiles;
 
     /**
      * A new board of tiles in row-major order.
@@ -41,14 +41,21 @@ public class ColourBoard extends Observable implements Serializable, Iterable<Co
      *
      * @param tiles the tiles for the board
      */
-    ColourBoard(List<ColourTile> tiles) {
+    ColourBoard(List<ColourTile> tiles, int complexity) {
+        NUM_ROWS = complexity;
+        NUM_COLS = complexity;
+        this.tiles = new ColourTile[NUM_ROWS][NUM_COLS];
         Iterator<ColourTile> iter = tiles.iterator();
 
-        for (int row = 0; row != ColourBoard.NUM_ROWS; row++) {
-            for (int col = 0; col != ColourBoard.NUM_COLS; col++) {
+        for (int row = 0; row != complexity; row++) {
+            for (int col = 0; col != complexity; col++) {
                 this.tiles[row][col] = iter.next();
             }
         }
+    }
+
+    int getNUM_ROWS(){
+        return this.NUM_ROWS;
     }
 
     /**

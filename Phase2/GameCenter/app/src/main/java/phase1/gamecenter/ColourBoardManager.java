@@ -93,18 +93,12 @@ class ColourBoardManager implements Serializable {
 
         if (complexity == 3) {
             tileNum = 0;
-            ColourBoard.NUM_COLS = 3;
-            ColourBoard.NUM_ROWS = 3;
             numTiles = 10;
         } else if (complexity == 4) {
             tileNum = 9;
-            ColourBoard.NUM_COLS = 4;
-            ColourBoard.NUM_ROWS = 4;
             numTiles = 26;
         } else {
             tileNum = 25;
-            ColourBoard.NUM_COLS = 5;
-            ColourBoard.NUM_ROWS = 5;
             numTiles = 51;
         }
 
@@ -112,8 +106,16 @@ class ColourBoardManager implements Serializable {
             tiles.add(new ColourTile(tileNum));
         }
         Collections.shuffle(tiles);
-        this.board = new ColourBoard(tiles);
+        this.board = new ColourBoard(tiles, complexity);
         this.firstTap = 0;
+    }
+
+    /**
+     * set the board of this boardmanager only for testing purpose
+     * @param board new board to be set
+     */
+    void setBoard(ColourBoard board){
+        this.board = board;
     }
 
     /**
@@ -171,7 +173,7 @@ class ColourBoardManager implements Serializable {
         int matchedNum = 0;
 
         //checks whether all tiles in a row are in the same colour
-        while (currRow < board.NUM_ROWS) {
+        while (currRow < board.getNUM_ROWS()) {
             currBackground = board.getTiles()[currRow][currCol].getBackground();
 
             //checks the row
@@ -205,10 +207,10 @@ class ColourBoardManager implements Serializable {
      */
     private ColourTile generateTile(){
         int background;
-        if (ColourBoard.NUM_ROWS == 3){
+        if (board.getNUM_ROWS() == 3){
             background = new Random().nextInt(8) + 1;
         }
-        else if (ColourBoard.NUM_ROWS == 4){
+        else if (board.getNUM_ROWS() == 4){
             background = new Random().nextInt(24) + 10;
         }
         else {
@@ -304,11 +306,11 @@ class ColourBoardManager implements Serializable {
      */
     boolean isValidTap(int position) {
 
-        int row = position / ColourBoard.NUM_ROWS;
-        int col = position % ColourBoard.NUM_COLS;
+        int row = position / board.getNUM_ROWS();
+        int col = position % board.getNUM_ROWS();
 
-        int firstTapRow = firstTap / ColourBoard.NUM_ROWS;
-        int firstTapCol = firstTap % ColourBoard.NUM_COLS;
+        int firstTapRow = firstTap / board.getNUM_ROWS();
+        int firstTapCol = firstTap % board.getNUM_ROWS();
 
 //        return (row != firstTapRow && col != firstTapCol);
 
@@ -333,11 +335,11 @@ class ColourBoardManager implements Serializable {
      */
     void touchMove(int position) {
 
-        int row = position / ColourBoard.NUM_ROWS;
-        int col = position % ColourBoard.NUM_COLS;
+        int row = position / board.getNUM_ROWS();
+        int col = position % board.getNUM_ROWS();
 
-        int firstTapRow = firstTap / ColourBoard.NUM_ROWS;
-        int firstTapCol = firstTap % ColourBoard.NUM_COLS;
+        int firstTapRow = firstTap / board.getNUM_ROWS();
+        int firstTapCol = firstTap % board.getNUM_ROWS();
 
         board.swapTiles(row, col, firstTapRow, firstTapCol);
         numOfMoves++;
