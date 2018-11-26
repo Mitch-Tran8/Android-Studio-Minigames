@@ -46,7 +46,7 @@ public class MovementController {
                 boardManager.touchMove(position);
                 if (boardManager.puzzleSolved()) {
                     String score = Integer.toString(boardManager.getScore());
-                    Toast.makeText(context, "It's a match!" + score, Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "YOU WIN! Your score is: " + score, Toast.LENGTH_LONG).show();
 //                    //gameActivity.switchToMain();
                 }
             } else {

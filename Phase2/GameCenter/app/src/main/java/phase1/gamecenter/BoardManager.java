@@ -360,15 +360,15 @@ class BoardManager implements Serializable {
      */
     boolean puzzleSolved() {
         boolean solved = true;
-//        int lastId = 1;
-//
-//        for (Tile tile : board) {
-//            if (tile.getId() == lastId) {
-//                lastId++;
-//            } else {
-//                solved = false;
-//            }
-//        }
+        int lastId = 1;
+
+        for (Tile tile : board) {
+            if (tile.getId() == lastId) {
+                lastId++;
+            } else {
+                solved = false;
+            }
+        }
         if (solved) {
             updateScore(solved);
             updateScoreboard();
