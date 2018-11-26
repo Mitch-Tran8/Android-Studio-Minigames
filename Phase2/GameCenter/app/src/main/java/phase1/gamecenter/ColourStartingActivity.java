@@ -14,9 +14,6 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import android.app.Activity;
-import android.os.Handler;
-import android.widget.TextView;
 
 /**
  * The initial activity for the sliding puzzle tile game.
@@ -118,7 +115,7 @@ public class ColourStartingActivity extends AppCompatActivity {
      * Switch to the ColourGameActivity view to play the game.
      */
     private void switchToGame() {
-        Intent tmp = new Intent(this, ColourGameActivity.class);
+        Intent tmp = new Intent(this, ColourTileRoundsActivity.class);
         saveToFile(ColourStartingActivity.TEMP_SAVE_FILENAME);
         startActivity(tmp);
     }

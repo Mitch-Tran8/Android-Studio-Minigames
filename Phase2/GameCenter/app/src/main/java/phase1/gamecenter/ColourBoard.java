@@ -23,12 +23,12 @@ public class ColourBoard extends Observable implements Serializable, Iterable<Co
     /**
      * The number of rows.
      */
-    static int NUM_ROWS = 4;
+    static int NUM_ROWS;
 
     /**
      * The number of rows.
      */
-    static int NUM_COLS = 4;
+    static int NUM_COLS;
 
     /**
      * The tiles on the board in row-major order.
@@ -77,6 +77,30 @@ public class ColourBoard extends Observable implements Serializable, Iterable<Co
      */
     ColourTile[][] getTiles() {
         return tiles;
+    }
+
+    /*
+     * sets the tile
+     */
+    void setTile(int row, int col, ColourTile newTile){
+        this.tiles[row][col] = newTile;
+        setChanged();
+        notifyObservers();
+    }
+
+    /*
+     * replace tiles in row with tiles in the row above
+     */
+    void replaceRow(int currRow, int thirdCol){
+        ColourTile copy1 = tiles[currRow - 1][thirdCol];
+        ColourTile copy2 = tiles[currRow - 1][thirdCol-1];
+        ColourTile copy3 = tiles[currRow - 1][thirdCol-1];
+
+        tiles[currRow][thirdCol] = copy1;
+        tiles[currRow][thirdCol-1] = copy2;
+        tiles[currRow][thirdCol-2] = copy3;
+        setChanged();
+        notifyObservers();
     }
 
     /**
