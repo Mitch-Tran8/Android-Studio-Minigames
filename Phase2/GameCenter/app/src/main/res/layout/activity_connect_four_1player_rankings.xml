@@ -31,7 +31,7 @@
             android:shadowDx="4"
             android:shadowDy="4"
             android:shadowRadius="4"
-            android:text="Connect 4 Most Wins in 2P"
+            android:text="Connect 4 Most Wins In AI"
             android:backgroundTint="#2C3E50"
             android:textColor="#33A8FF"
             android:fontFamily="sans-serif-smallcaps"
