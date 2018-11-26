@@ -38,16 +38,15 @@ public class UserScoreBoardActivity extends AppCompatActivity {
     /**
      * gets the scores from firebase and sets it as a list to userScores.
      */
-    private void getUserScores(){
-        final String user_id = getUserId();
+    private void getUserScores() {
+        String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(user_id).child("Game Collection").child("Sliding tiles");
         ref.child("userscores").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<Long> scores = new ArrayList<Long>();
-                ArrayList<String> users = new ArrayList<String>();
                 HashMap<String, Long> map = (HashMap<String, Long>) dataSnapshot.getValue();
-                for (HashMap.Entry <String, Long> entry: map.entrySet()){
+                for (HashMap.Entry<String, Long> entry : map.entrySet()) {
                     scores.add(entry.getValue());
                 }
                 Collections.sort(scores, Collections.<Long>reverseOrder());
@@ -63,17 +62,10 @@ public class UserScoreBoardActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * returns this user's user ID.
-     * @return
-     */
-
-    private String getUserId(){
-        String name = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        return name;
-    }
-
     private void showScores(){
+
+        TextView textViewName = findViewById(R.id.UserNameTitle);
+        textViewName.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName()+ "'s Scoreboard");
 
         TextView textView1 = findViewById(R.id.text1);
         textView1.setText(String.valueOf(userScores.get(0)));

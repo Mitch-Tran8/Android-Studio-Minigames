@@ -1,11 +1,25 @@
 package phase1.gamecenter;
 
+import android.support.annotation.NonNull;
+import android.util.Pair;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 
@@ -56,8 +70,15 @@ class BoardManager implements Serializable {
      */
     private boolean isValidUndo;
 
-    static int NUM_ROWS;
-    static int NUM_COLS;
+    /**
+     * The columns of the board, the board manager is managing
+     */
+    private int columns;
+
+    /**
+     * The rows of the board, the board manager is managing
+     */
+    private int rows;
 
 
     /**
@@ -92,6 +113,15 @@ class BoardManager implements Serializable {
     }
 
     /**
+     * Return the complexity
+     * This one
+     * @return Complexity
+     */
+    public String returnComplexity() {
+        return complexity;
+    }
+
+    /**
      * Return the current board.
      */
     Board getBoard() {
@@ -104,6 +134,8 @@ class BoardManager implements Serializable {
     BoardManager(int row, int col) {
         Board.NUM_COLS = col;
         Board.NUM_ROWS = row;
+        columns = col;
+        rows = row;
 
         if (Board.NUM_COLS == 3) {
             setComplexity("3x3");
@@ -297,6 +329,19 @@ class BoardManager implements Serializable {
         return blankTileIndex;
     }
 
+    /**
+     * returns the number of columns the board manager is managing
+     * @return number of columns
+     */
+    protected int getColumns() {
+        return columns;
+    }
+
+    /**
+     * returns the number of rows the board manager is managing
+     * @return number of rows
+     */
+    protected int getRows(){return rows;}
 
     /**
      * returns the number of moves made
@@ -315,15 +360,27 @@ class BoardManager implements Serializable {
      */
     boolean puzzleSolved() {
         boolean solved = true;
-        int lastId = 1;
-
-        for (Tile tile : board) {
-            if (tile.getId() == lastId) {
-                lastId++;
-            } else {
-                solved = false;
-            }
+//        int lastId = 1;
+//
+//        for (Tile tile : board) {
+//            if (tile.getId() == lastId) {
+//                lastId++;
+//            } else {
+//                solved = false;
+//            }
+//        }
+        if (solved) {
+            updateScore(solved);
+            updateScoreboard();
+            updateLeadeBoard();
         }
+        return solved;
+    }
+
+    /**
+     * update current score
+     */
+    private void updateScore(boolean solved) {
         if (Board.NUM_COLS == 3 && solved) {
             score = 50 - numOfMoves;
         } else if (Board.NUM_COLS == 4 && solved) {
@@ -331,16 +388,24 @@ class BoardManager implements Serializable {
         } else if (Board.NUM_COLS == 5 && solved) {
             score = 250 - numOfMoves;
         }
+    }
 
-        if (solved) {
-            try {
-                createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    /**
+     * update scoreboard for the user for sliding tiles
+     */
 
-        }
-        return solved;
+    private void updateScoreboard() {
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(getScore());
+        sbu.updateUserScoreBoard();
+    }
+
+    /**
+     * update scoreboard for leaderboard of sliding tiles
+     *
+     */
+    private void updateLeadeBoard(){
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(getScore());
+        sbu.updateLeaderBoard();
     }
 
     /*
@@ -378,10 +443,12 @@ class BoardManager implements Serializable {
 
     /**
      * returns if undo is valid
+     *
      * @return if undo is valid
      */
+
     boolean isValidUndo() {
-        if (maxUndoTimes == 0){
+        if (maxUndoTimes == 0) {
             return false;
         }
         return isValidUndo;
@@ -406,7 +473,7 @@ class BoardManager implements Serializable {
     /**
      * sets the maximum undo times
      */
-    void setMaxUndoTimes(int times){
+    void setMaxUndoTimes(int times) {
         maxUndoTimes = times;
     }
 

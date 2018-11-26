@@ -23,6 +23,11 @@ public class GameCenterMainActivity extends AppCompatActivity {
      */
     ImageButton colourTilesButton;
 
+    /**
+     * Colour tiles button that leads to the colour tiles game
+     */
+    ImageButton connectFourButton;
+
     /*
      * the profile button
      */
@@ -65,6 +70,7 @@ public class GameCenterMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game_center_main);
         slidingtilesbutton = findViewById(R.id.slidingtilesbutton);
         colourTilesButton = findViewById(R.id.colourtilesbutton);
+        connectFourButton = findViewById(R.id.connect4button);
         logoutButton = findViewById(R.id.logoutPageButton);
         menuView = findViewById(R.id.menuView);
         menuButton = findViewById(R.id.menuButton);
@@ -112,6 +118,17 @@ public class GameCenterMainActivity extends AppCompatActivity {
             }
         });
 
+        /*
+         * Activate the connect four button
+         */
+        connectFourButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(GameCenterMainActivity.this, ConnectNumbersStartingActivity.class);
+                i.putExtra("user_id", user_id);
+                startActivity(i);
+            }
+        });
         /*
          * Activate the logoutButton
          */

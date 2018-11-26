@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp">
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <TextView
+            android:id="@+id/scorePlayer1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="31dp"
+            android:layout_marginTop="46dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Player 1: 0"
+            android:textColor="@color/connectFourScores"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/scorePlayer2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/scorePlayer1"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="275dp"
+            android:layout_marginTop="-34dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Player 2: 0"
+            android:textColor="@color/connectFourScores"
+            android:textSize="25sp" />
+
+
+        <TextView
+            android:id="@+id/draws"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="161dp"
+            android:layout_marginTop="47dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Draws: 0"
+            android:textColor="@color/connectFourScores"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/button_reset"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/scorePlayer1"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="94dp"
+            android:layout_marginBottom="37dp"
+            android:backgroundTint="@color/connectFourButtons"
+            android:text="NEW ROUND"
+            tools:backgroundTint="@color/connectFourButtons" />
+
+        <Button
+            android:id="@+id/button_reset_game"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/scorePlayer1"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="214dp"
+            android:layout_marginBottom="37dp"
+            android:backgroundTint="@color/connectFourButtons"
+            android:text="RESET GAME"
+            tools:backgroundTint="@color/connectFourButtons" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="128dp">
+
+        <Button
+            android:id="@+id/button_00"
+            android:layout_width="130dp"
+            android:layout_height="127dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart = "13dp"
+            android:background="@drawable/circle_button"
+            android:textSize="70dp" />
+
+        <Button
+            android:id="@+id/button_01"
+            android:layout_width="130dp"
+            android:layout_height="127dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/button_00"
+            android:background="@drawable/circle_button"
+            android:textSize="70dp" />
+
+        <Button
+            android:id="@+id/button_02"
+            android:layout_width="130dp"
+            android:layout_height="127dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/button_01"
+            android:background="@drawable/circle_button"
+            android:textSize="70dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="128dp">
+
+        <Button
+            android:id="@+id/button_10"
+            android:layout_width="130dp"
+            android:layout_height="127dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart = "13dp"
+            android:background="@drawable/circle_button"
+            android:textSize="70dp" />
+
+        <Button
+            android:id="@+id/button_11"
+            android:layout_width="130dp"
+            android:layout_height="127dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/button_10"
+            android:background="@drawable/circle_button"
+            android:textSize="70dp" />
+
+        <Button
+            android:id="@+id/button_12"
+            android:layout_width="130dp"
+            android:layout_height="127dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/button_11"
+            android:background="@drawable/circle_button"
+            android:textSize="70dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="128dp">
+
+        <Button
+            android:id="@+id/button_20"
+            android:layout_width="130dp"
+            android:layout_height="127dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart = "13dp"
+            android:background="@drawable/circle_button"
+            android:textSize="70dp" />
+
+        <Button
+            android:id="@+id/button_21"
+            android:layout_width="130dp"
+            android:layout_height="127dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/button_20"
+            android:background="@drawable/circle_button"
+            android:textSize="70dp" />
+
+        <Button
+            android:id="@+id/button_22"
+            android:layout_width="130dp"
+            android:layout_height="127dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/button_21"
+            android:background="@drawable/circle_button"
+            android:textSize="70dp" />
+    </RelativeLayout>
+
+
+</LinearLayout>
+
+
+
+

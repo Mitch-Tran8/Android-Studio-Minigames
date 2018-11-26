@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -117,20 +118,15 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             String user_id = mAuth.getCurrentUser().getUid();
+                            FirebaseUser currUser = mAuth.getCurrentUser();
+                            UserProfileChangeRequest changeRequest = new UserProfileChangeRequest.Builder().setDisplayName(name).build();
+                            currUser.updateProfile(changeRequest);
 
                             User users = new User(email, name, games);
-                            ArrayList scores = new ArrayList();
-                            scores.add(new Pair<>("score1", 0));
-                            scores.add(new Pair<>("score2", 0));
-                            scores.add(new Pair<>("score3", 0));
-                            scores.add(new Pair<>("score4", 0));
-                            scores.add(new Pair<>("score5", 0));
+
                             databaseReference.child(user_id).setValue(users);
-                            databaseReference.child(user_id).child("Game Collection").setValue(games);
-                            DatabaseReference ref = databaseReference.child(user_id).child("Game Collection").child("Sliding tiles").child("userscores");
-                            for (int i = 1; i < 6; i++){
-                                ref.child("score"+ String.valueOf(i)).setValue(0);
-                            }
+                            createScoreBoards(user_id);
+
 
                                     Log.d(RegisterActivity.class.getSimpleName(), "Authentication successful");
 
@@ -157,26 +153,6 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * goes to next activity, which would be the login screen, after registration is succesful.
-     */
-    private void createAuthStateListener() {
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                final FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    Intent intent = new Intent(RegisterActivity.this, StartingActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
-                }
-            }
-
-        };
-    }
-
     @Override
     public void onStop() {
         super.onStop();
@@ -185,4 +161,23 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-}
+    /**
+     * creates the scoreboards for the user in firebase.
+     * @param user_id
+     */
+    private void createScoreBoards(String user_id){
+        DatabaseReference stRef = databaseReference.child(user_id).child("Game Collection").child("Sliding tiles").child("userscores");
+        for (int i = 1; i < 6; i++){
+            stRef.child("score"+ String.valueOf(i)).setValue(0);
+        }
+        DatabaseReference ctRef = databaseReference.child(user_id).child("Game Collection").child("Colour tiles").child("userscores");
+        for (int i = 1; i < 6; i++){
+            ctRef.child("score"+ String.valueOf(i)).setValue(0);}
+
+        DatabaseReference conRef = databaseReference.child(user_id).child("Game Collection").child("Connect34").child("userscores");
+
+        for (int i = 1; i < 6; i++){
+            conRef.child("score"+ String.valueOf(i)).setValue(0);
+    }
+
+}}

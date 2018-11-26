@@ -18,7 +18,6 @@ public class ColourRankingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rankings_screen_connect_numbers);
 
         connect3 = findViewById(R.id.rankings_3x3);
-        connect4 = findViewById(R.id.rankings_4x4);
         connect5 = findViewById(R.id.rankings_5x5);
 
         connect3.setOnClickListener(new View.OnClickListener() {
@@ -29,13 +28,6 @@ public class ColourRankingsActivity extends AppCompatActivity {
             }
         });
 
-        connect4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ColourRankingsActivity.this, ColourScoreBoard4x4.class);
-                startActivity(intent);
-            }
-        });
 
         connect5.setOnClickListener(new View.OnClickListener() {
             @Override

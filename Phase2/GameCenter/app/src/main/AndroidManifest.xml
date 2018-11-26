@@ -34,18 +34,34 @@
         <activity android:name=".DifficultyLevel" />
         <activity android:name=".LogoutActivity" />
         <activity android:name=".UserScoreBoardActivity"></activity>
-        <activity android:name=".RankingsActivity" />
         <activity android:name=".ColourRankingsActivity" />
         <activity android:name=".ColourScoreBoard3x3" />
-        <activity android:name=".ColourScoreBoard4x4" />
         <activity android:name=".ColourScoreBoard5x5" />
-
-        <activity android:name=".Scoreboard3x3" />
-        <activity android:name=".Scoreboard4x4" />
-        <activity android:name=".Scoreboard5x5" />
-
-
         <activity android:name=".ColourTileRoundsActivity"/>
+        <activity android:name=".ConnectFourMainActivity" />
+        <activity android:name=".ConnectNumbersStartingActivity" />
+        <activity android:name=".ConnectFourPlayersActivity" />
+        <activity android:name=".ConnectFourAIEasyMainActivity" />
+        <activity android:name=".ConnectNumbersSelectActivity" />
+        <activity android:name=".ConnectThreeAIEasyMainActivity" />
+        <activity android:name=".ConnectThreeMainActivity" />
+        <activity android:name=".ConnectThreePlayersActivity" />
+        <activity android:name=".ConnectThreeDifficultyActivity" />
+        <activity android:name=".ConnectFourDifficultyActivity" />
+        <activity android:name=".ConnectNumbersRankingsActivity" />
+        <activity android:name=".ConnectThreeRankingsMainActivity" />
+        <activity android:name=".ConnectFourRankingsMainActivity" />
+        <activity android:name=".ConnectFourRankings1PlayerActivity"/>
+        <activity android:name=".ConnectFourRankings2PlayersActivity"/>
+        <activity android:name=".ConnectThreeRankings1PlayerActivity"/>
+        <activity android:name=".ConnectThreeRankings2PlayersActivity"/>
+
+
+        <activity android:name=".LeaderboardActivity"/>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

@@ -3,4 +3,10 @@
     <color name="colorPrimary">#a693b5</color>
     <color name="colorPrimaryDark">#ceeaad</color>
     <color name="colorAccent">#97a2f9</color>
+    <color name="connectFourBoard">#a9d3e1</color>
+    <color name="connectFourButtons">#afd3a4</color>
+    <color name="connectFourScores">#6d5f80</color>
+    <color name="connectFourX">#e35a7f</color>
+    <color name="connectFourO">#e79024</color>
+    <color name="connectFourTransparent">#00ffffff</color>
 </resources>

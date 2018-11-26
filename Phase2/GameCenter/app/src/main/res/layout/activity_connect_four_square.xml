@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp">
+
+        <TextView
+            android:id="@+id/scorePlayer1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="49dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Player 1: 0"
+            android:textColor="@color/connectFourScores"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/scorePlayer2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/scorePlayer1"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="283dp"
+            android:layout_marginTop="-37dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Player 2: 0"
+            android:textColor="@color/connectFourScores"
+            android:textSize="25sp" />
+
+
+        <TextView
+            android:id="@+id/draws"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="167dp"
+            android:layout_marginTop="47dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Draws: 0"
+            android:textColor="@color/connectFourScores"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/button_reset"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/scorePlayer1"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="94dp"
+            android:layout_marginBottom="37dp"
+            android:backgroundTint="@color/connectFourButtons"
+            android:text="NEW ROUND"
+            tools:backgroundTint="@color/connectFourButtons" />
+
+        <Button
+            android:id="@+id/button_reset_game"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/scorePlayer1"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="214dp"
+            android:layout_marginBottom="37dp"
+            android:backgroundTint="@color/connectFourButtons"
+            android:text="RESET GAME"
+            tools:backgroundTint="@color/connectFourButtons" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/button_00"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+        <Button
+            android:id="@+id/button_01"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+        <Button
+            android:id="@+id/button_02"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+        <Button
+            android:id="@+id/button_03"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+        <Button
+            android:id="@+id/button_04"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/button_10"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+        <Button
+            android:id="@+id/button_11"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+        <Button
+            android:id="@+id/button_12"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+        <Button
+            android:id="@+id/button_13"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+        <Button
+            android:id="@+id/button_14"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/button_20"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+        <Button
+            android:id="@+id/button_21"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+        <Button
+            android:id="@+id/button_22"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+        <Button
+            android:id="@+id/button_23"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+        <Button
+            android:id="@+id/button_24"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/button_30"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+        <Button
+            android:id="@+id/button_31"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+        <Button
+            android:id="@+id/button_32"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+        <Button
+            android:id="@+id/button_33"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+        <Button
+            android:id="@+id/button_34"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/button_40"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+        <Button
+            android:id="@+id/button_41"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+        <Button
+            android:id="@+id/button_42"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+        <Button
+            android:id="@+id/button_43"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+
+        <Button
+            android:id="@+id/button_44"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/connectFourBoard"
+            android:textSize="60sp"
+            tools:backgroundTint="@color/connectFourBoard" />
+    </LinearLayout>
+
+</LinearLayout>
