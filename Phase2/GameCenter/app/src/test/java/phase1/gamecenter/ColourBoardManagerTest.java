@@ -160,7 +160,7 @@ public class ColourBoardManagerTest {
     }
 
     @Test
-    public void touchMove() {
+    public void testTouchMove_Tow_Same_Taps() {
         tiles.clear();
         tiles.add(new ColourTile(1));
         tiles.add(new ColourTile(2));
@@ -176,5 +176,25 @@ public class ColourBoardManagerTest {
         ColourBoardManager copy = testerBoardManager;
         copy.touchMove(1);
         assertEquals(testerBoardManager, copy);
+    }
+
+    @Test
+    public void testTouchMove_general() {
+        tiles.clear();
+        tiles.add(new ColourTile(1));
+        tiles.add(new ColourTile(2));
+        tiles.add(new ColourTile(3));
+        tiles.add(new ColourTile(4));
+        tiles.add(new ColourTile(5));
+        tiles.add(new ColourTile(6));
+        tiles.add(new ColourTile(7));
+        tiles.add(new ColourTile(8));
+        tiles.add(new ColourTile(9));
+        testerBoardManager.setFirstTap(1);
+        ColourBoard copyBoard = testerBoardManager.getBoard();
+        copyBoard.swapTiles(0,0,1,0);
+
+        testerBoardManager.touchMove(4);
+        assertEquals(testerBoardManager.getBoard(), copyBoard);
     }
 }
