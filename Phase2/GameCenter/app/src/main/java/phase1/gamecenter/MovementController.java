@@ -46,8 +46,8 @@ public class MovementController {
                 boardManager.touchMove(position);
                 if (boardManager.puzzleSolved()) {
                     String score = Integer.toString(boardManager.getScore());
-                    Toast.makeText(context, "YOU WIN! Score: " + score, Toast.LENGTH_LONG).show();
-                    //gameActivity.switchToMain();
+                    Toast.makeText(context, "It's a match!" + score, Toast.LENGTH_LONG).show();
+//                    //gameActivity.switchToMain();
                 }
             } else {
                 Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();
@@ -56,20 +56,23 @@ public class MovementController {
 
         // tap movements on the colourboard manager
         else {
+
             if (colourBoardManager.hasFirstTap()) {
                 if (colourBoardManager.isValidTap(position)){
                     colourBoardManager.touchMove(position);
-                    colourBoardManager.setFirstTap(0);
-
-                    Toast.makeText(context, "Swapped successfully", Toast.LENGTH_SHORT).show();
 
                     if (colourBoardManager.puzzleSolved()) {
+//                        colourBoardManager.addNewTiles();
+
                         //ToDo: implement a getScore method in ColourBoardManager and print the score when you win
-                        String score = Integer.toString(colourBoardManager.getScore());
-                        Toast.makeText(context, "YOU WIN! Score: " + score, Toast.LENGTH_LONG).show();
+//                        String score = Integer.toString(colourBoardManager.getScore());
+                        Toast.makeText(context, "It's a match!", Toast.LENGTH_LONG).show();
 
 //                        gameActivity.switchToMain();
                     }
+                    colourBoardManager.setFirstTap(0);
+
+//                    Toast.makeText(context, "Swapped successfully", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();

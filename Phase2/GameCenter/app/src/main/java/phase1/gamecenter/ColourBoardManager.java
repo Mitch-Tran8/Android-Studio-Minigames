@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
+import java.util.Random;
 
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
@@ -62,12 +63,22 @@ class ColourBoardManager implements Serializable {
     /**
      * countdown timer's seconds
      */
-    private int seconds = 30;
+    private int seconds;
 
     /**
      * countdown timer's minutes
      */
-    private int minutes = 0;
+    private int minutes;
+
+    /**
+     * The current user's id
+     */
+    private String user_id;
+
+    /*
+     * list of solved tiles that need to be taken care of
+     */
+    private Stack<Integer> matched;
 
     /**
      * Manage a new shuffled board.
@@ -78,22 +89,19 @@ class ColourBoardManager implements Serializable {
         int numTiles;
         seconds = second;
         minutes = minute;
+        matched= new Stack();
 
         if (complexity == 3) {
             tileNum = 0;
             ColourBoard.NUM_COLS = 3;
             ColourBoard.NUM_ROWS = 3;
             numTiles = 10;
-        }
-
-        else if (complexity == 4) {
+        } else if (complexity == 4) {
             tileNum = 9;
             ColourBoard.NUM_COLS = 4;
             ColourBoard.NUM_ROWS = 4;
             numTiles = 26;
-        }
-
-        else {
+        } else {
             tileNum = 25;
             ColourBoard.NUM_COLS = 5;
             ColourBoard.NUM_ROWS = 5;
@@ -111,14 +119,14 @@ class ColourBoardManager implements Serializable {
     /**
      * getter for minutes
      */
-    int getMinutes(){
+    int getMinutes() {
         return minutes;
     }
 
     /**
      * getter for seconds
      */
-    int getSeconds(){
+    int getSeconds() {
         return seconds;
     }
 
@@ -128,9 +136,11 @@ class ColourBoardManager implements Serializable {
      * @return whether the tiles are in row-major order
      */
     boolean puzzleSolved() {
-        boolean solved = (rowSolved() || colSolved());
+        boolean solved = rowSolved();
 
         if (solved) {
+            addNewTiles();
+            puzzleSolved();
             try {
                 createNewFile();
             } catch (IOException e) {
@@ -150,41 +160,107 @@ class ColourBoardManager implements Serializable {
     }
 
     /**
-     * Helper function to puzzleSolved, returns whether all tiles of each row are of the same colour
-     * @return whether all tiles of each row are of the same colour
+     * Helper function to puzzleSolved, returns whether all tiles of each row are in the same colour
+     *
+     * @return whether all tiles of each row are in the same colour
      */
-    private boolean rowSolved(){
+    private boolean rowSolved() {
         int currRow = 0;
-        int currCol = 1;
+        int currCol = 0;
         int currBackground = board.getTiles()[0][0].getBackground();
+        int matchedNum = 0;
 
         //checks whether all tiles in a row are in the same colour
-        while (currRow < (Board.NUM_ROWS-1)) {
-            for (ColourTile tile : board.getTiles()[currRow]){
-                if (tile.getBackground() != currBackground){
-                    return false;
+        while (currRow < board.NUM_ROWS) {
+            currBackground = board.getTiles()[currRow][currCol].getBackground();
+
+            //checks the row
+            for (ColourTile tile : board.getTiles()[currRow]) {
+                //checks the tile
+                if (tile.getBackground() != currBackground) {
+                    matchedNum = 1;
+                    currBackground = board.getTiles()[currRow][currCol].getBackground();
+                } else {
+                    matchedNum++;
+                    //checks whether there are connecting 3 tiles in the same colour
+                    if (matchedNum == 3) {
+                        matched.push(currCol);
+                        matched.push(currRow);
+                        score = 100 - numOfMoves;
+                        return true;
+                    }
                 }
+                currCol++;
             }
             currRow++;
-            currBackground = board.getTiles()[currRow][currCol].getBackground();
+            currCol = 0;
+            matchedNum = 0;
         }
-        score = 100-numOfMoves;
-        return true;
+        return false;
+    }
+
+    /**
+     * helper function to addNewTiles to generate a random tile
+     * @return a randomized colour tile
+     */
+    private ColourTile generateTile(){
+        int background;
+        if (ColourBoard.NUM_ROWS == 3){
+            background = new Random().nextInt(8) + 1;
+        }
+        else if (ColourBoard.NUM_ROWS == 4){
+            background = new Random().nextInt(24) + 10;
+        }
+        else {
+            background = new Random().nextInt(49) + 26;
+        }
+        return new ColourTile(background);
+    }
+
+    /*
+     * adds new tiles to the board
+     */
+    private void addNewTiles() {
+
+        //generate three random tiles
+        ColourTile tile1 = generateTile();
+        ColourTile tile2 = generateTile();
+        ColourTile tile3 = generateTile();
+
+        //fetch matched tiles
+        int currRow = matched.pop();
+        int thirdCol = matched.pop();
+        int secondCol = thirdCol - 1;
+        int firstCol = thirdCol - 2;
+
+        // replace tiles with tiles in the row above
+        while (currRow >= 0) {
+            // switch the colour tiles in the first row to randomly generated tiles
+            if (currRow == 0) {
+                board.setTile(currRow, firstCol, tile1);
+                board.setTile(currRow, secondCol, tile2);
+                board.setTile(currRow, thirdCol, tile3);
+                break;
+            }
+            // replace this row with the row above it
+            board.replaceRow(currRow, thirdCol);
+            currRow -= 1;
+        }
     }
 
     /**
      * Helper function to puzzleSolved, returns whether all tiles of each column are of the same colour
      * @return whether all tiles of each column are of the same colour
      */
-    private boolean colSolved(){
+    private boolean colSolved() {
         int currRow = 1;
         int currCol = 0;
         int currBackground = board.getTiles()[0][0].getBackground();
 
         //checks whether all tiles in a column are in the same colour
-        while(currCol < 4){
-            while (currRow < 4){
-                if (board.getTiles()[currRow][currCol].getBackground() != currBackground){
+        while (currCol < 4) {
+            while (currRow < 4) {
+                if (board.getTiles()[currRow][currCol].getBackground() != currBackground) {
                     return false;
                 }
                 currRow++;
@@ -199,7 +275,7 @@ class ColourBoardManager implements Serializable {
     /**
      * returns the score
      */
-    int getScore(){
+    int getScore() {
         return score;
     }
 
@@ -216,7 +292,7 @@ class ColourBoardManager implements Serializable {
      * sets the first tap's position to position
      * @param position the position
      */
-    void setFirstTap(int position){
+    void setFirstTap(int position) {
         this.firstTap = position;
     }
 
@@ -236,20 +312,16 @@ class ColourBoardManager implements Serializable {
 
 //        return (row != firstTapRow && col != firstTapCol);
 
-        if (row == firstTapRow && col == firstTapCol){
+        if (row == firstTapRow && col == firstTapCol) {
             return false;
-        }
-        else if (row == firstTapRow){
-            if (col -firstTapCol == 1){
+        } else if (row == firstTapRow) {
+            if (col - firstTapCol == 1) {
                 return true;
-            }
-            else return firstTapCol - col == 1;
-        }
-        else if (firstTapCol == col){
-            if (row - firstTapRow == 1){
+            } else return firstTapCol - col == 1;
+        } else if (firstTapCol == col) {
+            if (row - firstTapRow == 1) {
                 return true;
-            }
-            else return firstTapRow - row == 1;
+            } else return firstTapRow - row == 1;
         }
         return false;
     }
