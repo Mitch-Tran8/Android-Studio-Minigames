@@ -44,11 +44,11 @@ public class MovementController {
         if(boardManager != null) {
             if (boardManager.isValidTap(position)) {
                 boardManager.touchMove(position);
-                if (boardManager.puzzleSolved()) {
-                    String score = Integer.toString(boardManager.getScore());
-                    Toast.makeText(context, "YOU WIN! Score: " + score, Toast.LENGTH_LONG).show();
-                    //gameActivity.switchToMain();
-                }
+//                if (boardManager.puzzleSolved()) {
+//                    String score = Integer.toString(boardManager.getScore());
+//                    Toast.makeText(context, "YOU WIN! Score: " + score, Toast.LENGTH_LONG).show();
+//                    //gameActivity.switchToMain();
+//                }
             } else {
                 Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();
             }

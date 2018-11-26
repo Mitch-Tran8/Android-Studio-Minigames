@@ -141,7 +141,8 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
                             tv.setText(String.valueOf(minutes)+":"+String.valueOf(seconds));
                         }
                         else if (seconds == 0 && minutes == 0){
-                            Toast.makeText(ColourGameActivity.this, "Time's up, try again", Toast.LENGTH_LONG).show();
+                            String score = Integer.toString(boardManager.getScore());
+                            Toast.makeText(ColourGameActivity.this, "Time's up, your score: " + score, Toast.LENGTH_LONG).show();
                             saveToFile(ColourBoardManager.TEMP_SAVE_FILENAME);
                             Intent tmp = new Intent(ColourGameActivity.this, ColourTileRoundsActivity.class);
                             startActivity(tmp);
