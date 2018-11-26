@@ -30,7 +30,6 @@
         <activity android:name=".UserScoreBoard" />
         <activity android:name=".ColourGameActivity" />
         <activity android:name=".ColourStartingActivity" />
-        <activity android:name=".Profile" />
         <activity android:name=".DifficultyLevel" />
         <activity android:name=".LogoutActivity" />
         <activity android:name=".UserScoreBoardActivity"></activity>
