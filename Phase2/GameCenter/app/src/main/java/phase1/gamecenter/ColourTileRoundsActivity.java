@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -88,6 +89,25 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
      */
     Button round10Button;
 
+    /**
+     * The "how to play"/instructions button
+     */
+    Button instructionsButton;
+
+    /**
+     * The title for the instruction
+     */
+    TextView instructionsTitle;
+
+    /**
+     * The body of the instructions
+     */
+    TextView instructionsBody;
+
+    /**
+     * The view of the instructions
+     */
+    View instructionsView;
 
     /**
      * the board manager
@@ -98,17 +118,26 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_colour_tile_rounds);
-        round1Button = findViewById(R.id.round1_button);
-        round2Button = findViewById(R.id.round2_button);
-        round3Button = findViewById(R.id.round3_button);
-        round4Button = findViewById(R.id.round4_button);
-        round4Button = findViewById(R.id.round4_button);
-        round5Button = findViewById(R.id.round5_button);
-        round6Button = findViewById(R.id.round6_button);
-        round7Button = findViewById(R.id.round7_button);
-        round8Button = findViewById(R.id.round8_button);
-        round9Button = findViewById(R.id.round9_button);
-        round10Button = findViewById(R.id.round10_button);
+        findView();
+
+        /**
+         * Activate how to play button
+         */
+        instructionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(instructionsView.getVisibility() == View.GONE) {
+                    instructionsView.setVisibility(View.VISIBLE);
+                    instructionsTitle.setVisibility(View.VISIBLE);
+                    instructionsBody.setVisibility(View.VISIBLE);
+                } else {
+                    instructionsTitle.setVisibility(View.GONE);
+                    instructionsView.setVisibility(View.GONE);
+                    instructionsBody.setVisibility(View.GONE);
+                }
+            }
+        });
 
         /**
          * Activate the button for round 1
@@ -222,6 +251,30 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    /**
+     * finds the view of all of the buttons, textViews, and views.
+     */
+    private void findView() {
+        round1Button = findViewById(R.id.round1_button);
+        round2Button = findViewById(R.id.round2_button);
+        round3Button = findViewById(R.id.round3_button);
+        round4Button = findViewById(R.id.round4_button);
+        round4Button = findViewById(R.id.round4_button);
+        round5Button = findViewById(R.id.round5_button);
+        round6Button = findViewById(R.id.round6_button);
+        round7Button = findViewById(R.id.round7_button);
+        round8Button = findViewById(R.id.round8_button);
+        round9Button = findViewById(R.id.round9_button);
+        round10Button = findViewById(R.id.round10_button);
+        instructionsButton = findViewById(R.id.instructions_button);
+        instructionsBody = findViewById(R.id.instructions);
+        instructionsTitle = findViewById(R.id.instructions_title);
+        instructionsView = findViewById(R.id.view);
+        instructionsTitle.setVisibility(View.GONE);
+        instructionsView.setVisibility(View.GONE);
+        instructionsBody.setVisibility(View.GONE);
     }
 
 

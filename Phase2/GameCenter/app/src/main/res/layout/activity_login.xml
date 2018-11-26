@@ -67,7 +67,7 @@
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/button_style"
         android:backgroundTint="#FDD692"
@@ -86,18 +86,18 @@
         android:layout_width="275dp"
         android:layout_height="38dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="200dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/edit_text_style"
-        android:backgroundTint="#F7B267"
 
+        android:backgroundTint="#F7B267"
         android:fontFamily="@font/andika"
         android:text="Don't have an account? Register here."
-        android:textColor="#FDD692"
+        android:textColor="#FDD690"
         android:textSize="10dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_password"
         tools:ignore="OnClick" />
@@ -113,7 +113,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.904" />
+        app:layout_constraintVertical_bias="0.819" />
 
     <TextView
         android:id="@+id/textView4"

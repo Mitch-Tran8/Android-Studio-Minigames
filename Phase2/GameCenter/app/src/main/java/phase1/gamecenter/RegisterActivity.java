@@ -61,8 +61,6 @@ public class RegisterActivity extends AppCompatActivity {
      */
     private DatabaseReference databaseReference;
 
-    private GameManager games;
-    private Game game;
 
     /**
      * Regex expression for password strength: must be at least 6 characters long and have one letter
@@ -82,9 +80,6 @@ public class RegisterActivity extends AppCompatActivity {
         passwordField = (EditText) findViewById(R.id.passwordField);
         emailField = (EditText) findViewById(R.id.emailField);
         register_button = (Button) findViewById(R.id.register_button);
-        game = new Game("Sliding Tiles", 4, 4);
-        games = new GameManager(game);
-
 
         /**
          * Activate the register button
@@ -122,7 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
                             UserProfileChangeRequest changeRequest = new UserProfileChangeRequest.Builder().setDisplayName(name).build();
                             currUser.updateProfile(changeRequest);
 
-                            User users = new User(email, name, games);
+                            User users = new User(email, name);
 
                             databaseReference.child(user_id).setValue(users);
                             createScoreBoards(user_id);
