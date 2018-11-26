@@ -30,7 +30,7 @@ public class ConnectFourAIEasyMainActivity extends AppCompatActivity implements 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_connect_four_bubbles);
+        setContentView(R.layout.activity_connect_four_ai);
         scorePlayer1 = findViewById(R.id.scorePlayer1);
         aiPlayer = findViewById(R.id.aiPlayer);
         Button buttonReset = findViewById(R.id.button_reset);
@@ -83,35 +83,40 @@ public class ConnectFourAIEasyMainActivity extends AppCompatActivity implements 
         if (!((Button) v).getText().toString().equals("")) {//checks if button contains empty string, if X or O then already used
             Toast.makeText(this, "Invalid move!", Toast.LENGTH_LONG).show();
         }
-        ((Button) v).setTextColor(Color.parseColor("#FFE35A7F"));
-        ((Button) v).setText("X");
+        if (((Button) v).getText().toString().equals("")){
 
-        if (gameOver()) {
-            if (player1Turn) {
-                player1Wins();
-            }
-        }
-        else {
-            player1Turn = false;
-            int i = -1;
-            int j = -1;
-            do {
-                i = RANDOM.nextInt(4);
-                j = RANDOM.nextInt(4);
-            } while (!buttons[i][j].getText().toString().equals(""));
-
-            (buttons[i][j]).setTextColor(Color.parseColor("#FFE79024"));
-            (buttons[i][j]).setText("O");
-
+            ((Button) v).setTextColor(Color.parseColor("#FFE35A7F"));
+            ((Button) v).setText("X");
+            
             if (gameOver()) {
-                if (!player1Turn) {
-                    aiWins();
+                if (player1Turn) {
+                    player1Wins();
+                }
+            }
+            else {
+                player1Turn = false;
+                int i;
+                int j;
+                if (moves < 12) {
+                    do {
+                        i = RANDOM.nextInt(5);
+                        j = RANDOM.nextInt(5);
+                    } while (!buttons[i][j].getText().toString().equals(""));
+
+                    (buttons[i][j]).setTextColor(Color.parseColor("#FFE79024"));
+                    (buttons[i][j]).setText("O");
+
+                    if (gameOver()) {
+                        if (!player1Turn) {
+                            aiWins();
+                        }
+                    }
                 }
             }
         }
 
         moves++;
-         if (moves == 25) {
+         if (moves == 13) {
             tie();
         }else {
              player1Turn = true;

@@ -112,7 +112,7 @@ public class GameCenterMainActivity extends AppCompatActivity {
         colourTilesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(GameCenterMainActivity.this, ColourTileRoundsActivity.class);
+                Intent i = new Intent(GameCenterMainActivity.this, ColourStartingActivity.class);
                 i.putExtra("user_id", user_id);
                 startActivity(i);
             }

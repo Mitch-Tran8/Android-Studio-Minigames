@@ -116,7 +116,7 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
         round1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToRound(3, 1, 0);
+                switchToRound(3, 0, 59);
             }
 
         });
@@ -216,7 +216,7 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
         round10Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToRound(5, 2, 0);
+                switchToRound(5, 1, 59);
             }
 
         });

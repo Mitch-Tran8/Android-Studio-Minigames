@@ -5,7 +5,6 @@ https://stackoverflow.com/a/17486406
 
 package phase1.gamecenter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -25,8 +24,6 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import android.app.Activity;
-import android.os.Handler;
 import android.widget.TextView;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -70,6 +67,8 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
      * the column width and height
      */
     private static int columnWidth, columnHeight;
+    private int seconds;
+    private int minutes;
 
     /**
      * Set up the background image for each button based on the master list
@@ -95,6 +94,7 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
         gridView.setNumColumns(ColourBoard.NUM_COLS);
         gridView.setBoardManager(boardManager);
         boardManager.getBoard().addObserver(this);
+
         // Observer sets up desired dimensions as well as calls our display function
         gridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -115,15 +115,13 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
     }
 
     /**
-     * Helper function of the timer to onCreate
+     * helper function to set the timer
      */
     void setTheTimer(){
-        /*
-        Timer adapted from:
-        https://stackoverflow.com/a/17486406
-        */
         //Declare the timer
         Timer t = new Timer();
+        seconds = boardManager.getSeconds();
+        minutes = boardManager.getMinutes();
         //Set the schedule function and rate
         t.scheduleAtFixedRate(new TimerTask() {
 
@@ -131,13 +129,10 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
             public void run() {
                 runOnUiThread(new Runnable() {
 
-                    @SuppressLint("SetTextI18n")
                     @Override
                     public void run() {
-                        int seconds = boardManager.getSeconds();
-                        int minutes = boardManager.getMinutes();
                         TextView tv = (TextView) findViewById(R.id.editText);
-                        tv.setText(String.valueOf(minutes)+":"+String.valueOf(seconds));
+                        tv.setText(String.valueOf(minutes)+":"+ String.valueOf(seconds));
                         seconds -= 1;
 
                         if(seconds == 0 && minutes != 0) {
@@ -145,8 +140,9 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
                             minutes=minutes-1;
                             tv.setText(String.valueOf(minutes)+":"+String.valueOf(seconds));
                         }
-                        else if (seconds == 0){
-                            Toast.makeText(ColourGameActivity.this, "Time's up, try again", Toast.LENGTH_LONG).show();
+                        else if (seconds == 0 && minutes == 0){
+                            String score = Integer.toString(boardManager.getScore());
+                            Toast.makeText(ColourGameActivity.this, "Time's up, your score: " + score, Toast.LENGTH_LONG).show();
                             saveToFile(ColourBoardManager.TEMP_SAVE_FILENAME);
                             Intent tmp = new Intent(ColourGameActivity.this, ColourTileRoundsActivity.class);
                             startActivity(tmp);
