@@ -17,15 +17,17 @@ import java.util.HashMap;
 
 public class ScoreBoardUpdater {
     int userScore;
+    String gameName;
 
-    public ScoreBoardUpdater(int score){
+    public ScoreBoardUpdater(int score, String name){
         userScore = score;
+        gameName = name;
     }
 
     public void updateUserScoreBoard(){
 
         final String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(user_id).child("Game Collection").child("Sliding tiles");
+        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(user_id).child("Game Collection").child(gameName);
 
         ref.child("userscores").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

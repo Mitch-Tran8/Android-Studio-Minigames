@@ -42,7 +42,7 @@ class BoardManager implements Serializable {
     /**
      * The number of moves that has been made to this board
      */
-    private int numOfMoves;
+    protected int numOfMoves;
 
     /**
      * The stack that stocks all previous moves
@@ -63,7 +63,7 @@ class BoardManager implements Serializable {
      * the max times for the user to undo their moves, which can be manually modified by user.
      * otherwise is set as 3 by default
      */
-    private int maxUndoTimes;
+    protected int maxUndoTimes;
 
     /**
      * whether the moves can be undone - whether the maxUndoTimes has been reached
@@ -99,7 +99,7 @@ class BoardManager implements Serializable {
      *
      * @param complex the complexity of the game
      */
-    private void setComplexity(String complex) {
+    protected void setComplexity(String complex) {
         this.complexity = complex;
     }
 
@@ -108,16 +108,7 @@ class BoardManager implements Serializable {
      *
      * @return Complexity
      */
-    private String getComplexity() {
-        return complexity;
-    }
-
-    /**
-     * Return the complexity
-     * This one
-     * @return Complexity
-     */
-    public String returnComplexity() {
+    protected String getComplexity() {
         return complexity;
     }
 
@@ -380,7 +371,7 @@ class BoardManager implements Serializable {
     /**
      * update current score
      */
-    private void updateScore(boolean solved) {
+    protected void updateScore(boolean solved) {
         if (Board.NUM_COLS == 3 && solved) {
             score = 50 - numOfMoves;
         } else if (Board.NUM_COLS == 4 && solved) {
@@ -395,7 +386,7 @@ class BoardManager implements Serializable {
      */
 
     private void updateScoreboard() {
-        ScoreBoardUpdater sbu = new ScoreBoardUpdater(getScore());
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(getScore(), "Sliding tiles");
         sbu.updateUserScoreBoard();
     }
 
@@ -404,7 +395,7 @@ class BoardManager implements Serializable {
      *
      */
     private void updateLeadeBoard(){
-        ScoreBoardUpdater sbu = new ScoreBoardUpdater(getScore());
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(getScore(), "Sliding tiles");
         sbu.updateLeaderBoard();
     }
 
@@ -515,7 +506,7 @@ class BoardManager implements Serializable {
      * @param blankId the id of the blank tile(known to be the largest id)
      * @return the row and column of the blank tile closest too the tile provided as an int[]
      */
-    private int[] getBlankTile(int row, int col, int blankId) {
+    protected int[] getBlankTile(int row, int col, int blankId) {
 
         int blankRow = row;
         int blankCol = col;

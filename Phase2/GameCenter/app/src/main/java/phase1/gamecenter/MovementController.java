@@ -63,10 +63,11 @@ public class MovementController {
 
                     if (colourBoardManager.puzzleSolved()) {
 //                        colourBoardManager.addNewTiles();
-
-                        //ToDo: implement a getScore method in ColourBoardManager and print the score when you win
 //                        String score = Integer.toString(colourBoardManager.getScore());
-                        Toast.makeText(context, "It's a match!", Toast.LENGTH_LONG).show();
+
+                        Toast toast = Toast.makeText(context, "It's a match!", Toast.LENGTH_LONG);
+                        toast.setGravity(0,50,50);
+                        toast.show();
 
 //                        gameActivity.switchToMain();
                     }

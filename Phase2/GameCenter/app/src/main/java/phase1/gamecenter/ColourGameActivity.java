@@ -148,6 +148,7 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
                         }
                         else if (seconds == 0 && minutes == 0){
                             String score = Integer.toString(boardManager.getScore());
+                            updateScoreboard(boardManager.getScore());
                             Toast.makeText(ColourGameActivity.this, "Time's up, your score: " + score, Toast.LENGTH_LONG).show();
                             saveToFile(ColourBoardManager.TEMP_SAVE_FILENAME);
                             Intent tmp = new Intent(ColourGameActivity.this, ColourTileRoundsActivity.class);
@@ -157,6 +158,12 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
                 });
             }
         }, 0, 1000);
+    }
+
+
+    private void updateScoreboard(int score) {
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(score,"Colour tiles");
+        sbu.updateUserScoreBoard();
     }
 
     /**

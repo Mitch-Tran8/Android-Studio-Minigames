@@ -140,7 +140,8 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
     private void processMove (Button v) {
         if (((Button) v).getText().toString().equals("")){
 
-            ((Button) v).setTextColor(Color.parseColor("#FFE35A7F"));
+            ((Button) v).setTextColor(Color.parseColor("#00ffffff"));
+            ((Button) v).setBackgroundResource(R.drawable.sunglass_smiley);
             ((Button) v).setText("X");
 
             if (matchOver()) {
@@ -158,7 +159,8 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
                         j = RANDOM.nextInt(3);
                     } while (!buttons[i][j].getText().toString().equals(""));
 
-                    (buttons[i][j]).setTextColor(Color.parseColor("#FFE79024"));
+                    (buttons[i][j]).setTextColor(Color.parseColor("#00ffffff"));
+                    (buttons[i][j]).setBackgroundResource(R.drawable.robot);
                     (buttons[i][j]).setText("O");
 
                     if (matchOver()) {

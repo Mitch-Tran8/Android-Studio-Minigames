@@ -43,6 +43,10 @@ class ColourBoardManager implements Serializable {
      * the first tap
      */
     private int firstTap;
+    /**
+     * original time
+     */
+    private int originalSeconds;
 
     /**
      * Manage a board that has been pre-populated.
@@ -78,7 +82,12 @@ class ColourBoardManager implements Serializable {
     /*
      * list of solved tiles that need to be taken care of
      */
-    private Stack<Integer> matched;
+    private Stack<Integer> matchedRow;
+
+    /*
+     * list of solved tiles that need to be taken care of
+     */
+    private Stack<Integer> matchedCol;
 
     /**
      * Manage a new shuffled board.
@@ -88,8 +97,10 @@ class ColourBoardManager implements Serializable {
         int tileNum;
         int numTiles;
         seconds = second;
+        originalSeconds = second;
         minutes = minute;
-        matched= new Stack();
+        matchedRow= new Stack();
+        matchedCol= new Stack();
 
         if (complexity == 3) {
             tileNum = 0;
@@ -138,9 +149,10 @@ class ColourBoardManager implements Serializable {
      * @return whether the tiles are in row-major order
      */
     boolean puzzleSolved() {
-        boolean solved = rowSolved();
+        boolean solvedRow = rowSolved();
+        boolean solvedCol = colSolved();
 
-        if (solved) {
+        if (solvedRow) {
             addNewTiles();
             puzzleSolved();
             try {
@@ -148,10 +160,19 @@ class ColourBoardManager implements Serializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
+        } else if (solvedCol) {
+            addNewColTiles();
+            try {
+                createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        return solved;
+
+        return solvedRow || solvedCol;
     }
+
+
 
     /*
      * creates a new file
@@ -186,9 +207,11 @@ class ColourBoardManager implements Serializable {
                     matchedNum++;
                     //checks whether there are connecting 3 tiles in the same colour
                     if (matchedNum == 3) {
-                        matched.push(currCol);
-                        matched.push(currRow);
-                        score = 100 - numOfMoves;
+                        matchedRow.push(currCol);
+                        matchedRow.push(currRow);
+                        if(originalSeconds == 20){score+=3;}
+                        else if(originalSeconds==40){score+=2;}
+                        else{score+=1;}
                         return true;
                     }
                 }
@@ -200,6 +223,39 @@ class ColourBoardManager implements Serializable {
         }
         return false;
     }
+    /**
+     * Helper function to puzzleSolved, returns whether all tiles of each column are of the same colour
+     * @return whether all tiles of each column are of the same colour
+     */
+    private boolean colSolved() {
+        int currCol = 0;
+        int matchedNum = 0;
+        int currBackground = board.getTiles()[0][currCol].getBackground();
+        while (currCol < board.getNUM_COLS()) {
+
+            //check every element in the col
+            for (int currRow = 0; currRow < board.getNUM_ROWS(); currRow++) {
+                if (board.getTiles()[currRow][currCol].getBackground() == currBackground) {
+                    matchedNum++;
+                    if (matchedNum == 3) {
+                        matchedCol.push(currRow);
+                        matchedCol.push(currCol);
+                        if(originalSeconds == 20){score+=3;}
+                        else if(originalSeconds==40){score+=2;}
+                        else{score+=1;}
+                        return true;
+                    }
+                } else {
+                    matchedNum = 1;
+                    currBackground = board.getTiles()[currRow][currCol].getBackground();
+                }
+            }
+            currCol++;
+            matchedNum =0;
+        }
+        return false;
+    }
+
 
     /**
      * helper function to addNewTiles to generate a random tile
@@ -220,7 +276,7 @@ class ColourBoardManager implements Serializable {
     }
 
     /*
-     * adds new tiles to the board
+     * adds new tiles to the rows of the board
      */
     private void addNewTiles() {
 
@@ -230,8 +286,8 @@ class ColourBoardManager implements Serializable {
         ColourTile tile3 = generateTile();
 
         //fetch matched tiles
-        int currRow = matched.pop();
-        int thirdCol = matched.pop();
+        int currRow = matchedRow.pop();
+        int thirdCol = matchedRow.pop();
         int secondCol = thirdCol - 1;
         int firstCol = thirdCol - 2;
 
@@ -250,28 +306,27 @@ class ColourBoardManager implements Serializable {
         }
     }
 
-    /**
-     * Helper function to puzzleSolved, returns whether all tiles of each column are of the same colour
-     * @return whether all tiles of each column are of the same colour
+    /*
+     * adds new tiles to the columns of the board
      */
-    private boolean colSolved() {
-        int currRow = 1;
-        int currCol = 0;
-        int currBackground = board.getTiles()[0][0].getBackground();
+    private void addNewColTiles() {
 
-        //checks whether all tiles in a column are in the same colour
-        while (currCol < 4) {
-            while (currRow < 4) {
-                if (board.getTiles()[currRow][currCol].getBackground() != currBackground) {
-                    return false;
-                }
-                currRow++;
-            }
-            currCol++;
-            currRow = 1;
-            currBackground = board.getTiles()[currCol][0].getBackground();
-        }
-        return true;
+        //generate three random tiles
+        ColourTile tile1 = generateTile();
+        ColourTile tile2 = generateTile();
+        ColourTile tile3 = generateTile();
+
+        //fetch matched tiles
+        int currCol = matchedCol.pop();
+        int thirdRow = matchedCol.pop();
+        int secondRow = thirdRow - 1;
+        int firstRow = thirdRow - 2;
+
+
+        board.setTile(firstRow, currCol, tile1);
+        board.setTile(secondRow, currCol, tile2);
+        board.setTile(thirdRow, currCol, tile3);
+
     }
 
     /**

@@ -2,6 +2,7 @@ package phase1.gamecenter;
 
 import android.support.annotation.NonNull;
 
+import java.lang.reflect.Array;
 import java.util.Observable;
 
 import java.io.Serializable;
@@ -57,6 +58,7 @@ public class ColourBoard extends Observable implements Serializable, Iterable<Co
     int getNUM_ROWS(){
         return this.NUM_ROWS;
     }
+    int getNUM_COLS() {return this.NUM_COLS;}
 
     /**
      * Return the number of tiles on the board.
@@ -85,6 +87,7 @@ public class ColourBoard extends Observable implements Serializable, Iterable<Co
     ColourTile[][] getTiles() {
         return tiles;
     }
+
 
     /*
      * sets the tile

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
@@ -33,17 +34,84 @@ public class ColourStartingActivity extends AppCompatActivity {
      */
     private ColourBoardManager boardManager;
 
+    /**
+     *
+     * The start new game button
+     */
+    Button newGame;
+
+    /**
+     *
+     * The load saved game button
+     */
+    Button loadGame;
+
+    /**
+     *
+     * The rankings button
+     */
+    Button rankingsButton;
+
+    /**
+     *
+     * The instructions button
+     */
+    Button instructionsButton;
+
+    /**
+     * The instructions box/view
+     * @param savedInstanceState
+     */
+    View instructionsView;
+
+    /**
+     * The instructions title
+     *
+     */
+    TextView instructionsTitle;
+
+    /**
+     * The instructions body
+     *
+     */
+    TextView instructionsBody;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         saveToFile(TEMP_SAVE_FILENAME);
 
-        setContentView(R.layout.activity_starting_);
+        setContentView(R.layout.activity_colourstarting_);
         addStartButtonListener();
         addLoadButtonListener();
-        addSaveButtonListener();
-    }
 
+        instructionsButton = findViewById(R.id.instructions_button2);
+        instructionsView = findViewById(R.id.view2);
+        instructionsTitle = findViewById(R.id.instructions_title2);
+        instructionsBody = findViewById(R.id.instructions2);
+        instructionsBody.setVisibility(View.GONE);
+        instructionsTitle.setVisibility(View.GONE);
+        instructionsView.setVisibility(View.GONE);
+
+        instructionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(instructionsView.getVisibility() == View.GONE) {
+                    instructionsView.setVisibility(View.VISIBLE);
+                    instructionsTitle.setVisibility(View.VISIBLE);
+                    instructionsBody.setVisibility(View.VISIBLE);
+                } else {
+                    instructionsTitle.setVisibility(View.GONE);
+                    instructionsView.setVisibility(View.GONE);
+                    instructionsBody.setVisibility(View.GONE);
+                }
+
+
+            }
+        });
+
+
+    }
     /**
      * Activate the start button.
      */
@@ -80,27 +148,13 @@ public class ColourStartingActivity extends AppCompatActivity {
         Toast.makeText(this, "Loaded Game", Toast.LENGTH_SHORT).show();
     }
 
-    /**
-     * Activate the save button.
-     */
-    private void addSaveButtonListener() {
-        Button saveButton = findViewById(R.id.SaveButton);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveToFile(SAVE_FILENAME);
-                saveToFile(TEMP_SAVE_FILENAME);
-                makeToastSavedText();
-            }
-        });
-    }
 
-    /**
-     * Display that a game was saved successfully.
-     */
-    private void makeToastSavedText() {
-        Toast.makeText(this, "Game Saved", Toast.LENGTH_SHORT).show();
-    }
+//    /**
+//     * Display that a game was saved successfully.
+//     */
+//    private void makeToastSavedText() {
+//        Toast.makeText(this, "Game Saved", Toast.LENGTH_SHORT).show();
+//    }
 
     /**
      * Read the temporary board from disk.
