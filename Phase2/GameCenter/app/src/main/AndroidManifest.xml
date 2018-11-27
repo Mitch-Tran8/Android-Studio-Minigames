@@ -43,6 +43,7 @@
         <activity android:name=".ConnectFourAIEasyMainActivity" />
         <activity android:name=".ConnectNumbersSelectActivity" />
         <activity android:name=".ConnectThreeAIEasyMainActivity" />
+        <activity android:name=".ConnectThreeAIHardMainActivity" />
         <activity android:name=".ConnectThreeMainActivity" />
         <activity android:name=".ConnectThreePlayersActivity" />
         <activity android:name=".ConnectThreeDifficultyActivity" />

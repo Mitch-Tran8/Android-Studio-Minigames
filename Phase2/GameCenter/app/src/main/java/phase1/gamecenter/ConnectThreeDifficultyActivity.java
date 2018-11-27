@@ -30,18 +30,18 @@ public class ConnectThreeDifficultyActivity extends AppCompatActivity {
         easyDifficulty = findViewById(R.id.easy_button);
         hardDifficulty = findViewById(R.id.hard_button);
 
-/*        artificialIntel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ConnectNumbersStartingActivity.this, ConnectFourMainActivity.class);
-                startActivity(intent);
-            }
-        });*/
-
         easyDifficulty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ConnectThreeDifficultyActivity.this, ConnectThreeAIEasyMainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        hardDifficulty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ConnectThreeDifficultyActivity.this, ConnectThreeAIHardMainActivity.class);
                 startActivity(intent);
             }
         });
