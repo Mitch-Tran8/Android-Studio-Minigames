@@ -281,7 +281,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 4 in a row.
      */
-    private boolean checkRows(String[][] board) {
+    protected boolean checkRows(String[][] board) {
         for (int i = 0; i < 5; i++) {
             if (board[i][0].equals(board[i][1]) && board[i][0].equals(board[i][2]) &&
                     board[i][0].equals(board[i][3]) && !board[i][0].equals("")) {
@@ -302,7 +302,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 4 in a column
      */
-    private boolean checkColumns(String[][] board) {
+    protected boolean checkColumns(String[][] board) {
         for (int i = 0; i < 5; i++) {
             if (board[0][i].equals(board[1][i]) && board[0][i].equals(board[2][i]) &&
                     board[0][i].equals(board[3][i]) && !board[0][i].equals("")) {
@@ -323,7 +323,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 4 in a ascending diagonal.
      */
-    private boolean checkAscendingDiagonals(String[][] board) {
+    protected boolean checkAscendingDiagonals(String[][] board) {
 
         if (board[3][0].equals(board[2][1]) &&
                 board[3][0].equals(board[1][2]) &&
@@ -358,7 +358,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 4 in a descending diagonal.
      */
-    private boolean checkDescendingDiagonals(String[][] board) {
+    protected boolean checkDescendingDiagonals(String[][] board) {
 
         if (board[1][0].equals(board[2][1]) &&
                 board[1][0].equals(board[3][2]) &&

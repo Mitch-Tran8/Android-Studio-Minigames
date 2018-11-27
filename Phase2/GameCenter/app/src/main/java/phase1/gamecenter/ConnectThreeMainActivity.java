@@ -285,7 +285,7 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 3 in a row.
      */
-    private boolean checkRows(String[][] board) {
+    protected boolean checkRows(String[][] board) {
         for (int i = 0; i < 3; i++) {
             if (board[i][0].equals(board[i][1]) && board[i][0].equals(board[i][2]) &&
                     !board[i][0].equals("")) {
@@ -301,7 +301,7 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 3 in a column
      */
-    private boolean checkColumns(String[][] board) {
+    protected boolean checkColumns(String[][] board) {
         for (int i = 0; i < 3; i++) {
             if (board[0][i].equals(board[1][i]) && board[0][i].equals(board[2][i]) &&
                     !board[0][i].equals("")) {
@@ -317,7 +317,7 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 3 in a ascending diagonal.
      */
-    private boolean checkAscendingDiagonals(String[][] board) {
+    protected boolean checkAscendingDiagonals(String[][] board) {
 
         return (board[0][2].equals(board[1][1]) &&
                 board[0][2].equals(board[2][0]) &&
@@ -330,7 +330,7 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 3 in a descending diagonal.
      */
-    private boolean checkDescendingDiagonals(String[][] board) {
+    protected boolean checkDescendingDiagonals(String[][] board) {
 
         return (board[0][0].equals(board[1][1]) &&
                 board[0][0].equals(board[2][2]) &&
@@ -340,7 +340,7 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
     /**
      * Update TextView with the scores of each player.
      */
-    private void updatePoints() {
+    protected void updatePoints() {
         scorePlayer1.setText("Player 1: " + player1RoundsWon);
         scorePlayer2.setText("Player 2: " + player2RoundsWon);
         draws.setText("Draws: " + ties);
