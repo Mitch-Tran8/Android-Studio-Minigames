@@ -12,24 +12,11 @@ import java.util.List;
 
 
 public class SolvableBoardUnitTest {
-    private List<Tile> tiles3x3 = new ArrayList<>();
-    private Board testerBoard3x3 = new Board(tiles3x3);
-    private BoardManager testerBoardManager3x3 = new BoardManager(testerBoard3x3, 100);
-
-    private List<Tile> tiles4x4 = new ArrayList<>();
-    private Board testerBoard4x4 = new Board(tiles4x4);
-    private BoardManager testerBoardManager4x4 = new BoardManager(testerBoard4x4, 67);
-
-    private List<Tile> tiles5x5 = new ArrayList<>();
-    private Board testerBoard5x5 = new Board(tiles5x5);
-    private BoardManager testerBoardManager5x5 = new BoardManager(testerBoard5x5, 10);
-
 
     //------indexBlankTile() tests------
-
     @Test
     public void testIndexBlankTileLastTile() {
-        tiles3x3.clear();
+        List<Tile> tiles3x3 = new ArrayList<>();
         tiles3x3.add(new Tile(0, "3x3"));
         tiles3x3.add(new Tile(1, "3x3"));
         tiles3x3.add(new Tile(2, "3x3"));
@@ -39,13 +26,15 @@ public class SolvableBoardUnitTest {
         tiles3x3.add(new Tile(6, "3x3"));
         tiles3x3.add(new Tile(7, "3x3"));
         tiles3x3.add(new Tile(8, "3x3"));
+        Board testerBoard3x3 = new Board(tiles3x3);
+        BoardManager testerBoardManager3x3 = new BoardManager(testerBoard3x3, 100);
 
         assertEquals(8, testerBoardManager3x3.indexBlankTile(tiles3x3));
     }
 
     @Test
     public void testIndexBlankTileFirstTile() {
-        tiles3x3.clear();
+        List<Tile> tiles3x3 = new ArrayList<>();
         tiles3x3.add(new Tile(8, "3x3"));
         tiles3x3.add(new Tile(0, "3x3"));
         tiles3x3.add(new Tile(1, "3x3"));
@@ -55,12 +44,14 @@ public class SolvableBoardUnitTest {
         tiles3x3.add(new Tile(5, "3x3"));
         tiles3x3.add(new Tile(6, "3x3"));
         tiles3x3.add(new Tile(7, "3x3"));
+        Board testerBoard3x3 = new Board(tiles3x3);
+        BoardManager testerBoardManager3x3 = new BoardManager(testerBoard3x3, 100);
         assertEquals(0, testerBoardManager3x3.indexBlankTile(tiles3x3));
     }
 
     @Test
     public void testIndexBlankTileMiddleTile3x3() {
-        tiles3x3.clear();
+        List<Tile> tiles3x3 = new ArrayList<>();
         tiles3x3.add(new Tile(0, "3x3"));
         tiles3x3.add(new Tile(1, "3x3"));
         tiles3x3.add(new Tile(2, "3x3"));
@@ -70,12 +61,14 @@ public class SolvableBoardUnitTest {
         tiles3x3.add(new Tile(5, "3x3"));
         tiles3x3.add(new Tile(6, "3x3"));
         tiles3x3.add(new Tile(7, "3x3"));
+        Board testerBoard3x3 = new Board(tiles3x3);
+        BoardManager testerBoardManager3x3 = new BoardManager(testerBoard3x3, 100);
         assertEquals(4, testerBoardManager3x3.indexBlankTile(tiles3x3));
     }
 
     @Test
     public void testIndexBlankTileMiddleTile4x4() {
-        tiles4x4.clear();
+        List<Tile> tiles4x4 = new ArrayList<>();
         tiles4x4.add(new Tile(0, "4x4"));
         tiles4x4.add(new Tile(1, "4x4"));
         tiles4x4.add(new Tile(2, "4x4"));
@@ -92,13 +85,15 @@ public class SolvableBoardUnitTest {
         tiles4x4.add(new Tile(12, "4x4"));
         tiles4x4.add(new Tile(13, "4x4"));
         tiles4x4.add(new Tile(14, "4x4"));
+        Board testerBoard4x4 = new Board(tiles4x4);
+        BoardManager testerBoardManager4x4 = new BoardManager(testerBoard4x4, 67);
 
         assertEquals(12, testerBoardManager4x4.indexBlankTile(tiles4x4));
     }
 
     @Test
     public void testIndexBlankTileMiddleTile5x5() {
-        tiles5x5.clear();
+        List<Tile> tiles5x5 = new ArrayList<>();
         tiles5x5.add(new Tile(0, "5x5"));
         tiles5x5.add(new Tile(1, "5x5"));
         tiles5x5.add(new Tile(2, "5x5"));
@@ -124,6 +119,8 @@ public class SolvableBoardUnitTest {
         tiles5x5.add(new Tile(21, "5x5"));
         tiles5x5.add(new Tile(22, "5x5"));
         tiles5x5.add(new Tile(23, "5x5"));
+        Board testerBoard5x5 = new Board(tiles5x5);
+        BoardManager testerBoardManager5x5 = new BoardManager(testerBoard5x5, 10);
 
         assertEquals(20, testerBoardManager5x5.indexBlankTile(tiles5x5));
     }
@@ -132,6 +129,8 @@ public class SolvableBoardUnitTest {
 
     @Test
     public void testGetBlankTileRow_LastFromBottom3x3() {
+        List<Tile> tiles3x3 = new ArrayList<>();
+
         tiles3x3.clear();
         tiles3x3.add(new Tile(8, "3x3"));
         tiles3x3.add(new Tile(0, "3x3"));
@@ -142,13 +141,16 @@ public class SolvableBoardUnitTest {
         tiles3x3.add(new Tile(5, "3x3"));
         tiles3x3.add(new Tile(6, "3x3"));
         tiles3x3.add(new Tile(7, "3x3"));
+        Board testerBoard3x3 = new Board(tiles3x3);
+        BoardManager testerBoardManager3x3 = new BoardManager(testerBoard3x3, 100);
 
         assertEquals(3, testerBoardManager3x3.getBlankTileRow(tiles3x3));
     }
 
     @Test
     public void testGetBlankTileRow_FirstRowFromBottom3x3() {
-        tiles3x3.clear();
+        List<Tile> tiles3x3 = new ArrayList<>();
+
         tiles3x3.add(new Tile(0, "3x3"));
         tiles3x3.add(new Tile(1, "3x3"));
         tiles3x3.add(new Tile(2, "3x3"));
@@ -158,13 +160,15 @@ public class SolvableBoardUnitTest {
         tiles3x3.add(new Tile(6, "3x3"));
         tiles3x3.add(new Tile(7, "3x3"));
         tiles3x3.add(new Tile(8, "3x3"));
+        Board testerBoard3x3 = new Board(tiles3x3);
+        BoardManager testerBoardManager3x3 = new BoardManager(testerBoard3x3, 100);
 
         assertEquals(1, testerBoardManager3x3.getBlankTileRow(tiles3x3));
     }
 
     @Test
     public void testGetBlankTileRow_MiddleFromBottom3x3() {
-        tiles3x3.clear();
+        List<Tile> tiles3x3 = new ArrayList<>();
         tiles3x3.add(new Tile(0, "3x3"));
         tiles3x3.add(new Tile(1, "3x3"));
         tiles3x3.add(new Tile(2, "3x3"));
@@ -174,12 +178,14 @@ public class SolvableBoardUnitTest {
         tiles3x3.add(new Tile(5, "3x3"));
         tiles3x3.add(new Tile(6, "3x3"));
         tiles3x3.add(new Tile(7, "3x3"));
+        Board testerBoard3x3 = new Board(tiles3x3);
+        BoardManager testerBoardManager3x3 = new BoardManager(testerBoard3x3, 100);
         assertEquals(2, testerBoardManager3x3.getBlankTileRow(tiles3x3));
     }
 
     @Test
     public void testGetBlankTileRow_MiddleFromBottom4x4() {
-        tiles4x4.clear();
+        List<Tile> tiles4x4 = new ArrayList<>();
         tiles4x4.add(new Tile(0, "4x4"));
         tiles4x4.add(new Tile(1, "4x4"));
         tiles4x4.add(new Tile(2, "4x4"));
@@ -196,12 +202,15 @@ public class SolvableBoardUnitTest {
         tiles4x4.add(new Tile(12, "4x4"));
         tiles4x4.add(new Tile(13, "4x4"));
         tiles4x4.add(new Tile(14, "4x4"));
+        Board testerBoard4x4 = new Board(tiles4x4);
+        BoardManager testerBoardManager4x4 = new BoardManager(testerBoard4x4, 67);
         assertEquals(2, testerBoardManager4x4.getBlankTileRow(tiles4x4));
     }
 
     @Test
     public void testGetBlankTileRow_MiddleFromBottom5x5() {
-        tiles5x5.clear();
+        List<Tile> tiles5x5 = new ArrayList<>();
+
         tiles5x5.add(new Tile(0, "5x5"));
         tiles5x5.add(new Tile(1, "5x5"));
         tiles5x5.add(new Tile(2, "5x5"));
@@ -227,7 +236,8 @@ public class SolvableBoardUnitTest {
         tiles5x5.add(new Tile(21, "5x5"));
         tiles5x5.add(new Tile(22, "5x5"));
         tiles5x5.add(new Tile(23, "5x5"));
-
+        Board testerBoard5x5 = new Board(tiles5x5);
+        BoardManager testerBoardManager5x5 = new BoardManager(testerBoard5x5, 10);
         assertEquals(3, testerBoardManager5x5.getBlankTileRow(tiles5x5));
     }
 
@@ -235,7 +245,8 @@ public class SolvableBoardUnitTest {
 
     @Test
     public void getTilesValues3x3() {
-        tiles3x3.clear();
+        List<Tile> tiles3x3 = new ArrayList<>();
+
         tiles3x3.add(new Tile(0, "3x3"));
         tiles3x3.add(new Tile(1, "3x3"));
         tiles3x3.add(new Tile(2, "3x3"));
@@ -245,6 +256,8 @@ public class SolvableBoardUnitTest {
         tiles3x3.add(new Tile(6, "3x3"));
         tiles3x3.add(new Tile(3, "3x3"));
         tiles3x3.add(new Tile(7, "3x3"));
+        Board testerBoard3x3 = new Board(tiles3x3);
+        BoardManager testerBoardManager3x3 = new BoardManager(testerBoard3x3, 100);
 
         ArrayList<Integer> expectedList = new ArrayList<>(Arrays.asList(1,2,3,5,6,7,4,8));
 
@@ -253,7 +266,7 @@ public class SolvableBoardUnitTest {
     }
     @Test
     public void getTilesValues4x4() {
-        tiles4x4.clear();
+        List<Tile> tiles4x4 = new ArrayList<>();
         tiles4x4.add(new Tile(0, "4x4"));
         tiles4x4.add(new Tile(1, "4x4"));
         tiles4x4.add(new Tile(2, "4x4"));
@@ -270,6 +283,8 @@ public class SolvableBoardUnitTest {
         tiles4x4.add(new Tile(10, "4x4"));
         tiles4x4.add(new Tile(11, "4x4"));
         tiles4x4.add(new Tile(12, "4x4"));
+        Board testerBoard4x4 = new Board(tiles4x4);
+        BoardManager testerBoardManager4x4 = new BoardManager(testerBoard4x4, 67);
 
         ArrayList<Integer> expectedList = new ArrayList<>
                 (Arrays.asList(1,2,3,4,5,14,6,7,8,15,9,10,11,12,13));
@@ -279,7 +294,7 @@ public class SolvableBoardUnitTest {
 
     @Test
     public void getTilesValues5x5() {
-        tiles5x5.clear();
+        List<Tile> tiles5x5 = new ArrayList<>();
         tiles5x5.add(new Tile(0, "5x5"));
         tiles5x5.add(new Tile(1, "5x5"));
         tiles5x5.add(new Tile(2, "5x5"));
@@ -305,6 +320,8 @@ public class SolvableBoardUnitTest {
         tiles5x5.add(new Tile(20, "5x5"));
         tiles5x5.add(new Tile(21, "5x5"));
         tiles5x5.add(new Tile(22, "5x5"));
+        Board testerBoard5x5 = new Board(tiles5x5);
+        BoardManager testerBoardManager5x5 = new BoardManager(testerBoard5x5, 10);
 
 
         ArrayList<Integer> expectedList = new ArrayList<>
@@ -317,6 +334,8 @@ public class SolvableBoardUnitTest {
 
     @Test
     public void testCountInversions3x3(){
+        List<Tile> tiles3x3 = new ArrayList<>();
+
         tiles3x3.clear();
         tiles3x3.add(new Tile(8, "3x3"));
         tiles3x3.add(new Tile(0, "3x3"));
@@ -327,13 +346,15 @@ public class SolvableBoardUnitTest {
         tiles3x3.add(new Tile(4, "3x3"));
         tiles3x3.add(new Tile(3, "3x3"));
         tiles3x3.add(new Tile(5, "3x3"));
+        Board testerBoard3x3 = new Board(tiles3x3);
+        BoardManager testerBoardManager3x3 = new BoardManager(testerBoard3x3, 100);
 
         assertEquals(11, testerBoardManager3x3.countInversions(tiles3x3));
     }
 
     @Test
     public void testCountInversions4x4(){
-        tiles4x4.clear();
+        List<Tile> tiles4x4 = new ArrayList<>();
         tiles4x4.add(new Tile(5, "4x4"));
         tiles4x4.add(new Tile(12, "4x4"));
         tiles4x4.add(new Tile(6, "4x4"));
@@ -350,6 +371,8 @@ public class SolvableBoardUnitTest {
         tiles4x4.add(new Tile(2, "4x4"));
         tiles4x4.add(new Tile(0, "4x4"));
         tiles4x4.add(new Tile(3, "4x4"));
+        Board testerBoard4x4 = new Board(tiles4x4);
+        BoardManager testerBoardManager4x4 = new BoardManager(testerBoard4x4, 67);
 
         assertEquals(62, testerBoardManager4x4.countInversions(tiles4x4));
 
@@ -357,7 +380,7 @@ public class SolvableBoardUnitTest {
 
     @Test
     public void testCountInversions5x5(){
-        tiles5x5.clear();
+        List<Tile> tiles5x5 = new ArrayList<>();
         tiles5x5.add(new Tile(0, "5x5"));
         tiles5x5.add(new Tile(1, "5x5"));
         tiles5x5.add(new Tile(2, "5x5"));
@@ -383,6 +406,8 @@ public class SolvableBoardUnitTest {
         tiles5x5.add(new Tile(20, "5x5"));
         tiles5x5.add(new Tile(21, "5x5"));
         tiles5x5.add(new Tile(22, "5x5"));
+        Board testerBoard5x5 = new Board(tiles5x5);
+        BoardManager testerBoardManager5x5 = new BoardManager(testerBoard5x5, 10);
 
         assertEquals(24, testerBoardManager5x5.countInversions(tiles5x5));
 
@@ -392,7 +417,8 @@ public class SolvableBoardUnitTest {
 
     @Test
     public void testSolvableBoard3x3OddSolvable(){
-        tiles3x3.clear();
+        List<Tile> tiles3x3 = new ArrayList<>();
+
         tiles3x3.add(new Tile(0, "3x3"));
         tiles3x3.add(new Tile(7, "3x3"));
         tiles3x3.add(new Tile(1, "3x3"));
@@ -402,6 +428,8 @@ public class SolvableBoardUnitTest {
         tiles3x3.add(new Tile(6, "3x3"));
         tiles3x3.add(new Tile(5, "3x3"));
         tiles3x3.add(new Tile(4, "3x3"));
+        Board testerBoard3x3 = new Board(tiles3x3);
+        BoardManager testerBoardManager3x3 = new BoardManager(testerBoard3x3, 100);
 
         assertEquals(10, testerBoardManager3x3.countInversions(tiles3x3));
         assertEquals(2, testerBoardManager3x3.getBlankTileRow(tiles3x3));
@@ -410,7 +438,8 @@ public class SolvableBoardUnitTest {
 
     @Test
     public void testSolvableBoard3x3OddUnsolvable(){
-        tiles3x3.clear();
+        List<Tile> tiles3x3 = new ArrayList<>();
+
         tiles3x3.add(new Tile(0, "3x3"));
         tiles3x3.add(new Tile(1, "3x3"));
         tiles3x3.add(new Tile(2, "3x3"));
@@ -420,6 +449,8 @@ public class SolvableBoardUnitTest {
         tiles3x3.add(new Tile(6, "3x3"));
         tiles3x3.add(new Tile(5, "3x3"));
         tiles3x3.add(new Tile(8, "3x3"));
+        Board testerBoard3x3 = new Board(tiles3x3);
+        BoardManager testerBoardManager3x3 = new BoardManager(testerBoard3x3, 100);
 
         assertEquals(3, testerBoardManager3x3.countInversions(tiles3x3));
         assertEquals(1, testerBoardManager3x3.getBlankTileRow(tiles3x3));
@@ -428,7 +459,8 @@ public class SolvableBoardUnitTest {
 
     @Test
     public void testSolvableBoard4x4EvenUnsolvable() {
-        tiles4x4.clear();
+        List<Tile> tiles4x4 = new ArrayList<>();
+
         tiles4x4.add(new Tile(2, "4x4"));
         tiles4x4.add(new Tile(8, "4x4"));
         tiles4x4.add(new Tile(0, "4x4"));
@@ -445,6 +477,8 @@ public class SolvableBoardUnitTest {
         tiles4x4.add(new Tile(6, "4x4"));
         tiles4x4.add(new Tile(7, "4x4"));
         tiles4x4.add(new Tile(4, "4x4"));
+        Board testerBoard4x4 = new Board(tiles4x4);
+        BoardManager testerBoardManager4x4 = new BoardManager(testerBoard4x4, 67);
 
         assertEquals(56, testerBoardManager4x4.countInversions(tiles4x4));
         assertEquals(2, testerBoardManager4x4.getBlankTileRow(tiles4x4));
@@ -454,7 +488,8 @@ public class SolvableBoardUnitTest {
 
     @Test
     public void testSolvableBoard4x4EvenSolvable() {
-        tiles4x4.clear();
+        List<Tile> tiles4x4 = new ArrayList<>();
+
         tiles4x4.add(new Tile(12, "4x4"));
         tiles4x4.add(new Tile(1, "4x4"));
         tiles4x4.add(new Tile(9, "4x4"));
@@ -471,6 +506,8 @@ public class SolvableBoardUnitTest {
         tiles4x4.add(new Tile(13, "4x4"));
         tiles4x4.add(new Tile(10, "4x4"));
         tiles4x4.add(new Tile(6, "4x4"));
+        Board testerBoard4x4 = new Board(tiles4x4);
+        BoardManager testerBoardManager4x4 = new BoardManager(testerBoard4x4, 67);
 
         assertEquals(41, testerBoardManager4x4.countInversions(tiles4x4));
         assertEquals(2, testerBoardManager4x4.getBlankTileRow(tiles4x4));
