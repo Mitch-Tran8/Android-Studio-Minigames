@@ -30,18 +30,11 @@ public class ConnectNumbersSelectActivity extends AppCompatActivity {
         connectThree = findViewById(R.id.connect_three_button);
         connectFour = findViewById(R.id.connect_four_button);
 
-/*        artificialIntel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ConnectNumbersStartingActivity.this, ConnectFourMainActivity.class);
-                startActivity(intent);
-            }
-        });*/
 
         connectThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ConnectNumbersSelectActivity.this, ConnectThreePlayersActivity.class);
+                Intent intent = new Intent(ConnectNumbersSelectActivity.this, ConnectThreeMainActivity.class);
                 startActivity(intent);
             }
         });
@@ -50,7 +43,7 @@ public class ConnectNumbersSelectActivity extends AppCompatActivity {
         connectFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ConnectNumbersSelectActivity.this, ConnectFourPlayersActivity.class);
+                Intent intent = new Intent(ConnectNumbersSelectActivity.this, ConnectFourMainActivity.class);
                 startActivity(intent);
             }
         });

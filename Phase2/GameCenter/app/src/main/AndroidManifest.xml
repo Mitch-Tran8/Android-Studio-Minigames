@@ -55,6 +55,7 @@
         <activity android:name=".ConnectFourRankings2PlayersActivity"/>
         <activity android:name=".ConnectThreeRankings1PlayerActivity"/>
         <activity android:name=".ConnectThreeRankings2PlayersActivity"/>
+        <activity android:name=".ConnectThreeActivity" />
 
 
         <activity android:name=".LeaderboardActivity"/>

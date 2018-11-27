@@ -8,36 +8,29 @@ import android.widget.Button;
 
 public class ConnectNumbersStartingActivity extends AppCompatActivity {
 
-    /**
-     * Button that allows user to start the connect four game.
-     */
-    Button startGame;
-
-    /**
-     * Button that allows the user to view rankings for the connect four game.
-     */
-    Button rankings;
+    Button onePlayer;
+    Button twoPlayers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_connect_numbers_starting);
+        setContentView(R.layout.activity_connect_numbers_complexity);
 
-        startGame = findViewById(R.id.start_game_button);
-        rankings = findViewById(R.id.rankings_button);
+        Button onePlayer = findViewById(R.id.one_player_button);
+        Button twoPlayer = findViewById(R.id.two_player_button);
 
-        startGame.setOnClickListener(new View.OnClickListener() {
+        onePlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ConnectNumbersStartingActivity.this, ConnectNumbersSelectActivity.class);
+                Intent intent = new Intent(ConnectNumbersStartingActivity.this, ConnectThreeActivity.class);
                 startActivity(intent);
             }
         });
 
-       rankings.setOnClickListener(new View.OnClickListener() {
+        twoPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ConnectNumbersStartingActivity.this, ConnectNumbersRankingsActivity.class);
+                Intent intent = new Intent(ConnectNumbersStartingActivity.this, ConnectNumbersSelectActivity.class);
                 startActivity(intent);
             }
         });
