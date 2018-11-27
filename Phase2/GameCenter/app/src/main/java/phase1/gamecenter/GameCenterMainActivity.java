@@ -113,7 +113,6 @@ public class GameCenterMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(GameCenterMainActivity.this, ColourStartingActivity.class);
-                i.putExtra("user_id", user_id);
                 startActivity(i);
             }
         });

@@ -147,17 +147,41 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
                             tv.setText(String.valueOf(minutes)+":"+String.valueOf(seconds));
                         }
                         else if (seconds == 0 && minutes == 0){
-                            String score = Integer.toString(boardManager.getScore());
-                            updateScoreboard(boardManager.getScore());
-                            Toast.makeText(ColourGameActivity.this, "Time's up, your score: " + score, Toast.LENGTH_LONG).show();
-                            saveToFile(ColourBoardManager.TEMP_SAVE_FILENAME);
-                            Intent tmp = new Intent(ColourGameActivity.this, ColourTileRoundsActivity.class);
-                            startActivity(tmp);
+                            gameOver();
                         }
                     }
                 });
             }
         }, 0, 1000);
+    }
+
+    /**
+     * Helper function to the setTimer method, deals with the case when time is over.
+     */
+    private void gameOver() {
+        String score = Integer.toString(boardManager.getScore());
+        updateScoreboard(boardManager.getScore());
+        if(boardManager.getScore() < boardManager.getScoreReq()) {
+            Toast toast = Toast.makeText(ColourGameActivity.this, "Time's up, your score: " + score, Toast.LENGTH_LONG);
+            toast.setGravity(0,10,10);
+            toast.show();
+            saveToFile(ColourBoardManager.TEMP_SAVE_FILENAME);
+            Intent tmp = new Intent(ColourGameActivity.this, ColourTileRoundsActivity.class);
+            tmp.putExtra("win",0);
+            startActivity(tmp);
+        } else {
+            Toast toast = Toast.makeText(ColourGameActivity.this, "Time's up, you've unlocked the next level!" +
+                    " your score: " + score, Toast.LENGTH_LONG);
+            toast.setGravity(0,10,10);
+            toast.show();
+            saveToFile(ColourBoardManager.TEMP_SAVE_FILENAME);
+            Intent tmp = new Intent(ColourGameActivity.this, ColourTileRoundsActivity.class);
+            Bundle b = new Bundle();
+            b.putInt("round",  boardManager.getRound() + 1);
+            tmp.putExtras(b);
+            startActivity(tmp);
+
+        }
     }
 
 

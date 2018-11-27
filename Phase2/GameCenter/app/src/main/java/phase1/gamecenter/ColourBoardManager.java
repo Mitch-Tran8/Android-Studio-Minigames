@@ -90,18 +90,48 @@ class ColourBoardManager implements Serializable {
     private Stack<Integer> matchedCol;
 
     /**
+     * The score required to beat the level and move on to the next one.
+     */
+    private int scoreReq;
+
+    /**
+     * The complexity of the board
+     */
+    private int complexity;
+
+    /**
+     * The round of the board
+     */
+    private static int round;
+
+    /**
      * Manage a new shuffled board.
      */
-    ColourBoardManager(int complexity, int minute, int second) {
+    ColourBoardManager(int round, int complexity, int minute, int second) {
         List<ColourTile> tiles = new ArrayList<>();
+        this.round = round;
         int tileNum;
         int numTiles;
         seconds = second;
         originalSeconds = second;
         minutes = minute;
+        setScoreReq(complexity);
         matchedRow= new Stack();
         matchedCol= new Stack();
+        setUpBoard(complexity, tiles);
+        this.firstTap = 0;
+    }
 
+    /**
+     * getter for the current round that the user is playing
+     * @return int round
+     */
+    public static int getRound(){return round;}
+
+    private void setUpBoard(int complexity, List<ColourTile> tiles) {
+        int tileNum;
+        int numTiles;
+        this.complexity = complexity;
         if (complexity == 3) {
             tileNum = 0;
             numTiles = 10;
@@ -118,8 +148,17 @@ class ColourBoardManager implements Serializable {
         }
         Collections.shuffle(tiles);
         this.board = new ColourBoard(tiles, complexity);
-        this.firstTap = 0;
     }
+
+    private void setScoreReq(int complexity) {
+        if(complexity == 3){
+            this.scoreReq = 15;
+        } else if(complexity == 4){
+            this.scoreReq = 40;
+        } else {this.scoreReq = 60;}
+    }
+
+    public int getScoreReq(){return scoreReq;}
 
     /**
      * set the board of this boardmanager only for testing purpose
@@ -162,6 +201,7 @@ class ColourBoardManager implements Serializable {
             }
         } else if (solvedCol) {
             addNewColTiles();
+            puzzleSolved();
             try {
                 createNewFile();
             } catch (IOException e) {

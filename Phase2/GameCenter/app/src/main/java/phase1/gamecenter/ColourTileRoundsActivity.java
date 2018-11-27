@@ -38,6 +38,10 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
      * A temporary save file.
      */
     public static final String TEMP_SAVE_FILENAME = "save_file_tmp.ser";
+    /**
+     * current round
+     */
+    static int currentRound;
 
     /**
      * The round1 button
@@ -118,11 +122,50 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_colour_tile_rounds);
+        Bundle b = getIntent().getExtras();
+        int win = b.getInt("round");
+        System.out.println("number "+win);
         findView();
+        activateInstructionsButton();
+        activateRound1Button();
 
+        switch(win){
+            case 2: activateRound2Button();break;
+            case 3: activateRound3Button();break;
+            case 4: activateRound4Button();break;
+            case 5: activateRound5Button();break;
+            case 6: activateRound6Button();break;
+            case 7: activateRound7Button();break;
+            case 8: activateRound8Button();break;
+            case 9: activateRound9Button();break;
+            case 10: activateRound10Button();break;
+            default: activateRound1Button();break;
+
+        }
+
+
+    }
+
+    private void activateRound1Button() {
         /**
-         * Activate how to play button
+         * Activate the button for round 1
          */
+        round1Button = findViewById(R.id.round1_button);
+
+        round1Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToRound(1,3, 0, 59);
+            }
+
+        });
+    }
+
+    /**
+     * Activate how to play button
+     */
+    private void activateInstructionsButton() {
+
         instructionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,136 +181,143 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
                 }
             }
         });
+    }
 
-        /**
-         * Activate the button for round 1
-         */
-        round1Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToRound(3, 0, 59);
-            }
+    /**
+     * Activate the button for round 10
+     */
+    private void activateRound10Button() {
 
-        });
+        round10Button = findViewById(R.id.round10_button);
 
-        /**
-         * Activate the button for round 2
-         */
-        round2Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToRound(3, 0, 40);
-            }
-
-        });
-
-        /**
-         * Activate the button for round 3
-         */
-        round3Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToRound(3, 0, 20);
-            }
-
-        });
-
-        /**
-         * Activate the button for round 4
-         */
-        round4Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToRound(4, 0, 20);
-            }
-
-        });
-
-        /**
-         * Activate the button for round 5
-         */
-        round5Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToRound(4, 0, 20);
-            }
-
-        });
-
-        /**
-         * Activate the button for round 6
-         */
-        round6Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToRound(4, 0, 20);
-            }
-
-        });
-
-        /**
-         * Activate the button for round 7
-         */
-        round7Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToRound(5, 0, 20);
-            }
-
-        });
-        /**
-         /**
-         * Activate the button for round 8
-         */
-        round8Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToRound(5, 2, 0);
-            }
-
-        });
-        /**
-         /**
-         * Activate the button for round 9
-         */
-        round9Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToRound(5, 2, 0);
-            }
-
-        });
-
-        /**
-        /**
-         * Activate the button for round 10
-         */
         round10Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToRound(5, 1, 59);
+                switchToRound(10,5, 1, 59);
             }
 
         });
+    }
 
+    /**
+     /**
+     * Activate the button for round 9
+     */
+    private void activateRound9Button() {
 
+        round9Button = findViewById(R.id.round9_button);
+
+        round9Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToRound(9,5, 2, 0);
+            }
+
+        });
+    }
+
+    /**
+     /**
+     * Activate the button for round 8
+     */
+    private void activateRound8Button() {
+
+        round8Button = findViewById(R.id.round8_button);
+
+        round8Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToRound(8,5, 2, 0);
+            }
+
+        });
+    }
+
+    /**
+     * Activate the button for round 7
+     */
+    private void activateRound7Button() {
+
+        round7Button = findViewById(R.id.round7_button);
+
+        round7Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToRound(7,5, 0, 20);
+            }
+
+        });
+    }
+
+    /**
+     * Activate the button for round 6
+     */
+    private void activateRound6Button() {
+
+        round6Button = findViewById(R.id.round6_button);
+
+        round6Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToRound(6,4, 0, 20);
+            }
+
+        });
+    }
+
+    /**
+     * Activate the button for round 5
+     */
+    private void activateRound5Button() {
+
+        round5Button = findViewById(R.id.round5_button);
+
+        round5Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToRound(5,4, 0, 20);
+            }
+
+        });
+    }
+
+    /**
+     * Activate the button for round 4
+     */
+    private void activateRound4Button() {
+
+        round4Button = findViewById(R.id.round4_button);
+
+        round4Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToRound(5,4, 0, 20);
+            }
+
+        });
+    }
+
+    /**
+     * Activate the button for round 3
+     */
+    private void activateRound3Button() {
+
+        round3Button = findViewById(R.id.round3_button);
+
+        round3Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToRound(4,3, 0, 20);
+            }
+
+        });
     }
 
     /**
      * finds the view of all of the buttons, textViews, and views.
      */
     private void findView() {
-        round1Button = findViewById(R.id.round1_button);
-        round2Button = findViewById(R.id.round2_button);
-        round3Button = findViewById(R.id.round3_button);
-        round4Button = findViewById(R.id.round4_button);
-        round4Button = findViewById(R.id.round4_button);
-        round5Button = findViewById(R.id.round5_button);
-        round6Button = findViewById(R.id.round6_button);
-        round7Button = findViewById(R.id.round7_button);
-        round8Button = findViewById(R.id.round8_button);
-        round9Button = findViewById(R.id.round9_button);
-        round10Button = findViewById(R.id.round10_button);
+
         instructionsButton = findViewById(R.id.instructions_button);
         instructionsBody = findViewById(R.id.instructions);
         instructionsTitle = findViewById(R.id.instructions_title);
@@ -275,14 +325,31 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
         instructionsTitle.setVisibility(View.GONE);
         instructionsView.setVisibility(View.GONE);
         instructionsBody.setVisibility(View.GONE);
+
+
     }
 
+    /**
+     * Activate the button for round 2
+     */
+    public void activateRound2Button() {
+
+        round2Button = findViewById(R.id.round2_button);
+
+        round2Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToRound(2, 3, 0, 40);
+            }
+
+        });
+    }
 
     /**
      * Switch to the round/level that the user selects.
      */
-    private void switchToRound(int complexity, int minute, int second) {
-        boardManager = new ColourBoardManager(complexity, minute, second);
+    private void switchToRound(int round, int complexity, int minute, int second) {
+        boardManager = new ColourBoardManager(round, complexity, minute, second);
         saveToFile(TEMP_SAVE_FILENAME);
         Intent tmp = new Intent(ColourTileRoundsActivity.this, ColourGameActivity.class);
         startActivity(tmp);

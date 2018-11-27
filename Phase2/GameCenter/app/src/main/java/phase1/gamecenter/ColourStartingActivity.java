@@ -117,6 +117,7 @@ public class ColourStartingActivity extends AppCompatActivity {
      */
     private void addStartButtonListener() {
         Button startButton = findViewById(R.id.StartButton);
+
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -170,6 +171,9 @@ public class ColourStartingActivity extends AppCompatActivity {
      */
     private void switchToGame() {
         Intent tmp = new Intent(this, ColourTileRoundsActivity.class);
+        Bundle b = new Bundle();
+        b.putInt("round", 0);
+        tmp.putExtras(b);
         saveToFile(ColourStartingActivity.TEMP_SAVE_FILENAME);
         startActivity(tmp);
     }

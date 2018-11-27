@@ -47,7 +47,6 @@ public class MovementController {
                 if (boardManager.puzzleSolved()) {
                     String score = Integer.toString(boardManager.getScore());
                     Toast.makeText(context, "YOU WIN! Your score is: " + score, Toast.LENGTH_LONG).show();
-//                    //gameActivity.switchToMain();
                 }
             } else {
                 Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();
@@ -68,13 +67,9 @@ public class MovementController {
                         Toast toast = Toast.makeText(context, "It's a match!", Toast.LENGTH_LONG);
                         toast.setGravity(0,50,50);
                         toast.show();
-
-//                        gameActivity.switchToMain();
                     }
                     colourBoardManager.setFirstTap(0);
-
-//                    Toast.makeText(context, "Swapped successfully", Toast.LENGTH_SHORT).show();
-                }
+                    }
                 else {
                     Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();
                     colourBoardManager.setFirstTap(0);
