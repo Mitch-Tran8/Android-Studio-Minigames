@@ -200,7 +200,6 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
                         j = RANDOM.nextInt(3);
                     } while (!buttons[i][j].getText().toString().equals(""));
                     (buttons[i][j]).setText("O");
-
                     if (matchOver()) {
                         if (!player1Turn) {
                             aiWins();
@@ -300,7 +299,7 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 3 in a row.
      */
-    private boolean checkRows(String[][] board) {
+    protected boolean checkRows(String[][] board) {
         for (int i = 0; i < 3; i++) {
             if (board[i][0].equals(board[i][1]) && board[i][0].equals(board[i][2]) &&
                     !board[i][0].equals("")) {
@@ -316,7 +315,7 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 3 in a column
      */
-    private boolean checkColumns(String[][] board) {
+    protected boolean checkColumns(String[][] board) {
         for (int i = 0; i < 3; i++) {
             if (board[0][i].equals(board[1][i]) && board[0][i].equals(board[2][i]) &&
                      !board[0][i].equals("")) {
@@ -332,7 +331,7 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 3 in a ascending diagonal.
      */
-    private boolean checkAscendingDiagonals(String[][] board) {
+    protected boolean checkAscendingDiagonals(String[][] board) {
 
         return (board[0][2].equals(board[1][1]) &&
                 board[0][2].equals(board[2][0]) &&
@@ -345,7 +344,7 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 3 in a descending diagonal.
      */
-    private boolean checkDescendingDiagonals(String[][] board) {
+    protected boolean checkDescendingDiagonals(String[][] board) {
 
         return (board[0][0].equals(board[1][1]) &&
                 board[0][0].equals(board[2][2]) &&
