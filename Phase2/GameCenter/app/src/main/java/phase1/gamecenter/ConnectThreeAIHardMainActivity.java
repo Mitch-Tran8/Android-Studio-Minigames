@@ -1,8 +1,6 @@
 package phase1.gamecenter;
 
-import java.util.Random;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,22 +8,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements View.OnClickListener {
+public class ConnectThreeAIHardMainActivity extends AppCompatActivity implements View.OnClickListener {
 
     /**
      * 2D array of buttons, representing the connect three game board.
      */
     private Button[][] buttons = new Button[3][3];
-
-    /**
-     * a variable representing a random call.
-     */
-    private static final Random RANDOM = new Random();
-
-    /**
-     * Boolean representing if it is player 1's turn.
-     */
-    private boolean player1Turn = true;
 
     /**
      * The number of moves made on the connect three board.
@@ -77,6 +65,17 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
      */
     private int roundsPlayed;
 
+    /**
+     * Boolean representing if it is player 1's turn.
+     */
+    private boolean player1Turn = true;
+
+    /**
+     * The number of turns that have past.
+     */
+    private int turns;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +86,7 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
         draws = findViewById(R.id.draws);
         Button buttonReset = findViewById(R.id.button_reset);
         Button gameReset = findViewById(R.id.button_reset_game);
+        moves = 9;
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -117,9 +117,10 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
                         buttons[i][j].setText("");
                     }
                 }
-                moves = 0;
-                roundsPlayed = 0;
+                moves = 9;
+                turns = 0;
                 player1Turn = true;
+                roundsPlayed = 0;
                 player1points = 0;
                 player1RoundsWon = 0;
                 aiRoundsWon = 0;
@@ -144,7 +145,8 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
                             buttons[i][j].setText("");
                         }
                     }
-                    moves = 0;
+                    moves = 9;
+                    turns = 0;
                     player1Turn = true;
                 } else {
                     if (player1RoundsWon == 3) {
@@ -182,41 +184,37 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
      * @param v The button pressed by the current player.
      */
     private void processMove (Button v) {
+        // if button already has been played, don't do anything
         if (((Button) v).getText().toString().equals("")){
-            ((Button) v).setText("X");
-
-            if (matchOver()) {
-                if (player1Turn) {
+            ((Button) v).setText("X"); // human move
+            --moves;
+            if (matchOver()){
+                if (player1Turn){
                     player1Wins();
                 }
-            }
-            else {
+            }else {
                 player1Turn = false;
-                int i;
-                int j;
-                if (moves < 4){
-                        do {
-                        i = RANDOM.nextInt(3);
-                        j = RANDOM.nextInt(3);
-                    } while (!buttons[i][j].getText().toString().equals(""));
-                    (buttons[i][j]).setText("O");
-
-                    if (matchOver()) {
-                        if (!player1Turn) {
+                System.out.println(moves);
+                if (turns < 4){
+                    Button button = findViewById(findBestMove()); // AI's turn
+                    button.setText("O");
+                    --moves;
+                    if (matchOver()){
+                        if (!player1Turn){
                             aiWins();
                         }
                     }
                 }
             }
         }
-
-        moves++;
-        if (moves == 5) {
-            tie();
-        }else {
+        turns ++;
+        if (turns == 5){
+                tie();
+            }else {
             player1Turn = true;
         }
     }
+
 
     /**
      * Displays the toast message when the game is over.
@@ -286,12 +284,11 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                board[i][j] = buttons[i][j].getText().toString(); //go through all buttons and set their XO text
+                board[i][j] = buttons[i][j].getText().toString(); //go thru all buttons and set their XO text
             }
         }
 
-        return (checkRows(board) || checkColumns(board) || checkAscendingDiagonals(board) ||
-                checkDescendingDiagonals(board));
+        return (checkRows(board) || checkColumns(board) || checkAscendingDiagonals(board) || checkDescendingDiagonals(board));
     }
 
     /**
@@ -319,7 +316,7 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
     private boolean checkColumns(String[][] board) {
         for (int i = 0; i < 3; i++) {
             if (board[0][i].equals(board[1][i]) && board[0][i].equals(board[2][i]) &&
-                     !board[0][i].equals("")) {
+                    !board[0][i].equals("")) {
                 return true;
             }
         }
@@ -361,10 +358,147 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
         draws.setText("Draws: " + ties);
     }
 
+    /**
+     * Return the best move bestMove for the AI to execute.
+     */
+    private int findBestMove() {
+        int bestMove = -1; // will be the resource id of the best button to play
+        int best = -1000;
+
+        // since we have to do a super long function call to get the string,
+        // its better just to make another matrix. easier readability too
+        // also avoid playing with the button text while doing minimax
+        String[][] board = new String[3][3];
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
+                board[i][j] = buttons[i][j].getText().toString();
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (board[i][j].equals("")){
+                    board[i][j] = "O"; // only ever evaluate for AI player2
+                    --moves;
+                    int currentValue = minimax(board, 0, false);
+                    --moves;
+                    board[i][j] = "";
+                    if (currentValue > best) {
+                        best = currentValue;
+                        String buttonID = "button_" + i + j;
+                        bestMove = getResources().getIdentifier(buttonID, "id", getPackageName());
+                    }
+                }
+            }
+        }
+        return bestMove;
+    }
+
+    /**
+     * Return the best value bestValue using a minimax algorithm.
+     */
+    private int minimax (String[][] board, int depth, boolean isMax) {
+        int score = evaluateBoard(board);
+
+        if (score == 10){
+            return score - depth;
+        }
+        else if (score == -10){
+            return score + depth;
+        }
+        else if (moves == 0){
+            return 0;
+        }
+
+        if (isMax) {
+            int bestValue = -1000;
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    if (board[i][j].equals("")) {
+                        board[i][j] = "O";
+                        --moves;
+                        bestValue = Math.max(bestValue, minimax(board, depth+1, true));
+                        ++moves;
+                        board[i][j] = "";
+                    }
+                }
+            }
+            return bestValue;
+        }
+        else {
+            int bestValue = 1000;
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    if (board[i][j].equals("")) {
+                        board[i][j] = "X";
+                        --moves;
+                        bestValue = Math.min(bestValue, minimax(board,depth+1,false));
+                        ++moves;
+                        board[i][j] = "";
+                    }
+                }
+            }
+            return bestValue;
+        }
+    }
+
+    /**
+     * Evaluates the current connect three board to see if the game is over and returns the value.
+     */
+    private int evaluateBoard(String[][] board) {
+        // check whether or not there is 3 in a row
+        for (int i = 0; i < 3; i++){
+            if (board[i][0].equals(board[i][1]) && board[i][0].equals(board[i][2]) &&
+                    !board[i][0].equals("")) {
+                if (board[i][0].equals("O")){
+                    return +10;
+                }
+                else if (board[i][0].equals("X")){
+                    return -10;
+                }
+            }
+        }
+        // check whether or not there is 3 in a column
+        for (int i = 0; i < 3; i++){
+            if (board[0][i].equals(board[1][i]) && board[0][i].equals(board[2][i]) &&
+                    !board[0][i].equals("")) {
+                if (board[0][i].equals("O")){
+                    return +10;
+                }
+                else if (board[0][i].equals("X")){
+                    return -10;}
+            }
+        }
+
+        // check whether or not there is 3 in an ascending diagonal pattern
+        if (board[0][2].equals(board[1][1]) &&
+                board[0][2].equals(board[2][0]) &&
+                !board[0][2].equals("")){
+            if (board[0][2].equals("O")){
+                return +10;
+            }
+            else if (board[0][2].equals("X")){
+                return -10;
+            }
+        }
+
+        // check whether or not there is 3 in an descending diagonal pattern
+        if (board[0][0].equals(board[1][1]) &&
+                board[0][0].equals(board[2][2]) &&
+                !board[0][0].equals("")){
+            if (board[0][0].equals("O")){
+                return +10;
+            }
+            else if (board[0][0].equals("X")){
+                return -10;
+            }
+        }
+        return 0;
+    }
+
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ConnectThreeAIEasyMainActivity.this, ConnectNumbersStartingActivity.class);
+        Intent intent = new Intent(ConnectThreeAIHardMainActivity.this, ConnectNumbersStartingActivity.class);
         startActivity(intent);
     }
 
 }
+

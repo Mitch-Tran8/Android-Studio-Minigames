@@ -12,7 +12,7 @@ import android.widget.Toast;
 public class ConnectThreeMainActivity extends AppCompatActivity implements View.OnClickListener {
 
     /**
-     * 2D array of buttons, representing the connect four game board.
+     * 2D array of buttons, representing the connect three game board.
      */
     private Button[][] buttons = new Button[3][3];
 
@@ -22,17 +22,17 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
     private boolean player1Turn = true;
 
     /**
-     * The number of moves made on the connect four board.
+     * The number of moves made on the connect three board.
      */
     private int moves;
 
     /**
-     * The number of rounds player 1 has won.
+     * The score of player 1.
      */
     private int player1points;
 
     /**
-     * The number of rounds player 2 has won.
+     * The score of player 2.
      */
     private int player2points;
 
@@ -251,7 +251,8 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
     }
 
     /**
-     * Return whether the connect three game is over, that is, if a player has made three in a row.
+     * Return whether the connect three game is over, that is, if a player has won three rounds or
+     * five rounds have been played without a player winning 3 rounds.
      *
      * @return whether the game is over.
      */
@@ -269,11 +270,13 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                board[i][j] = buttons[i][j].getText().toString(); //go thru all buttons and set their XO text
+                board[i][j] = buttons[i][j].getText().toString(); //go through all buttons and set
+                // their XO text
             }
         }
 
-        return (checkRows(board) || checkColumns(board) || checkAscendingDiagonals(board) || checkDescendingDiagonals(board));
+        return (checkRows(board) || checkColumns(board) || checkAscendingDiagonals(board) ||
+                checkDescendingDiagonals(board));
     }
 
     /**
