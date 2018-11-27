@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">GameCenter</string>
     <string name="title_activity_colour_tile_rounds">ColourTileRoundsActivity</string>
+
 </resources>
