@@ -92,7 +92,7 @@
 
     <Button
         android:id="@+id/instructions_button2"
-        android:layout_width="218dp"
+        android:layout_width="232dp"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/instructions2"
         android:layout_alignTop="@+id/view2"

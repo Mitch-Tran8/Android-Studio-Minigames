@@ -162,15 +162,15 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
         String score = Integer.toString(boardManager.getScore());
         updateScoreboard(boardManager.getScore());
         if(boardManager.getScore() < boardManager.getScoreReq()) {
-            Toast toast = Toast.makeText(ColourGameActivity.this, "Time's up, your score: " + score, Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(ColourGameActivity.this, "Time's up! Try again to unlock the next level. Your score: " + score, Toast.LENGTH_LONG);
             toast.setGravity(0,10,10);
             toast.show();
             saveToFile(ColourBoardManager.TEMP_SAVE_FILENAME);
             Intent tmp = new Intent(ColourGameActivity.this, ColourTileRoundsActivity.class);
-            tmp.putExtra("win",0);
+            tmp.putExtra("round",boardManager.getRound());
             startActivity(tmp);
         } else {
-            Toast toast = Toast.makeText(ColourGameActivity.this, "Time's up, you've unlocked the next level!" +
+            Toast toast = Toast.makeText(ColourGameActivity.this, "Time's up! you've unlocked the next level. :D" +
                     " your score: " + score, Toast.LENGTH_LONG);
             toast.setGravity(0,10,10);
             toast.show();
@@ -230,12 +230,14 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveToFile(BoardComplexity.TEMP_SAVE_FILENAME);
+                saveToFile(ColourStartingActivity.TEMP_SAVE_FILENAME);
                 Toast.makeText(ColourGameActivity.this, "Succesfully saved", Toast.LENGTH_LONG).show();
 
             }
         });
     }
+
+
 
     /**
      * Dispatch onPause() to fragments.

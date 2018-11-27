@@ -114,6 +114,11 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
     View instructionsView;
 
     /**
+     * The save progress button
+     */
+    Button saveProgress;
+
+    /**
      * the board manager
      */
     private ColourBoardManager boardManager;
@@ -128,6 +133,14 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
         findView();
         activateInstructionsButton();
         activateRound1Button();
+
+        saveProgress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveToFile(ColourStartingActivity.TEMP_SAVE_FILENAME);
+                Toast.makeText(ColourTileRoundsActivity.this, "Succesfully saved", Toast.LENGTH_LONG).show();
+            }
+        });
 
         switch(win){
             case 2: activateRound2Button();break;
@@ -319,6 +332,7 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
     private void findView() {
 
         instructionsButton = findViewById(R.id.instructions_button);
+        saveProgress = findViewById(R.id.save_progress);
         instructionsBody = findViewById(R.id.instructions);
         instructionsTitle = findViewById(R.id.instructions_title);
         instructionsView = findViewById(R.id.view);

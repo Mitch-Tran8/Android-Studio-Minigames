@@ -102,7 +102,7 @@ class ColourBoardManager implements Serializable {
     /**
      * The round of the board
      */
-    private static int round;
+    private int round;
 
     /**
      * Manage a new shuffled board.
@@ -115,7 +115,7 @@ class ColourBoardManager implements Serializable {
         seconds = second;
         originalSeconds = second;
         minutes = minute;
-        setScoreReq(complexity);
+        setScoreReq(round);
         matchedRow= new Stack();
         matchedCol= new Stack();
         setUpBoard(complexity, tiles);
@@ -126,7 +126,7 @@ class ColourBoardManager implements Serializable {
      * getter for the current round that the user is playing
      * @return int round
      */
-    public static int getRound(){return round;}
+    public int getRound(){return round;}
 
     private void setUpBoard(int complexity, List<ColourTile> tiles) {
         int tileNum;
@@ -150,12 +150,46 @@ class ColourBoardManager implements Serializable {
         this.board = new ColourBoard(tiles, complexity);
     }
 
-    private void setScoreReq(int complexity) {
-        if(complexity == 3){
-            this.scoreReq = 15;
-        } else if(complexity == 4){
-            this.scoreReq = 40;
-        } else {this.scoreReq = 60;}
+    /**
+     * sets the required score for each round before the user can make it to the next round
+     * @param round
+     */
+    private void setScoreReq(int round) {
+        switch (round) {
+            case 1:
+                this.scoreReq = 20;
+                break;
+            case 2:
+                this.scoreReq = 40;
+                break;
+            case 3:
+                this.scoreReq = 60;
+                break;
+            case 4:
+                this.scoreReq = 80;
+                break;
+            case 5:
+                this.scoreReq = 100;
+                break;
+            case 6:
+                this.scoreReq = 120;
+                break;
+            case 7:
+                this.scoreReq = 140;
+                break;
+            case 8:
+                this.scoreReq = 160;
+                break;
+            case 9:
+                this.scoreReq = 20;
+                break;
+            case 10:
+                this.scoreReq = 40;
+                break;
+            default:
+                this.score = 50;
+                break;
+        }
     }
 
     public int getScoreReq(){return scoreReq;}
