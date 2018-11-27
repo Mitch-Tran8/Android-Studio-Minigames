@@ -54,6 +54,16 @@ public class GameCenterMainActivity extends AppCompatActivity {
     FloatingActionButton menuButton;
 
     /**
+     * scoreboard button
+     */
+    Button userScoreboardButton;
+
+    /**
+     * Leaderboard button
+     */
+    Button leaderBoardButton;
+
+    /**
      * The current user's Id
      *
      * @param user_id
@@ -76,6 +86,8 @@ public class GameCenterMainActivity extends AppCompatActivity {
         menuButton = findViewById(R.id.menuButton);
         menuView.setVisibility(View.GONE);
         logoutButton.setVisibility(View.GONE);
+        userScoreboardButton = findViewById(R.id.scoreboard);
+        leaderBoardButton = findViewById(R.id.leaderboard);
 
         /**
          * Activate the menu button
@@ -140,5 +152,30 @@ public class GameCenterMainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        /**
+         *Activate user score board button
+         */
+        userScoreboardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(GameCenterMainActivity.this, UserScoreBoardActivity.class);
+                startActivity(i);
+            }
+        });
+
+        /**
+         * Activate leader board button
+         */
+
+        leaderBoardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(GameCenterMainActivity.this, LeaderboardActivity.class);
+                startActivity(i);
+            }
+        });
+
+
     }
 }

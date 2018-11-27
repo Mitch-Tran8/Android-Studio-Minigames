@@ -1,13 +1,12 @@
 package phase1.gamecenter;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Pair;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,26 +16,57 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 
 public class LeaderboardActivity extends AppCompatActivity {
     /**
-     * A list of the leeaderboard scores.
+     * an arraylist of the scores in leaderboard
      */
-    ArrayList<Pair<String, Integer>> leaderBoardScores;
+    private ArrayList<Pair<String, Integer>> leaderBoardScores;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboard);
-        getLeaderBoardScores();
+        getLeaderBoardScores("Colour Tiles");
+
+
+        TabLayout tabLayout = findViewById(R.id.TabLayout);
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                onTab(tab.getPosition());
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+    }
+
+    private void onTab(int position){
+        if (position == 0){
+            getLeaderBoardScores("Colour Tiles");
+        }
+
+        else if (position == 1){getLeaderBoardScores("Sliding Tiles");}
+
     }
 
     /**
      * gets the scores from firebase and sets it as a list to userScores.
      */
-    private void getLeaderBoardScores(){
-        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Leaderboards").child("Sliding Tiles");
+    private void getLeaderBoardScores(final String game){
+        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Leaderboards").child(game);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -58,7 +88,9 @@ public class LeaderboardActivity extends AppCompatActivity {
                 });
 
                 leaderBoardScores = leaderScores;
-                setUpRankings();
+                setUpRankings(game);
+
+
             }
 
             @Override
@@ -68,13 +100,10 @@ public class LeaderboardActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * returns this user's user ID.
-     * @return
-     */
+    private void setUpRankings(String game){
 
-    private void setUpRankings(){
-
+        TextView title = findViewById(R.id.LeaderBoardTitle);
+        title.setText(game + "Rankings");
 
         TextView name1 = findViewById(R.id.text1);
         name1.setText(String.valueOf(leaderBoardScores.get(0).first));

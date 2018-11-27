@@ -2,6 +2,7 @@ package phase1.gamecenter;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -31,16 +32,34 @@ public class UserScoreBoardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_score_board);
-        Intent i = getIntent();
-        getUserScores();
+        getUserScores("Colour tiles");
+
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (tab.getPosition() == 0){getUserScores("Colour tiles");}
+                else if (tab.getPosition() == 1){getUserScores("Sliding tiles");}
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     /**
      * gets the scores from firebase and sets it as a list to userScores.
      */
-    private void getUserScores() {
+    private void getUserScores(final String game) {
         String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(user_id).child("Game Collection").child("Sliding tiles");
+        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(user_id).child("Game Collection").child(game);
         ref.child("userscores").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -52,7 +71,7 @@ public class UserScoreBoardActivity extends AppCompatActivity {
                 Collections.sort(scores, Collections.<Long>reverseOrder());
                 userScores = scores;
 
-                showScores();
+                showScores(game);
             }
 
             @Override
@@ -62,10 +81,10 @@ public class UserScoreBoardActivity extends AppCompatActivity {
         });
     }
 
-    private void showScores(){
+    private void showScores(String game){
 
         TextView textViewName = findViewById(R.id.UserNameTitle);
-        textViewName.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName()+ "'s Scoreboard");
+        textViewName.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName()+ "'s " + game + " Scoreboard");
 
         TextView textView1 = findViewById(R.id.text1);
         textView1.setText(String.valueOf(userScores.get(0)));
