@@ -2,6 +2,9 @@ package phase1.gamecenter;
 
 import java.util.Observable;
 
+/**
+ * a board. the abstract class for SlidingTileBoard and ColourBoard.
+ */
 public abstract class Board extends Observable {
 
     /**

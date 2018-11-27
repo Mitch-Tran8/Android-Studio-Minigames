@@ -2,6 +2,9 @@ package phase1.gamecenter;
 
 import java.util.Stack;
 
+/**
+ * a board manager. the abstract boardmanager to SlidingTileBoardManager and ColourBoardManager.
+ */
 public abstract class BoardManager {
 
     /**
