@@ -12,30 +12,69 @@ import android.widget.Toast;
 
 public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    /**
+     * 2D array of buttons, representing the connect three game board.
+     */
     private Button[][] buttons = new Button[3][3];
 
+    /**
+     * a variable representing a random call.
+     */
     private static final Random RANDOM = new Random();
 
+    /**
+     * Boolean representing if it is player 1's turn.
+     */
     private boolean player1Turn = true;
 
+    /**
+     * The number of moves made on the connect three board.
+     */
     private int moves;
 
+    /**
+     * The number of games tied.
+     */
     private int ties;
 
+    /**
+     * The score of player 1.
+     */
     private int player1points;
 
+    /**
+     * The score of the AI.
+     */
     private int aipoints;
 
+    /**
+     * TextView that shows the number of rounds player 1 has won.
+     */
     private TextView scorePlayer1;
 
+    /**
+     * TextView that shows the number of rounds the AI has won.
+     */
     private TextView aiPlayer;
 
+    /**
+     * TextView that shows the number of ties.
+     */
     private TextView draws;
 
+    /**
+     * Number of rounds won by player 1.
+     */
     private int player1RoundsWon;
 
+    /**
+     * Number of rounds won by the AI.
+     */
     private int aiRoundsWon;
 
+    /**
+     * Number of rounds played.
+     */
     private int roundsPlayed;
 
 
@@ -137,11 +176,13 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
         }
     }
 
+    /**
+     * Process the move of the current player.
+     *
+     * @param v The button pressed by the current player.
+     */
     private void processMove (Button v) {
         if (((Button) v).getText().toString().equals("")){
-
-            ((Button) v).setTextColor(Color.parseColor("#00ffffff"));
-            ((Button) v).setBackgroundResource(R.drawable.sunglass_smiley);
             ((Button) v).setText("X");
 
             if (matchOver()) {
@@ -158,9 +199,6 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
                         i = RANDOM.nextInt(3);
                         j = RANDOM.nextInt(3);
                     } while (!buttons[i][j].getText().toString().equals(""));
-
-                    (buttons[i][j]).setTextColor(Color.parseColor("#00ffffff"));
-                    (buttons[i][j]).setBackgroundResource(R.drawable.robot);
                     (buttons[i][j]).setText("O");
 
                     if (matchOver()) {
@@ -193,6 +231,9 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
         }
     }
 
+    /**
+     * Player 1 wins the match, update scores.
+     */
     private void player1Wins() {
         player1points = player1points + 5;
         aipoints = aipoints - 3;
@@ -202,6 +243,9 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
         updatePoints();
     }
 
+    /**
+     * The AI wins the match, update scores.
+     */
     private void aiWins() {
         aipoints = aipoints + 5;
         player1points = player1points - 3;
@@ -210,6 +254,10 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
         Toast.makeText(this, "AI wins!", Toast.LENGTH_LONG).show();
         updatePoints();
     }
+
+    /**
+     * Tie in the game.
+     */
     private void tie() {
         ties++;
         roundsPlayed++;
@@ -217,26 +265,40 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
         updatePoints();
     }
 
+    /**
+     * Return whether the connect three game is over, that is, if the player or the AI has won three
+     * rounds or five rounds have been played without the player or AI winning 3 rounds.
+     *
+     * @return whether the game is over.
+     */
     private boolean gameOver() {
         return (player1RoundsWon == 3 || aiRoundsWon == 3 || roundsPlayed == 5);
     }
 
+    /**
+     * Return whether the connect three game is over, that is, if the player or AI has made three in
+     * a row.
+     *
+     * @return whether the game is over.
+     */
     private boolean matchOver() {
         String[][] board = new String[3][3];
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                board[i][j] = buttons[i][j].getText().toString(); //go thru all buttons and set their XO text
+                board[i][j] = buttons[i][j].getText().toString(); //go through all buttons and set their XO text
             }
         }
 
-        return (checkRows(board) || checkColumns(board) || checkAscendingDiagonals(board) || checkDescendingDiagonals(board));
+        return (checkRows(board) || checkColumns(board) || checkAscendingDiagonals(board) ||
+                checkDescendingDiagonals(board));
     }
 
     /**
-     * Return whether or not there is a 4 in a row.
+     * Return whether or not there is a 3 in a row.
+     *
      * @param board String[][] with the current moves on the board (X's and O's)
-     * @return whether or not there is a 4 in a row.
+     * @return whether or not there is a 3 in a row.
      */
     private boolean checkRows(String[][] board) {
         for (int i = 0; i < 3; i++) {
@@ -249,9 +311,10 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
     }
 
     /**
-     * Return whether or not there is a 4 in a column.
+     * Return whether or not there is a 3 in a column.
+     *
      * @param board String[][] with the current moves on the board (X's and O's)
-     * @return whether or not there is a 4 in a column
+     * @return whether or not there is a 3 in a column
      */
     private boolean checkColumns(String[][] board) {
         for (int i = 0; i < 3; i++) {
@@ -264,9 +327,10 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
     }
 
     /**
-     * Return whether or not there is a 4 in an ascending diagonal pattern.
+     * Return whether or not there is a 3 in an ascending diagonal pattern.
+     *
      * @param board String[][] with the current moves on the board (X's and O's)
-     * @return whether or not there is a 4 in a ascending diagonal.
+     * @return whether or not there is a 3 in a ascending diagonal.
      */
     private boolean checkAscendingDiagonals(String[][] board) {
 
@@ -276,9 +340,10 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
     }
 
     /**
-     * Return whether or not there is a 4 in an descending diagonal pattern.
+     * Return whether or not there is a 3 in an descending diagonal pattern.
+     *
      * @param board String[][] with the current moves on the board (X's and O's)
-     * @return whether or not there is a 4 in a descending diagonal.
+     * @return whether or not there is a 3 in a descending diagonal.
      */
     private boolean checkDescendingDiagonals(String[][] board) {
 
@@ -287,6 +352,9 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
                 !board[0][0].equals(""));
     }
 
+    /**
+     * Update TextView with the scores of the player and AI.
+     */
     private void updatePoints() {
         scorePlayer1.setText("Player 1: " + player1RoundsWon);
         aiPlayer.setText("AI: " + aiRoundsWon);
