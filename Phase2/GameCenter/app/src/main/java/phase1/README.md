@@ -19,9 +19,9 @@
 
 9.  After you have registered you will be taken back to the login page.
 
-10.  Select the sliding tiles game.
+10.  Select the sliding numberTiles game.
 
-11.  Choose complexity of the board to start a new game or load from a saved game.
+11.  Choose complexity of the slidingTilesBoard to start a new game or load from a saved game.
 
 12.  If the user would like to save the game, tap save.
 
@@ -36,7 +36,7 @@
 
 ### Sliding Tiles Puzzle Game Updates
 -  #### Game Complexity
-    -   The user has the freedom to choose the size of the tiles board he/she would like to
+    -   The user has the freedom to choose the size of the numberTiles slidingTilesBoard he/she would like to
     play: 3x3, 4x4, or 5x5.
 
 -  #### Saving Game States
@@ -56,8 +56,8 @@
 	 user to complete the game. Much like the game of golf, the fewer the amount of moves taken, the
 	  higher the score will be.
 
-	-   We have accounted for the three different board complexities when calculating the score by
-	setting a “max” number of moves for each board size (50 for 3x3, 150 for 4x4, 250 for 5x5) and
+	-   We have accounted for the three different slidingTilesBoard complexities when calculating the score by
+	setting a “max” number of moves for each slidingTilesBoard size (50 for 3x3, 150 for 4x4, 250 for 5x5) and
 	subtracting the number of moves take by the user from the “max” to generate the user’s score.
 
 

@@ -2,9 +2,11 @@ package phase1.gamecenter;
 
 import org.junit.Test;
 
+import phase1.gamecenter.colourtiles.ColourTile;
+
 import static org.junit.Assert.assertEquals;
 
-public class ColorTileTest {
+public class ColorNumberTileTest {
 
    ColourTile testingTile = new ColourTile(4, 3);
    ColourTile testingTile2 = new ColourTile(5, 4);

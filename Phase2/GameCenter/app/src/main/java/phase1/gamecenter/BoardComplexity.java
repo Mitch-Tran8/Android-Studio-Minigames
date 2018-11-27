@@ -6,21 +6,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import phase1.gamecenter.slidingtiles.DifficultyLevel;
+import phase1.gamecenter.slidingtiles.GameActivity;
+import phase1.gamecenter.slidingtiles.SlidingTileBoardManager;
 
 /**
  * ColourBoard Complexity Activity
@@ -65,7 +63,7 @@ public class BoardComplexity extends AppCompatActivity {
     /**
      * the board manager
      */
-    private BoardManager boardManager;
+    private SlidingTileBoardManager slidingTileBoardManager;
 
     /**
      * the firebase auth
@@ -112,7 +110,7 @@ public class BoardComplexity extends AppCompatActivity {
         fourButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boardManager = new BoardManager(4, 4);
+                slidingTileBoardManager = new SlidingTileBoardManager(4, 4);
                 saveToFile(TEMP_SAVE_FILENAME);
                 switchToDifficulty();
 
@@ -139,7 +137,7 @@ public class BoardComplexity extends AppCompatActivity {
         fiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boardManager = new BoardManager(5, 5);
+                slidingTileBoardManager = new SlidingTileBoardManager(5, 5);
                 saveToFile(TEMP_SAVE_FILENAME);
                 switchToDifficulty();
             }
@@ -151,7 +149,7 @@ public class BoardComplexity extends AppCompatActivity {
         threeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boardManager = new BoardManager(3, 3);
+                slidingTileBoardManager = new SlidingTileBoardManager(3, 3);
                 saveToFile(TEMP_SAVE_FILENAME);
                 switchToDifficulty();
             }
@@ -181,7 +179,7 @@ public class BoardComplexity extends AppCompatActivity {
             InputStream inputStream = this.openFileInput(fileName);
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
-                boardManager = (BoardManager) input.readObject();
+                slidingTileBoardManager = (SlidingTileBoardManager) input.readObject();
                 inputStream.close();
             }
         } catch (FileNotFoundException e) {
@@ -202,7 +200,7 @@ public class BoardComplexity extends AppCompatActivity {
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(
                     this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(boardManager);
+            outputStream.writeObject(slidingTileBoardManager);
             outputStream.close();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());

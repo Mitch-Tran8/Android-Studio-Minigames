@@ -1,10 +1,12 @@
-package phase1.gamecenter;
+package phase1.gamecenter.colourtiles;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+
+import phase1.gamecenter.R;
 
 public class ColourRankingsActivity extends AppCompatActivity {
 

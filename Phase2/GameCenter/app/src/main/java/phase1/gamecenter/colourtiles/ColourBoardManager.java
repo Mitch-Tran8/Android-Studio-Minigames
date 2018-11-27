@@ -1,4 +1,4 @@
-package phase1.gamecenter;
+package phase1.gamecenter.colourtiles;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,10 +9,12 @@ import java.util.List;
 import java.util.Stack;
 import java.util.Random;
 
+import phase1.gamecenter.BoardManager;
+
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
-class ColourBoardManager implements Serializable {
+public class ColourBoardManager extends BoardManager implements Serializable {
 
     /**
      * The board being managed.
@@ -49,22 +51,6 @@ class ColourBoardManager implements Serializable {
     private int originalSeconds;
 
     /**
-     * Manage a board that has been pre-populated.
-     *
-     * @param board the board
-     */
-    ColourBoardManager(ColourBoard board) {
-        this.board = board;
-    }
-
-    /**
-     * Return the current board.
-     */
-    ColourBoard getBoard() {
-        return board;
-    }
-
-    /**
      * countdown timer's seconds
      */
     private int seconds;
@@ -95,11 +81,6 @@ class ColourBoardManager implements Serializable {
     private int scoreReq;
 
     /**
-     * The complexity of the board
-     */
-    private int complexity;
-
-    /**
      * The round of the board
      */
     private int round;
@@ -107,11 +88,9 @@ class ColourBoardManager implements Serializable {
     /**
      * Manage a new shuffled board.
      */
-    ColourBoardManager(int round, int complexity, int minute, int second) {
+    public ColourBoardManager(int round, int complexity, int minute, int second) {
         List<ColourTile> tiles = new ArrayList<>();
         this.round = round;
-        int tileNum;
-        int numTiles;
         seconds = second;
         originalSeconds = second;
         minutes = minute;
@@ -123,6 +102,22 @@ class ColourBoardManager implements Serializable {
     }
 
     /**
+     * Manage a board that has been pre-populated.
+     *
+     * @param board the board
+     */
+    ColourBoardManager(ColourBoard board) {
+        this.board = board;
+    }
+
+    /**
+     * Return the current board.
+     */
+    public ColourBoard getBoard() {
+        return board;
+    }
+
+    /**
      * getter for the current round that the user is playing
      * @return int round
      */
@@ -131,7 +126,6 @@ class ColourBoardManager implements Serializable {
     private void setUpBoard(int complexity, List<ColourTile> tiles) {
         int tileNum;
         int numTiles;
-        this.complexity = complexity;
         if (complexity == 3) {
             tileNum = 0;
             numTiles = 10;
@@ -198,7 +192,7 @@ class ColourBoardManager implements Serializable {
      * set the board of this boardmanager only for testing purpose
      * @param board new board to be set
      */
-    void setBoard(ColourBoard board){
+    public void setBoard(ColourBoard board){
         this.board = board;
     }
 
@@ -221,7 +215,7 @@ class ColourBoardManager implements Serializable {
      *
      * @return whether the tiles are in row-major order
      */
-    boolean puzzleSolved() {
+    public boolean puzzleSolved() {
         boolean solvedRow = rowSolved();
         boolean solvedCol = colSolved();
 
@@ -415,7 +409,7 @@ class ColourBoardManager implements Serializable {
      *
      * @return whether the tile at position is surrounded by a blank tile
      */
-    boolean hasFirstTap() {
+    public boolean hasFirstTap() {
         return firstTap != 0;
     }
 
@@ -423,7 +417,7 @@ class ColourBoardManager implements Serializable {
      * sets the first tap's position to position
      * @param position the position
      */
-    void setFirstTap(int position) {
+    public void setFirstTap(int position) {
         this.firstTap = position;
     }
 
@@ -433,7 +427,7 @@ class ColourBoardManager implements Serializable {
      * @param position the tile to check
      * @return whether the tile at position is next to the first tile
      */
-    boolean isValidTap(int position) {
+    public boolean isValidTap(int position) {
 
         int row = position / board.getNUM_ROWS();
         int col = position % board.getNUM_ROWS();
@@ -462,7 +456,7 @@ class ColourBoardManager implements Serializable {
      *
      * @param position the position
      */
-    void touchMove(int position) {
+    public void touchMove(int position) {
 
         int row = position / board.getNUM_ROWS();
         int col = position % board.getNUM_ROWS();

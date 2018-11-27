@@ -1,4 +1,4 @@
-package phase1.gamecenter;
+package phase1.gamecenter.colourtiles;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import phase1.gamecenter.R;
 
 
 /**

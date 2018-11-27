@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".StartingActivity" />
-        <activity android:name=".GameActivity" />
+        <activity android:name=".slidingtiles.GameActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,15 +28,15 @@
         <activity android:name=".SlidingTileMainPageActivity" />
         <activity android:name=".BoardComplexity" />
         <activity android:name=".UserScoreBoard" />
-        <activity android:name=".ColourGameActivity" />
-        <activity android:name=".ColourStartingActivity" />
-        <activity android:name=".DifficultyLevel" />
+        <activity android:name=".colourtiles.ColourGameActivity" />
+        <activity android:name=".colourtiles.ColourStartingActivity" />
+        <activity android:name=".slidingtiles.DifficultyLevel" />
         <activity android:name=".LogoutActivity" />
         <activity android:name=".UserScoreBoardActivity"></activity>
-        <activity android:name=".ColourRankingsActivity" />
-        <activity android:name=".ColourScoreBoard3x3" />
-        <activity android:name=".ColourScoreBoard5x5" />
-        <activity android:name=".ColourTileRoundsActivity"/>
+        <activity android:name=".colourtiles.ColourRankingsActivity" />
+        <activity android:name=".colourtiles.ColourScoreBoard3x3" />
+        <activity android:name=".colourtiles.ColourScoreBoard5x5" />
+        <activity android:name=".colourtiles.ColourTileRoundsActivity"/>
         <activity android:name=".connectnumbers.ConnectFourMainActivity" />
         <activity android:name=".connectnumbers.ConnectNumbersStartingActivity" />
         <activity android:name=".connectnumbers.ConnectFourPlayersActivity" />

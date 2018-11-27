@@ -300,7 +300,7 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 3 in a row.
      */
-    protected boolean checkRows(String[][] board) {
+    public boolean checkRows(String[][] board) {
         for (int i = 0; i < 3; i++) {
             if (board[i][0].equals(board[i][1]) && board[i][0].equals(board[i][2]) &&
                     !board[i][0].equals("")) {
@@ -316,7 +316,7 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 3 in a column
      */
-    protected boolean checkColumns(String[][] board) {
+    public boolean checkColumns(String[][] board) {
         for (int i = 0; i < 3; i++) {
             if (board[0][i].equals(board[1][i]) && board[0][i].equals(board[2][i]) &&
                      !board[0][i].equals("")) {
@@ -332,7 +332,7 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 3 in a ascending diagonal.
      */
-    protected boolean checkAscendingDiagonals(String[][] board) {
+    public boolean checkAscendingDiagonals(String[][] board) {
 
         return (board[0][2].equals(board[1][1]) &&
                 board[0][2].equals(board[2][0]) &&
@@ -345,7 +345,7 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 3 in a descending diagonal.
      */
-    protected boolean checkDescendingDiagonals(String[][] board) {
+    public boolean checkDescendingDiagonals(String[][] board) {
 
         return (board[0][0].equals(board[1][1]) &&
                 board[0][0].equals(board[2][2]) &&

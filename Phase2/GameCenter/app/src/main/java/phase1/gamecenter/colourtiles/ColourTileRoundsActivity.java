@@ -1,4 +1,4 @@
-package phase1.gamecenter;
+package phase1.gamecenter.colourtiles;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,19 +9,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import phase1.gamecenter.R;
 
 /**
  * ColourBoard Complexity Activity

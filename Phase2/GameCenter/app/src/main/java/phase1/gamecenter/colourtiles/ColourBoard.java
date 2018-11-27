@@ -1,20 +1,18 @@
-package phase1.gamecenter;
+package phase1.gamecenter.colourtiles;
 
 import android.support.annotation.NonNull;
-
-import java.lang.reflect.Array;
-import java.util.Observable;
 
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import phase1.gamecenter.Board;
+
 /**
  * The sliding tiles board.
  */
-public class ColourBoard extends Observable implements Serializable, Iterable<ColourTile> {
-
+public class ColourBoard extends Board implements Serializable, Iterable<ColourTile> {
 
     public static final String up = "up";
     public static final String down = "down";
@@ -42,7 +40,7 @@ public class ColourBoard extends Observable implements Serializable, Iterable<Co
      *
      * @param tiles the tiles for the board
      */
-    ColourBoard(List<ColourTile> tiles, int complexity) {
+    public ColourBoard(List<ColourTile> tiles, int complexity) {
         NUM_ROWS = complexity;
         NUM_COLS = complexity;
         this.tiles = new ColourTile[NUM_ROWS][NUM_COLS];
@@ -121,7 +119,7 @@ public class ColourBoard extends Observable implements Serializable, Iterable<Co
      * @param row2 the second tile row
      * @param col2 the second tile col
      */
-    void swapTiles(int row1, int col1, int row2, int col2) {
+    public void swapTiles(int row1, int col1, int row2, int col2) {
 
         ColourTile tile1 = getTile(row1, col1);
         ColourTile tile2 = getTile(row2, col2);

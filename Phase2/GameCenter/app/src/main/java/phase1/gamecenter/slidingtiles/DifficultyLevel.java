@@ -1,4 +1,4 @@
-package phase1.gamecenter;
+package phase1.gamecenter.slidingtiles;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,13 +6,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import phase1.gamecenter.BoardComplexity;
+import phase1.gamecenter.R;
+import phase1.gamecenter.StartingActivity;
 
 
 public class DifficultyLevel extends AppCompatActivity {
@@ -37,7 +40,7 @@ public class DifficultyLevel extends AppCompatActivity {
     /**
      * the board manager
      */
-    BoardManager boardManager;
+    SlidingTileBoardManager slidingTileBoardManager;
 
     /**
      * The current user's Id
@@ -83,7 +86,7 @@ public class DifficultyLevel extends AppCompatActivity {
         easyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boardManager.setMaxUndoTimes(6);
+                slidingTileBoardManager.setMaxUndoTimes(6);
                 saveToFile(TEMP_SAVE_FILENAME);
                 switchToGame();
             }
@@ -97,7 +100,7 @@ public class DifficultyLevel extends AppCompatActivity {
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boardManager.setMaxUndoTimes(3);
+                slidingTileBoardManager.setMaxUndoTimes(3);
                 saveToFile(TEMP_SAVE_FILENAME);
                 switchToGame();
             }
@@ -111,7 +114,7 @@ public class DifficultyLevel extends AppCompatActivity {
         spicyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boardManager.setMaxUndoTimes(0);
+                slidingTileBoardManager.setMaxUndoTimes(0);
                 saveToFile(TEMP_SAVE_FILENAME);
                 switchToGame();
             }
@@ -140,7 +143,7 @@ public class DifficultyLevel extends AppCompatActivity {
             InputStream inputStream = this.openFileInput(fileName);
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
-                boardManager = (BoardManager) input.readObject();
+                slidingTileBoardManager = (SlidingTileBoardManager) input.readObject();
                 inputStream.close();
             }
         } catch (FileNotFoundException e) {
@@ -161,7 +164,7 @@ public class DifficultyLevel extends AppCompatActivity {
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(
                     this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(boardManager);
+            outputStream.writeObject(slidingTileBoardManager);
             outputStream.close();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());

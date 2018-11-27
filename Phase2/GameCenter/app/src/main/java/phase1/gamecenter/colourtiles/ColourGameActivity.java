@@ -3,7 +3,7 @@ Timer adapted from:
 https://stackoverflow.com/a/17486406
  */
 
-package phase1.gamecenter;
+package phase1.gamecenter.colourtiles;
 
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +28,10 @@ import android.widget.TextView;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import phase1.gamecenter.CustomAdapter;
+import phase1.gamecenter.GestureDetectGridView;
+import phase1.gamecenter.R;
+import phase1.gamecenter.ScoreBoardUpdater;
 
 
 /**

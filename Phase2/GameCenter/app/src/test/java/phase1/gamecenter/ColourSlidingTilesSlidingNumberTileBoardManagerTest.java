@@ -5,12 +5,16 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import phase1.gamecenter.colourtiles.ColourBoard;
+import phase1.gamecenter.colourtiles.ColourBoardManager;
+import phase1.gamecenter.colourtiles.ColourTile;
+
 import static org.junit.Assert.*;
 
-public class ColourBoardManagerTest {
+public class ColourSlidingTilesSlidingNumberTileBoardManagerTest {
     private List<ColourTile> tiles = new ArrayList<>();
-    private ColourBoardManager testerBoardManager = new ColourBoardManager(3, 0, 59);
-    private ColourBoardManager testerBoardManager2 = new ColourBoardManager(5, 1, 59);
+    private ColourBoardManager testerBoardManager = new ColourBoardManager(1, 3, 0, 59);
+    private ColourBoardManager testerBoardManager2 = new ColourBoardManager(10, 5, 1, 59);
 
     @Test
     public void testGetBoard() {

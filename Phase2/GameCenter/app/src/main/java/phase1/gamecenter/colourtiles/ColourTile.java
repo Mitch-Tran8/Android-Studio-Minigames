@@ -1,13 +1,16 @@
-package phase1.gamecenter;
+package phase1.gamecenter.colourtiles;
 
 import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 
+import phase1.gamecenter.R;
+import phase1.gamecenter.Tile;
+
 /**
  * A ColourTile in a sliding tiles puzzle.
  */
-public class ColourTile implements Comparable<ColourTile>, Serializable {
+public class ColourTile extends Tile implements Comparable<ColourTile>, Serializable {
 
     /**
      * The background id to find the tile image.

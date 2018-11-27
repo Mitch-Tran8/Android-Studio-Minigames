@@ -1,4 +1,4 @@
-package phase1.gamecenter;
+package phase1.gamecenter.slidingtiles;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,10 +10,6 @@ import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,6 +20,12 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import phase1.gamecenter.BoardComplexity;
+import phase1.gamecenter.CustomAdapter;
+import phase1.gamecenter.GestureDetectGridView;
+import phase1.gamecenter.R;
+import phase1.gamecenter.SlidingTileMainPageActivity;
+
 
 /**
  * The game activity.
@@ -33,7 +35,7 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
     /**
      * The board manager.
      */
-    private BoardManager boardManager;
+    private SlidingTileBoardManager slidingTileBoardManager;
 
     /**
      * The buttons to display.
@@ -59,7 +61,7 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
      */
 
     public void autoSave(){
-        int numMoves = boardManager.getNumOfMoves();
+        int numMoves = slidingTileBoardManager.getNumOfMoves();
         if(numMoves %3 ==0){
             saveToFile(BoardComplexity.TEMP_SAVE_FILENAME);
         }
@@ -77,9 +79,9 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
 
         // Add View to activity
         gridView = findViewById(R.id.grid);
-        gridView.setNumColumns(boardManager.getColumns());
-        gridView.setBoardManager(boardManager);
-        boardManager.getBoard().addObserver(this);
+        gridView.setNumColumns(slidingTileBoardManager.getColumns());
+        gridView.setSlidingTileBoardManager(slidingTileBoardManager);
+        slidingTileBoardManager.getSlidingTilesBoard().addObserver(this);
 
         // Observer sets up desired dimensions as well as calls our display function
         gridView.getViewTreeObserver().addOnGlobalLayoutListener(
@@ -91,8 +93,8 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
                         int displayWidth = gridView.getMeasuredWidth();
                         int displayHeight = gridView.getMeasuredHeight();
 
-                        columnWidth = displayWidth / boardManager.getColumns();
-                        columnHeight = displayHeight / boardManager.getRows();
+                        columnWidth = displayWidth / slidingTileBoardManager.getColumns();
+                        columnHeight = displayHeight / slidingTileBoardManager.getRows();
 
                         display();
                     }
@@ -108,8 +110,8 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (boardManager.isValidUndo()) {
-                    boardManager.undo();
+                if (slidingTileBoardManager.isValidUndo()) {
+                    slidingTileBoardManager.undo();
                     Toast.makeText(GameActivity.this, "Undo Succesful", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(GameActivity.this, "Maximum undo moves reached", Toast.LENGTH_LONG).show();
@@ -140,12 +142,12 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
      * @param context the context
      */
     private void createTileButtons(Context context) {
-        Board board = boardManager.getBoard();
+        SlidingTilesBoard slidingTilesBoard = slidingTileBoardManager.getSlidingTilesBoard();
         tileButtons = new ArrayList<>();
-        for (int row = 0; row != boardManager.getRows(); row++) {
-            for (int col = 0; col != boardManager.getColumns(); col++) {
+        for (int row = 0; row != slidingTileBoardManager.getRows(); row++) {
+            for (int col = 0; col != slidingTileBoardManager.getColumns(); col++) {
                 Button tmp = new Button(context);
-                tmp.setBackgroundResource(board.getTile(row, col).getBackground());
+                tmp.setBackgroundResource(slidingTilesBoard.getTile(row, col).getBackground());
                 this.tileButtons.add(tmp);
             }
         }
@@ -155,12 +157,12 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
      * Update the backgrounds on the buttons to match the tiles.
      */
     private void updateTileButtons() {
-        Board board = boardManager.getBoard();
+        SlidingTilesBoard slidingTilesBoard = slidingTileBoardManager.getSlidingTilesBoard();
         int nextPos = 0;
         for (Button b : tileButtons) {
-            int row = nextPos / boardManager.getRows();
-            int col = nextPos % boardManager.getColumns();
-            b.setBackgroundResource(board.getTile(row, col).getBackground());
+            int row = nextPos / slidingTileBoardManager.getRows();
+            int col = nextPos % slidingTileBoardManager.getColumns();
+            b.setBackgroundResource(slidingTilesBoard.getTile(row, col).getBackground());
             nextPos++;
         }
         autoSave();
@@ -186,7 +188,7 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
             InputStream inputStream = this.openFileInput(fileName);
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
-                boardManager = (BoardManager) input.readObject();
+                slidingTileBoardManager = (SlidingTileBoardManager) input.readObject();
 
                 inputStream.close();
             }
@@ -208,7 +210,7 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(
                     this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(boardManager);
+            outputStream.writeObject(slidingTileBoardManager);
             outputStream.close();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());

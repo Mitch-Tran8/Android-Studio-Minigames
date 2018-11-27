@@ -9,11 +9,13 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import phase1.gamecenter.slidingtiles.GameActivity;
+import phase1.gamecenter.slidingtiles.SlidingTileBoardManager;
 
 
 /**
@@ -32,12 +34,12 @@ public class StartingActivity extends AppCompatActivity {
     /**
      * The board manager.
      */
-    private BoardManager boardManager;
+    private SlidingTileBoardManager slidingTileBoardManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boardManager = new BoardManager(4, 4);
+        slidingTileBoardManager = new SlidingTileBoardManager(4, 4);
         saveToFile(TEMP_SAVE_FILENAME);
 
         setContentView(R.layout.activity_starting_);
@@ -55,7 +57,7 @@ public class StartingActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boardManager = new BoardManager(4, 4);
+                slidingTileBoardManager = new SlidingTileBoardManager(4, 4);
                 switchToGame();
             }
         });
@@ -147,7 +149,7 @@ public class StartingActivity extends AppCompatActivity {
             InputStream inputStream = this.openFileInput(fileName);
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
-                boardManager = (BoardManager) input.readObject();
+                slidingTileBoardManager = (SlidingTileBoardManager) input.readObject();
                 inputStream.close();
             }
         } catch (FileNotFoundException e) {
@@ -168,7 +170,7 @@ public class StartingActivity extends AppCompatActivity {
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(
                     this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(boardManager);
+            outputStream.writeObject(slidingTileBoardManager);
 
             outputStream.close();
         } catch (IOException e) {
