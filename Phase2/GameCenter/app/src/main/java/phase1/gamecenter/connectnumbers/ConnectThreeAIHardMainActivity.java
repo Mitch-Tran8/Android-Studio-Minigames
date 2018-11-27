@@ -1,4 +1,4 @@
-package phase1.gamecenter;
+package phase1.gamecenter.connectnumbers;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import phase1.gamecenter.R;
 
 public class ConnectThreeAIHardMainActivity extends AppCompatActivity implements View.OnClickListener {
 

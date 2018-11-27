@@ -2,7 +2,7 @@ package phase1.gamecenter;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
+import phase1.gamecenter.connectnumbers.ConnectThreeMainActivity;
 
 import static junit.framework.Assert.assertEquals;
 

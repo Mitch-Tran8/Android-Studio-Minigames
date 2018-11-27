@@ -2,6 +2,9 @@ package phase1.gamecenter;
 
 
 import org.junit.Test;
+
+import phase1.gamecenter.connectnumbers.ConnectFourMainActivity;
+
 import static junit.framework.Assert.assertEquals;
 
 

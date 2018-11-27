@@ -1,4 +1,4 @@
-package phase1.gamecenter;
+package phase1.gamecenter.connectnumbers;
 
 import java.util.Random;
 import android.content.Intent;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import phase1.gamecenter.R;
 
 public class ConnectFourAIEasyMainActivity extends AppCompatActivity implements View.OnClickListener {
 

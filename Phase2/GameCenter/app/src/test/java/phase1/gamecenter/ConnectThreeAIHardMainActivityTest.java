@@ -2,6 +2,8 @@ package phase1.gamecenter;
 
 import org.junit.Test;
 
+import phase1.gamecenter.connectnumbers.ConnectThreeAIHardMainActivity;
+
 import static junit.framework.Assert.assertEquals;
 
 public class ConnectThreeAIHardMainActivityTest {
