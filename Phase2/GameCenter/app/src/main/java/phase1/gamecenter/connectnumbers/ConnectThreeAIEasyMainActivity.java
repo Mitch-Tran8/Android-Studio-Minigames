@@ -206,6 +206,8 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
                     if (matchOver()) {
                         if (!player1Turn) {
                             aiWins();
+                            Toast.makeText(this, "AI wins!", Toast.LENGTH_LONG).show();
+                            updatePoints();
                         }
                     }
                 }
@@ -236,6 +238,11 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
      * @param round amount of rounds to be set
      */
     public void setAiRoundsWon(int round){ this.aiRoundsWon = round;}
+
+    /**
+     * get the number of rounds the AI has won only for testing purpose
+     */
+    public int getAiRoundsWon(){ return aiRoundsWon;}
 
     /**
      * set the number of rounds that have been played for testing purpose
@@ -294,8 +301,6 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
         player1points = player1points - 3;
         aiRoundsWon++;
         roundsPlayed++;
-        Toast.makeText(this, "AI wins!", Toast.LENGTH_LONG).show();
-        updatePoints();
     }
 
     /**
