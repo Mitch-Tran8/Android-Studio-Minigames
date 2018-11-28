@@ -118,4 +118,105 @@ public class ConnectFourMainActivityTest {
         ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
         assertEquals(false, testerActivity.checkDescendingDiagonals(testerBoard));
     }
+
+    @Test
+    public void testCheckPlayer1RoundsWonGameOverIsTrue(){
+        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
+        testerActivity.setPlayer1RoundsWon(3);
+        assertEquals(true, testerActivity.gameOver());
+    }
+
+    @Test
+    public void testCheckAiRoundsWonGameOverIsTrue(){
+        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
+        testerActivity.setPlayer2RoundsWon(3);
+        assertEquals(true, testerActivity.gameOver());
+    }
+
+    @Test
+    public void testCheckRoundsWonGameOverIsTrue(){
+        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
+        testerActivity.setRoundsPlayed(5);
+        assertEquals(true, testerActivity.gameOver());
+    }
+
+    @Test
+    public void testCheckGameOverIsFalse(){
+        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
+        testerActivity.setPlayer1RoundsWon(0);
+        testerActivity.setPlayer2RoundsWon(0);
+        testerActivity.setRoundsPlayed(0);
+        assertEquals(false, testerActivity.gameOver());
+    }
+
+    @Test
+    public void testPlayer1WinsPlayer1PointsChange(){
+        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
+        testerActivity.player1Wins();
+        assertEquals(5, testerActivity.getPlayer1Points());
+    }
+
+    @Test
+    public void testPlayer1WinsPlayer2PointsChange(){
+        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
+        testerActivity.player1Wins();
+        assertEquals(-3, testerActivity.getPlayer2Points());
+    }
+
+    @Test
+    public void testPlayer1WinsPlayer1RoundChange(){
+        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
+        testerActivity.player1Wins();
+        assertEquals(1, testerActivity.getPlayer1RoundsWon());
+    }
+
+    @Test
+    public void testPlayer1WinsRoundsPlayedChange(){
+        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
+        testerActivity.player1Wins();
+        assertEquals(1, testerActivity.getRoundsPlayed());
+    }
+
+    @Test
+    public void testPLayer2WinsPlayer1PointsChange(){
+        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
+        testerActivity.player2Wins();
+        assertEquals(-3, testerActivity.getPlayer1Points());
+    }
+
+    @Test
+    public void testPlayer2WinsPlayer2PointsChange(){
+        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
+        testerActivity.player2Wins();
+        assertEquals(5, testerActivity.getPlayer2Points());
+    }
+
+    @Test
+    public void testPlayer2WinsPlayer2RoundChange(){
+        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
+        testerActivity.player2Wins();
+        assertEquals(1, testerActivity.getPlayer2RoundsWon());
+    }
+
+    @Test
+    public void testPlayer2WinsRoundsPlayedChange(){
+        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
+        testerActivity.player2Wins();
+        assertEquals(1, testerActivity.getRoundsPlayed());
+    }
+
+    @Test
+    public void testTieRoundChange(){
+        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
+        testerActivity.tie();
+        assertEquals(1, testerActivity.getTies());
+    }
+
+    @Test
+    public void testTieRoundsPlayedChange(){
+        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
+        testerActivity.tie();
+        assertEquals(1, testerActivity.getRoundsPlayed());
+    }
+
 }

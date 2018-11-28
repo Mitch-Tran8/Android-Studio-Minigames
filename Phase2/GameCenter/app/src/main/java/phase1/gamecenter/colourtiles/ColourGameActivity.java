@@ -64,14 +64,6 @@ public class  ColourGameActivity extends AppCompatActivity implements Observer {
     private Button saveButton;
 
     /**
-     * Constants for swiping directions. Should be an enum, probably.
-     */
-    public static final int UP = 1;
-    public static final int DOWN = 2;
-    public static final int LEFT = 3;
-    public static final int RIGHT = 4;
-
-    /**
      * Grid View and calculated column height and width based on device size
      */
     private GestureDetectGridView gridView;
@@ -174,18 +166,20 @@ public class  ColourGameActivity extends AppCompatActivity implements Observer {
             toast.show();
             saveToFile(ColourBoardManager.TEMP_SAVE_FILENAME);
             Intent tmp = new Intent(ColourGameActivity.this, ColourTileRoundsActivity.class);
-            tmp.putExtra("round",boardManager.getRound());
+            boardManager.setRound(boardManager.getRound() - 1);
+            tmp.putExtra("round", boardManager.getRound());
+            System.out.println("lost "+ (boardManager.getRound()));
             startActivity(tmp);
         } else {
             Toast toast = Toast.makeText(ColourGameActivity.this, "Time's up! you've unlocked the next level. :D" +
                     " your score: " + score, Toast.LENGTH_LONG);
             toast.setGravity(0,10,10);
             toast.show();
-            saveToFile(ColourBoardManager.TEMP_SAVE_FILENAME);
             Intent tmp = new Intent(ColourGameActivity.this, ColourTileRoundsActivity.class);
-            Bundle b = new Bundle();
-            b.putInt("round",  boardManager.getRound() + 1);
-            tmp.putExtras(b);
+            boardManager.setRound(boardManager.getRound() + 1);
+            saveToFile(ColourBoardManager.TEMP_SAVE_FILENAME);
+            tmp.putExtra("rounds", boardManager.getRound());
+            System.out.println("won "+ (boardManager.getRound()));
             startActivity(tmp);
 
         }

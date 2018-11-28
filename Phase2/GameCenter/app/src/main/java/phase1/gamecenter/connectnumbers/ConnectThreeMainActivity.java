@@ -195,15 +195,69 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
         if (matchOver()) {
             if (player1Turn) {
                 player1Wins();
+                Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_LONG).show();
+                updatePoints();
             } else {
                 player2Wins();
+                Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_LONG).show();
+                updatePoints();
             }
         } else if (moves == 9) {
             tie();
+            Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
+            updatePoints();
         } else {
             player1Turn = !player1Turn;
         }
     }
+
+    /**
+     * set the number of rounds player 1 has won only for testing purpose
+     * @param round amount of rounds to be set
+     */
+    public void setPlayer1RoundsWon(int round){ this.player1RoundsWon = round;}
+
+    /**
+     * get the number of rounds player 1 has won only for testing purpose
+     */
+    public int getPlayer1RoundsWon(){ return player1RoundsWon;}
+
+    /**
+     * set the number of rounds the AI has won only for testing purpose
+     * @param round amount of rounds to be set
+     */
+    public void setPlayer2RoundsWon(int round){ this.player2RoundsWon = round;}
+
+    /**
+     * get the number of rounds the AI has won only for testing purpose
+     */
+    public int getPlayer2RoundsWon(){ return player2RoundsWon;}
+
+    /**
+     * set the number of rounds that have been played for testing purpose
+     * @param round amount of rounds to be set
+     */
+    public void setRoundsPlayed(int round){ this.roundsPlayed = round;}
+
+    /**
+     * get the number of rounds that have been played for testing purpose
+     */
+    public int getRoundsPlayed(){ return roundsPlayed;}
+
+    /**
+     * get the number of rounds player 1 has won only for testing purpose
+     */
+    public int getPlayer1Points(){ return player1points;}
+
+    /**
+     * get the number of rounds the AI has won only for testing purpose
+     */
+    public int getPlayer2Points(){ return player2points;}
+
+    /**
+     * get the number of rounds that have been played for testing purpose
+     */
+    public int getTies(){ return ties;}
 
     /**
      * Displays the toast message when the game is over.
@@ -221,35 +275,29 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
     /**
      * Tie in the game.
      */
-    private void tie() {
+    public void tie() {
         ties++;
         roundsPlayed++;
-        Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
-        updatePoints();
     }
 
     /**
      * Player 2 wins the match, update scores.
      */
-    private void player2Wins() {
+    public void player2Wins() {
         player2points = player2points + 5;
         player1points = player1points - 3;
         player2RoundsWon++;
         roundsPlayed++;
-        Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_LONG).show();
-        updatePoints();
     }
 
     /**
      * Player 1 wins the match, update scores.
      */
-    private void player1Wins() {
+    public void player1Wins() {
         player1points = player1points + 5;
         player2points = player2points - 3;
         player1RoundsWon++;
         roundsPlayed++;
-        Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_LONG).show();
-        updatePoints();
     }
 
     /**
@@ -258,7 +306,7 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
      *
      * @return whether the game is over.
      */
-    private boolean gameOver() {
+    public boolean gameOver() {
         return (player1RoundsWon == 3 || player2RoundsWon == 3 || roundsPlayed == 5);
     }
 

@@ -71,21 +71,9 @@ public class SlidingTilesBoardManagerUnitTest {
 
     @Test
     public void testNumOfMoves() {
-        List<NumberTile> numberTiles = new ArrayList<NumberTile>();
-        numberTiles.add(new NumberTile(0, "3x3"));
-        numberTiles.add(new NumberTile(1, "3x3"));
-        numberTiles.add(new NumberTile(2, "3x3"));
-        numberTiles.add(new NumberTile(3, "3x3"));
-        numberTiles.add(new NumberTile(4, "3x3"));
-        numberTiles.add(new NumberTile(5, "3x3"));
-        numberTiles.add(new NumberTile(6, "3x3"));
-        numberTiles.add(new NumberTile(7, "3x3"));
-        numberTiles.add(new NumberTile(8, "3x3"));
-
-        SlidingTilesBoard testerSlidingTilesBoard = new SlidingTilesBoard(numberTiles);
-        SlidingTileBoardManager testerSlidingTileBoardManager = new SlidingTileBoardManager(testerSlidingTilesBoard, 39);
-        testerSlidingTileBoardManager.setNumOfMoves(3);
-        assertEquals(3, testerSlidingTileBoardManager.getNumOfMoves());
+        SlidingTileBoardManager testerSlidingTileBoardManager2 = new SlidingTileBoardManager(3, 3);
+        testerSlidingTileBoardManager2.setNumOfMoves(3);
+        assertEquals(3, testerSlidingTileBoardManager2.getNumOfMoves());
     }
 
 /*    @Test

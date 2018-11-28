@@ -118,6 +118,7 @@ public class ColourBoardManager extends BoardManager implements Serializable {
      * @return int round
      */
     public int getRound(){return round;}
+    public void setRound(int round){this.round = round;}
 
     /**
      * sets up the board
