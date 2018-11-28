@@ -15,7 +15,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.GridView;
 
-import java.io.IOException;
+import phase1.gamecenter.colourtiles.ColourBoardManager;
+import phase1.gamecenter.slidingtiles.SlidingTileBoardManager;
 
 public class GestureDetectGridView extends GridView {
     public static final int SWIPE_MIN_DISTANCE = 100;
@@ -26,7 +27,7 @@ public class GestureDetectGridView extends GridView {
     private boolean mFlingConfirmed = false;
     private float mTouchX;
     private float mTouchY;
-    private BoardManager boardManager;
+    private SlidingTileBoardManager slidingTileBoardManager;
     private ColourBoardManager colourBoardManager;
 
     public GestureDetectGridView(Context context) {
@@ -104,9 +105,9 @@ public class GestureDetectGridView extends GridView {
         return gDetector.onTouchEvent(ev);
     }
 
-    public void setBoardManager(BoardManager boardManager) {
-        this.boardManager = boardManager;
-        mController.setBoardManager(boardManager);
+    public void setSlidingTileBoardManager(SlidingTileBoardManager slidingTileBoardManager) {
+        this.slidingTileBoardManager = slidingTileBoardManager;
+        mController.setSlidingTileBoardManager(slidingTileBoardManager);
     }
     public void setBoardManager(ColourBoardManager boardManager) {
         this.colourBoardManager = boardManager;

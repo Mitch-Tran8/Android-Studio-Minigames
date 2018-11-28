@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ColourStartingActivity">
+    tools:context=".colourtiles.ColourStartingActivity">
 
     <TextView
         android:id="@+id/instructions2"
@@ -19,7 +19,7 @@
         android:ems="10"
         android:fontFamily="@font/andika"
         android:inputType="textMultiLine"
-        android:text="Match three of the same colour tiles as many times as you can within the given amount of time. You may only progress to the next round once you've completed all of the ones prior to it."
+        android:text="Match three of the same colour numberTiles as many times as you can within the given amount of time. You may only progress to the next round once you've completed all of the ones prior to it."
         android:textAlignment="center"
         android:textColor="#E2D4D3"
         android:textSize="18sp"

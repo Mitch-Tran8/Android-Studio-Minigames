@@ -1,13 +1,10 @@
 package phase1.gamecenter;
 
-import android.os.Bundle;
-
 import java.util.ArrayList;
-import java.util.Collections;
 
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
-import android.content.Intent;
+
+import phase1.gamecenter.slidingtiles.SlidingTileBoardManager;
 
 /**
  * The scoreboard for a specific game,holds the top 5 scores and corresponding users for the
@@ -30,7 +27,7 @@ public class GameScoreBoard extends AppCompatActivity {
      */
     private ArrayList<Object> gameScoreBoard;
 
-    public BoardManager boardManager;
+    public SlidingTileBoardManager slidingTileBoardManager;
 
     public User user;
 

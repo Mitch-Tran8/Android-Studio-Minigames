@@ -1,18 +1,20 @@
 package phase1.gamecenter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.widget.Toast;
 
+import phase1.gamecenter.colourtiles.ColourBoardManager;
+import phase1.gamecenter.slidingtiles.SlidingTileBoardManager;
+
 /**
- * Controls movements on BoardManager
+ * Controls movements on SlidingTileBoardManager
  */
 public class MovementController {
 
     /**
-     * The BoardManager that MovementController is controlling.
+     * The SlidingTileBoardManager that MovementController is controlling.
      */
-    private BoardManager boardManager = null;
+    private SlidingTileBoardManager slidingTileBoardManager = null;
     private ColourBoardManager colourBoardManager = null;
 
     /**
@@ -22,11 +24,11 @@ public class MovementController {
     }
 
     /**
-     * Set the boardManager that MovementController is acting upon.
-     * @param boardManager the boardManager being controlled
+     * Set the slidingTileBoardManager that MovementController is acting upon.
+     * @param slidingTileBoardManager the slidingTileBoardManager being controlled
      */
-    public void setBoardManager(BoardManager boardManager) {
-        this.boardManager = boardManager;
+    public void setSlidingTileBoardManager(SlidingTileBoardManager slidingTileBoardManager) {
+        this.slidingTileBoardManager = slidingTileBoardManager;
     }
     public void setBoardManager(ColourBoardManager boardManager) {
         this.colourBoardManager = boardManager;
@@ -41,11 +43,11 @@ public class MovementController {
     public void processTapMovement(Context context, int position, boolean display) {
 
         // tap movements on the board manager
-        if(boardManager != null) {
-            if (boardManager.isValidTap(position)) {
-                boardManager.touchMove(position);
-                if (boardManager.puzzleSolved()) {
-                    String score = Integer.toString(boardManager.getScore());
+        if(slidingTileBoardManager != null) {
+            if (slidingTileBoardManager.isValidTap(position)) {
+                slidingTileBoardManager.touchMove(position);
+                if (slidingTileBoardManager.puzzleSolved()) {
+                    String score = Integer.toString(slidingTileBoardManager.getScore());
                     Toast.makeText(context, "YOU WIN! Your score is: " + score, Toast.LENGTH_LONG).show();
                 }
             } else {
