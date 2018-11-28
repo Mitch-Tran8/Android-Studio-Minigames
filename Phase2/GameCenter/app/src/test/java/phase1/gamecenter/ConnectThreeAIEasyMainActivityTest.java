@@ -126,6 +126,33 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
         assertEquals(false, testerActivity.gameOver());
     }
 
+    @Test
+    public void testPlayer1WinsPlayerPointsChange(){
+        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        testerActivity.player1Wins();
+        assertEquals(5, testerActivity.getPlayer1Points());
+    }
+
+    @Test
+    public void testPlayer1WinsAiPointsChange(){
+        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        testerActivity.player1Wins();
+        assertEquals(-3, testerActivity.getAiPoints());
+    }
+
+    @Test
+    public void testPlayer1WinsAiPlayer1RoundChange(){
+        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        testerActivity.player1Wins();
+        assertEquals(1, testerActivity.getPlayer1RoundsWon());
+    }
+
+    @Test
+    public void testPlayer1WinsAiRoundsPlayedChange(){
+        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        testerActivity.player1Wins();
+        assertEquals(1, testerActivity.getRoundsPlayed());
+    }
 
 }
 
