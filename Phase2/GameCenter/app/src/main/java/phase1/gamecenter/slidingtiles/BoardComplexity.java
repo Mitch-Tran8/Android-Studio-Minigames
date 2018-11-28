@@ -1,4 +1,4 @@
-package phase1.gamecenter;
+package phase1.gamecenter.slidingtiles;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -16,9 +16,8 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import phase1.gamecenter.slidingtiles.DifficultyLevel;
-import phase1.gamecenter.slidingtiles.GameActivity;
-import phase1.gamecenter.slidingtiles.SlidingTileBoardManager;
+import phase1.gamecenter.R;
+import phase1.gamecenter.StartingActivity;
 
 /**
  * ColourBoard Complexity Activity

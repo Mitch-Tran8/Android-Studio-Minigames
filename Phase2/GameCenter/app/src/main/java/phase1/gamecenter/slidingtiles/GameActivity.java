@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import phase1.gamecenter.BoardComplexity;
 import phase1.gamecenter.CustomAdapter;
 import phase1.gamecenter.GestureDetectGridView;
 import phase1.gamecenter.R;

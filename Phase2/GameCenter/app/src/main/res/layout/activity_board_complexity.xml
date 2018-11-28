@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BoardComplexity">
+    tools:context=".slidingtiles.BoardComplexity">
 
     <TextView
         android:id="@+id/complexity_title"

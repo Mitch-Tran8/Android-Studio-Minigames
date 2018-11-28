@@ -26,7 +26,7 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".GameCenterMainActivity" />
         <activity android:name=".SlidingTileMainPageActivity" />
-        <activity android:name=".BoardComplexity" />
+        <activity android:name=".slidingtiles.BoardComplexity" />
         <activity android:name=".UserScoreBoard" />
         <activity android:name=".colourtiles.ColourGameActivity" />
         <activity android:name=".colourtiles.ColourStartingActivity" />

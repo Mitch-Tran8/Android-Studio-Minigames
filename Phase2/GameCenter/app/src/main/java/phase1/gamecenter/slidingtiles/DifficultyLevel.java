@@ -13,7 +13,6 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import phase1.gamecenter.BoardComplexity;
 import phase1.gamecenter.R;
 import phase1.gamecenter.StartingActivity;
 
