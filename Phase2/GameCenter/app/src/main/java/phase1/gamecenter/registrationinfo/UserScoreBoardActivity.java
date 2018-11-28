@@ -1,4 +1,4 @@
-package phase1.gamecenter;
+package phase1.gamecenter.registrationinfo;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -17,6 +17,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+
+import phase1.gamecenter.R;
 
 /**
  * UserScoreBoard Activity. The user's personal scoreboard.

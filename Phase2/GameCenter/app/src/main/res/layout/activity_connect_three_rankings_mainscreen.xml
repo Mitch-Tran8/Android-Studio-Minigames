@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SlidingTileMainPageActivity">
+    tools:context=".slidingtiles.SlidingTileMainPageActivity">
 
     <Button
         android:id="@+id/artificial_intel_rankings_button"

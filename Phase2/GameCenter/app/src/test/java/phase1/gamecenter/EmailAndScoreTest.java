@@ -2,6 +2,8 @@ package phase1.gamecenter;
 
 import org.junit.Test;
 
+import phase1.gamecenter.registrationinfo.EmailAndScore;
+
 import static org.junit.Assert.assertEquals;
 
 public class EmailAndScoreTest {

@@ -23,7 +23,6 @@ import java.util.Observer;
 import phase1.gamecenter.CustomAdapter;
 import phase1.gamecenter.GestureDetectGridView;
 import phase1.gamecenter.R;
-import phase1.gamecenter.SlidingTileMainPageActivity;
 
 
 /**

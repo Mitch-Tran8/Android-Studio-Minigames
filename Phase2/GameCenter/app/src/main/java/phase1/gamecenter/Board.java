@@ -19,4 +19,6 @@ public abstract class Board extends Observable {
 
     public Board(){
     }
+
+
 }

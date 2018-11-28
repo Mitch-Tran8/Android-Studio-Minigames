@@ -1,4 +1,4 @@
-package phase1.gamecenter;
+package phase1.gamecenter.slidingtiles;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +12,11 @@ import com.google.firebase.auth.FirebaseUser;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import phase1.gamecenter.slidingtiles.BoardComplexity;
+import phase1.gamecenter.registrationinfo.EmailAndScore;
+import phase1.gamecenter.GameCenterMainActivity;
+import phase1.gamecenter.LeaderboardActivity;
+import phase1.gamecenter.R;
+import phase1.gamecenter.registrationinfo.UserScoreBoardActivity;
 
 
 /**
