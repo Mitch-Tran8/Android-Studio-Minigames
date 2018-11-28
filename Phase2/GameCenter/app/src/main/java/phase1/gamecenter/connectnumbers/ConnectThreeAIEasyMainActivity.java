@@ -189,6 +189,8 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
             if (matchOver()) {
                 if (player1Turn) {
                     player1Wins();
+                    Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_LONG).show();
+                    updatePoints();
                 }
             }
             else {
@@ -225,6 +227,11 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
     public void setPlayer1RoundsWon(int round){ this.player1RoundsWon = round;}
 
     /**
+     * get the number of rounds player 1 has won only for testing purpose
+     */
+    public int getPlayer1RoundsWon(){ return player1RoundsWon;}
+
+    /**
      * set the number of rounds the AI has won only for testing purpose
      * @param round amount of rounds to be set
      */
@@ -235,6 +242,26 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
      * @param round amount of rounds to be set
      */
     public void setRoundsPlayed(int round){ this.roundsPlayed = round;}
+
+    /**
+     * get the number of rounds that have been played for testing purpose
+     */
+    public int getRoundsPlayed(){ return roundsPlayed;}
+
+    /**
+     * get the number of rounds player 1 has won only for testing purpose
+     */
+    public int getPlayer1Points(){ return player1points;}
+
+    /**
+     * get the number of rounds the AI has won only for testing purpose
+     */
+    public int getAiPoints(){ return aipoints;}
+
+    /**
+     * get the number of rounds that have been played for testing purpose
+     */
+    public int getTies(){ return ties;}
 
     /**
      * Displays the toast message when the game is over.
@@ -252,19 +279,17 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
     /**
      * Player 1 wins the match, update scores.
      */
-    private void player1Wins() {
+    public void player1Wins() {
         player1points = player1points + 5;
         aipoints = aipoints - 3;
         player1RoundsWon++;
         roundsPlayed++;
-        Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_LONG).show();
-        updatePoints();
     }
 
     /**
      * The AI wins the match, update scores.
      */
-    private void aiWins() {
+    public void aiWins() {
         aipoints = aipoints + 5;
         player1points = player1points - 3;
         aiRoundsWon++;
@@ -276,7 +301,7 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
     /**
      * Tie in the game.
      */
-    private void tie() {
+    public void tie() {
         ties++;
         roundsPlayed++;
         Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
