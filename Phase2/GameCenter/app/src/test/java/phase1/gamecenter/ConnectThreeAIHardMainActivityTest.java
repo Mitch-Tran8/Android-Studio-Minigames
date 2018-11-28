@@ -126,4 +126,75 @@ public class ConnectThreeAIHardMainActivityTest {
         assertEquals(false, testerActivity.gameOver());
     }
 
+    @Test
+    public void testPlayer1WinsPlayer1PointsChange(){
+        ConnectThreeAIHardMainActivity testerActivity = new ConnectThreeAIHardMainActivity();
+        testerActivity.player1Wins();
+        assertEquals(5, testerActivity.getPlayer1Points());
+    }
+
+    @Test
+    public void testPlayer1WinsAiPointsChange(){
+        ConnectThreeAIHardMainActivity testerActivity = new ConnectThreeAIHardMainActivity();
+        testerActivity.player1Wins();
+        assertEquals(-3, testerActivity.getAiPoints());
+    }
+
+    @Test
+    public void testPlayer1WinsPlayer1RoundChange(){
+        ConnectThreeAIHardMainActivity testerActivity = new ConnectThreeAIHardMainActivity();
+        testerActivity.player1Wins();
+        assertEquals(1, testerActivity.getPlayer1RoundsWon());
+    }
+
+    @Test
+    public void testPlayer1WinsRoundsPlayedChange(){
+        ConnectThreeAIHardMainActivity testerActivity = new ConnectThreeAIHardMainActivity();
+        testerActivity.player1Wins();
+        assertEquals(1, testerActivity.getRoundsPlayed());
+    }
+
+    @Test
+    public void testAiWinsPlayer1PointsChange(){
+        ConnectThreeAIHardMainActivity testerActivity = new ConnectThreeAIHardMainActivity();
+        testerActivity.aiWins();
+        assertEquals(-3, testerActivity.getPlayer1Points());
+    }
+
+    @Test
+    public void testAiWinsAiPointsChange(){
+        ConnectThreeAIHardMainActivity testerActivity = new ConnectThreeAIHardMainActivity();
+        testerActivity.aiWins();
+        assertEquals(5, testerActivity.getAiPoints());
+    }
+
+    @Test
+    public void testAiWinsAiRoundChange(){
+        ConnectThreeAIHardMainActivity testerActivity = new ConnectThreeAIHardMainActivity();
+        testerActivity.aiWins();
+        assertEquals(1, testerActivity.getAiRoundsWon());
+    }
+
+    @Test
+    public void testAiWinsRoundsPlayedChange(){
+        ConnectThreeAIHardMainActivity testerActivity = new ConnectThreeAIHardMainActivity();
+        testerActivity.aiWins();
+        assertEquals(1, testerActivity.getRoundsPlayed());
+    }
+
+    @Test
+    public void testTieRoundChange(){
+        ConnectThreeAIHardMainActivity testerActivity = new ConnectThreeAIHardMainActivity();
+        testerActivity.tie();
+        assertEquals(1, testerActivity.getTies());
+    }
+
+    @Test
+    public void testTieRoundsPlayedChange(){
+        ConnectThreeAIHardMainActivity testerActivity = new ConnectThreeAIHardMainActivity();
+        testerActivity.tie();
+        assertEquals(1, testerActivity.getRoundsPlayed());
+    }
+
+
 }
