@@ -1,12 +1,13 @@
 package phase1.gamecenter;
 
 import org.junit.Test;
-
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import phase1.gamecenter.connectnumbers.ConnectThreeAIEasyMainActivity;
 
 import static junit.framework.Assert.assertEquals;
 
-public class ConnectThreeAIEasyMainActivityTest {
+public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
     @Test
     public void testCheckRowsTrue() {
         String[][] testerBoard = {
@@ -74,7 +75,7 @@ public class ConnectThreeAIEasyMainActivityTest {
     }
 
     @Test
-    public void testCheckDescendingDiagonalsTrue() {
+    public void testCheckDescendingDiagonalIsTrue() {
         String[][] testerBoard = {
                 {"O", "X", "O"},
                 {"X", "O", "O"},
@@ -85,7 +86,7 @@ public class ConnectThreeAIEasyMainActivityTest {
     }
 
     @Test
-    public void testCheckDescendingDiagonalsFalse() {
+    public void testCheckDescendingDiagonalIsFalse() {
         String[][] testerBoard = {
                 {"", "X", "O"},
                 {"X", "", "O"},
@@ -95,4 +96,36 @@ public class ConnectThreeAIEasyMainActivityTest {
         assertEquals(false, testerActivity.checkDescendingDiagonals(testerBoard));
     }
 
+    @Test
+    public void testCheckPlayer1RoundsWonGameOverIsTrue(){
+        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        testerActivity.setPlayer1RoundsWon(3);
+        assertEquals(true, testerActivity.gameOver());
+    }
+
+    @Test
+    public void testCheckAiRoundsWonGameOverIsTrue(){
+        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        testerActivity.setAiRoundsWon(3);
+        assertEquals(true, testerActivity.gameOver());
+    }
+
+    @Test
+    public void testCheckRoundsWonGameOverIsTrue(){
+        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        testerActivity.setRoundsPlayed(5);
+        assertEquals(true, testerActivity.gameOver());
+    }
+
+    @Test
+    public void testCheckGameOverIsFalse(){
+        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        testerActivity.setPlayer1RoundsWon(0);
+        testerActivity.setAiRoundsWon(0);
+        testerActivity.setRoundsPlayed(0);
+        assertEquals(false, testerActivity.gameOver());
+    }
+
+
 }
+
