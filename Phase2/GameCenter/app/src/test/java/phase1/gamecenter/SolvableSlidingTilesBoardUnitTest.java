@@ -186,7 +186,50 @@ public class SolvableSlidingTilesBoardUnitTest {
     }
 
     @Test
-    public void testGetBlankTileRow_MiddleFromBottom4x4() {
+    public void testGetBlankTileRow_TopFromBottom3x3() {
+        List<NumberTile> tiles3x3 = new ArrayList<>();
+        tiles3x3.add(new NumberTile(8, "3x3"));
+        tiles3x3.add(new NumberTile(0, "3x3"));
+        tiles3x3.add(new NumberTile(1, "3x3"));
+        tiles3x3.add(new NumberTile(2, "3x3"));
+        tiles3x3.add(new NumberTile(3, "3x3"));
+        tiles3x3.add(new NumberTile(4, "3x3"));
+        tiles3x3.add(new NumberTile(5, "3x3"));
+        tiles3x3.add(new NumberTile(6, "3x3"));
+        tiles3x3.add(new NumberTile(7, "3x3"));
+
+        SlidingTilesBoard testerSlidingTilesBoard3X3 = new SlidingTilesBoard(tiles3x3);
+        SlidingTileBoardManager testerSlidingTileBoardManager3X3 = new SlidingTileBoardManager(testerSlidingTilesBoard3X3, 100);
+        assertEquals(3, testerSlidingTileBoardManager3X3.getBlankTileRow(tiles3x3));
+    }
+
+    @Test
+    public void testGetBlankTileRow_Bottom4x4() {
+        List<NumberTile> tiles4x4 = new ArrayList<>();
+        tiles4x4.add(new NumberTile(0, "4x4"));
+        tiles4x4.add(new NumberTile(1, "4x4"));
+        tiles4x4.add(new NumberTile(2, "4x4"));
+        tiles4x4.add(new NumberTile(3, "4x4"));
+        tiles4x4.add(new NumberTile(4, "4x4"));
+        tiles4x4.add(new NumberTile(5, "4x4"));
+        tiles4x4.add(new NumberTile(6, "4x4"));
+        tiles4x4.add(new NumberTile(7, "4x4"));
+        tiles4x4.add(new NumberTile(8, "4x4"));
+        tiles4x4.add(new NumberTile(9, "4x4"));
+        tiles4x4.add(new NumberTile(10, "4x4"));
+        tiles4x4.add(new NumberTile(11, "4x4"));
+        tiles4x4.add(new NumberTile(12, "4x4"));
+        tiles4x4.add(new NumberTile(13, "4x4"));
+        tiles4x4.add(new NumberTile(14, "4x4"));
+        tiles4x4.add(new NumberTile(15, "4x4"));
+        SlidingTilesBoard testerSlidingTilesBoard4X4 = new SlidingTilesBoard(tiles4x4);
+        SlidingTileBoardManager testerSlidingTileBoardManager4X4 = new SlidingTileBoardManager(testerSlidingTilesBoard4X4, 67);
+        assertEquals(1, testerSlidingTileBoardManager4X4.getBlankTileRow(tiles4x4));
+    }
+
+
+    @Test
+    public void testGetBlankTileRow_2ndFromBottom4x4() {
         List<NumberTile> tiles4x4 = new ArrayList<>();
         tiles4x4.add(new NumberTile(0, "4x4"));
         tiles4x4.add(new NumberTile(1, "4x4"));
@@ -210,9 +253,122 @@ public class SolvableSlidingTilesBoardUnitTest {
     }
 
     @Test
-    public void testGetBlankTileRow_MiddleFromBottom5x5() {
-        List<NumberTile> tiles5x5 = new ArrayList<>();
+    public void testGetBlankTileRow_3rdFromBottom4x4() {
+        List<NumberTile> tiles4x4 = new ArrayList<>();
+        tiles4x4.add(new NumberTile(0, "4x4"));
+        tiles4x4.add(new NumberTile(1, "4x4"));
+        tiles4x4.add(new NumberTile(2, "4x4"));
+        tiles4x4.add(new NumberTile(3, "4x4"));
+        tiles4x4.add(new NumberTile(4, "4x4"));
+        tiles4x4.add(new NumberTile(15, "4x4"));
+        tiles4x4.add(new NumberTile(5, "4x4"));
+        tiles4x4.add(new NumberTile(6, "4x4"));
+        tiles4x4.add(new NumberTile(7, "4x4"));
+        tiles4x4.add(new NumberTile(8, "4x4"));
+        tiles4x4.add(new NumberTile(9, "4x4"));
+        tiles4x4.add(new NumberTile(10, "4x4"));
+        tiles4x4.add(new NumberTile(11, "4x4"));
+        tiles4x4.add(new NumberTile(12, "4x4"));
+        tiles4x4.add(new NumberTile(13, "4x4"));
+        tiles4x4.add(new NumberTile(14, "4x4"));
+        SlidingTilesBoard testerSlidingTilesBoard4X4 = new SlidingTilesBoard(tiles4x4);
+        SlidingTileBoardManager testerSlidingTileBoardManager4X4 = new SlidingTileBoardManager(testerSlidingTilesBoard4X4, 67);
+        assertEquals(3, testerSlidingTileBoardManager4X4.getBlankTileRow(tiles4x4));
+    }
 
+    @Test
+    public void testGetBlankTileRow_4thFromBottom4x4() {
+        List<NumberTile> tiles4x4 = new ArrayList<>();
+        tiles4x4.add(new NumberTile(15, "4x4"));
+        tiles4x4.add(new NumberTile(0, "4x4"));
+        tiles4x4.add(new NumberTile(1, "4x4"));
+        tiles4x4.add(new NumberTile(2, "4x4"));
+        tiles4x4.add(new NumberTile(3, "4x4"));
+        tiles4x4.add(new NumberTile(4, "4x4"));
+        tiles4x4.add(new NumberTile(5, "4x4"));
+        tiles4x4.add(new NumberTile(6, "4x4"));
+        tiles4x4.add(new NumberTile(7, "4x4"));
+        tiles4x4.add(new NumberTile(8, "4x4"));
+        tiles4x4.add(new NumberTile(9, "4x4"));
+        tiles4x4.add(new NumberTile(10, "4x4"));
+        tiles4x4.add(new NumberTile(11, "4x4"));
+        tiles4x4.add(new NumberTile(12, "4x4"));
+        tiles4x4.add(new NumberTile(13, "4x4"));
+        tiles4x4.add(new NumberTile(14, "4x4"));
+        SlidingTilesBoard testerSlidingTilesBoard4X4 = new SlidingTilesBoard(tiles4x4);
+        SlidingTileBoardManager testerSlidingTileBoardManager4X4 = new SlidingTileBoardManager(testerSlidingTilesBoard4X4, 67);
+        assertEquals(4, testerSlidingTileBoardManager4X4.getBlankTileRow(tiles4x4));
+    }
+
+    @Test
+    public void testGetBlankTileRow_1stFromBottom5x5() {
+        List<NumberTile> tiles5x5 = new ArrayList<>();
+        tiles5x5.add(new NumberTile(0, "5x5"));
+        tiles5x5.add(new NumberTile(1, "5x5"));
+        tiles5x5.add(new NumberTile(2, "5x5"));
+        tiles5x5.add(new NumberTile(3, "5x5"));
+        tiles5x5.add(new NumberTile(4, "5x5"));
+        tiles5x5.add(new NumberTile(5, "5x5"));
+        tiles5x5.add(new NumberTile(6, "5x5"));
+        tiles5x5.add(new NumberTile(7, "5x5"));
+        tiles5x5.add(new NumberTile(8, "5x5"));
+        tiles5x5.add(new NumberTile(9, "5x5"));
+        tiles5x5.add(new NumberTile(10, "5x5"));
+        tiles5x5.add(new NumberTile(11, "5x5"));
+        tiles5x5.add(new NumberTile(12, "5x5"));
+        tiles5x5.add(new NumberTile(13, "5x5"));
+        tiles5x5.add(new NumberTile(14, "5x5"));
+        tiles5x5.add(new NumberTile(15, "5x5"));
+        tiles5x5.add(new NumberTile(16, "5x5"));
+        tiles5x5.add(new NumberTile(17, "5x5"));
+        tiles5x5.add(new NumberTile(18, "5x5"));
+        tiles5x5.add(new NumberTile(19, "5x5"));
+        tiles5x5.add(new NumberTile(20, "5x5"));
+        tiles5x5.add(new NumberTile(21, "5x5"));
+        tiles5x5.add(new NumberTile(22, "5x5"));
+        tiles5x5.add(new NumberTile(23, "5x5"));
+        tiles5x5.add(new NumberTile(24, "5x5"));
+        SlidingTilesBoard testerSlidingTilesBoard5X5 = new SlidingTilesBoard(tiles5x5);
+        SlidingTileBoardManager testerSlidingTileBoardManager5X5 = new SlidingTileBoardManager(testerSlidingTilesBoard5X5, 10);
+        assertEquals(1, testerSlidingTileBoardManager5X5.getBlankTileRow(tiles5x5));
+    }
+
+    @Test
+    public void testGetBlankTileRow_2ndFromBottom5x5() {
+        List<NumberTile> tiles5x5 = new ArrayList<>();
+        tiles5x5.add(new NumberTile(0, "5x5"));
+        tiles5x5.add(new NumberTile(1, "5x5"));
+        tiles5x5.add(new NumberTile(2, "5x5"));
+        tiles5x5.add(new NumberTile(3, "5x5"));
+        tiles5x5.add(new NumberTile(4, "5x5"));
+        tiles5x5.add(new NumberTile(5, "5x5"));
+        tiles5x5.add(new NumberTile(6, "5x5"));
+        tiles5x5.add(new NumberTile(7, "5x5"));
+        tiles5x5.add(new NumberTile(8, "5x5"));
+        tiles5x5.add(new NumberTile(9, "5x5"));
+        tiles5x5.add(new NumberTile(10, "5x5"));
+        tiles5x5.add(new NumberTile(11, "5x5"));
+        tiles5x5.add(new NumberTile(12, "5x5"));
+        tiles5x5.add(new NumberTile(13, "5x5"));
+        tiles5x5.add(new NumberTile(14, "5x5"));
+        tiles5x5.add(new NumberTile(15, "5x5"));
+        tiles5x5.add(new NumberTile(16, "5x5"));
+        tiles5x5.add(new NumberTile(17, "5x5"));
+        tiles5x5.add(new NumberTile(24, "5x5"));
+        tiles5x5.add(new NumberTile(18, "5x5"));
+        tiles5x5.add(new NumberTile(19, "5x5"));
+        tiles5x5.add(new NumberTile(20, "5x5"));
+        tiles5x5.add(new NumberTile(21, "5x5"));
+        tiles5x5.add(new NumberTile(22, "5x5"));
+        tiles5x5.add(new NumberTile(23, "5x5"));
+        SlidingTilesBoard testerSlidingTilesBoard5X5 = new SlidingTilesBoard(tiles5x5);
+        SlidingTileBoardManager testerSlidingTileBoardManager5X5 = new SlidingTileBoardManager(testerSlidingTilesBoard5X5, 10);
+        assertEquals(2, testerSlidingTileBoardManager5X5.getBlankTileRow(tiles5x5));
+    }
+
+    @Test
+    public void testGetBlankTileRow_3rdFromBottom5x5() {
+        List<NumberTile> tiles5x5 = new ArrayList<>();
         tiles5x5.add(new NumberTile(0, "5x5"));
         tiles5x5.add(new NumberTile(1, "5x5"));
         tiles5x5.add(new NumberTile(2, "5x5"));
@@ -242,6 +398,73 @@ public class SolvableSlidingTilesBoardUnitTest {
         SlidingTileBoardManager testerSlidingTileBoardManager5X5 = new SlidingTileBoardManager(testerSlidingTilesBoard5X5, 10);
         assertEquals(3, testerSlidingTileBoardManager5X5.getBlankTileRow(tiles5x5));
     }
+
+    @Test
+    public void testGetBlankTileRow_4thFromBottom5x5() {
+        List<NumberTile> tiles5x5 = new ArrayList<>();
+        tiles5x5.add(new NumberTile(0, "5x5"));
+        tiles5x5.add(new NumberTile(1, "5x5"));
+        tiles5x5.add(new NumberTile(2, "5x5"));
+        tiles5x5.add(new NumberTile(3, "5x5"));
+        tiles5x5.add(new NumberTile(4, "5x5"));
+        tiles5x5.add(new NumberTile(5, "5x5"));
+        tiles5x5.add(new NumberTile(24, "5x5"));
+        tiles5x5.add(new NumberTile(6, "5x5"));
+        tiles5x5.add(new NumberTile(7, "5x5"));
+        tiles5x5.add(new NumberTile(8, "5x5"));
+        tiles5x5.add(new NumberTile(9, "5x5"));
+        tiles5x5.add(new NumberTile(10, "5x5"));
+        tiles5x5.add(new NumberTile(11, "5x5"));
+        tiles5x5.add(new NumberTile(12, "5x5"));
+        tiles5x5.add(new NumberTile(13, "5x5"));
+        tiles5x5.add(new NumberTile(14, "5x5"));
+        tiles5x5.add(new NumberTile(15, "5x5"));
+        tiles5x5.add(new NumberTile(16, "5x5"));
+        tiles5x5.add(new NumberTile(17, "5x5"));
+        tiles5x5.add(new NumberTile(18, "5x5"));
+        tiles5x5.add(new NumberTile(19, "5x5"));
+        tiles5x5.add(new NumberTile(20, "5x5"));
+        tiles5x5.add(new NumberTile(21, "5x5"));
+        tiles5x5.add(new NumberTile(22, "5x5"));
+        tiles5x5.add(new NumberTile(23, "5x5"));
+        SlidingTilesBoard testerSlidingTilesBoard5X5 = new SlidingTilesBoard(tiles5x5);
+        SlidingTileBoardManager testerSlidingTileBoardManager5X5 = new SlidingTileBoardManager(testerSlidingTilesBoard5X5, 10);
+        assertEquals(4, testerSlidingTileBoardManager5X5.getBlankTileRow(tiles5x5));
+    }
+
+    @Test
+    public void testGetBlankTileRow_5thFromBottom5x5() {
+        List<NumberTile> tiles5x5 = new ArrayList<>();
+        tiles5x5.add(new NumberTile(24, "5x5"));
+        tiles5x5.add(new NumberTile(0, "5x5"));
+        tiles5x5.add(new NumberTile(1, "5x5"));
+        tiles5x5.add(new NumberTile(2, "5x5"));
+        tiles5x5.add(new NumberTile(3, "5x5"));
+        tiles5x5.add(new NumberTile(4, "5x5"));
+        tiles5x5.add(new NumberTile(5, "5x5"));
+        tiles5x5.add(new NumberTile(6, "5x5"));
+        tiles5x5.add(new NumberTile(7, "5x5"));
+        tiles5x5.add(new NumberTile(8, "5x5"));
+        tiles5x5.add(new NumberTile(9, "5x5"));
+        tiles5x5.add(new NumberTile(10, "5x5"));
+        tiles5x5.add(new NumberTile(11, "5x5"));
+        tiles5x5.add(new NumberTile(12, "5x5"));
+        tiles5x5.add(new NumberTile(13, "5x5"));
+        tiles5x5.add(new NumberTile(14, "5x5"));
+        tiles5x5.add(new NumberTile(15, "5x5"));
+        tiles5x5.add(new NumberTile(16, "5x5"));
+        tiles5x5.add(new NumberTile(17, "5x5"));
+        tiles5x5.add(new NumberTile(18, "5x5"));
+        tiles5x5.add(new NumberTile(19, "5x5"));
+        tiles5x5.add(new NumberTile(20, "5x5"));
+        tiles5x5.add(new NumberTile(21, "5x5"));
+        tiles5x5.add(new NumberTile(22, "5x5"));
+        tiles5x5.add(new NumberTile(23, "5x5"));
+        SlidingTilesBoard testerSlidingTilesBoard5X5 = new SlidingTilesBoard(tiles5x5);
+        SlidingTileBoardManager testerSlidingTileBoardManager5X5 = new SlidingTileBoardManager(testerSlidingTilesBoard5X5, 10);
+        assertEquals(5, testerSlidingTileBoardManager5X5.getBlankTileRow(tiles5x5));
+    }
+
 
     //-----------getTilesValues() tests ----------
 
