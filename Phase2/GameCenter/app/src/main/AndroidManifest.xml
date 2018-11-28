@@ -33,9 +33,6 @@
         <activity android:name=".slidingtiles.DifficultyLevel" />
         <activity android:name=".LogoutActivity" />
         <activity android:name=".UserScoreBoardActivity"></activity>
-        <activity android:name=".colourtiles.ColourRankingsActivity" />
-        <activity android:name=".colourtiles.ColourScoreBoard3x3" />
-        <activity android:name=".colourtiles.ColourScoreBoard5x5" />
         <activity android:name=".colourtiles.ColourTileRoundsActivity"/>
         <activity android:name=".connectnumbers.ConnectFourMainActivity" />
         <activity android:name=".connectnumbers.ConnectNumbersStartingActivity" />

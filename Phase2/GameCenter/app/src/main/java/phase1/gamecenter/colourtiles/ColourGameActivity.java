@@ -157,15 +157,15 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
     private void gameOver() {
         String score = Integer.toString(boardManager.getScore());
         updateScoreboard(boardManager.getScore());
-        if(boardManager.getScore() < board.getScoreReq()) {
+        if(boardManager.getScore() < boardManager.getScoreReq()) {
             Toast toast = Toast.makeText(ColourGameActivity.this, "Time's up! Try again to unlock the next level. Your score: " + score, Toast.LENGTH_LONG);
             toast.setGravity(0,10,10);
             toast.show();
             saveToFile(ColourBoardManager.TEMP_SAVE_FILENAME);
             Intent tmp = new Intent(ColourGameActivity.this, ColourTileRoundsActivity.class);
-            board.setRound(board.getRound() - 1);
-            tmp.putExtra("round", board.getRound());
-            System.out.println("lost "+ (board.getRound()));
+            boardManager.setRound(boardManager.getRound() - 1);
+            tmp.putExtra("round", boardManager.getRound());
+            System.out.println("lost "+ (boardManager.getRound()));
             startActivity(tmp);
         } else {
             Toast toast = Toast.makeText(ColourGameActivity.this, "Time's up! you've unlocked the next level. :D" +
@@ -175,9 +175,9 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
             saveToFile(ColourBoardManager.TEMP_SAVE_FILENAME);
             Intent tmp = new Intent(ColourGameActivity.this, ColourTileRoundsActivity.class);
             Bundle b = new Bundle();
-            board.setRound(board.getRound() + 1);
-            b.putInt("round",  board.getRound());
-            System.out.println("won "+ (board.getRound()));
+            boardManager.setRound(boardManager.getRound() + 1);
+            b.putInt("round",  boardManager.getRound());
+            System.out.println("won "+ (boardManager.getRound()));
             tmp.putExtras(b);
             startActivity(tmp);
 
