@@ -217,6 +217,8 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
         moves++;
         if (moves == 5) {
             tie();
+            Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
+            updatePoints();
         }else {
             player1Turn = true;
         }
@@ -309,8 +311,6 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
     public void tie() {
         ties++;
         roundsPlayed++;
-        Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
-        updatePoints();
     }
 
     /**
