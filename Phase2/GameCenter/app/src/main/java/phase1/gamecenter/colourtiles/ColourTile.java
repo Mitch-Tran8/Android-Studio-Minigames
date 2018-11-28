@@ -136,80 +136,81 @@ public class ColourTile extends Tile implements Comparable<ColourTile>, Serializ
                 background = R.drawable.colour_9;
                 break;
             case 26:
-                background = R.drawable.colour_11;
+                background = R.drawable.colour_16;
                 break;
             case 27:
-                background = R.drawable.colour_11;
+                background = R.drawable.colour_16;
                 break;
             case 28:
-                background = R.drawable.colour_11;
+                background = R.drawable.colour_16;
                 break;
             case 29:
-                background = R.drawable.colour_11;
+                background = R.drawable.colour_16;
                 break;
             case 30:
-                background = R.drawable.colour_11;
+                background = R.drawable.colour_16;
                 break;
             case 31:
-                background = R.drawable.colour_12;
+                background = R.drawable.colour_17;
                 break;
             case 32:
-                background = R.drawable.colour_12;
+                background = R.drawable.colour_17;
                 break;
             case 33:
-                background = R.drawable.colour_12;
+                background = R.drawable.colour_17;
                 break;
             case 34:
-                background = R.drawable.colour_12;
+                background = R.drawable.colour_17;
                 break;
             case 35:
-                background = R.drawable.colour_12;
+                background = R.drawable.colour_17;
                 break;
             case 36:
-                background = R.drawable.colour_13;
+                background = R.drawable.colour_18;
                 break;
             case 37:
-                background = R.drawable.colour_13;
+                background = R.drawable.colour_18;
                 break;
             case 38:
-                background = R.drawable.colour_13;
+                background = R.drawable.colour_18;
                 break;
             case 39:
-                background = R.drawable.colour_13;
+                background = R.drawable.colour_18;
                 break;
             case 40:
-                background = R.drawable.colour_13;
+                background = R.drawable.colour_18;
                 break;
             case 41:
-                background = R.drawable.colour_14;
+                background = R.drawable.colour_19;
                 break;
             case 42:
-                background = R.drawable.colour_14;
+                background = R.drawable.colour_19;
                 break;
             case 43:
-                background = R.drawable.colour_14;
+                background = R.drawable.colour_19;
                 break;
             case 44:
-                background = R.drawable.colour_14;
+                background = R.drawable.colour_19;
                 break;
             case 45:
-                background = R.drawable.colour_14;
+                background = R.drawable.colour_20;
                 break;
             case 46:
-                background = R.drawable.colour_15;
+                background = R.drawable.colour_20;
                 break;
             case 47:
-                background = R.drawable.colour_15;
+                background = R.drawable.colour_20;
                 break;
             case 48:
-                background = R.drawable.colour_15;
+                background = R.drawable.colour_20;
                 break;
             case 49:
-                background = R.drawable.colour_15;
+                background = R.drawable.colour_20;
                 break;
             case 50:
-                background = R.drawable.colour_15;
+                background = R.drawable.colour_20;
                 break;
+
         }
     }
 

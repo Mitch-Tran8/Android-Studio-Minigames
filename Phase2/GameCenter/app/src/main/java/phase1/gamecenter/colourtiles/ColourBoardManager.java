@@ -337,8 +337,9 @@ public class ColourBoardManager extends BoardManager implements Serializable {
         }
         else if (board.getNUM_ROWS() == 4){
             background = new Random().nextInt(24) + 10;
-        }
-        else {
+        }else if(board.getNUM_ROWS() == 5){
+            background = new Random().nextInt(50) + 26;
+        } else {
             background = new Random().nextInt(49) + 26;
         }
         return new ColourTile(background);

@@ -236,7 +236,6 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
         activateRound6Button();
         activateRound7Button();
         activateRound8Button();
-        activateRound9Button();
         round9Button = findViewById(R.id.round9_button);
 
         round9Button.setOnClickListener(new View.OnClickListener() {
