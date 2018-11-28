@@ -96,4 +96,35 @@ public class ConnectThreeMainActivityTest {
         assertEquals(false, testerActivity.checkDescendingDiagonals(testerBoard));
     }
 
+    @Test
+    public void testCheckPlayer1RoundsWonGameOverIsTrue(){
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
+        testerActivity.setPlayer1RoundsWon(3);
+        assertEquals(true, testerActivity.gameOver());
+    }
+
+    @Test
+    public void testCheckAiRoundsWonGameOverIsTrue(){
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
+        testerActivity.setPlayer2RoundsWon(3);
+        assertEquals(true, testerActivity.gameOver());
+    }
+
+    @Test
+    public void testCheckRoundsWonGameOverIsTrue(){
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
+        testerActivity.setRoundsPlayed(5);
+        assertEquals(true, testerActivity.gameOver());
+    }
+
+    @Test
+    public void testCheckGameOverIsFalse(){
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
+        testerActivity.setPlayer1RoundsWon(0);
+        testerActivity.setPlayer2RoundsWon(0);
+        testerActivity.setRoundsPlayed(0);
+        assertEquals(false, testerActivity.gameOver());
+    }
+
+
 }
