@@ -363,6 +363,11 @@ public class SlidingTileBoardManager extends BoardManager implements Serializabl
             }
         }
         if (solved) {
+            try {
+                createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             updateScore(solved);
             updateScoreboard();
             updateLeadeBoard();
@@ -489,15 +494,6 @@ public class SlidingTileBoardManager extends BoardManager implements Serializabl
         numOfMoves++;
 
     }
-
-
-    /**
-     * returns the moveStack
-     */
-    Stack getMoveStack() {
-        return this.moveStack;
-    }
-
 
     /**
      * Helper function for touchMove, returns the row and column as an array of the blank tile

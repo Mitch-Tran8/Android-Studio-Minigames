@@ -10,6 +10,9 @@ import android.widget.ImageButton;
 
 import phase1.gamecenter.colourtiles.ColourStartingActivity;
 import phase1.gamecenter.connectnumbers.ConnectNumbersStartingActivity;
+import phase1.gamecenter.registrationinfo.LogoutActivity;
+import phase1.gamecenter.registrationinfo.UserScoreBoardActivity;
+import phase1.gamecenter.slidingtiles.SlidingTileMainPageActivity;
 
 /**
  * Game Center Activity.

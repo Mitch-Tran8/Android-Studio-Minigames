@@ -6,13 +6,12 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-
-import phase1.gamecenter.Board;
+import java.util.Observable;
 
 /**
  * The sliding numberTiles board.
  */
-public class SlidingTilesBoard extends Board implements Serializable, Iterable<NumberTile> {
+public class SlidingTilesBoard extends Observable implements Serializable, Iterable<NumberTile> {
 
     /**
      * The number of rows.

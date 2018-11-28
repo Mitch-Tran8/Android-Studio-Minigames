@@ -1,4 +1,4 @@
-package phase1.gamecenter;
+package phase1.gamecenter.registrationinfo;
 
 import android.os.Bundle;
 
@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.content.Intent;
+
+import phase1.gamecenter.R;
+import phase1.gamecenter.slidingtiles.SlidingTileMainPageActivity;
 
 
 public class

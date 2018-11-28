@@ -59,15 +59,6 @@ public class ColourBoard extends Board implements Serializable, Iterable<ColourT
     int getNUM_COLS() {return this.NUM_COLS;}
 
     /**
-     * Return the number of tiles on the board.
-     *
-     * @return the number of tiles on the board
-     */
-    int numTiles() {
-        return NUM_COLS * NUM_ROWS;
-    }
-
-    /**
      * Return the tile at (row, col)
      *
      * @param row the tile row
@@ -82,7 +73,7 @@ public class ColourBoard extends Board implements Serializable, Iterable<ColourT
      * returns the tiles
      * @return tiles
      */
-    ColourTile[][] getTiles() {
+    public ColourTile[][] getTiles() {
         return tiles;
     }
 

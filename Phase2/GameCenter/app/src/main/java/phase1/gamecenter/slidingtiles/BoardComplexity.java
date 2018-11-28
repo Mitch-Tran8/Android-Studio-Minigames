@@ -17,7 +17,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import phase1.gamecenter.R;
-import phase1.gamecenter.StartingActivity;
 
 /**
  * ColourBoard Complexity Activity
@@ -162,7 +161,6 @@ public class BoardComplexity extends AppCompatActivity {
      */
     private void switchToDifficulty() {
         Intent tmp = new Intent(BoardComplexity.this, DifficultyLevel.class);
-        saveToFile(StartingActivity.TEMP_SAVE_FILENAME);
         tmp.putExtra("user_id", user_id);
         startActivity(tmp);
     }
