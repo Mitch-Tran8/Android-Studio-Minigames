@@ -217,6 +217,24 @@ public class ConnectThreeAIHardMainActivity extends AppCompatActivity implements
         }
     }
 
+    /**
+     * set the number of rounds player 1 has won only for testing purpose
+     * @param round amount of rounds to be set
+     */
+    public void setPlayer1RoundsWon(int round){ this.player1RoundsWon = round;}
+
+    /**
+     * set the number of rounds the AI has won only for testing purpose
+     * @param round amount of rounds to be set
+     */
+    public void setAiRoundsWon(int round){ this.aiRoundsWon = round;}
+
+    /**
+     * set the number of rounds that have been played for testing purpose
+     * @param round amount of rounds to be set
+     */
+    public void setRoundsPlayed(int round){ this.roundsPlayed = round;}
+
 
     /**
      * Displays the toast message when the game is over.
@@ -271,7 +289,7 @@ public class ConnectThreeAIHardMainActivity extends AppCompatActivity implements
      *
      * @return whether the game is over.
      */
-    private boolean gameOver() {
+    public boolean gameOver() {
         return (player1RoundsWon == 3 || aiRoundsWon == 3 || roundsPlayed == 5);
     }
 
