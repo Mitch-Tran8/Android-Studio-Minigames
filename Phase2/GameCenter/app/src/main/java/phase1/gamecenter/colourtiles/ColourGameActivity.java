@@ -172,13 +172,11 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
                     " your score: " + score, Toast.LENGTH_LONG);
             toast.setGravity(0,10,10);
             toast.show();
-            saveToFile(ColourBoardManager.TEMP_SAVE_FILENAME);
             Intent tmp = new Intent(ColourGameActivity.this, ColourTileRoundsActivity.class);
-            Bundle b = new Bundle();
             boardManager.setRound(boardManager.getRound() + 1);
-            b.putInt("round",  boardManager.getRound());
+            saveToFile(ColourBoardManager.TEMP_SAVE_FILENAME);
+            tmp.putExtra("rounds", boardManager.getRound());
             System.out.println("won "+ (boardManager.getRound()));
-            tmp.putExtras(b);
             startActivity(tmp);
 
         }

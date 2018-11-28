@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -78,6 +79,12 @@ public class ColourStartingActivity extends AppCompatActivity {
      */
     TextView instructionsBody;
 
+    /**
+     *
+     *
+     */
+    int rounds;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,6 +143,7 @@ public class ColourStartingActivity extends AppCompatActivity {
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                rounds = loadRounds();
                 loadFromFile(SAVE_FILENAME);
                 saveToFile(TEMP_SAVE_FILENAME);
                 makeToastLoadedText();
@@ -173,9 +181,8 @@ public class ColourStartingActivity extends AppCompatActivity {
      */
     private void switchToGame() {
         Intent tmp = new Intent(this, ColourTileRoundsActivity.class);
-        Bundle b = new Bundle();
-        b.putInt("round", 0);
-        tmp.putExtras(b);
+        tmp.putExtra("rounds", rounds);
+
         saveToFile(ColourStartingActivity.TEMP_SAVE_FILENAME);
         startActivity(tmp);
     }
@@ -217,5 +224,25 @@ public class ColourStartingActivity extends AppCompatActivity {
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
         }
+    }
+
+    public int loadRounds(){
+        try {
+            InputStream inputStream = this.openFileInput("rounds.ser");
+            if (inputStream != null) {
+                ObjectInputStream input = new ObjectInputStream(inputStream);
+                rounds = (int) input.readObject();
+                inputStream.close();
+                return rounds;
+
+            }
+        } catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        } catch (ClassNotFoundException e) {
+            Log.e("login activity", "File contained unexpected data type: " + e.toString());
+        }
+        return rounds;
     }
 }

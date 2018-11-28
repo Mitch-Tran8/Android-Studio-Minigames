@@ -9,7 +9,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -117,12 +119,18 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
      */
     private ColourBoardManager boardManager;
 
+    /**
+     * number of rounds unlocked
+     */
+
+    int rounds;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_colour_tile_rounds);
-        Bundle b = getIntent().getExtras();
-        int win = b.getInt("round");
+        int win = getIntent().getIntExtra("rounds", 1);
+        rounds = win;
         findView();
         activateInstructionsButton();
         activateRound1Button();
@@ -131,6 +139,7 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveToFile(ColourStartingActivity.TEMP_SAVE_FILENAME);
+                saveRounds("rounds.ser");
                 Toast.makeText(ColourTileRoundsActivity.this, "Succesfully saved", Toast.LENGTH_LONG).show();
             }
         });
@@ -395,6 +404,17 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
             ObjectOutputStream outputStream = new ObjectOutputStream(
                     this.openFileOutput(fileName, MODE_PRIVATE));
             outputStream.writeObject(boardManager);
+            outputStream.close();
+        } catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
+
+    public void saveRounds(String fileName){
+        try {
+            ObjectOutputStream outputStream = new ObjectOutputStream(
+                    this.openFileOutput(fileName, MODE_PRIVATE));
+            outputStream.writeObject(rounds);
             outputStream.close();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
