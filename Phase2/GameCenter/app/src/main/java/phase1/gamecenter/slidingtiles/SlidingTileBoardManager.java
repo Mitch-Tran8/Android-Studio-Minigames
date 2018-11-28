@@ -11,6 +11,10 @@ import java.util.Stack;
 import phase1.gamecenter.BoardManager;
 import phase1.gamecenter.ScoreBoardUpdater;
 
+/**
+ * Reference to this website for how to determine if boards are solvable or not:
+ * https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html?fbclid=IwAR22P8kSU4KcmgF1mM3n6bXR5StBHXk2vYXCLuzghiePfxfcQ-zHGXrHDHs
+ */
 
 /**
  * Manage a slidingTilesBoard, including swapping tiles, checking for a win, and managing taps.
