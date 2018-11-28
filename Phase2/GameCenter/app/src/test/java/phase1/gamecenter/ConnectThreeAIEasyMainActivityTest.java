@@ -127,7 +127,7 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
     }
 
     @Test
-    public void testPlayer1WinsPlayerPointsChange(){
+    public void testPlayer1WinsPlayer1PointsChange(){
         ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
         testerActivity.player1Wins();
         assertEquals(5, testerActivity.getPlayer1Points());
@@ -141,16 +141,44 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
     }
 
     @Test
-    public void testPlayer1WinsAiPlayer1RoundChange(){
+    public void testPlayer1WinsPlayer1RoundChange(){
         ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
         testerActivity.player1Wins();
         assertEquals(1, testerActivity.getPlayer1RoundsWon());
     }
 
     @Test
-    public void testPlayer1WinsAiRoundsPlayedChange(){
+    public void testPlayer1WinsRoundsPlayedChange(){
         ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
         testerActivity.player1Wins();
+        assertEquals(1, testerActivity.getRoundsPlayed());
+    }
+
+    @Test
+    public void testAiWinsPlayer1PointsChange(){
+        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        testerActivity.aiWins();
+        assertEquals(-3, testerActivity.getPlayer1Points());
+    }
+
+    @Test
+    public void testAiWinsAiPointsChange(){
+        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        testerActivity.aiWins();
+        assertEquals(5, testerActivity.getAiPoints());
+    }
+
+    @Test
+    public void testAiWinsAiRoundChange(){
+        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        testerActivity.aiWins();
+        assertEquals(1, testerActivity.getAiRoundsWon());
+    }
+
+    @Test
+    public void testAiWinsRoundsPlayedChange(){
+        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        testerActivity.aiWins();
         assertEquals(1, testerActivity.getRoundsPlayed());
     }
 
