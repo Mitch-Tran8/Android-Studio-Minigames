@@ -199,9 +199,18 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the button for round 10
+     * Activate the button for round 10 and keep all the other buttons before it activated
      */
     private void activateRound10Button() {
+        activateRound1Button();
+        activateRound2Button();
+        activateRound3Button();
+        activateRound4Button();
+        activateRound5Button();
+        activateRound6Button();
+        activateRound7Button();
+        activateRound8Button();
+        activateRound9Button();
 
         round10Button = findViewById(R.id.round10_button);
 
@@ -216,10 +225,18 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
 
     /**
      /**
-     * Activate the button for round 9
+     * Activate the button for round 9 and keep all the other buttons before it activated
      */
     private void activateRound9Button() {
-
+        activateRound1Button();
+        activateRound2Button();
+        activateRound3Button();
+        activateRound4Button();
+        activateRound5Button();
+        activateRound6Button();
+        activateRound7Button();
+        activateRound8Button();
+        activateRound9Button();
         round9Button = findViewById(R.id.round9_button);
 
         round9Button.setOnClickListener(new View.OnClickListener() {
@@ -233,9 +250,16 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
 
     /**
      /**
-     * Activate the button for round 8
+     * Activate the button for round 8 and keep all the other buttons before it activated
      */
     private void activateRound8Button() {
+        activateRound1Button();
+        activateRound2Button();
+        activateRound3Button();
+        activateRound4Button();
+        activateRound5Button();
+        activateRound6Button();
+        activateRound7Button();
 
         round8Button = findViewById(R.id.round8_button);
 
@@ -249,10 +273,15 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the button for round 7
+     * Activate the button for round 7 and keep all the other buttons before it activated
      */
     private void activateRound7Button() {
-
+        activateRound1Button();
+        activateRound2Button();
+        activateRound3Button();
+        activateRound4Button();
+        activateRound5Button();
+        activateRound6Button();
         round7Button = findViewById(R.id.round7_button);
 
         round7Button.setOnClickListener(new View.OnClickListener() {
@@ -265,10 +294,14 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the button for round 6
+     * Activate the button for round 6 and keep all the other buttons before it activated
      */
     private void activateRound6Button() {
-
+        activateRound1Button();
+        activateRound2Button();
+        activateRound3Button();
+        activateRound4Button();
+        activateRound5Button();
         round6Button = findViewById(R.id.round6_button);
 
         round6Button.setOnClickListener(new View.OnClickListener() {
@@ -281,10 +314,13 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the button for round 5
+     * Activate the button for round 5 and keep all the other buttons before it activated
      */
     private void activateRound5Button() {
-
+        activateRound1Button();
+        activateRound2Button();
+        activateRound3Button();
+        activateRound4Button();
         round5Button = findViewById(R.id.round5_button);
 
         round5Button.setOnClickListener(new View.OnClickListener() {
@@ -297,10 +333,12 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the button for round 4
+     * Activate the button for round 4 and keep all the other buttons before it activated
      */
     private void activateRound4Button() {
-
+        activateRound1Button();
+        activateRound2Button();
+        activateRound3Button();
         round4Button = findViewById(R.id.round4_button);
 
         round4Button.setOnClickListener(new View.OnClickListener() {
@@ -313,10 +351,11 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the button for round 3
+     * Activate the button for round 3 and keep all the other buttons before it activated
      */
     private void activateRound3Button() {
-
+        activateRound1Button();
+        activateRound2Button();
         round3Button = findViewById(R.id.round3_button);
 
         round3Button.setOnClickListener(new View.OnClickListener() {
@@ -346,7 +385,7 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the button for round 2
+     * Activate the button for round 2 and keep all the other buttons before it activated
      */
     public void activateRound2Button() {
 
