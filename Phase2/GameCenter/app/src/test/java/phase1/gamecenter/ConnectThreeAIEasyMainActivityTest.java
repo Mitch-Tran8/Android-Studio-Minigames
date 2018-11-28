@@ -182,5 +182,19 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
         assertEquals(1, testerActivity.getRoundsPlayed());
     }
 
+    @Test
+    public void testTieRoundChange(){
+        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        testerActivity.tie();
+        assertEquals(1, testerActivity.getTies());
+    }
+
+    @Test
+    public void testTieRoundsPlayedChange(){
+        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        testerActivity.tie();
+        assertEquals(1, testerActivity.getRoundsPlayed());
+    }
+
 }
 
