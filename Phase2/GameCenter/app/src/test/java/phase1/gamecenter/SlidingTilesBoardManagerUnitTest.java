@@ -13,7 +13,7 @@ import phase1.gamecenter.slidingtiles.SlidingTileBoardManager;
 import phase1.gamecenter.slidingtiles.SlidingTilesBoard;
 
 
-public class SlidingTilesSlidingNumberTileBoardManagerUnitTest {
+public class SlidingTilesBoardManagerUnitTest {
 
     @Test
     public void testSetComplexity() {

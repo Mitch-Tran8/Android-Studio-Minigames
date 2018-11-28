@@ -39,8 +39,8 @@ public class SlidingTilesBoard extends Board implements Serializable, Iterable<N
         super();
         Iterator<NumberTile> iter = numberTiles.iterator();
 
-        for (int row = 0; row != SlidingTilesBoard.NUM_ROWS; row++) {
-            for (int col = 0; col != SlidingTilesBoard.NUM_COLS; col++) {
+        for (int row = 0; row < NUM_ROWS; row++) {
+            for (int col = 0; col < NUM_COLS; col++) {
                 this.numberTiles[row][col] = iter.next();
             }
         }

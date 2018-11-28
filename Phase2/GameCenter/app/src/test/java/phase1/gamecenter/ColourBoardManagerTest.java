@@ -11,7 +11,7 @@ import phase1.gamecenter.colourtiles.ColourTile;
 
 import static org.junit.Assert.*;
 
-public class ColourSlidingTilesSlidingNumberTileBoardManagerTest {
+public class ColourBoardManagerTest {
     private List<ColourTile> tiles = new ArrayList<>();
     private ColourBoardManager testerBoardManager = new ColourBoardManager(1, 3, 0, 59);
     private ColourBoardManager testerBoardManager2 = new ColourBoardManager(10, 5, 1, 59);
