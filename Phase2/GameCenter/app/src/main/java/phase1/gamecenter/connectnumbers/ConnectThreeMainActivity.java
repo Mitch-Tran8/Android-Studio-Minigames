@@ -206,6 +206,24 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
     }
 
     /**
+     * set the number of rounds player 1 has won only for testing purpose
+     * @param round amount of rounds to be set
+     */
+    public void setPlayer1RoundsWon(int round){ this.player1RoundsWon = round;}
+
+    /**
+     * set the number of rounds player 2 has won only for testing purpose
+     * @param round amount of rounds to be set
+     */
+    public void setPlayer2RoundsWon(int round){ this.player2RoundsWon = round;}
+
+    /**
+     * set the number of rounds that have been played for testing purpose
+     * @param round amount of rounds to be set
+     */
+    public void setRoundsPlayed(int round){ this.roundsPlayed = round;}
+
+    /**
      * Displays the toast message when the game is over.
      */
     private void gameOverMessage() {
@@ -258,7 +276,7 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
      *
      * @return whether the game is over.
      */
-    private boolean gameOver() {
+    public boolean gameOver() {
         return (player1RoundsWon == 3 || player2RoundsWon == 3 || roundsPlayed == 5);
     }
 
