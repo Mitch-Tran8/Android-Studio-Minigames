@@ -49,15 +49,6 @@ class ColourBoardManager implements Serializable {
     private int originalSeconds;
 
     /**
-     * Manage a board that has been pre-populated.
-     *
-     * @param board the board
-     */
-    ColourBoardManager(ColourBoard board) {
-        this.board = board;
-    }
-
-    /**
      * Return the current board.
      */
     ColourBoard getBoard() {
@@ -89,10 +80,6 @@ class ColourBoardManager implements Serializable {
      */
     private Stack<Integer> matchedCol;
 
-    /**
-     * The score required to beat the level and move on to the next one.
-     */
-    private int scoreReq;
 
     /**
      * The complexity of the board
@@ -109,13 +96,12 @@ class ColourBoardManager implements Serializable {
      */
     ColourBoardManager(int round, int complexity, int minute, int second) {
         List<ColourTile> tiles = new ArrayList<>();
+        board.round = round;
         this.round = round;
-        int tileNum;
-        int numTiles;
-        seconds = second;
-        originalSeconds = second;
-        minutes = minute;
-        setScoreReq(round);
+        this.complexity = complexity;
+        this.seconds = second;
+        this.originalSeconds = second;
+        this.minutes = minute;
         matchedRow= new Stack();
         matchedCol= new Stack();
         setUpBoard(complexity, tiles);
@@ -126,7 +112,7 @@ class ColourBoardManager implements Serializable {
      * getter for the current round that the user is playing
      * @return int round
      */
-    public int getRound(){return round;}
+    public int getRound(){return board.getRound();}
 
     private void setUpBoard(int complexity, List<ColourTile> tiles) {
         int tileNum;
@@ -149,50 +135,6 @@ class ColourBoardManager implements Serializable {
         Collections.shuffle(tiles);
         this.board = new ColourBoard(tiles, complexity);
     }
-
-    /**
-     * sets the required score for each round before the user can make it to the next round
-     * @param round
-     */
-    private void setScoreReq(int round) {
-        switch (round) {
-            case 1:
-                this.scoreReq = 20;
-                break;
-            case 2:
-                this.scoreReq = 40;
-                break;
-            case 3:
-                this.scoreReq = 60;
-                break;
-            case 4:
-                this.scoreReq = 80;
-                break;
-            case 5:
-                this.scoreReq = 100;
-                break;
-            case 6:
-                this.scoreReq = 120;
-                break;
-            case 7:
-                this.scoreReq = 140;
-                break;
-            case 8:
-                this.scoreReq = 160;
-                break;
-            case 9:
-                this.scoreReq = 20;
-                break;
-            case 10:
-                this.scoreReq = 40;
-                break;
-            default:
-                this.score = 50;
-                break;
-        }
-    }
-
-    public int getScoreReq(){return scoreReq;}
 
     /**
      * set the board of this boardmanager only for testing purpose

@@ -129,7 +129,6 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_colour_tile_rounds);
         Bundle b = getIntent().getExtras();
         int win = b.getInt("round");
-        System.out.println("number "+win);
         findView();
         activateInstructionsButton();
         activateRound1Button();

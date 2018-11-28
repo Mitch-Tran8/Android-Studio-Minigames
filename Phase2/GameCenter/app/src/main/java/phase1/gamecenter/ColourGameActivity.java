@@ -56,14 +56,6 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
     private Button saveButton;
 
     /**
-     * Constants for swiping directions. Should be an enum, probably.
-     */
-    public static final int UP = 1;
-    public static final int DOWN = 2;
-    public static final int LEFT = 3;
-    public static final int RIGHT = 4;
-
-    /**
      * Grid View and calculated column height and width based on device size
      */
     private GestureDetectGridView gridView;
@@ -161,13 +153,15 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
     private void gameOver() {
         String score = Integer.toString(boardManager.getScore());
         updateScoreboard(boardManager.getScore());
-        if(boardManager.getScore() < boardManager.getScoreReq()) {
+        if(boardManager.getScore() < board.getScoreReq()) {
             Toast toast = Toast.makeText(ColourGameActivity.this, "Time's up! Try again to unlock the next level. Your score: " + score, Toast.LENGTH_LONG);
             toast.setGravity(0,10,10);
             toast.show();
             saveToFile(ColourBoardManager.TEMP_SAVE_FILENAME);
             Intent tmp = new Intent(ColourGameActivity.this, ColourTileRoundsActivity.class);
-            tmp.putExtra("round",boardManager.getRound());
+            board.setRound(board.getRound() - 1);
+            tmp.putExtra("round", board.getRound());
+            System.out.println("lost "+ (board.getRound()));
             startActivity(tmp);
         } else {
             Toast toast = Toast.makeText(ColourGameActivity.this, "Time's up! you've unlocked the next level. :D" +
@@ -177,7 +171,9 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
             saveToFile(ColourBoardManager.TEMP_SAVE_FILENAME);
             Intent tmp = new Intent(ColourGameActivity.this, ColourTileRoundsActivity.class);
             Bundle b = new Bundle();
-            b.putInt("round",  boardManager.getRound() + 1);
+            board.setRound(board.getRound() + 1);
+            b.putInt("round",  board.getRound());
+            System.out.println("won "+ (board.getRound()));
             tmp.putExtras(b);
             startActivity(tmp);
 

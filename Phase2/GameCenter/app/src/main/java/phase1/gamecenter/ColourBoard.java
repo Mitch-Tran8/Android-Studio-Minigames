@@ -15,12 +15,6 @@ import java.util.List;
  */
 public class ColourBoard extends Observable implements Serializable, Iterable<ColourTile> {
 
-
-    public static final String up = "up";
-    public static final String down = "down";
-    public static final String left = "left";
-    public static final String right = "right";
-
     /**
      * The number of rows.
      */
@@ -35,6 +29,13 @@ public class ColourBoard extends Observable implements Serializable, Iterable<Co
      * The tiles on the board in row-major order.
      */
     private ColourTile[][] tiles;
+
+    /**
+     * The round that the current user is playing
+     */
+     static int round = 1;
+
+     static int scoreReq = 20;
 
     /**
      * A new board of tiles in row-major order.
@@ -59,6 +60,54 @@ public class ColourBoard extends Observable implements Serializable, Iterable<Co
         return this.NUM_ROWS;
     }
     int getNUM_COLS() {return this.NUM_COLS;}
+    int getRound(){return this.round;}
+
+
+    /**
+     * sets the required score for each round before the user can make it to the next round
+     * @param round
+     */
+    protected void setScoreReq(int round) {
+        switch (round) {
+            case 1:
+                this.scoreReq = 20;
+                break;
+            case 2:
+                this.scoreReq = 40;
+                break;
+            case 3:
+                this.scoreReq = 60;
+                break;
+            case 4:
+                this.scoreReq = 80;
+                break;
+            case 5:
+                this.scoreReq = 100;
+                break;
+            case 6:
+                this.scoreReq = 120;
+                break;
+            case 7:
+                this.scoreReq = 140;
+                break;
+            case 8:
+                this.scoreReq = 160;
+                break;
+            case 9:
+                this.scoreReq = 180;
+                break;
+            case 10:
+                this.scoreReq = 200;
+                break;
+            default:
+                this.scoreReq = 50;
+                break;
+        }
+    }
+
+    public int getScoreReq(){return scoreReq;}
+
+    void setRound(int round){this.round = round;}
 
     /**
      * Return the number of tiles on the board.

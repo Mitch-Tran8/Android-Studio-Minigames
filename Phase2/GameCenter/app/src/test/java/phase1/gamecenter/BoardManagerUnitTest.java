@@ -79,7 +79,8 @@ public class BoardManagerUnitTest {
         tiles.add(new Tile(6, "3x3"));
         tiles.add(new Tile(7, "3x3"));
         tiles.add(new Tile(8, "3x3"));
-
+        Board.NUM_ROWS = 3;
+        Board.NUM_COLS = 3;
         Board testerBoard = new Board(tiles);
         BoardManager testerBoardManager = new BoardManager(testerBoard, 39);
         testerBoardManager.numOfMoves = 3;
