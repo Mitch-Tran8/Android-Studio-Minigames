@@ -132,7 +132,7 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveToFile(ColourStartingActivity.TEMP_SAVE_FILENAME);
-                Toast.makeText(ColourTileRoundsActivity.this, "Succesfully saved", Toast.LENGTH_LONG).show();
+                Toast.makeText(ColourTileRoundsActivity.this, "Successfully saved", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -149,8 +149,6 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
             default: activateRound1Button();break;
 
         }
-
-
     }
 
     private void activateRound1Button() {
@@ -333,8 +331,6 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
         instructionsTitle.setVisibility(View.GONE);
         instructionsView.setVisibility(View.GONE);
         instructionsBody.setVisibility(View.GONE);
-
-
     }
 
     /**

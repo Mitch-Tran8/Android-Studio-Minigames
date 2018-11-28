@@ -33,11 +33,15 @@ import phase1.gamecenter.GestureDetectGridView;
 import phase1.gamecenter.R;
 import phase1.gamecenter.ScoreBoardUpdater;
 
-
 /**
  * The game activity with the goal to connect the biggest possible blob of colour tiles.
  */
-public class ColourGameActivity extends AppCompatActivity implements Observer {
+public class  ColourGameActivity extends AppCompatActivity implements Observer {
+
+    /**
+     * a colour game activity
+     */
+    private ColourGameActivity colourGameActivity;
 
     /**
      * The board manager.
@@ -79,16 +83,6 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
     private int seconds;
     private int minutes;
 
-    /**
-     * Set up the background image for each button based on the master list
-     * of positions, and then call the adapter to set the view.
-     */
-    // Display
-    public void display() {
-        updateTileButtons();
-        gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +90,6 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
         createTileButtons(this);
         setContentView(R.layout.activity_colourmain);
         addSaveButtonListener();
-
 
         // Add View to activity
         board = boardManager.getBoard();
@@ -122,6 +115,15 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
                     }
                 });
         setTheTimer();
+    }
+
+    /**
+     * Set up the background image for each button based on the master list
+     * of positions, and then call the adapter to set the view.
+     */
+    public void display() {
+        updateTileButtons();
+        gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
     }
 
     /**
@@ -157,12 +159,13 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
                 });
             }
         }, 0, 1000);
+
     }
 
     /**
      * Helper function to the setTimer method, deals with the case when time is over.
      */
-    private void gameOver() {
+    protected void gameOver() {
         String score = Integer.toString(boardManager.getScore());
         updateScoreboard(boardManager.getScore());
         if(boardManager.getScore() < boardManager.getScoreReq()) {
@@ -188,8 +191,7 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
         }
     }
 
-
-    private void updateScoreboard(int score) {
+    public void updateScoreboard(int score) {
         ScoreBoardUpdater sbu = new ScoreBoardUpdater(score,"Colour tiles");
         sbu.updateUserScoreBoard();
     }
@@ -199,7 +201,7 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
      *
      * @param context the context
      */
-    private void createTileButtons(Context context) {
+    public void createTileButtons(Context context) {
         ColourBoard board = boardManager.getBoard();
         tileButtons = new ArrayList<>();
         for (int row = 0; row != board.getNUM_ROWS(); row++) {
@@ -214,7 +216,7 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
     /**
      * Update the backgrounds on the buttons to match the tiles.
      */
-    private void updateTileButtons() {
+    public void updateTileButtons() {
         ColourBoard board = boardManager.getBoard();
         int nextPos = 0;
         for (Button b : tileButtons) {
@@ -228,7 +230,7 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
     /**
      * Activate the save button
      */
-    private void addSaveButtonListener() {
+    public void addSaveButtonListener() {
         saveButton = findViewById(R.id.save_button);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -257,7 +259,7 @@ public class ColourGameActivity extends AppCompatActivity implements Observer {
      *
      * @param fileName the name of the file
      */
-    private void loadFromFile(String fileName) {
+    protected void loadFromFile(String fileName) {
 
         try {
             InputStream inputStream = this.openFileInput(fileName);

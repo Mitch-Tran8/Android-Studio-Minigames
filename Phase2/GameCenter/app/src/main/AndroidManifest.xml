@@ -14,28 +14,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".StartingActivity" />
         <activity android:name=".slidingtiles.GameActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".registrationinfo.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".registrationinfo.RegisterActivity" />
         <activity android:name=".GameCenterMainActivity" />
-        <activity android:name=".SlidingTileMainPageActivity" />
+        <activity android:name=".slidingtiles.SlidingTileMainPageActivity" />
         <activity android:name=".slidingtiles.BoardComplexity" />
-        <activity android:name=".UserScoreBoard" />
+        <activity android:name=".registrationinfo.UserScoreBoard" />
         <activity android:name=".colourtiles.ColourGameActivity" />
         <activity android:name=".colourtiles.ColourStartingActivity" />
         <activity android:name=".slidingtiles.DifficultyLevel" />
-        <activity android:name=".LogoutActivity" />
-        <activity android:name=".UserScoreBoardActivity"></activity>
-        <activity android:name=".colourtiles.ColourRankingsActivity" />
-        <activity android:name=".colourtiles.ColourScoreBoard3x3" />
-        <activity android:name=".colourtiles.ColourScoreBoard5x5" />
+        <activity android:name=".registrationinfo.LogoutActivity" />
+        <activity android:name=".registrationinfo.UserScoreBoardActivity"></activity>
         <activity android:name=".colourtiles.ColourTileRoundsActivity"/>
         <activity android:name=".connectnumbers.ConnectFourMainActivity" />
         <activity android:name=".connectnumbers.ConnectNumbersStartingActivity" />

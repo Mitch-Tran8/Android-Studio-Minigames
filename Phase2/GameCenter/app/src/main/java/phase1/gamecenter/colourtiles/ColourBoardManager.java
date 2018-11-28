@@ -11,6 +11,7 @@ import java.util.Random;
 
 import phase1.gamecenter.BoardManager;
 
+
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
@@ -25,11 +26,6 @@ public class ColourBoardManager extends BoardManager implements Serializable {
      * the score
      */
     private int score;
-
-    /**
-     * the number of moves taken
-     */
-    private int numOfMoves;
 
     /**
      * A temporary save file.
@@ -123,6 +119,11 @@ public class ColourBoardManager extends BoardManager implements Serializable {
      */
     public int getRound(){return round;}
 
+    /**
+     * sets up the board
+     * @param complexity the complexity
+     * @param tiles the tiles
+     */
     private void setUpBoard(int complexity, List<ColourTile> tiles) {
         int tileNum;
         int numTiles;
@@ -148,7 +149,7 @@ public class ColourBoardManager extends BoardManager implements Serializable {
      * sets the required score for each round before the user can make it to the next round
      * @param round
      */
-    private void setScoreReq(int round) {
+     void setScoreReq(int round) {
         switch (round) {
             case 1:
                 this.scoreReq = 20;
@@ -240,8 +241,6 @@ public class ColourBoardManager extends BoardManager implements Serializable {
         return solvedRow || solvedCol;
     }
 
-
-
     /*
      * creates a new file
      */
@@ -291,6 +290,7 @@ public class ColourBoardManager extends BoardManager implements Serializable {
         }
         return false;
     }
+
     /**
      * Helper function to puzzleSolved, returns whether all tiles of each column are of the same colour
      * @return whether all tiles of each column are of the same colour

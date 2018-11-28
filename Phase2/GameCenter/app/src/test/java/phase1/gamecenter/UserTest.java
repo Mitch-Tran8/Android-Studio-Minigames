@@ -1,6 +1,8 @@
 package phase1.gamecenter;
 import org.junit.Test;
 
+import phase1.gamecenter.registrationinfo.User;
+
 import static org.junit.Assert.assertEquals;
 
 public class UserTest {

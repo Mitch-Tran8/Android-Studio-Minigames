@@ -14,7 +14,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import phase1.gamecenter.R;
-import phase1.gamecenter.StartingActivity;
 
 
 public class DifficultyLevel extends AppCompatActivity {
@@ -52,7 +51,6 @@ public class DifficultyLevel extends AppCompatActivity {
      * A temporary save file.
      */
     public static final String TEMP_SAVE_FILENAME = "save_file_tmp.ser";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,11 +122,12 @@ public class DifficultyLevel extends AppCompatActivity {
     /**
      * Switch to the ColourGameActivity view to play the game.
      */
-    private void switchToGame() {
+    private String switchToGame() {
         Intent tmp = new Intent(DifficultyLevel.this, GameActivity.class);
-        saveToFile(StartingActivity.TEMP_SAVE_FILENAME);
+        saveToFile(BoardComplexity.TEMP_SAVE_FILENAME);
         tmp.putExtra("user_id", user_id);
         startActivity(tmp);
+        return "switched to game.";
     }
 
     /**
@@ -136,7 +135,7 @@ public class DifficultyLevel extends AppCompatActivity {
      *
      * @param fileName the name of the file
      */
-    private void loadFromFile(String fileName) {
+    private String loadFromFile(String fileName) {
 
         try {
             InputStream inputStream = this.openFileInput(fileName);
@@ -152,6 +151,8 @@ public class DifficultyLevel extends AppCompatActivity {
         } catch (ClassNotFoundException e) {
             Log.e("login activity", "File contained unexpected data type: " + e.toString());
         }
+
+        return "loaded from file.";
     }
 
     /**
@@ -159,7 +160,7 @@ public class DifficultyLevel extends AppCompatActivity {
      *
      * @param fileName the name of the file
      */
-    public void saveToFile(String fileName) {
+    public String saveToFile(String fileName) {
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(
                     this.openFileOutput(fileName, MODE_PRIVATE));
@@ -168,5 +169,7 @@ public class DifficultyLevel extends AppCompatActivity {
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
         }
+
+        return "saved to file.";
     }
 }

@@ -1,4 +1,4 @@
-package phase1.gamecenter;
+package phase1.gamecenter.slidingtiles;
 
 
 import org.junit.Test;
