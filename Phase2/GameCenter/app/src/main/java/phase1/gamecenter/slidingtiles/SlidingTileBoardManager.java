@@ -2,16 +2,16 @@ package phase1.gamecenter.slidingtiles;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
 import phase1.gamecenter.BoardManager;
+import phase1.gamecenter.FileManager;
 import phase1.gamecenter.ScoreBoardUpdater;
 
-/**
+/*
  * Reference to this website for how to determine if boards are solvable or not:
  * https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html?fbclid=IwAR22P8kSU4KcmgF1mM3n6bXR5StBHXk2vYXCLuzghiePfxfcQ-zHGXrHDHs
  */
@@ -19,7 +19,7 @@ import phase1.gamecenter.ScoreBoardUpdater;
 /**
  * Manage a slidingTilesBoard, including swapping tiles, checking for a win, and managing taps.
  */
-public class SlidingTileBoardManager extends BoardManager implements Serializable {
+public class SlidingTileBoardManager extends FileManager implements BoardManager {
 
     /**
      * The slidingTilesBoard being managed.
@@ -126,7 +126,7 @@ public class SlidingTileBoardManager extends BoardManager implements Serializabl
     }
 
     /**
-     * Returns whether or not the ColourBoard is solvable
+     * Returns whether or not the MatchedBoard is solvable
      *
      * @return whether the slidingTilesBoard is solvable or not
      */
@@ -355,12 +355,13 @@ public class SlidingTileBoardManager extends BoardManager implements Serializabl
      *
      * @return whether the tiles are in row-major order
      */
+    @Override
     public boolean puzzleSolved() {
         boolean solved = true;
         int lastId = 1;
 
-        for (NumberTile numberTile : slidingTilesBoard) {
-            if (numberTile.getId() == lastId) {
+        for (Object numberTile : slidingTilesBoard) {
+            if (((NumberTile)numberTile).getId() == lastId) {
                 lastId++;
             } else {
                 solved = false;
@@ -408,14 +409,6 @@ public class SlidingTileBoardManager extends BoardManager implements Serializabl
     private void updateLeadeBoard(){
         ScoreBoardUpdater sbu = new ScoreBoardUpdater(getScore(), "Sliding tiles");
         sbu.updateLeaderBoard();
-    }
-
-    /*
-     * creates a new file
-     */
-    private void createNewFile() throws IOException {
-        File file = new File(BoardComplexity.TEMP_SAVE_FILENAME);
-        file.createNewFile();
     }
 
     /**

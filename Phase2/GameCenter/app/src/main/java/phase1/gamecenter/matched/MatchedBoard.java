@@ -1,23 +1,18 @@
-package phase1.gamecenter.colourtiles;
+package phase1.gamecenter.matched;
 
 import android.support.annotation.NonNull;
 
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Observable;
 
 import phase1.gamecenter.Board;
 
 /**
  * The sliding tiles board.
  */
-public class ColourBoard extends Board implements Serializable, Iterable<ColourTile> {
-
-    public static final String up = "up";
-    public static final String down = "down";
-    public static final String left = "left";
-    public static final String right = "right";
+public class MatchedBoard extends Observable implements Board {
 
     /**
      * The number of rows.
@@ -32,7 +27,7 @@ public class ColourBoard extends Board implements Serializable, Iterable<ColourT
     /**
      * The tiles on the board in row-major order.
      */
-    private ColourTile[][] tiles;
+    private MatchedTile[][] tiles;
 
     /**
      * A new board of tiles in row-major order.
@@ -40,11 +35,11 @@ public class ColourBoard extends Board implements Serializable, Iterable<ColourT
      *
      * @param tiles the tiles for the board
      */
-    public ColourBoard(List<ColourTile> tiles, int complexity) {
+    MatchedBoard(List<MatchedTile> tiles, int complexity) {
         NUM_ROWS = complexity;
         NUM_COLS = complexity;
-        this.tiles = new ColourTile[NUM_ROWS][NUM_COLS];
-        Iterator<ColourTile> iter = tiles.iterator();
+        this.tiles = new MatchedTile[NUM_ROWS][NUM_COLS];
+        Iterator<MatchedTile> iter = tiles.iterator();
 
         for (int row = 0; row != complexity; row++) {
             for (int col = 0; col != complexity; col++) {
@@ -53,9 +48,18 @@ public class ColourBoard extends Board implements Serializable, Iterable<ColourT
         }
     }
 
+    /**
+     * returns the NUM_ROWS
+     * @return the NUM_ROWS
+     */
     int getNUM_ROWS(){
         return this.NUM_ROWS;
     }
+
+    /**
+     * returns the NUM_COLS
+     * @return NUM_COLS
+     */
     int getNUM_COLS() {return this.NUM_COLS;}
 
     /**
@@ -65,7 +69,7 @@ public class ColourBoard extends Board implements Serializable, Iterable<ColourT
      * @param col the tile column
      * @return the tile at (row, col)
      */
-    ColourTile getTile(int row, int col) {
+    MatchedTile getTile(int row, int col) {
         return tiles[row][col];
     }
 
@@ -73,7 +77,7 @@ public class ColourBoard extends Board implements Serializable, Iterable<ColourT
      * returns the tiles
      * @return tiles
      */
-    public ColourTile[][] getTiles() {
+    public MatchedTile[][] getTiles() {
         return tiles;
     }
 
@@ -81,7 +85,7 @@ public class ColourBoard extends Board implements Serializable, Iterable<ColourT
     /*
      * sets the tile
      */
-    void setTile(int row, int col, ColourTile newTile){
+    void setTile(int row, int col, MatchedTile newTile){
         this.tiles[row][col] = newTile;
         setChanged();
         notifyObservers();
@@ -91,9 +95,9 @@ public class ColourBoard extends Board implements Serializable, Iterable<ColourT
      * replace tiles in row with tiles in the row above
      */
     void replaceRow(int currRow, int thirdCol){
-        ColourTile copy1 = tiles[currRow - 1][thirdCol];
-        ColourTile copy2 = tiles[currRow - 1][thirdCol-1];
-        ColourTile copy3 = tiles[currRow - 1][thirdCol-1];
+        MatchedTile copy1 = tiles[currRow - 1][thirdCol];
+        MatchedTile copy2 = tiles[currRow - 1][thirdCol-1];
+        MatchedTile copy3 = tiles[currRow - 1][thirdCol-1];
 
         tiles[currRow][thirdCol] = copy1;
         tiles[currRow][thirdCol-1] = copy2;
@@ -112,8 +116,8 @@ public class ColourBoard extends Board implements Serializable, Iterable<ColourT
      */
     public void swapTiles(int row1, int col1, int row2, int col2) {
 
-        ColourTile tile1 = getTile(row1, col1);
-        ColourTile tile2 = getTile(row2, col2);
+        MatchedTile tile1 = getTile(row1, col1);
+        MatchedTile tile2 = getTile(row2, col2);
 
         tiles[row1][col1] = tile2;
         tiles[row2][col2] = tile1;
@@ -124,23 +128,22 @@ public class ColourBoard extends Board implements Serializable, Iterable<ColourT
 
     @Override
     public String toString() {
-        return "ColourBoard{" +
+        return "MatchedBoard{" +
                 "tiles=" + Arrays.toString(tiles) +
                 '}';
     }
 
     @Override
     @NonNull
-    public Iterator<ColourTile> iterator() {
+    public Iterator<MatchedTile> iterator() {
         return new BoardIterator();
     }
-
 
     /**
      * The sliding tiles board iterator.
      * Subclass to the board class.
      */
-    private class BoardIterator implements Iterator<ColourTile> {
+    private class BoardIterator implements Iterator<MatchedTile> {
 
         private int nextColumn = 0;
         int row = 0;
@@ -151,12 +154,12 @@ public class ColourBoard extends Board implements Serializable, Iterable<ColourT
         }
 
         @Override
-        public ColourTile next() {
+        public MatchedTile next() {
             if (!hasNext()) {
                 return null;
             }
 
-            ColourTile current = getTile(row, nextColumn);
+            MatchedTile current = getTile(row, nextColumn);
 
             if (nextColumn == NUM_COLS - 1) {
                 row++;

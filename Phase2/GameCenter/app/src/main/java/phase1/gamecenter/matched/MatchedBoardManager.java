@@ -1,8 +1,6 @@
-package phase1.gamecenter.colourtiles;
+package phase1.gamecenter.matched;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,17 +8,17 @@ import java.util.Stack;
 import java.util.Random;
 
 import phase1.gamecenter.BoardManager;
-
+import phase1.gamecenter.FileManager;
 
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
-public class ColourBoardManager extends BoardManager implements Serializable {
+public class MatchedBoardManager extends FileManager implements BoardManager {
 
     /**
      * The board being managed.
      */
-    private ColourBoard board;
+    private MatchedBoard board;
 
     /**
      * the score
@@ -30,17 +28,13 @@ public class ColourBoardManager extends BoardManager implements Serializable {
     /**
      * A temporary save file.
      */
-    public static final String TEMP_SAVE_FILENAME = "save_file_tmp.ser";
-
-    /**
-     * The stack that stocks all previous moves
-     */
-    private Stack<int[]> moveStack;
+    static final String TEMP_SAVE_FILENAME = "matched_file_tmp.ser";
 
     /**
      * the first tap
      */
     private int firstTap;
+
     /**
      * original time
      */
@@ -55,11 +49,6 @@ public class ColourBoardManager extends BoardManager implements Serializable {
      * countdown timer's minutes
      */
     private int minutes;
-
-    /**
-     * The current user's id
-     */
-    private String user_id;
 
     /*
      * list of solved tiles that need to be taken care of
@@ -84,8 +73,8 @@ public class ColourBoardManager extends BoardManager implements Serializable {
     /**
      * Manage a new shuffled board.
      */
-    public ColourBoardManager(int round, int complexity, int minute, int second) {
-        List<ColourTile> tiles = new ArrayList<>();
+    public MatchedBoardManager(int round, int complexity, int minute, int second) {
+        List<MatchedTile> tiles = new ArrayList<>();
         this.round = round;
         seconds = second;
         originalSeconds = second;
@@ -98,18 +87,9 @@ public class ColourBoardManager extends BoardManager implements Serializable {
     }
 
     /**
-     * Manage a board that has been pre-populated.
-     *
-     * @param board the board
-     */
-    ColourBoardManager(ColourBoard board) {
-        this.board = board;
-    }
-
-    /**
      * Return the current board.
      */
-    public ColourBoard getBoard() {
+    public MatchedBoard getBoard() {
         return board;
     }
 
@@ -118,6 +98,11 @@ public class ColourBoardManager extends BoardManager implements Serializable {
      * @return int round
      */
     public int getRound(){return round;}
+
+    /**
+     * sets the round
+     * @param round the round
+     */
     public void setRound(int round){this.round = round;}
 
     /**
@@ -125,7 +110,7 @@ public class ColourBoardManager extends BoardManager implements Serializable {
      * @param complexity the complexity
      * @param tiles the tiles
      */
-    private void setUpBoard(int complexity, List<ColourTile> tiles) {
+    private void setUpBoard(int complexity, List<MatchedTile> tiles) {
         int tileNum;
         int numTiles;
         if (complexity == 3) {
@@ -140,15 +125,16 @@ public class ColourBoardManager extends BoardManager implements Serializable {
         }
 
         for (++tileNum; tileNum != numTiles; tileNum++) {
-            tiles.add(new ColourTile(tileNum));
+            tiles.add(new MatchedTile(tileNum));
         }
         Collections.shuffle(tiles);
-        this.board = new ColourBoard(tiles, complexity);
+        puzzleSolved();
+        this.board = new MatchedBoard(tiles, complexity);
     }
 
     /**
      * sets the required score for each round before the user can make it to the next round
-     * @param round
+     * @param round the round
      */
      void setScoreReq(int round) {
         switch (round) {
@@ -194,7 +180,7 @@ public class ColourBoardManager extends BoardManager implements Serializable {
      * set the board of this boardmanager only for testing purpose
      * @param board new board to be set
      */
-    public void setBoard(ColourBoard board){
+    public void setBoard(MatchedBoard board){
         this.board = board;
     }
 
@@ -217,6 +203,7 @@ public class ColourBoardManager extends BoardManager implements Serializable {
      *
      * @return whether the tiles are in row-major order
      */
+    @Override
     public boolean puzzleSolved() {
         boolean solvedRow = rowSolved();
         boolean solvedCol = colSolved();
@@ -242,14 +229,6 @@ public class ColourBoardManager extends BoardManager implements Serializable {
         return solvedRow || solvedCol;
     }
 
-    /*
-     * creates a new file
-     */
-    private void createNewFile() throws IOException {
-        File file = new File(TEMP_SAVE_FILENAME);
-        file.createNewFile();
-    }
-
     /**
      * Helper function to puzzleSolved, returns whether all tiles of each row are in the same colour
      *
@@ -266,7 +245,7 @@ public class ColourBoardManager extends BoardManager implements Serializable {
             currBackground = board.getTiles()[currRow][currCol].getBackground();
 
             //checks the row
-            for (ColourTile tile : board.getTiles()[currRow]) {
+            for (MatchedTile tile : board.getTiles()[currRow]) {
                 //checks the tile
                 if (tile.getBackground() != currBackground) {
                     matchedNum = 1;
@@ -330,7 +309,7 @@ public class ColourBoardManager extends BoardManager implements Serializable {
      * helper function to addNewTiles to generate a random tile
      * @return a randomized colour tile
      */
-    private ColourTile generateTile(){
+    private MatchedTile generateTile(){
         int background;
         if (board.getNUM_ROWS() == 3){
             background = new Random().nextInt(8) + 1;
@@ -342,7 +321,7 @@ public class ColourBoardManager extends BoardManager implements Serializable {
         } else {
             background = new Random().nextInt(49) + 26;
         }
-        return new ColourTile(background);
+        return new MatchedTile(background);
     }
 
     /*
@@ -351,9 +330,9 @@ public class ColourBoardManager extends BoardManager implements Serializable {
     private void addNewTiles() {
 
         //generate three random tiles
-        ColourTile tile1 = generateTile();
-        ColourTile tile2 = generateTile();
-        ColourTile tile3 = generateTile();
+        MatchedTile tile1 = generateTile();
+        MatchedTile tile2 = generateTile();
+        MatchedTile tile3 = generateTile();
 
         //fetch matched tiles
         int currRow = matchedRow.pop();
@@ -382,9 +361,9 @@ public class ColourBoardManager extends BoardManager implements Serializable {
     private void addNewColTiles() {
 
         //generate three random tiles
-        ColourTile tile1 = generateTile();
-        ColourTile tile2 = generateTile();
-        ColourTile tile3 = generateTile();
+        MatchedTile tile1 = generateTile();
+        MatchedTile tile2 = generateTile();
+        MatchedTile tile3 = generateTile();
 
         //fetch matched tiles
         int currCol = matchedCol.pop();
@@ -467,7 +446,6 @@ public class ColourBoardManager extends BoardManager implements Serializable {
         int firstTapCol = firstTap % board.getNUM_ROWS();
 
         board.swapTiles(row, col, firstTapRow, firstTapCol);
-        numOfMoves++;
     }
 
 }

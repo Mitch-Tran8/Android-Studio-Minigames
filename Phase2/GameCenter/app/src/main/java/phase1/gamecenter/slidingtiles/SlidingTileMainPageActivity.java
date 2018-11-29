@@ -28,10 +28,16 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
      * The buttons to display
      */
     Button startButton;
-    Button userRankingsButton;
-    Button leaderboardButton;
-    Button backButton;
 
+    /**
+     * the user's randings button
+     */
+    Button userRankingsButton;
+
+    /**
+     * the leaderboard button
+     */
+    Button leaderboardButton;
 
     /**
      * Emails and scores of userList
@@ -97,20 +103,16 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
                 startActivity(i);
 
             }
-        });}
+        });
+    }
 
-
-        /**
-         * Back button from the game to the main page
-         */
+    /**
+     * Back button from the game to the main page
+     */
     @Override
     public void onBackPressed() {
-        GameCenterMainActivity gameCentre= new GameCenterMainActivity();
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
         Intent intent = new Intent(SlidingTileMainPageActivity.this, GameCenterMainActivity.class);
-
-        startActivity(intent); //GO TO GAME CENTRE
+        startActivity(intent);
     }
 }
 

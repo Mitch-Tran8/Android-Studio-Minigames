@@ -10,24 +10,16 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import phase1.gamecenter.FileManager;
 import phase1.gamecenter.R;
 
 /**
- * ColourBoard Complexity Activity
+ * MatchedBoard Complexity Activity
  */
-public class BoardComplexity extends AppCompatActivity {
-
-
-    /**
-     * The main save file.
-     */
-    public static final String SAVE_FILENAME = "save_file.ser";
+public class BoardComplexity extends FileManager {
 
     /**
      * A temporary save file.
@@ -63,23 +55,11 @@ public class BoardComplexity extends AppCompatActivity {
      */
     private SlidingTileBoardManager slidingTileBoardManager;
 
-    /**
-     * the firebase auth
-     */
-    private FirebaseAuth mAuth;
-
-    /**
-     * the firebase database reference
-     */
-    private DatabaseReference databaseReference;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent i = getIntent();
         user_id = i.getStringExtra("user_id");
-        mAuth = FirebaseAuth.getInstance();
-
         setContentView(R.layout.activity_board_complexity);
 
         /*
@@ -109,7 +89,7 @@ public class BoardComplexity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 slidingTileBoardManager = new SlidingTileBoardManager(4, 4);
-                saveToFile(TEMP_SAVE_FILENAME);
+                saveToFile(TEMP_SAVE_FILENAME, slidingTileBoardManager);
                 switchToDifficulty();
 
             }
@@ -121,7 +101,7 @@ public class BoardComplexity extends AppCompatActivity {
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                Intent tmp = new Intent(BoardComplexity.this, GameActivity.class);
+                Intent tmp = new Intent(BoardComplexity.this, SlidingTilesGameActivity.class);
                 tmp.putExtra("user_id", user_id);
                 startActivity(tmp);
 
@@ -136,7 +116,7 @@ public class BoardComplexity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 slidingTileBoardManager = new SlidingTileBoardManager(5, 5);
-                saveToFile(TEMP_SAVE_FILENAME);
+                saveToFile(TEMP_SAVE_FILENAME, slidingTileBoardManager);
                 switchToDifficulty();
             }
         });
@@ -148,7 +128,7 @@ public class BoardComplexity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 slidingTileBoardManager = new SlidingTileBoardManager(3, 3);
-                saveToFile(TEMP_SAVE_FILENAME);
+                saveToFile(TEMP_SAVE_FILENAME, slidingTileBoardManager);
                 switchToDifficulty();
             }
 
@@ -163,45 +143,6 @@ public class BoardComplexity extends AppCompatActivity {
         Intent tmp = new Intent(BoardComplexity.this, DifficultyLevel.class);
         tmp.putExtra("user_id", user_id);
         startActivity(tmp);
-    }
-
-    /**
-     * Load the board manager from fileName.
-     *
-     * @param fileName the name of the file
-     */
-    private void loadFromFile(String fileName) {
-
-        try {
-            InputStream inputStream = this.openFileInput(fileName);
-            if (inputStream != null) {
-                ObjectInputStream input = new ObjectInputStream(inputStream);
-                slidingTileBoardManager = (SlidingTileBoardManager) input.readObject();
-                inputStream.close();
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " + e.toString());
-        }
-    }
-
-    /**
-     * Save the board manager to fileName.
-     *
-     * @param fileName the name of the file
-     */
-    public void saveToFile(String fileName) {
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(slidingTileBoardManager);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
     }
 }
 

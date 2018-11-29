@@ -3,32 +3,29 @@ Timer adapted from:
 https://stackoverflow.com/a/17486406
  */
 
-package phase1.gamecenter.colourtiles;
+package phase1.gamecenter.matched;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Observer;
 
 import android.widget.TextView;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
 import phase1.gamecenter.CustomAdapter;
+import phase1.gamecenter.FileManager;
+import phase1.gamecenter.GameActivity;
 import phase1.gamecenter.GestureDetectGridView;
 import phase1.gamecenter.R;
 import phase1.gamecenter.ScoreBoardUpdater;
@@ -36,32 +33,22 @@ import phase1.gamecenter.ScoreBoardUpdater;
 /**
  * The game activity with the goal to connect the biggest possible blob of colour tiles.
  */
-public class  ColourGameActivity extends AppCompatActivity implements Observer {
-
-    /**
-     * a colour game activity
-     */
-    private ColourGameActivity colourGameActivity;
+public class MatchedGameActivity extends FileManager implements GameActivity {
 
     /**
      * The board manager.
      */
-    private ColourBoardManager boardManager;
+    private MatchedBoardManager boardManager;
 
     /**
      * The board.
      */
-    private ColourBoard board;
+    private MatchedBoard board;
 
     /**
      * The buttons to display.
      */
     private ArrayList<Button> tileButtons;
-
-    /**
-     * Save button
-     */
-    private Button saveButton;
 
     /**
      * Grid View and calculated column height and width based on device size
@@ -72,16 +59,23 @@ public class  ColourGameActivity extends AppCompatActivity implements Observer {
      * the column width and height
      */
     private static int columnWidth, columnHeight;
+
+    /**
+     * the initial seconds
+     */
     private int seconds;
+
+    /**
+     * the initial minute
+     */
     private int minutes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadFromFile(ColourStartingActivity.TEMP_SAVE_FILENAME);
+        boardManager = loadFromFileMatched();
         createTileButtons(this);
         setContentView(R.layout.activity_colourmain);
-        addSaveButtonListener();
 
         // Add View to activity
         board = boardManager.getBoard();
@@ -136,15 +130,15 @@ public class  ColourGameActivity extends AppCompatActivity implements Observer {
                     @Override
                     public void run() {
                         TextView tv = (TextView) findViewById(R.id.editText);
-                        tv.setText(String.valueOf(minutes)+":"+ String.valueOf(seconds));
+                        tv.setText(String.format("%s:%s", String.valueOf(minutes), String.valueOf(seconds)));
                         seconds -= 1;
 
                         if(seconds == 0 && minutes != 0) {
                             seconds=60;
                             minutes=minutes-1;
-                            tv.setText(String.valueOf(minutes)+":"+String.valueOf(seconds));
+                            tv.setText(String.format("%s:%s", String.valueOf(minutes), String.valueOf(seconds)));
                         }
-                        else if (seconds == 0 && minutes == 0){
+                        else if (seconds == 0){
                             gameOver();
                         }
                     }
@@ -161,30 +155,33 @@ public class  ColourGameActivity extends AppCompatActivity implements Observer {
         String score = Integer.toString(boardManager.getScore());
         updateScoreboard(boardManager.getScore());
         if(boardManager.getScore() < boardManager.getScoreReq()) {
-            Toast toast = Toast.makeText(ColourGameActivity.this, "Time's up! Try again to unlock the next level. Your score: " + score, Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(MatchedGameActivity.this, "Time's up! Try again to unlock the next level. Your score: " + score, Toast.LENGTH_LONG);
             toast.setGravity(0,10,10);
             toast.show();
-            saveToFile(ColourBoardManager.TEMP_SAVE_FILENAME);
-            Intent tmp = new Intent(ColourGameActivity.this, ColourTileRoundsActivity.class);
+            saveToFile(MatchedBoardManager.TEMP_SAVE_FILENAME, boardManager);
+            Intent tmp = new Intent(MatchedGameActivity.this, MatchedRoundsActivity.class);
             boardManager.setRound(boardManager.getRound() - 1);
             tmp.putExtra("round", boardManager.getRound());
             System.out.println("lost "+ (boardManager.getRound()));
             startActivity(tmp);
         } else {
-            Toast toast = Toast.makeText(ColourGameActivity.this, "Time's up! you've unlocked the next level. :D" +
+            Toast toast = Toast.makeText(MatchedGameActivity.this, "Time's up! you've unlocked the next level. :D" +
                     " your score: " + score, Toast.LENGTH_LONG);
             toast.setGravity(0,10,10);
             toast.show();
-            Intent tmp = new Intent(ColourGameActivity.this, ColourTileRoundsActivity.class);
+            Intent tmp = new Intent(MatchedGameActivity.this, MatchedRoundsActivity.class);
             boardManager.setRound(boardManager.getRound() + 1);
-            saveToFile(ColourBoardManager.TEMP_SAVE_FILENAME);
+            saveToFile(MatchedBoardManager.TEMP_SAVE_FILENAME, boardManager);
             tmp.putExtra("rounds", boardManager.getRound());
             System.out.println("won "+ (boardManager.getRound()));
             startActivity(tmp);
-
         }
     }
 
+    /**
+     * updates the score board
+     * @param score the score
+     */
     public void updateScoreboard(int score) {
         ScoreBoardUpdater sbu = new ScoreBoardUpdater(score,"Colour tiles");
         sbu.updateUserScoreBoard();
@@ -192,11 +189,10 @@ public class  ColourGameActivity extends AppCompatActivity implements Observer {
 
     /**
      * Create the buttons for displaying the tiles.
-     *
      * @param context the context
      */
     public void createTileButtons(Context context) {
-        ColourBoard board = boardManager.getBoard();
+        MatchedBoard board = boardManager.getBoard();
         tileButtons = new ArrayList<>();
         for (int row = 0; row != board.getNUM_ROWS(); row++) {
             for (int col = 0; col != board.getNUM_ROWS(); col++) {
@@ -211,7 +207,7 @@ public class  ColourGameActivity extends AppCompatActivity implements Observer {
      * Update the backgrounds on the buttons to match the tiles.
      */
     public void updateTileButtons() {
-        ColourBoard board = boardManager.getBoard();
+        MatchedBoard board = boardManager.getBoard();
         int nextPos = 0;
         for (Button b : tileButtons) {
             int row = nextPos / board.getNUM_ROWS();
@@ -222,73 +218,27 @@ public class  ColourGameActivity extends AppCompatActivity implements Observer {
     }
 
     /**
-     * Activate the save button
-     */
-    public void addSaveButtonListener() {
-        saveButton = findViewById(R.id.save_button);
-
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveToFile(ColourStartingActivity.TEMP_SAVE_FILENAME);
-                Toast.makeText(ColourGameActivity.this, "Succesfully saved", Toast.LENGTH_LONG).show();
-
-            }
-        });
-    }
-
-
-
-    /**
      * Dispatch onPause() to fragments.
      */
     @Override
     protected void onPause() {
         super.onPause();
-        saveToFile(ColourStartingActivity.TEMP_SAVE_FILENAME);
-    }
-
-    /**
-     * Load the board manager from fileName.
-     *
-     * @param fileName the name of the file
-     */
-    protected void loadFromFile(String fileName) {
-
-        try {
-            InputStream inputStream = this.openFileInput(fileName);
-            if (inputStream != null) {
-                ObjectInputStream input = new ObjectInputStream(inputStream);
-                boardManager = (ColourBoardManager) input.readObject();
-                inputStream.close();
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " + e.toString());
-        }
-    }
-
-    /**
-     * Save the board manager to fileName.
-     *
-     * @param fileName the name of the file
-     */
-    public void saveToFile(String fileName) {
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(boardManager);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
+        saveToFile(MatchedStartingActivity.TEMP_SAVE_FILENAME, boardManager);
     }
 
     @Override
     public void update(Observable o, Object arg) {
         display();
+    }
+
+    /**
+     * Back button from the game to the main page
+     */
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(MatchedGameActivity.this, MatchedRoundsActivity.class);
+        seconds = 0;
+        minutes = 0;
+        startActivity(intent);
     }
 }

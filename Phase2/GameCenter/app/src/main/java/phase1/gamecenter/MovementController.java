@@ -3,7 +3,7 @@ package phase1.gamecenter;
 import android.content.Context;
 import android.widget.Toast;
 
-import phase1.gamecenter.colourtiles.ColourBoardManager;
+import phase1.gamecenter.matched.MatchedBoardManager;
 import phase1.gamecenter.slidingtiles.SlidingTileBoardManager;
 
 /**
@@ -15,7 +15,7 @@ public class MovementController {
      * The SlidingTileBoardManager that MovementController is controlling.
      */
     private SlidingTileBoardManager slidingTileBoardManager = null;
-    private ColourBoardManager colourBoardManager = null;
+    private MatchedBoardManager matchedBoardManager = null;
 
     /**
      * The MovementController
@@ -30,8 +30,8 @@ public class MovementController {
     public void setSlidingTileBoardManager(SlidingTileBoardManager slidingTileBoardManager) {
         this.slidingTileBoardManager = slidingTileBoardManager;
     }
-    public void setBoardManager(ColourBoardManager boardManager) {
-        this.colourBoardManager = boardManager;
+    public void setBoardManager(MatchedBoardManager boardManager) {
+        this.matchedBoardManager = boardManager;
     }
 
     /**
@@ -58,27 +58,27 @@ public class MovementController {
         // tap movements on the colourboard manager
         else {
 
-            if (colourBoardManager.hasFirstTap()) {
-                if (colourBoardManager.isValidTap(position)){
-                    colourBoardManager.touchMove(position);
+            if (matchedBoardManager.hasFirstTap()) {
+                if (matchedBoardManager.isValidTap(position)){
+                    matchedBoardManager.touchMove(position);
 
-                    if (colourBoardManager.puzzleSolved()) {
-//                        colourBoardManager.addNewTiles();
-//                        String score = Integer.toString(colourBoardManager.getScore());
+                    if (matchedBoardManager.puzzleSolved()) {
+//                        matchedBoardManager.addNewTiles();
+//                        String score = Integer.toString(matchedBoardManager.getScore());
 
                         Toast toast = Toast.makeText(context, "It's a match!", Toast.LENGTH_LONG);
                         toast.setGravity(0,50,50);
                         toast.show();
                     }
-                    colourBoardManager.setFirstTap(0);
+                    matchedBoardManager.setFirstTap(0);
                     }
                 else {
                     Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();
-                    colourBoardManager.setFirstTap(0);
+                    matchedBoardManager.setFirstTap(0);
                 }
 
             } else {
-                colourBoardManager.setFirstTap(position);
+                matchedBoardManager.setFirstTap(position);
                 Toast.makeText(context, "Select a tile to swap", Toast.LENGTH_SHORT).show();
             }
         }

@@ -1,16 +1,14 @@
-package phase1.gamecenter.colourtiles;
+package phase1.gamecenter.matched;
 
 import android.support.annotation.NonNull;
-
-import java.io.Serializable;
 
 import phase1.gamecenter.R;
 import phase1.gamecenter.Tile;
 
 /**
- * A ColourTile in a sliding tiles puzzle.
+ * A MatchedTile in a sliding tiles puzzle.
  */
-public class ColourTile extends Tile implements Comparable<ColourTile>, Serializable {
+public class MatchedTile implements Tile {
 
     /**
      * The background id to find the tile image.
@@ -41,12 +39,12 @@ public class ColourTile extends Tile implements Comparable<ColourTile>, Serializ
     }
 
     /**
-     * A ColourTile with id and background. The background may not have a corresponding image.
+     * A MatchedTile with id and background. The background may not have a corresponding image.
      *
      * @param id         the id
      * @param background the background
      */
-    public ColourTile(int id, int background) {
+    public MatchedTile(int id, int background) {
         this.id = id;
         this.background = background;
     }
@@ -56,7 +54,7 @@ public class ColourTile extends Tile implements Comparable<ColourTile>, Serializ
      *
      * @param backgroundId
      */
-    public ColourTile(int backgroundId) {
+    public MatchedTile(int backgroundId) {
         id = backgroundId;
         // This looks so ugly.
         switch (backgroundId) {
@@ -215,7 +213,7 @@ public class ColourTile extends Tile implements Comparable<ColourTile>, Serializ
     }
 
     @Override
-    public int compareTo(@NonNull ColourTile o) {
-        return o.id - this.id;
+    public int compareTo(@NonNull Object o) {
+        return ((MatchedTile)o).id - this.id;
     }
 }

@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-import phase1.gamecenter.colourtiles.ColourStartingActivity;
+import phase1.gamecenter.matched.MatchedStartingActivity;
 import phase1.gamecenter.connectnumbers.ConnectNumbersStartingActivity;
 import phase1.gamecenter.registrationinfo.LogoutActivity;
 import phase1.gamecenter.registrationinfo.UserScoreBoardActivity;
@@ -130,7 +130,7 @@ public class GameCenterMainActivity extends AppCompatActivity {
         colourTilesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(GameCenterMainActivity.this, ColourStartingActivity.class);
+                Intent i = new Intent(GameCenterMainActivity.this, MatchedStartingActivity.class);
                 startActivity(i);
             }
         });

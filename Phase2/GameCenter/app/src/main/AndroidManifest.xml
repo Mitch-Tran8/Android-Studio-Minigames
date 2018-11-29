@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".slidingtiles.GameActivity" />
+        <activity android:name=".slidingtiles.SlidingTilesGameActivity" />
         <activity android:name=".registrationinfo.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,12 +27,12 @@
         <activity android:name=".slidingtiles.SlidingTileMainPageActivity" />
         <activity android:name=".slidingtiles.BoardComplexity" />
         <activity android:name=".registrationinfo.UserScoreBoard" />
-        <activity android:name=".colourtiles.ColourGameActivity" />
-        <activity android:name=".colourtiles.ColourStartingActivity" />
+        <activity android:name=".matched.MatchedGameActivity" />
+        <activity android:name=".matched.MatchedStartingActivity" />
         <activity android:name=".slidingtiles.DifficultyLevel" />
         <activity android:name=".registrationinfo.LogoutActivity" />
         <activity android:name=".registrationinfo.UserScoreBoardActivity"></activity>
-        <activity android:name=".colourtiles.ColourTileRoundsActivity"/>
+        <activity android:name=".matched.MatchedRoundsActivity"/>
         <activity android:name=".connectnumbers.ConnectFourMainActivity" />
         <activity android:name=".connectnumbers.ConnectNumbersStartingActivity" />
         <activity android:name=".connectnumbers.ConnectNumbersSelectActivity" />
@@ -45,6 +45,9 @@
 
 
         <activity android:name=".LeaderboardActivity"/>
+        <activity android:name=".FileManager" />
+        <activity android:name=".slidingtiles.SlidingTileBoardManager" />
+        <activity android:name=".matched.MatchedBoardManager" />
 
         <meta-data
             android:name="preloaded_fonts"
