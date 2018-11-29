@@ -474,9 +474,6 @@ public class ConnectThreeAIHardMainActivity extends AppCompatActivity implements
         int bestMove = -1; // will be the resource id of the best button to play
         int best = -1000;
 
-        // since we have to do a super long function call to get the string,
-        // its better just to make another matrix. easier readability too
-        // also avoid playing with the button text while doing minimax
         String[][] board = new String[3][3];
         for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++)
@@ -500,6 +497,13 @@ public class ConnectThreeAIHardMainActivity extends AppCompatActivity implements
         }
         return bestMove;
     }
+    boolean noMovesLeft(String[][]board){
+        for (int i = 0; i<3; i++)
+            for (int j = 0; j<3; j++)
+                if (board[i][j].equals(""))
+                    return true;
+        return false;
+    }
 
     /**
      * Return the best value bestValue using a minimax algorithm.
@@ -513,7 +517,7 @@ public class ConnectThreeAIHardMainActivity extends AppCompatActivity implements
         else if (score == -10){
             return score + depth;
         }
-        else if (moves == 0){
+        else if (!noMovesLeft(board)){
             return 0;
         }
 
@@ -524,7 +528,7 @@ public class ConnectThreeAIHardMainActivity extends AppCompatActivity implements
                     if (board[i][j].equals("")) {
                         board[i][j] = "O";
                         --moves;
-                        bestValue = Math.max(bestValue, minimax(board, depth+1, true));
+                        bestValue = Math.max(bestValue, minimax(board, depth+1, false));
                         ++moves;
                         board[i][j] = "";
                     }
@@ -539,7 +543,7 @@ public class ConnectThreeAIHardMainActivity extends AppCompatActivity implements
                     if (board[i][j].equals("")) {
                         board[i][j] = "X";
                         --moves;
-                        bestValue = Math.min(bestValue, minimax(board,depth+1,false));
+                        bestValue = Math.min(bestValue, minimax(board,depth+1, true));
                         ++moves;
                         board[i][j] = "";
                     }

@@ -14,72 +14,12 @@ import java.util.Stack;
 import phase1.gamecenter.R;
 import phase1.gamecenter.ScoreBoardUpdater;
 
-public class ConnectFourMainActivity extends AppCompatActivity implements View.OnClickListener {
+public class ConnectFourMainActivity extends ConnectNumbersActivity implements View.OnClickListener {
 
     /**
      * 2D array of buttons, representing the connect four game board.
      */
     private Button[][] buttons = new Button[5][5];
-
-    /**
-     * Boolean representing if it is player 1's turn.
-     */
-    private boolean player1Turn = true;
-
-    /**
-     * The number of moves made on the connect four board.
-     */
-    private int moves;
-
-    /**
-     * The number of points player 1 has won.
-     */
-    private int player1points;
-
-    /**
-     * The number of points player 2 has won.
-     */
-    private int player2points;
-
-    /**
-     * The number of games tied.
-     */
-    private int ties;
-
-    /**
-     * TextView that shows the number of rounds player 1 has won.
-     */
-    private TextView scorePlayer1;
-
-    /**
-     * TextView that shows the number of rounds player 1 has won.
-     */
-    private TextView scorePlayer2;
-
-    /**
-     * TextView that shows the number of ties.
-     */
-    private TextView draws;
-
-    /**
-     * Number of rounds won by player 1.
-     */
-    private int player1RoundsWon;
-
-    /**
-     * Number of rounds won by player 2.
-     */
-    private int player2RoundsWon;
-
-    /**
-     * Number of the rounds of the game played.
-     */
-    private int roundsPlayed;
-
-    /**
-     * The stack that stocks all previous moves
-     */
-    private Stack<Integer> moveStack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,11 +43,8 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
             }
         }
 
-        //reset to NEW ROUND
         buttonResetListener(buttonReset);
-        //reset the GAME
         gameResetListener(gameReset);
-        ///
         addUndoButtonListener(undoButton);
     }
 
@@ -115,7 +52,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      * On click listener for the game reset button -> reset the game.
      * @param gameReset the reset game button.
      */
-    private void gameResetListener(Button gameReset) {
+    protected void gameResetListener(Button gameReset) {
         gameReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,7 +66,6 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
                 roundsPlayed = 0;
                 player1Turn = true;
                 player1points = 0;
-                player2points = 0;
                 player1RoundsWon = 0;
                 player2RoundsWon = 0;
                 ties = 0;
@@ -142,7 +78,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      * On click listener for the reset button -> create a new match
      * @param buttonReset the new match button
      */
-    private void buttonResetListener(Button buttonReset) {
+    protected void buttonResetListener(Button buttonReset) {
         buttonReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -174,7 +110,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
     /**
      * Activate the undo button.
      */
-    private void addUndoButtonListener(Button undoButton) {
+    protected void addUndoButtonListener(Button undoButton) {
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,7 +124,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
         if (gameOver()) {
             gameOverMessage();
         } else {
-            if (matchOver()) {
+            if (matchOver(5, buttons)) {
                 Toast.makeText(this, "Match over. Please start a new match.", Toast.LENGTH_LONG).show();
             } else {
                 if (!((Button) v).getText().toString().equals("")) {//checks if button contains empty string, if X or O then already used
@@ -207,20 +143,18 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      */
     private void processMove(Button v) {
         if (player1Turn) {
-            //v.setTextColor(Color.parseColor("#FFE35A7F"));
             v.setTextColor(Color.parseColor("#00ffffff"));
             v.setBackgroundResource(R.drawable.sunglass_smiley);
             v.setText("X");
             this.moveStack.push(v.getId());
         } else {
-            //v.setTextColor(Color.parseColor("#FFE79024"));
             v.setTextColor(Color.parseColor("#00ffffff"));
             v.setBackgroundResource(R.drawable.crazy_face);
             v.setText("O");
             this.moveStack.push(v.getId());
         }
         moves++;
-        if (matchOver()) {
+        if (matchOver(5, buttons)) {
             if (player1Turn) {
                 player1Wins();
                 Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_LONG).show();
@@ -240,125 +174,12 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
     }
 
     /**
-     * set the number of rounds player 1 has won only for testing purpose
-     * @param round amount of rounds to be set
-     */
-    public void setPlayer1RoundsWon(int round){ this.player1RoundsWon = round;}
-
-    /**
-     * get the number of rounds player 1 has won only for testing purpose
-     */
-    public int getPlayer1RoundsWon(){ return player1RoundsWon;}
-
-    /**
-     * set the number of rounds the AI has won only for testing purpose
-     * @param round amount of rounds to be set
-     */
-    public void setPlayer2RoundsWon(int round){ this.player2RoundsWon = round;}
-
-    /**
-     * get the number of rounds the AI has won only for testing purpose
-     */
-    public int getPlayer2RoundsWon(){ return player2RoundsWon;}
-
-    /**
-     * set the number of rounds that have been played for testing purpose
-     * @param round amount of rounds to be set
-     */
-    public void setRoundsPlayed(int round){ this.roundsPlayed = round;}
-
-    /**
-     * get the number of rounds that have been played for testing purpose
-     */
-    public int getRoundsPlayed(){ return roundsPlayed;}
-
-    /**
-     * get the number of rounds player 1 has won only for testing purpose
-     */
-    public int getPlayer1Points(){ return player1points;}
-
-    /**
-     * get the number of rounds the AI has won only for testing purpose
-     */
-    public int getPlayer2Points(){ return player2points;}
-
-    /**
-     * get the number of rounds that have been played for testing purpose
-     */
-    public int getTies(){ return ties;}
-
-    /**
-     * Displays the toast message when the game is over.
-     */
-    private void gameOverMessage() {
-        if (player1RoundsWon == 3) {
-            Toast.makeText(this, "Game Over. Player 1 wins! Please start a new game.", Toast.LENGTH_LONG).show();
-        } else if (player2RoundsWon == 3) {
-            Toast.makeText(this, "Game Over. Player 2 wins! Please start a new game.", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "Game Over. TIE! Please start a new game.", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    /**
-     * Tie in the game.
-     */
-    public void tie() {
-        ties++;
-        roundsPlayed++;
-    }
-
-    /**
-     * Player 2 wins the match, update scores.
-     */
-    public void player2Wins() {
-        player2points = player2points + 5;
-        player1points = player1points - 3;
-        player2RoundsWon++;
-        roundsPlayed++;
-    }
-
-    /**
-     * Player 1 wins the match, update scores.
-     */
-    public void player1Wins() {
-        player1points = player1points + 5;
-        player2points = player2points - 3;
-        player1RoundsWon++;
-        roundsPlayed++;
-    }
-
-    /**
-     * Return whether the connect four game is over, that is, if a player has made four in a row.
-     *
-     * @return whether the game is over.
-     */
-    public boolean gameOver() {
-        return (player1RoundsWon == 3 || player2RoundsWon == 3 || roundsPlayed == 5);
-    }
-
-    /**
-     * Return whether the connect four game is over, that is, if a player has made four in a row.
-     *
-     * @return whether the game is over.
-     */
-    private boolean matchOver() {
-        String[][] board = new String[5][5];
-
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                board[i][j] = buttons[i][j].getText().toString(); //go thru all buttons and set their XO text
-            }
-        }
-        return (checkRows(board) || checkColumns(board) || checkAscendingDiagonals(board) || checkDescendingDiagonals(board));
-    }
-
-    /**
      * Return whether or not there is a 4 in a row.
      *
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 4 in a row.
      */
+    @Override
     public boolean checkRows(String[][] board) {
         for (int i = 0; i < 5; i++) {
             if (board[i][0].equals(board[i][1]) && board[i][0].equals(board[i][2]) &&
@@ -380,6 +201,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 4 in a column
      */
+    @Override
     public boolean checkColumns(String[][] board) {
         for (int i = 0; i < 5; i++) {
             if (board[0][i].equals(board[1][i]) && board[0][i].equals(board[2][i]) &&
@@ -401,6 +223,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 4 in a ascending diagonal.
      */
+    @Override
     public boolean checkAscendingDiagonals(String[][] board) {
 
         if (board[3][0].equals(board[2][1]) &&
@@ -436,6 +259,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 4 in a descending diagonal.
      */
+    @Override
     public boolean checkDescendingDiagonals(String[][] board) {
 
         if (board[1][0].equals(board[2][1]) &&
@@ -462,15 +286,6 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
             return true;
         }
         return false;
-    }
-
-    /**
-     * Update TextView with the scores of each player.
-     */
-    private void updateRoundsWon() {
-        scorePlayer1.setText("Player 1: " + player1RoundsWon);
-        scorePlayer2.setText("Player 2: " + player2RoundsWon);
-        draws.setText("Draws: " + ties);
     }
 
     /**

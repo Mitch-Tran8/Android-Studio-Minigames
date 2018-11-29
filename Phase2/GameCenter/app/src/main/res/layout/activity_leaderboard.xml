@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:tabMode="scrollable"
-    tools:context=".LeaderboardActivity"
+    tools:context=".registrationinfo.LeaderboardActivity"
     tools:layout_editor_absoluteY="25dp">
 
 
