@@ -46,11 +46,6 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     protected TextView scorePlayer1;
 
     /**
-     * TextView that shows the number of rounds player 1 has won.
-     */
-    protected TextView scorePlayer2;
-
-    /**
      * TextView that shows the number of ties.
      */
     protected TextView draws;
@@ -63,7 +58,7 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     /**
      * Number of rounds won by player 2.
      */
-    protected int player2RoundsWon;
+    protected int opponentRoundsWon;
 
     /**
      * Number of rounds played.
@@ -79,81 +74,68 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
      * set the number of rounds player 1 has won only for testing purpose
      * @param round amount of rounds to be set
      */
-    protected void setPlayer1RoundsWon(int round){ this.player1RoundsWon = round;}
+    public void setPlayer1RoundsWon(int round){ this.player1RoundsWon = round;}
 
     /**
      * get the number of rounds player 1 has won only for testing purpose
      */
-    protected int getPlayer1RoundsWon(){ return player1RoundsWon;}
+    public int getPlayer1RoundsWon(){ return player1RoundsWon;}
 
     /**
-     * set the number of rounds the AI has won only for testing purpose
+     * set the number of rounds player 1 has won only for testing purpose
      * @param round amount of rounds to be set
      */
-    protected void setPlayer2RoundsWon(int round){ this.player2RoundsWon = round;}
+    public void setOpponentRoundsWon(int round){ this.opponentRoundsWon = round;}
 
     /**
-     * get the number of rounds the AI has won only for testing purpose
+     * get the number of rounds player 1 has won only for testing purpose
      */
-    protected int getPlayer2RoundsWon(){ return player2RoundsWon;}
+    public int getOpponentRoundsWon(){ return opponentRoundsWon;}
 
     /**
      * set the number of rounds that have been played for testing purpose
      * @param round amount of rounds to be set
      */
-    protected void setRoundsPlayed(int round){ this.roundsPlayed = round;}
+    public void setRoundsPlayed(int round){ this.roundsPlayed = round;}
 
     /**
      * get the number of rounds that have been played for testing purpose
      */
-    protected int getRoundsPlayed(){ return roundsPlayed;}
+    public int getRoundsPlayed(){ return roundsPlayed;}
 
     /**
      * get the number of rounds player 1 has won only for testing purpose
      */
-    protected int getPlayer1Points(){ return player1points;}
+    public int getPlayer1Points(){ return player1points;}
 
     /**
      * get the number of rounds that have been played for testing purpose
      */
-    protected int getTies(){ return ties;}
-
-    /**
-     * Displays the toast message when the game is over.
-     */
-    protected void gameOverMessage() {
-        if (player1RoundsWon == 3) {
-            Toast.makeText(this, "Game Over. Player 1 wins! Please start a new game.", Toast.LENGTH_LONG).show();
-        } else if (player2RoundsWon == 3) {
-            Toast.makeText(this, "Game Over. Player 2 wins! Please start a new game.", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "Game Over. TIE! Please start a new game.", Toast.LENGTH_LONG).show();
-        }
-    }
+    public int getTies(){ return ties;}
 
     /**
      * Tie in the game.
      */
-    protected void tie() {
+    public void tie() {
         ties++;
-        roundsPlayed++;
-    }
-
-    /**
-     * Player 2 wins the match, update scores.
-     */
-    protected void player2Wins() {
-        player1points = player1points - 3;
-        player2RoundsWon++;
         roundsPlayed++;
     }
 
     /**
      * Player 1 wins the match, update scores.
      */
-    protected void player1Wins() {
+    public void player1Wins() {
         player1points = player1points + 5;
         player1RoundsWon++;
+        roundsPlayed++;
+    }
+
+    /**
+     * Opponent wins the match, update scores.
+     */
+    public void opponentWins() {
+        player1points = player1points - 3;
+        opponentRoundsWon++;
         roundsPlayed++;
     }
 
@@ -163,8 +145,8 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
      *
      * @return whether the game is over.
      */
-    protected boolean gameOver() {
-        return (player1RoundsWon == 3 || player2RoundsWon == 3 || roundsPlayed == 5);
+    public boolean gameOver() {
+        return (player1RoundsWon == 3 || opponentRoundsWon == 3 || roundsPlayed == 5);
     }
 
     protected boolean matchOver(int size, Button[][] buttonsArray) {
@@ -176,15 +158,6 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
             }
         }
         return (checkRows(board) || checkColumns(board) || checkAscendingDiagonals(board) || checkDescendingDiagonals(board));
-    }
-
-    /**
-     * Update TextView with the scores of each player.
-     */
-    protected void updateRoundsWon() {
-        scorePlayer1.setText("Player 1: " + player1RoundsWon);
-        scorePlayer2.setText("Player 2: " + player2RoundsWon);
-        draws.setText("Draws: " + ties);
     }
 
     /**
@@ -204,10 +177,67 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
      */
     abstract void addUndoButtonListener(Button undoButton);
 
+    /**
+     * Return whether or not there is a 3 in a row.
+     *
+     * @param board String[][] with the current moves on the board (X's and O's)
+     * @return whether or not there is a 3 in a row.
+     */
+    public boolean checkRows(String[][] board){
+        for (int i = 0; i < 3; i++) {
+            if (board[i][0].equals(board[i][1]) && board[i][0].equals(board[i][2]) &&
+                    !board[i][0].equals("")) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-    abstract boolean checkRows(String[][] board);
-    abstract boolean checkColumns(String[][] board);
-    abstract boolean checkAscendingDiagonals(String[][] board);
-    abstract boolean checkDescendingDiagonals(String[][] board);
+    /**
+     * Return whether or not there is a 3 in a column.
+     *
+     * @param board String[][] with the current moves on the board (X's and O's)
+     * @return whether or not there is a 3 in a column
+     */
+    public boolean checkColumns(String[][] board){
+        for (int i = 0; i < 3; i++) {
+            if (board[0][i].equals(board[1][i]) && board[0][i].equals(board[2][i]) &&
+                    !board[0][i].equals("")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Return whether or not there is a 3 in an ascending diagonal pattern.
+     *
+     * @param board String[][] with the current moves on the board (X's and O's)
+     * @return whether or not there is a 3 in a ascending diagonal.
+     */
+    public boolean checkAscendingDiagonals(String[][] board){
+        return (board[0][2].equals(board[1][1]) &&
+                board[0][2].equals(board[2][0]) &&
+                !board[0][2].equals(""));
+    }
+
+    /**
+     * Return whether or not there is a 3 in an descending diagonal pattern.
+     *
+     * @param board String[][] with the current moves on the board (X's and O's)
+     * @return whether or not there is a 3 in a descending diagonal.
+     */
+    public boolean checkDescendingDiagonals(String[][] board){
+        return (board[0][0].equals(board[1][1]) &&
+                board[0][0].equals(board[2][2]) &&
+                !board[0][0].equals(""));
+    }
+
+    abstract void gameOverMessage();
+
+    abstract void updateRoundsWon();
+
+    abstract void undoMove();
+
 
 }
