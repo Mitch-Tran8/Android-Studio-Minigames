@@ -42,6 +42,7 @@ public class UserScoreBoardActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getPosition() == 0){getUserScores("Colour Tiles");}
                 else if (tab.getPosition() == 1){getUserScores("Sliding Tiles");}
+                else{getUserScores("Connect34");}
             }
 
             @Override
@@ -86,7 +87,7 @@ public class UserScoreBoardActivity extends AppCompatActivity {
     private void showScores(String game){
 
         TextView textViewName = findViewById(R.id.UserNameTitle);
-        textViewName.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName()+ "'s " + game + " Scoreboard");
+        textViewName.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName()+ "'s Scoreboard");
 
         TextView textView1 = findViewById(R.id.text1);
         textView1.setText(String.valueOf(userScores.get(0)));

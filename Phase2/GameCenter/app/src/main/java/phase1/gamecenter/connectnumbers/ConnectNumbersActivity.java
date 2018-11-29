@@ -123,6 +123,7 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
      */
     protected void gameOverMessage() {
         if (player1RoundsWon == 3) {
+
             Toast.makeText(this, "Game Over. Player 1 wins! Please start a new game.", Toast.LENGTH_LONG).show();
         } else if (player2RoundsWon == 3) {
             Toast.makeText(this, "Game Over. Player 2 wins! Please start a new game.", Toast.LENGTH_LONG).show();

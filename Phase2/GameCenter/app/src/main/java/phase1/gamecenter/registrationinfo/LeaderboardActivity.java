@@ -38,7 +38,9 @@ public class LeaderboardActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                onTab(tab.getPosition());
+                if (tab.getPosition() == 0){getLeaderBoardScores("Colour Tiles");}
+                else if (tab.getPosition() == 1){getLeaderBoardScores("Sliding Tiles");}
+                else{getLeaderBoardScores("Connect34");}
 
             }
 
