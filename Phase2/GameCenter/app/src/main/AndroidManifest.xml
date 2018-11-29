@@ -26,7 +26,6 @@
         <activity android:name=".GameCenterMainActivity" />
         <activity android:name=".slidingtiles.SlidingTileMainPageActivity" />
         <activity android:name=".slidingtiles.BoardComplexity" />
-        <activity android:name=".registrationinfo.UserScoreBoard" />
         <activity android:name=".colourtiles.ColourGameActivity" />
         <activity android:name=".colourtiles.ColourStartingActivity" />
         <activity android:name=".slidingtiles.DifficultyLevel" />
@@ -39,9 +38,7 @@
         <activity android:name=".connectnumbers.ConnectThreeAIEasyMainActivity" />
         <activity android:name=".connectnumbers.ConnectThreeAIHardMainActivity" />
         <activity android:name=".connectnumbers.ConnectThreeMainActivity" />
-        <activity android:name=".connectnumbers.ConnectThreePlayersActivity" />
         <activity android:name=".connectnumbers.ConnectThreeDifficultyActivity" />
-        <activity android:name=".connectnumbers.ConnectThreeActivity" />
 
 
         <activity android:name=".LeaderboardActivity"/>
