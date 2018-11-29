@@ -35,22 +35,12 @@
         <activity android:name=".colourtiles.ColourTileRoundsActivity"/>
         <activity android:name=".connectnumbers.ConnectFourMainActivity" />
         <activity android:name=".connectnumbers.ConnectNumbersStartingActivity" />
-        <activity android:name=".connectnumbers.ConnectFourPlayersActivity" />
-        <activity android:name=".connectnumbers.ConnectFourAIEasyMainActivity" />
         <activity android:name=".connectnumbers.ConnectNumbersSelectActivity" />
         <activity android:name=".connectnumbers.ConnectThreeAIEasyMainActivity" />
         <activity android:name=".connectnumbers.ConnectThreeAIHardMainActivity" />
         <activity android:name=".connectnumbers.ConnectThreeMainActivity" />
         <activity android:name=".connectnumbers.ConnectThreePlayersActivity" />
         <activity android:name=".connectnumbers.ConnectThreeDifficultyActivity" />
-        <activity android:name=".connectnumbers.ConnectFourDifficultyActivity" />
-        <activity android:name=".connectnumbers.ConnectNumbersRankingsActivity" />
-        <activity android:name=".connectnumbers.ConnectThreeRankingsMainActivity" />
-        <activity android:name=".connectnumbers.ConnectFourRankingsMainActivity" />
-        <activity android:name=".connectnumbers.ConnectFourRankings1PlayerActivity"/>
-        <activity android:name=".connectnumbers.ConnectFourRankings2PlayersActivity"/>
-        <activity android:name=".connectnumbers.ConnectThreeRankings1PlayerActivity"/>
-        <activity android:name=".connectnumbers.ConnectThreeRankings2PlayersActivity"/>
         <activity android:name=".connectnumbers.ConnectThreeActivity" />
 
 
