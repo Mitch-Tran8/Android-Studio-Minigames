@@ -374,7 +374,7 @@ public class SlidingTileBoardManager extends BoardManager implements Serializabl
             }
             updateScore(solved);
             updateScoreboard();
-            updateLeadeBoard();
+            updateLeaderBoard();
         }
         return solved;
     }
@@ -397,7 +397,7 @@ public class SlidingTileBoardManager extends BoardManager implements Serializabl
      */
 
     private void updateScoreboard() {
-        ScoreBoardUpdater sbu = new ScoreBoardUpdater(getScore(), "Sliding tiles");
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(getScore(), "Sliding Tiles");
         sbu.updateUserScoreBoard();
     }
 
@@ -405,8 +405,8 @@ public class SlidingTileBoardManager extends BoardManager implements Serializabl
      * update scoreboard for leaderboard of sliding tiles
      *
      */
-    private void updateLeadeBoard(){
-        ScoreBoardUpdater sbu = new ScoreBoardUpdater(getScore(), "Sliding tiles");
+    private void updateLeaderBoard(){
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(getScore(), "Sliding Tiles");
         sbu.updateLeaderBoard();
     }
 

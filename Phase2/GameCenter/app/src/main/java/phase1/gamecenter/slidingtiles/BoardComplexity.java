@@ -116,7 +116,7 @@ public class  BoardComplexity extends AppCompatActivity {
         });
 
         /*
-         * activate load button
+        * activate load button
          */
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override

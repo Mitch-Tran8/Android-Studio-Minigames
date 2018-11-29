@@ -160,6 +160,7 @@ public class  ColourGameActivity extends AppCompatActivity implements Observer {
     protected void gameOver() {
         String score = Integer.toString(boardManager.getScore());
         updateScoreboard(boardManager.getScore());
+        updateLeaderBoard(boardManager.getScore());
         if(boardManager.getScore() < boardManager.getScoreReq()) {
             Toast toast = Toast.makeText(ColourGameActivity.this, "Time's up! Try again to unlock the next level. Your score: " + score, Toast.LENGTH_LONG);
             toast.setGravity(0,10,10);
@@ -185,9 +186,23 @@ public class  ColourGameActivity extends AppCompatActivity implements Observer {
         }
     }
 
+    /**
+     * update the user's scoreboard on firebase
+     * @param score
+     */
+
     public void updateScoreboard(int score) {
-        ScoreBoardUpdater sbu = new ScoreBoardUpdater(score,"Colour tiles");
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(score,"Colour Tiles");
         sbu.updateUserScoreBoard();
+    }
+
+    /**
+     * update scoreboard for leaderboard on firebase
+     *
+     */
+    private void updateLeaderBoard(int score){
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(score, "Colour Tiles");
+        sbu.updateLeaderBoard();
     }
 
     /**

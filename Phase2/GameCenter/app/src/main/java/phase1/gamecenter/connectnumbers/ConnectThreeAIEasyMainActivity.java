@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import phase1.gamecenter.R;
+import phase1.gamecenter.ScoreBoardUpdater;
 
 public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -189,6 +190,7 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
             gameOverMessage();
         } else {
             if (matchOver()) {
+
                 Toast.makeText(this, "Match over. Please start a new match.", Toast.LENGTH_LONG).show();
             } else {
                 if (!((Button) v).getText().toString().equals("")) {//checks if button contains empty string, if X or O then already used
@@ -302,6 +304,8 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
      */
     private void gameOverMessage() {
         if (player1RoundsWon == 3) {
+            updateLeaderBoard();
+            updateScoreboard();
             Toast.makeText(this, "Game Over. Player 1 wins! Please start a new game.", Toast.LENGTH_LONG).show();
         } else if (aiRoundsWon == 3) {
             Toast.makeText(this, "Game Over. Player 2 wins! Please start a new game.", Toast.LENGTH_LONG).show();
@@ -468,5 +472,23 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
         Intent intent = new Intent(ConnectThreeAIEasyMainActivity.this, ConnectNumbersStartingActivity.class);
         startActivity(intent);
     }
+
+    /**
+     * update user's scoreboard on firebase
+     */
+    private void updateScoreboard() {
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect34");
+        sbu.updateUserScoreBoard();
+    }
+
+    /**
+     * update scoreboard for leaderboard on firebase
+     *
+     */
+    private void updateLeaderBoard(){
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect34");
+        sbu.updateLeaderBoard();
+    }
+
 
 }

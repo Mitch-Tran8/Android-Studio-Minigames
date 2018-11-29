@@ -70,7 +70,7 @@ public class ScoreBoardUpdater {
     }
 
     public void updateLeaderBoard(){
-        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Leaderboards").child("Sliding Tiles");
+        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Leaderboards").child(gameName);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
