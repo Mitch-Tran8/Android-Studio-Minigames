@@ -428,7 +428,7 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
      * undo the most recent move if the max undo times has not been reached
      */
     private void undoMove() {
-        if(!matchOver()){
+        if(moves < 9){
             if(moveStack.size() > 0){
                 int id = this.moveStack.pop();
                 for (int i = 0; i < 3; i++) {
