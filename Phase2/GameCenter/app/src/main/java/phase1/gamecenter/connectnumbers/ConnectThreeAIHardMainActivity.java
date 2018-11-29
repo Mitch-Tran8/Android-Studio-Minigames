@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Stack;
+
 import phase1.gamecenter.R;
 
 public class ConnectThreeAIHardMainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -77,6 +79,11 @@ public class ConnectThreeAIHardMainActivity extends AppCompatActivity implements
      */
     private int turns;
 
+    /**
+     * The stack that stocks all previous moves
+     */
+    private Stack<Integer> moveStack;
+
 
 
     @Override
@@ -88,6 +95,8 @@ public class ConnectThreeAIHardMainActivity extends AppCompatActivity implements
         draws = findViewById(R.id.draws);
         Button buttonReset = findViewById(R.id.button_reset);
         Button gameReset = findViewById(R.id.button_reset_game);
+        Button undoButton = findViewById(R.id.undoButton);
+        this.moveStack = new Stack<>();
         moves = 9;
 
         for (int i = 0; i < 3; i++) {
@@ -104,6 +113,8 @@ public class ConnectThreeAIHardMainActivity extends AppCompatActivity implements
         buttonResetListener(buttonReset);
         //reset the GAME using button
         gameResetListener(gameReset);
+        ///
+        addUndoButtonListener(undoButton);
     }
 
     /**
@@ -181,6 +192,19 @@ public class ConnectThreeAIHardMainActivity extends AppCompatActivity implements
     }
 
     /**
+     * Activate the undo button.
+     */
+    private void addUndoButtonListener(Button undoButton) {
+        undoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                undoMove();
+            }
+        });
+    }
+
+
+    /**
      * Process the move of the current player.
      *
      * @param v The button pressed by the current player.
@@ -189,6 +213,7 @@ public class ConnectThreeAIHardMainActivity extends AppCompatActivity implements
         // if button already has been played, don't do anything
         if (((Button) v).getText().toString().equals("")){
             ((Button) v).setText("X"); // human move
+            this.moveStack.push(v.getId());
             --moves;
             if (matchOver()){
                 if (player1Turn){
@@ -198,10 +223,10 @@ public class ConnectThreeAIHardMainActivity extends AppCompatActivity implements
                 }
             }else {
                 player1Turn = false;
-                System.out.println(moves);
                 if (turns < 4){
                     Button button = findViewById(findBestMove()); // AI's turn
                     button.setText("O");
+                    this.moveStack.push(button.getId());
                     --moves;
                     if (matchOver()){
                         if (!player1Turn){
@@ -406,6 +431,37 @@ public class ConnectThreeAIHardMainActivity extends AppCompatActivity implements
         scorePlayer1.setText("Player 1: " + player1RoundsWon);
         aiPlayer.setText("AI: " + aiRoundsWon);
         draws.setText("Draws: " + ties);
+    }
+
+    /**
+     * undo the most recent move if the max undo times has not been reached
+     */
+    private void undoMove() {
+        if(turns < 5){
+            if(moveStack.size() > 0){
+                int id = this.moveStack.pop();
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        if (buttons[i][j].getId() == id){
+                            buttons[i][j].setText("");
+                            buttons[i][j].setBackgroundResource(R.drawable.circle_button);
+                            moves++;
+                        }
+                    }
+                }
+                int id2 = this.moveStack.pop();
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        if (buttons[i][j].getId() == id2){
+                            buttons[i][j].setText("");
+                            buttons[i][j].setBackgroundResource(R.drawable.circle_button);
+                            moves++;
+                        }
+                    }
+                }
+                --turns;
+            }
+        }
     }
 
     /**

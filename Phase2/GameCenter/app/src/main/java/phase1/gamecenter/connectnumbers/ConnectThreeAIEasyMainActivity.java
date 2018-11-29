@@ -1,6 +1,8 @@
 package phase1.gamecenter.connectnumbers;
 
 import java.util.Random;
+import java.util.Stack;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -78,6 +80,11 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
      */
     private int roundsPlayed;
 
+    /**
+     * The stack that stocks all previous moves
+     */
+    private Stack<Integer> moveStack;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +95,8 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
         draws = findViewById(R.id.draws);
         Button buttonReset = findViewById(R.id.button_reset);
         Button gameReset = findViewById(R.id.button_reset_game);
+        Button undoButton = findViewById(R.id.undoButton);
+        this.moveStack = new Stack<>();
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -103,6 +112,8 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
         buttonResetListener(buttonReset);
         //reset the GAME using button
         gameResetListener(gameReset);
+        ///
+        addUndoButtonListener(undoButton);
     }
 
     /**
@@ -160,6 +171,18 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
         });
     }
 
+    /**
+     * Activate the undo button.
+     */
+    private void addUndoButtonListener(Button undoButton) {
+        undoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                undoMove();
+            }
+        });
+    }
+
     @Override
     public void onClick(View v) {
         if (gameOver()) {
@@ -185,6 +208,7 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
     private void processMove (Button v) {
         if (((Button) v).getText().toString().equals("")){
             ((Button) v).setText("X");
+            this.moveStack.push(v.getId());
 
             if (matchOver()) {
                 if (player1Turn) {
@@ -203,6 +227,7 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
                         j = RANDOM.nextInt(3);
                     } while (!buttons[i][j].getText().toString().equals(""));
                     (buttons[i][j]).setText("O");
+                    this.moveStack.push(buttons[i][j].getId());
                     if (matchOver()) {
                         if (!player1Turn) {
                             aiWins();
@@ -407,6 +432,35 @@ public class ConnectThreeAIEasyMainActivity extends AppCompatActivity implements
         scorePlayer1.setText("Player 1: " + player1RoundsWon);
         aiPlayer.setText("AI: " + aiRoundsWon);
         draws.setText("Draws: " + ties);
+    }
+
+    /**
+     * undo the most recent move if the max undo times has not been reached
+     */
+    private void undoMove() {
+        if(!matchOver()){
+            if(moveStack.size() > 0){
+                int id = this.moveStack.pop();
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        if (buttons[i][j].getId() == id){
+                            buttons[i][j].setText("");
+                            buttons[i][j].setBackgroundResource(R.drawable.circle_button);
+                        }
+                    }
+                }
+                int id2 = this.moveStack.pop();
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        if (buttons[i][j].getId() == id2){
+                            buttons[i][j].setText("");
+                            buttons[i][j].setBackgroundResource(R.drawable.circle_button);
+                        }
+                    }
+                }
+                --moves;
+            }
+        }
     }
 
     @Override
