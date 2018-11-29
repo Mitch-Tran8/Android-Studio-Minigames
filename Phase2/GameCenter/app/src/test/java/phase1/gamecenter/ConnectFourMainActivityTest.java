@@ -127,9 +127,9 @@ public class ConnectFourMainActivityTest {
     }
 
     @Test
-    public void testCheckAiRoundsWonGameOverIsTrue(){
+    public void testCheckOpponentRoundsWonGameOverIsTrue(){
         ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
-        testerActivity.setPlayer2RoundsWon(3);
+        testerActivity.setOpponentRoundsWon(3);
         assertEquals(true, testerActivity.gameOver());
     }
 
@@ -144,7 +144,7 @@ public class ConnectFourMainActivityTest {
     public void testCheckGameOverIsFalse(){
         ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
         testerActivity.setPlayer1RoundsWon(0);
-        testerActivity.setPlayer2RoundsWon(0);
+        testerActivity.setOpponentRoundsWon(0);
         testerActivity.setRoundsPlayed(0);
         assertEquals(false, testerActivity.gameOver());
     }
@@ -154,13 +154,6 @@ public class ConnectFourMainActivityTest {
         ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
         testerActivity.player1Wins();
         assertEquals(5, testerActivity.getPlayer1Points());
-    }
-
-    @Test
-    public void testPlayer1WinsPlayer2PointsChange(){
-        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
-        testerActivity.player1Wins();
-        assertEquals(-3, testerActivity.getPlayer2Points());
     }
 
     @Test
@@ -180,28 +173,21 @@ public class ConnectFourMainActivityTest {
     @Test
     public void testPLayer2WinsPlayer1PointsChange(){
         ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
-        testerActivity.player2Wins();
+        testerActivity.opponentWins();
         assertEquals(-3, testerActivity.getPlayer1Points());
-    }
-
-    @Test
-    public void testPlayer2WinsPlayer2PointsChange(){
-        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
-        testerActivity.player2Wins();
-        assertEquals(5, testerActivity.getPlayer2Points());
     }
 
     @Test
     public void testPlayer2WinsPlayer2RoundChange(){
         ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
-        testerActivity.player2Wins();
-        assertEquals(1, testerActivity.getPlayer2RoundsWon());
+        testerActivity.opponentWins();
+        assertEquals(1, testerActivity.getOpponentRoundsWon());
     }
 
     @Test
     public void testPlayer2WinsRoundsPlayedChange(){
         ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
-        testerActivity.player2Wins();
+        testerActivity.opponentWins();
         assertEquals(1, testerActivity.getRoundsPlayed());
     }
 

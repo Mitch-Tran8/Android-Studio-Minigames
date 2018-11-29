@@ -2,6 +2,7 @@ package phase1.gamecenter;
 
 import org.junit.Test;
 
+import phase1.gamecenter.connectnumbers.ConnectThreeAIEasyMainActivity;
 import phase1.gamecenter.connectnumbers.ConnectThreeMainActivity;
 
 import static junit.framework.Assert.assertEquals;
@@ -11,9 +12,9 @@ public class ConnectThreeMainActivityTest {
     @Test
     public void testCheckRowsTrue() {
         String[][] testerBoard = {
-            {"O", "X", "O"},
-            {"X", "X", "X"},
-            {"", "O", ""},
+                {"O", "X", "O"},
+                {"X", "X", "X"},
+                {"", "O", ""},
         };
         ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         assertEquals(true, testerActivity.checkRows(testerBoard));
@@ -104,9 +105,9 @@ public class ConnectThreeMainActivityTest {
     }
 
     @Test
-    public void testCheckAiRoundsWonGameOverIsTrue(){
+    public void testCheckOpponentRoundsWonGameOverIsTrue(){
         ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
-        testerActivity.setPlayer2RoundsWon(3);
+        testerActivity.setOpponentRoundsWon(3);
         assertEquals(true, testerActivity.gameOver());
     }
 
@@ -121,7 +122,7 @@ public class ConnectThreeMainActivityTest {
     public void testCheckGameOverIsFalse(){
         ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         testerActivity.setPlayer1RoundsWon(0);
-        testerActivity.setPlayer2RoundsWon(0);
+        testerActivity.setOpponentRoundsWon(0);
         testerActivity.setRoundsPlayed(0);
         assertEquals(false, testerActivity.gameOver());
     }
@@ -131,13 +132,6 @@ public class ConnectThreeMainActivityTest {
         ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         testerActivity.player1Wins();
         assertEquals(5, testerActivity.getPlayer1Points());
-    }
-
-    @Test
-    public void testPlayer1WinsPlayer2PointsChange(){
-        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
-        testerActivity.player1Wins();
-        assertEquals(-3, testerActivity.getPlayer2Points());
     }
 
     @Test
@@ -157,28 +151,21 @@ public class ConnectThreeMainActivityTest {
     @Test
     public void testPLayer2WinsPlayer1PointsChange(){
         ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
-        testerActivity.player2Wins();
+        testerActivity.opponentWins();
         assertEquals(-3, testerActivity.getPlayer1Points());
-    }
-
-    @Test
-    public void testPlayer2WinsPlayer2PointsChange(){
-        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
-        testerActivity.player2Wins();
-        assertEquals(5, testerActivity.getPlayer2Points());
     }
 
     @Test
     public void testPlayer2WinsPlayer2RoundChange(){
         ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
-        testerActivity.player2Wins();
-        assertEquals(1, testerActivity.getPlayer2RoundsWon());
+        testerActivity.opponentWins();
+        assertEquals(1, testerActivity.getOpponentRoundsWon());
     }
 
     @Test
     public void testPlayer2WinsRoundsPlayedChange(){
         ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
-        testerActivity.player2Wins();
+        testerActivity.opponentWins();
         assertEquals(1, testerActivity.getRoundsPlayed());
     }
 
@@ -195,5 +182,4 @@ public class ConnectThreeMainActivityTest {
         testerActivity.tie();
         assertEquals(1, testerActivity.getRoundsPlayed());
     }
-    
 }
