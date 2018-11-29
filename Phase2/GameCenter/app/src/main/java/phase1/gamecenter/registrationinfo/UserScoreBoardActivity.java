@@ -21,7 +21,7 @@ import java.util.HashMap;
 import phase1.gamecenter.R;
 
 /**
- * UserScoreBoard Activity. The user's personal scoreboard.
+ * UserScoreBoardActivity. The user's personal scoreboard.
  */
 
 public class UserScoreBoardActivity extends AppCompatActivity {

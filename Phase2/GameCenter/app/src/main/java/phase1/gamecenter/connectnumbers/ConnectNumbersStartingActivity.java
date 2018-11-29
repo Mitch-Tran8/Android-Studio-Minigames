@@ -24,7 +24,7 @@ public class ConnectNumbersStartingActivity extends AppCompatActivity {
         onePlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ConnectNumbersStartingActivity.this, ConnectThreeActivity.class);
+                Intent intent = new Intent(ConnectNumbersStartingActivity.this, ConnectThreeDifficultyActivity.class);
                 startActivity(intent);
             }
         });

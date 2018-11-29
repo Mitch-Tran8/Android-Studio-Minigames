@@ -21,7 +21,7 @@ import phase1.gamecenter.R;
 /**
  * ColourBoard Complexity Activity
  */
-public class BoardComplexity extends AppCompatActivity {
+public class  BoardComplexity extends AppCompatActivity {
 
 
     /**
