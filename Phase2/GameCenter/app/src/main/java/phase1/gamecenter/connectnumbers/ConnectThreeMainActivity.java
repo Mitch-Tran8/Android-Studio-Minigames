@@ -97,6 +97,8 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
                     player1Turn = true;
                 } else {
                     if (player1RoundsWon == 3) {
+                        updateScoreboard();
+                        updateLeaderBoard();
                         Toast.makeText(getApplicationContext(), "Game Over. Player 1 wins! Please start a new game.", Toast.LENGTH_LONG).show();
                     } else if (player2RoundsWon == 3){
                         Toast.makeText(getApplicationContext(), "Game Over. Player 2 wins! Please start a new game.", Toast.LENGTH_LONG).show();

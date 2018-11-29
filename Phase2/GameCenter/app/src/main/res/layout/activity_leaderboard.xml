@@ -24,7 +24,7 @@
             android:id="@+id/ColourTileTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Colour Tile Leaderboard" />
+            android:text="Matched Leaderboard" />
 
         <android.support.design.widget.TabItem
             android:id="@+id/SlidingTileTab"
@@ -32,10 +32,10 @@
             android:layout_height="wrap_content"
             android:text="Sliding Tile Leaderboard" />
 
-        <!--<android.support.design.widget.TabItem-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Right" />-->
+        <android.support.design.widget.TabItem
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Connect Numbers Leaderboard" />
 
     </android.support.design.widget.TabLayout>
 
