@@ -2,16 +2,14 @@ package phase1.gamecenter.slidingtiles;
 
 import android.support.annotation.NonNull;
 
-import java.io.Serializable;
-
 import phase1.gamecenter.R;
 import phase1.gamecenter.Tile;
 
 
 /**
- * A ColourTile in a sliding tiles puzzle.
+ * A MatchedTile in a sliding tiles puzzle.
  */
-public class NumberTile extends Tile implements Comparable<NumberTile>, Serializable {
+public class NumberTile implements Tile {
 
     /**
      * The background id to find the tile image.
@@ -42,7 +40,7 @@ public class NumberTile extends Tile implements Comparable<NumberTile>, Serializ
     }
 
     /**
-     * A ColourTile with id and background. The background may not have a corresponding image.
+     * A MatchedTile with id and background. The background may not have a corresponding image.
      *
      * @param id         the id
      * @param background the background
@@ -151,7 +149,7 @@ public class NumberTile extends Tile implements Comparable<NumberTile>, Serializ
     }
 
     @Override
-    public int compareTo(@NonNull NumberTile o) {
-        return o.id - this.id;
+    public int compareTo(@NonNull Object o) {
+        return ((NumberTile)o).id - this.id;
     }
 }

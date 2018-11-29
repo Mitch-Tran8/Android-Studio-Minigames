@@ -12,6 +12,7 @@ import android.widget.Toast;
 import java.util.Stack;
 
 import phase1.gamecenter.R;
+import phase1.gamecenter.ScoreBoardUpdater;
 
 public class ConnectFourMainActivity extends ConnectNumbersActivity implements View.OnClickListener {
 
@@ -98,6 +99,8 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
                     player1Turn = true;
                 } else {
                     if (player1RoundsWon == 3) {
+                        updateLeaderBoard();
+                        updateScoreboard();
                         Toast.makeText(getApplicationContext(), "Game Over. Player 1 wins! Please refresh the game.", Toast.LENGTH_LONG).show();
                     } else if (opponentRoundsWon == 3) {
                         Toast.makeText(getApplicationContext(), "Game Over. Player 2 wins! Please refresh the game.", Toast.LENGTH_LONG).show();
@@ -345,5 +348,23 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
         Intent intent = new Intent(ConnectFourMainActivity.this, ConnectNumbersStartingActivity.class);
         startActivity(intent);
     }
+
+    /**
+     * update user's scoreboard on firebase
+     */
+    private void updateScoreboard() {
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect34");
+        sbu.updateUserScoreBoard();
+    }
+
+    /**
+     * update scoreboard for leaderboard on firebase
+     *
+     */
+    private void updateLeaderBoard(){
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect34");
+        sbu.updateLeaderBoard();
+    }
+
 
 }

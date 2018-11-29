@@ -15,7 +15,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.GridView;
 
-import phase1.gamecenter.colourtiles.ColourBoardManager;
+import phase1.gamecenter.matched.MatchedBoardManager;
 import phase1.gamecenter.slidingtiles.SlidingTileBoardManager;
 
 public class GestureDetectGridView extends GridView {
@@ -28,7 +28,7 @@ public class GestureDetectGridView extends GridView {
     private float mTouchX;
     private float mTouchY;
     private SlidingTileBoardManager slidingTileBoardManager;
-    private ColourBoardManager colourBoardManager;
+    private MatchedBoardManager matchedBoardManager;
 
     public GestureDetectGridView(Context context) {
         super(context);
@@ -109,8 +109,8 @@ public class GestureDetectGridView extends GridView {
         this.slidingTileBoardManager = slidingTileBoardManager;
         mController.setSlidingTileBoardManager(slidingTileBoardManager);
     }
-    public void setBoardManager(ColourBoardManager boardManager) {
-        this.colourBoardManager = boardManager;
+    public void setBoardManager(MatchedBoardManager boardManager) {
+        this.matchedBoardManager = boardManager;
         mController.setBoardManager(boardManager);
     }
 }

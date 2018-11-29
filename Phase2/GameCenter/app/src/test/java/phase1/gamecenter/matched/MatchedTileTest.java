@@ -1,17 +1,14 @@
-package phase1.gamecenter.colourtiles;
+package phase1.gamecenter.matched;
 
 import org.junit.Test;
 
-import phase1.gamecenter.colourtiles.ColourTile;
-import phase1.gamecenter.slidingtiles.NumberTile;
-
 import static org.junit.Assert.assertEquals;
 
-public class ColourTileTest {
+public class MatchedTileTest {
 
-   ColourTile testingTile = new ColourTile(4, 3);
-   ColourTile testingTile2 = new ColourTile(5, 4);
-   ColourTile testingTile3 = new ColourTile(10, 10);
+   MatchedTile testingTile = new MatchedTile(4, 3);
+   MatchedTile testingTile2 = new MatchedTile(5, 4);
+   MatchedTile testingTile3 = new MatchedTile(10, 10);
 
     @Test
     public void testGetBackground_3() {
@@ -35,97 +32,97 @@ public class ColourTileTest {
 
     @Test
     public void testTile10() {
-        ColourTile testerTile = new ColourTile(10);
+        MatchedTile testerTile = new MatchedTile(10);
         assertEquals(10, testerTile.getId());
     }
 
     @Test
     public void testTile11() {
-        ColourTile testerTile = new ColourTile(11);
+        MatchedTile testerTile = new MatchedTile(11);
         assertEquals(11, testerTile.getId());
     }
 
     @Test
     public void testTile12() {
-        ColourTile testerTile = new ColourTile(12);
+        MatchedTile testerTile = new MatchedTile(12);
         assertEquals(12, testerTile.getId());
     }
 
     @Test
     public void testTile13() {
-        ColourTile testerTile = new ColourTile(13);
+        MatchedTile testerTile = new MatchedTile(13);
         assertEquals(13, testerTile.getId());
     }
 
     @Test
     public void testTile14() {
-        ColourTile testerTile = new ColourTile(14);
+        MatchedTile testerTile = new MatchedTile(14);
         assertEquals(14, testerTile.getId());
     }
 
     @Test
     public void testTile15() {
-        ColourTile testerTile = new ColourTile(15);
+        MatchedTile testerTile = new MatchedTile(15);
         assertEquals(15, testerTile.getId());
     }
 
     @Test
     public void testTile16() {
-        ColourTile testerTile = new ColourTile(16);
+        MatchedTile testerTile = new MatchedTile(16);
         assertEquals(16, testerTile.getId());
     }
 
     @Test
     public void testTile17() {
-        ColourTile testerTile = new ColourTile(17);
+        MatchedTile testerTile = new MatchedTile(17);
         assertEquals(17, testerTile.getId());
     }
 
     @Test
     public void testTile18() {
-        ColourTile testerTile = new ColourTile(18);
+        MatchedTile testerTile = new MatchedTile(18);
         assertEquals(18, testerTile.getId());
     }
 
     @Test
     public void testTile19() {
-        ColourTile testerTile = new ColourTile(19);
+        MatchedTile testerTile = new MatchedTile(19);
         assertEquals(19, testerTile.getId());
     }
 
     @Test
     public void testTile20() {
-        ColourTile testerTile = new ColourTile(20);
+        MatchedTile testerTile = new MatchedTile(20);
         assertEquals(20, testerTile.getId());
     }
 
     @Test
     public void testTile21() {
-        ColourTile testerTile = new ColourTile(21);
+        MatchedTile testerTile = new MatchedTile(21);
         assertEquals(21, testerTile.getId());
     }
 
     @Test
     public void testTile22() {
-        ColourTile testerTile = new ColourTile(22);
+        MatchedTile testerTile = new MatchedTile(22);
         assertEquals(22, testerTile.getId());
     }
 
     @Test
     public void testTile23() {
-        ColourTile testerTile = new ColourTile(23);
+        MatchedTile testerTile = new MatchedTile(23);
         assertEquals(23, testerTile.getId());
     }
 
     @Test
     public void testTile24() {
-        ColourTile testerTile = new ColourTile(24);
+        MatchedTile testerTile = new MatchedTile(24);
         assertEquals(24, testerTile.getId());
     }
 
     @Test
     public void testTile25() {
-        ColourTile testerTile = new ColourTile(25);
+        MatchedTile testerTile = new MatchedTile(25);
         assertEquals(25, testerTile.getId());
     }
 }

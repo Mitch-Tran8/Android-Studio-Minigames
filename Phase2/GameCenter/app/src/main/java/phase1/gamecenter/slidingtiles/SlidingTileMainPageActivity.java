@@ -1,7 +1,6 @@
 package phase1.gamecenter.slidingtiles;
 
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,9 +16,7 @@ import java.util.ArrayList;
 
 import phase1.gamecenter.registrationinfo.EmailAndScore;
 import phase1.gamecenter.GameCenterMainActivity;
-import phase1.gamecenter.LeaderboardActivity;
 import phase1.gamecenter.R;
-import phase1.gamecenter.registrationinfo.UserScoreBoardActivity;
 
 
 /**
@@ -79,7 +76,7 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
         exitInstructionsButton.setVisibility(View.GONE);
 
 
-        /**
+        /*
          * Activate start button
          */
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +88,7 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
             }
         });
 
-        /**
+        /*
          * Activate the how to play button
          */
         howToPlayButton.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +108,7 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
             }
         });
 
-        /**
+        /*
          * Activate the exit instructions button
          */
         exitInstructionsButton.setOnClickListener(new View.OnClickListener() {
@@ -136,8 +133,7 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         Intent intent = new Intent(SlidingTileMainPageActivity.this, GameCenterMainActivity.class);
-
-        startActivity(intent); //GO TO GAME CENTRE
+        startActivity(intent);
     }
 }
 

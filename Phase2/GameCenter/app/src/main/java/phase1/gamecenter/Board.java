@@ -1,24 +1,7 @@
 package phase1.gamecenter;
+import java.io.Serializable;
 
-import java.util.Observable;
+public interface Board extends Serializable, Iterable{
 
-/**
- * a board. the abstract class for SlidingTileBoard and ColourBoard.
- */
-public abstract class Board extends Observable {
-
-    /**
-     * The number of rows.
-     */
-    private int NUM_ROWS;
-
-    /**
-     * The number of rows.
-     */
-    private int NUM_COLS;
-
-    public Board(){
-    }
-
-
+    void swapTiles(int row, int col, int row1, int col1);
 }

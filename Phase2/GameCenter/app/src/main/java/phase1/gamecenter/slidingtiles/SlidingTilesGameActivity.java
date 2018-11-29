@@ -2,33 +2,25 @@ package phase1.gamecenter.slidingtiles;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Observer;
 
 import phase1.gamecenter.CustomAdapter;
+import phase1.gamecenter.FileManager;
+import phase1.gamecenter.GameActivity;
 import phase1.gamecenter.GestureDetectGridView;
 import phase1.gamecenter.R;
-
 
 /**
  * The game activity.
  */
-public class  GameActivity extends AppCompatActivity implements Observer, Serializable {
+public class SlidingTilesGameActivity extends FileManager implements GameActivity {
 
     /**
      * The board manager.
@@ -41,8 +33,14 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
     private ArrayList<Button> tileButtons;
 
 
-    // Grid View and calculated column height and width based on device size
+    /**
+     * Grid View and calculated column height and width based on device size
+     */
     private GestureDetectGridView gridView;
+
+    /**
+     * the column width and height
+     */
     private static int columnWidth, columnHeight;
 
     /**
@@ -61,14 +59,14 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
     public void autoSave(){
         int numMoves = slidingTileBoardManager.getNumOfMoves();
         if(numMoves %3 ==0){
-            saveToFile(BoardComplexity.TEMP_SAVE_FILENAME);
+            saveToFile(BoardComplexity.TEMP_SAVE_FILENAME, slidingTileBoardManager);
         }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadFromFile(BoardComplexity.TEMP_SAVE_FILENAME);
+        slidingTileBoardManager = loadFromFileSlidingTiles(BoardComplexity.TEMP_SAVE_FILENAME);
         createTileButtons(this);
         setContentView(R.layout.activity_main);
         addUndoButtonListener();
@@ -110,9 +108,9 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
             public void onClick(View v) {
                 if (slidingTileBoardManager.isValidUndo()) {
                     slidingTileBoardManager.undo();
-                    Toast.makeText(GameActivity.this, "Undo Succesful", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SlidingTilesGameActivity.this, "Undo Succesful", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(GameActivity.this, "Maximum undo moves reached", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SlidingTilesGameActivity.this, "Maximum undo moves reached", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -121,14 +119,14 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
     /**
      * Activate the save button
      */
-    private void addSaveButtonListener() {
+    public void addSaveButtonListener() {
         Button saveButton = findViewById(R.id.save_button);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveToFile(BoardComplexity.TEMP_SAVE_FILENAME);
-                Toast.makeText(GameActivity.this, "Succesfully saved", Toast.LENGTH_LONG).show();
+                saveToFile(BoardComplexity.TEMP_SAVE_FILENAME, slidingTileBoardManager);
+                Toast.makeText(SlidingTilesGameActivity.this, "Succesfully saved", Toast.LENGTH_LONG).show();
 
             }
         });
@@ -139,7 +137,7 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
      *
      * @param context the context
      */
-    private void createTileButtons(Context context) {
+    public void createTileButtons(Context context) {
         SlidingTilesBoard slidingTilesBoard = slidingTileBoardManager.getSlidingTilesBoard();
         tileButtons = new ArrayList<>();
         for (int row = 0; row != slidingTileBoardManager.getRows(); row++) {
@@ -154,7 +152,7 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
     /**
      * Update the backgrounds on the buttons to match the tiles.
      */
-    private void updateTileButtons() {
+    public void updateTileButtons() {
         SlidingTilesBoard slidingTilesBoard = slidingTileBoardManager.getSlidingTilesBoard();
         int nextPos = 0;
         for (Button b : tileButtons) {
@@ -172,47 +170,7 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
     @Override
     protected void onPause() {
         super.onPause();
-        saveToFile(BoardComplexity.TEMP_SAVE_FILENAME);
-    }
-
-    /**
-     * Load the board manager from fileName.
-     *
-     * @param fileName the name of the file
-     */
-    private void loadFromFile(String fileName) {
-
-        try {
-            InputStream inputStream = this.openFileInput(fileName);
-            if (inputStream != null) {
-                ObjectInputStream input = new ObjectInputStream(inputStream);
-                slidingTileBoardManager = (SlidingTileBoardManager) input.readObject();
-
-                inputStream.close();
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " + e.toString());
-        }
-    }
-
-    /**
-     * Save the board manager to fileName.
-     *
-     * @param fileName the name of the file
-     */
-    public void saveToFile(String fileName) {
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(slidingTileBoardManager);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
+        saveToFile(BoardComplexity.TEMP_SAVE_FILENAME, slidingTileBoardManager);
     }
 
     @Override
@@ -220,13 +178,13 @@ public class  GameActivity extends AppCompatActivity implements Observer, Serial
         display();
     }
 
-
     /**
      * Back button from the game to the main page
      */
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(GameActivity.this, SlidingTileMainPageActivity.class);
+        Intent intent = new Intent(SlidingTilesGameActivity.this, SlidingTileMainPageActivity.class);
         startActivity(intent);
-}}
+}
+}
 

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import phase1.gamecenter.R;
+import phase1.gamecenter.ScoreBoardUpdater;
 
 public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity implements View.OnClickListener {
 
@@ -198,6 +199,8 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
      */
     protected void gameOverMessage() {
         if (player1RoundsWon == 3) {
+            updateLeaderBoard();
+            updateScoreboard();
             Toast.makeText(this, "Game Over. Player 1 wins! Please start a new game.", Toast.LENGTH_LONG).show();
         } else if (opponentRoundsWon == 3) {
             Toast.makeText(this, "Game Over. AI wins! Please start a new game.", Toast.LENGTH_LONG).show();
@@ -249,5 +252,23 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
         Intent intent = new Intent(ConnectThreeAIEasyMainActivity.this, ConnectNumbersStartingActivity.class);
         startActivity(intent);
     }
+
+    /**
+     * update user's scoreboard on firebase
+     */
+    private void updateScoreboard() {
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect34");
+        sbu.updateUserScoreBoard();
+    }
+
+    /**
+     * update scoreboard for leaderboard on firebase
+     *
+     */
+    private void updateLeaderBoard(){
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect34");
+        sbu.updateLeaderBoard();
+    }
+
 
 }

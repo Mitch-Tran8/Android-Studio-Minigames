@@ -1,10 +1,8 @@
-package phase1.gamecenter.colourtiles;
+package phase1.gamecenter.matched;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
-public class ColourStartingActivityTest {
+public class MatchedStartingActivityTest {
 
     @Test
     public void onCreate() {

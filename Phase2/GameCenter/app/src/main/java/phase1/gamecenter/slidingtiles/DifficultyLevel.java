@@ -1,22 +1,15 @@
 package phase1.gamecenter.slidingtiles;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
+import phase1.gamecenter.FileManager;
 import phase1.gamecenter.R;
 
 
-public class DifficultyLevel extends AppCompatActivity {
+public class DifficultyLevel extends FileManager {
 
     /**
      * the button to confirm user's desired undo moves
@@ -42,8 +35,6 @@ public class DifficultyLevel extends AppCompatActivity {
 
     /**
      * The current user's Id
-     *
-     * @param user_id
      */
     private String user_id;
 
@@ -57,7 +48,7 @@ public class DifficultyLevel extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Intent i = getIntent();
         user_id = i.getStringExtra("user_id");
-        loadFromFile(BoardComplexity.TEMP_SAVE_FILENAME);
+        slidingTileBoardManager = loadFromFileSlidingTiles(TEMP_SAVE_FILENAME);
         setContentView(R.layout.activity_set_max_undo_moves);
 
         /*
@@ -84,7 +75,7 @@ public class DifficultyLevel extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 slidingTileBoardManager.setMaxUndoTimes(6);
-                saveToFile(TEMP_SAVE_FILENAME);
+                saveToFile(TEMP_SAVE_FILENAME, slidingTileBoardManager);
                 switchToGame();
             }
         });
@@ -98,7 +89,7 @@ public class DifficultyLevel extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 slidingTileBoardManager.setMaxUndoTimes(3);
-                saveToFile(TEMP_SAVE_FILENAME);
+                saveToFile(TEMP_SAVE_FILENAME, slidingTileBoardManager);
                 switchToGame();
             }
         });
@@ -112,7 +103,7 @@ public class DifficultyLevel extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 slidingTileBoardManager.setMaxUndoTimes(0);
-                saveToFile(TEMP_SAVE_FILENAME);
+                saveToFile(TEMP_SAVE_FILENAME, slidingTileBoardManager);
                 switchToGame();
             }
         });
@@ -120,56 +111,12 @@ public class DifficultyLevel extends AppCompatActivity {
     }
 
     /**
-     * Switch to the ColourGameActivity view to play the game.
+     * Switch to the MatchedGameActivity view to play the game.
      */
-    private String switchToGame() {
-        Intent tmp = new Intent(DifficultyLevel.this, GameActivity.class);
-        saveToFile(BoardComplexity.TEMP_SAVE_FILENAME);
+    private void switchToGame() {
+        Intent tmp = new Intent(DifficultyLevel.this, SlidingTilesGameActivity.class);
+        saveToFile(TEMP_SAVE_FILENAME, slidingTileBoardManager);
         tmp.putExtra("user_id", user_id);
         startActivity(tmp);
-        return "switched to game.";
-    }
-
-    /**
-     * Load the board manager from fileName.
-     *
-     * @param fileName the name of the file
-     */
-    private String loadFromFile(String fileName) {
-
-        try {
-            InputStream inputStream = this.openFileInput(fileName);
-            if (inputStream != null) {
-                ObjectInputStream input = new ObjectInputStream(inputStream);
-                slidingTileBoardManager = (SlidingTileBoardManager) input.readObject();
-                inputStream.close();
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " + e.toString());
-        }
-
-        return "loaded from file.";
-    }
-
-    /**
-     * Save the board manager to fileName.
-     *
-     * @param fileName the name of the file
-     */
-    public String saveToFile(String fileName) {
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(slidingTileBoardManager);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
-
-        return "saved to file.";
     }
 }

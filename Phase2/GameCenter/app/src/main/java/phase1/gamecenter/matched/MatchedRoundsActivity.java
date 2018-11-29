@@ -1,4 +1,4 @@
-package phase1.gamecenter.colourtiles;
+package phase1.gamecenter.matched;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,25 +9,24 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import phase1.gamecenter.FileManager;
 import phase1.gamecenter.R;
 
 /**
- * ColourBoard Complexity Activity
+ * MatchedBoard Complexity Activity
  */
-public class ColourTileRoundsActivity extends AppCompatActivity {
+public class MatchedRoundsActivity extends FileManager {
 
     /**
      * A temporary save file.
      */
-    public static final String TEMP_SAVE_FILENAME = "save_file_tmp.ser";
+    public static final String TEMP_SAVE_FILENAME = "matched_file_tmp.ser";
 
     /**
      * The round buttons to be displayed
@@ -62,7 +61,7 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
     /**
      * the board manager
      */
-    private ColourBoardManager boardManager;
+    private MatchedBoardManager boardManager;
 
     /**
      * number of rounds unlocked
@@ -82,9 +81,9 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
         saveProgress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveToFile(ColourStartingActivity.TEMP_SAVE_FILENAME);
-                saveRounds("rounds.ser");
-                Toast.makeText(ColourTileRoundsActivity.this, "Succesfully saved", Toast.LENGTH_LONG).show();
+                saveToFile(MatchedStartingActivity.TEMP_SAVE_FILENAME, boardManager);
+                saveRounds("rounds.ser", rounds);
+                Toast.makeText(MatchedRoundsActivity.this, "Succesfully saved", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -103,8 +102,6 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
             default: activateRound1Button();break;
 
         }
-
-
     }
 
     /**
@@ -137,11 +134,12 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
     }
 
     private void activateRound1Button() {
-        /**
-         * Activate the button for round 1
-         */
+
         round1Button = findViewById(R.id.round1_button);
 
+        /*
+         * Activate the button for round 1
+         */
         round1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -190,7 +188,6 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
     }
 
     /**
-     /**
      * Activate the button for round 9 and keep all the other buttons before it activated
      */
     private void activateRound9Button() {
@@ -207,7 +204,6 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
     }
 
     /**
-     /**
      * Activate the button for round 8 and keep all the other buttons before it activated
      */
     private void activateRound8Button() {
@@ -342,60 +338,20 @@ public class ColourTileRoundsActivity extends AppCompatActivity {
      * Switch to the round/level that the user selects.
      */
     private void switchToRound(int round, int complexity, int minute, int second) {
-        boardManager = new ColourBoardManager(round, complexity, minute, second);
-        saveToFile(TEMP_SAVE_FILENAME);
-        Intent tmp = new Intent(ColourTileRoundsActivity.this, ColourGameActivity.class);
+        boardManager = new MatchedBoardManager(round, complexity, minute, second);
+        saveToFile(TEMP_SAVE_FILENAME, boardManager);
+        Intent tmp = new Intent(MatchedRoundsActivity.this, MatchedGameActivity.class);
         startActivity(tmp);
     }
 
     /**
-     * Load the board manager from fileName.
-     *
-     * @param fileName the name of the file
+     * Back button from the game to the main page
      */
-    private void loadFromFile(String fileName) {
-
-        try {
-            InputStream inputStream = this.openFileInput(fileName);
-            if (inputStream != null) {
-                ObjectInputStream input = new ObjectInputStream(inputStream);
-                boardManager = (ColourBoardManager) input.readObject();
-                inputStream.close();
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " + e.toString());
-        }
-    }
-
-    /**
-     * Save the board manager to fileName.
-     *
-     * @param fileName the name of the file
-     */
-    public void saveToFile(String fileName) {
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(boardManager);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
-    }
-
-    public void saveRounds(String fileName){
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(rounds);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(MatchedRoundsActivity.this, MatchedStartingActivity.class);
+        saveRounds("rounds.ser", rounds);
+        startActivity(intent);
     }
 }
 

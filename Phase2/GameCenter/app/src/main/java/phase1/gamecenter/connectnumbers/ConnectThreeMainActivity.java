@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import phase1.gamecenter.R;
+import phase1.gamecenter.ScoreBoardUpdater;
 
 public class ConnectThreeMainActivity extends ConnectNumbersActivity implements View.OnClickListener {
 
@@ -101,6 +102,8 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
                     player1Turn = true;
                 } else {
                     if (player1RoundsWon == 3) {
+                        updateScoreboard();
+                        updateLeaderBoard();
                         Toast.makeText(getApplicationContext(), "Game Over. Player 1 wins! Please start a new game.", Toast.LENGTH_LONG).show();
                     } else if (opponentRoundsWon == 3){
                         Toast.makeText(getApplicationContext(), "Game Over. Player 2 wins! Please start a new game.", Toast.LENGTH_LONG).show();
@@ -236,5 +239,23 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
         Intent intent = new Intent(ConnectThreeMainActivity.this, ConnectNumbersStartingActivity.class);
         startActivity(intent);
     }
+
+    /**
+     * update user's scoreboard on firebase
+     */
+    private void updateScoreboard() {
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect34");
+        sbu.updateUserScoreBoard();
+    }
+
+    /**
+     * update scoreboard for leaderboard on firebase
+     *
+     */
+    private void updateLeaderBoard(){
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect34");
+        sbu.updateLeaderBoard();
+    }
+
 
 }

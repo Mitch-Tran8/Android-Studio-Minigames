@@ -1,7 +1,20 @@
 package phase1.gamecenter;
+import java.io.Serializable;
 
 /**
- * a tile. the abstract class to NumberTile and ColourTile
+ * a tile interface
  */
-public abstract class Tile {
+public interface Tile extends Comparable, Serializable {
+
+    /**
+     * returns a tile's id
+     * @return a tile's id
+     */
+    int getId();
+
+    /**
+     * returns a tile's background
+     * @return a tile's background
+     */
+    int getBackground();
 }
