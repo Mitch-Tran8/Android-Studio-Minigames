@@ -444,6 +444,7 @@ public class ConnectThreeMainActivity extends AppCompatActivity implements View.
                         }
                     }
                 }
+                --moves;
             }
         }
     }

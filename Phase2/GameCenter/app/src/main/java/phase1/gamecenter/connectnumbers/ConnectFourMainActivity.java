@@ -490,6 +490,7 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
                         }
                     }
                 }
+                --moves;
             }
         }
     }
