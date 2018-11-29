@@ -21,6 +21,11 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
      */
     private Button[][] buttons = new Button[5][5];
 
+    /**
+     * TextView that shows the number of rounds player 1 has won.
+     */
+    private TextView scorePlayer2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +72,7 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
                 player1Turn = true;
                 player1points = 0;
                 player1RoundsWon = 0;
-                player2RoundsWon = 0;
+                opponentRoundsWon = 0;
                 ties = 0;
                 updateRoundsWon();
             }
@@ -97,7 +102,7 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
                         updateLeaderBoard();
                         updateScoreboard();
                         Toast.makeText(getApplicationContext(), "Game Over. Player 1 wins! Please refresh the game.", Toast.LENGTH_LONG).show();
-                    } else if (player2RoundsWon == 3) {
+                    } else if (opponentRoundsWon == 3) {
                         Toast.makeText(getApplicationContext(), "Game Over. Player 2 wins! Please refresh the game.", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getApplicationContext(), "Game Over. TIE! Please start a new game.", Toast.LENGTH_LONG).show();
@@ -160,7 +165,7 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
                 Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_LONG).show();
                 updateRoundsWon();
             } else {
-                player2Wins();
+                opponentWins();
                 Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_LONG).show();
                 updateRoundsWon();
             }
@@ -170,6 +175,19 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
             updateRoundsWon();
         } else {
             player1Turn = !player1Turn;
+        }
+    }
+
+    /**
+     * Displays the toast message when the game is over.
+     */
+    protected void gameOverMessage() {
+        if (player1RoundsWon == 3) {
+            Toast.makeText(this, "Game Over. Player 1 wins! Please start a new game.", Toast.LENGTH_LONG).show();
+        } else if (opponentRoundsWon == 3) {
+            Toast.makeText(this, "Game Over. Player 2 wins! Please start a new game.", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Game Over. TIE! Please start a new game.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -289,9 +307,18 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
     }
 
     /**
+     * Update TextView with the scores of each player.
+     */
+    protected void updateRoundsWon() {
+        scorePlayer1.setText("Player 1: " + player1RoundsWon);
+        scorePlayer2.setText("Player 2: " + opponentRoundsWon);
+        draws.setText("Draws: " + ties);
+    }
+
+    /**
      * undo the most recent move if the max undo times has not been reached
      */
-    private void undoMove() {
+    protected void undoMove() {
         if(!matchOver(5, buttons) && moves < 25){
             if(moveStack.size() > 0){
                 int id = this.moveStack.pop();

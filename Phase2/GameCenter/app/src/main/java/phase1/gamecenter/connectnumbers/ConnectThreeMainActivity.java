@@ -22,6 +22,11 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
      */
     private Button[][] buttons = new Button[3][3];
 
+    /**
+     * TextView that shows the number of rounds player 1 has won.
+     */
+    private TextView scorePlayer2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +74,7 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
                 player1Turn = true;
                 player1points = 0;
                 player1RoundsWon = 0;
-                player2RoundsWon = 0;
+                opponentRoundsWon = 0;
                 ties = 0;
                 updateRoundsWon();
             }
@@ -100,7 +105,7 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
                         updateScoreboard();
                         updateLeaderBoard();
                         Toast.makeText(getApplicationContext(), "Game Over. Player 1 wins! Please start a new game.", Toast.LENGTH_LONG).show();
-                    } else if (player2RoundsWon == 3){
+                    } else if (opponentRoundsWon == 3){
                         Toast.makeText(getApplicationContext(), "Game Over. Player 2 wins! Please start a new game.", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getApplicationContext(), "Game Over. TIE! Please start a new game.", Toast.LENGTH_LONG).show();
@@ -166,7 +171,7 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
                 Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_LONG).show();
                 updateRoundsWon();
             } else {
-                player2Wins();
+                opponentWins();
                 Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_LONG).show();
                 updateRoundsWon();
             }
@@ -179,73 +184,32 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
         }
     }
 
-
     /**
-     * Return whether or not there is a 3 in a row.
-     *
-     * @param board String[][] with the current moves on the board (X's and O's)
-     * @return whether or not there is a 3 in a row.
+     * Displays the toast message when the game is over.
      */
-    @Override
-    public boolean checkRows(String[][] board) {
-        for (int i = 0; i < 3; i++) {
-            if (board[i][0].equals(board[i][1]) && board[i][0].equals(board[i][2]) &&
-                    !board[i][0].equals("")) {
-                return true;
-            }
+    protected void gameOverMessage() {
+        if (player1RoundsWon == 3) {
+            Toast.makeText(this, "Game Over. Player 1 wins! Please start a new game.", Toast.LENGTH_LONG).show();
+        } else if (opponentRoundsWon == 3) {
+            Toast.makeText(this, "Game Over. Player 2 wins! Please start a new game.", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Game Over. TIE! Please start a new game.", Toast.LENGTH_LONG).show();
         }
-        return false;
     }
 
     /**
-     * Return whether or not there is a 3 in a column.
-     *
-     * @param board String[][] with the current moves on the board (X's and O's)
-     * @return whether or not there is a 3 in a column
+     * Update TextView with the scores of each player.
      */
-    @Override
-    public boolean checkColumns(String[][] board) {
-        for (int i = 0; i < 3; i++) {
-            if (board[0][i].equals(board[1][i]) && board[0][i].equals(board[2][i]) &&
-                    !board[0][i].equals("")) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Return whether or not there is a 3 in an ascending diagonal pattern.
-     *
-     * @param board String[][] with the current moves on the board (X's and O's)
-     * @return whether or not there is a 3 in a ascending diagonal.
-     */
-    @Override
-    public boolean checkAscendingDiagonals(String[][] board) {
-
-        return (board[0][2].equals(board[1][1]) &&
-                board[0][2].equals(board[2][0]) &&
-                !board[0][2].equals(""));
-    }
-
-    /**
-     * Return whether or not there is a 3 in an descending diagonal pattern.
-     *
-     * @param board String[][] with the current moves on the board (X's and O's)
-     * @return whether or not there is a 3 in a descending diagonal.
-     */
-    @Override
-    public boolean checkDescendingDiagonals(String[][] board) {
-
-        return (board[0][0].equals(board[1][1]) &&
-                board[0][0].equals(board[2][2]) &&
-                !board[0][0].equals(""));
+    protected void updateRoundsWon() {
+        scorePlayer1.setText("Player 1: " + player1RoundsWon);
+        scorePlayer2.setText("Player 2: " + opponentRoundsWon);
+        draws.setText("Draws: " + ties);
     }
 
     /**
      * undo the most recent move if the max undo times has not been reached
      */
-    private void undoMove() {
+    protected void undoMove() {
         if(!matchOver(3, buttons) && moves < 9){
             if(moveStack.size() > 0){
                 int id = this.moveStack.pop();

@@ -3,11 +3,15 @@ package phase1.gamecenter;
 import org.junit.Test;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import phase1.gamecenter.connectnumbers.ConnectFourMainActivity;
 import phase1.gamecenter.connectnumbers.ConnectThreeAIEasyMainActivity;
+import phase1.gamecenter.connectnumbers.ConnectThreeAIHardMainActivity;
 
 import static junit.framework.Assert.assertEquals;
 
 public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
+
     @Test
     public void testCheckRowsTrue() {
         String[][] testerBoard = {
@@ -75,7 +79,7 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
     }
 
     @Test
-    public void testCheckDescendingDiagonalIsTrue() {
+    public void testCheckDescendingDiagonalsTrue() {
         String[][] testerBoard = {
                 {"O", "X", "O"},
                 {"X", "O", "O"},
@@ -86,7 +90,7 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
     }
 
     @Test
-    public void testCheckDescendingDiagonalIsFalse() {
+    public void testCheckDescendingDiagonalsFalse() {
         String[][] testerBoard = {
                 {"", "X", "O"},
                 {"X", "", "O"},
@@ -104,9 +108,9 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
     }
 
     @Test
-    public void testCheckAiRoundsWonGameOverIsTrue(){
+    public void testCheckOpponentRoundsWonGameOverIsTrue(){
         ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
-        testerActivity.setAiRoundsWon(3);
+        testerActivity.setOpponentRoundsWon(3);
         assertEquals(true, testerActivity.gameOver());
     }
 
@@ -121,7 +125,7 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
     public void testCheckGameOverIsFalse(){
         ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
         testerActivity.setPlayer1RoundsWon(0);
-        testerActivity.setAiRoundsWon(0);
+        testerActivity.setOpponentRoundsWon(0);
         testerActivity.setRoundsPlayed(0);
         assertEquals(false, testerActivity.gameOver());
     }
@@ -131,13 +135,6 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
         ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
         testerActivity.player1Wins();
         assertEquals(5, testerActivity.getPlayer1Points());
-    }
-
-    @Test
-    public void testPlayer1WinsAiPointsChange(){
-        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
-        testerActivity.player1Wins();
-        assertEquals(-3, testerActivity.getAiPoints());
     }
 
     @Test
@@ -155,30 +152,23 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
     }
 
     @Test
-    public void testAiWinsPlayer1PointsChange(){
+    public void testPLayer2WinsPlayer1PointsChange(){
         ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
-        testerActivity.aiWins();
+        testerActivity.opponentWins();
         assertEquals(-3, testerActivity.getPlayer1Points());
     }
 
     @Test
-    public void testAiWinsAiPointsChange(){
+    public void testPlayer2WinsPlayer2RoundChange(){
         ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
-        testerActivity.aiWins();
-        assertEquals(5, testerActivity.getAiPoints());
+        testerActivity.opponentWins();
+        assertEquals(1, testerActivity.getOpponentRoundsWon());
     }
 
     @Test
-    public void testAiWinsAiRoundChange(){
+    public void testPlayer2WinsRoundsPlayedChange(){
         ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
-        testerActivity.aiWins();
-        assertEquals(1, testerActivity.getAiRoundsWon());
-    }
-
-    @Test
-    public void testAiWinsRoundsPlayedChange(){
-        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
-        testerActivity.aiWins();
+        testerActivity.opponentWins();
         assertEquals(1, testerActivity.getRoundsPlayed());
     }
 
