@@ -19,7 +19,7 @@
 
 9.  After you have registered you will be taken back to the login page.
 
-To play sliding tiles:
+### To play sliding tiles:
 
 1.  Select the sliding numberTiles game.
 
@@ -29,11 +29,11 @@ To play sliding tiles:
 
 4.  To exit the game, tap the back button.
 
-To Play Matched (colour Tiles):
+### To Play Matched (colour Tiles):
 
-1. Selected the matched game
+1. Selected the matched game.
 
-2. Select either instructions, load from game or start a new game
+2. Select either instructions, load from game or start a new game.
 
 3. When selecting either load/new game, you will be taken to a page with all the rounds displayed.
 All of the buttons except round1 will be un clickable. Select round 1.
@@ -54,8 +54,33 @@ round that you played, and there is a save button in the actual game play to sav
 
 7. Once you beat all of the levels, a message will be displayed.
 
-To play Connect numbers:
+### To play Connect numbers:
 
+1. Select the connect numbers game.
+
+2. To play against AI, select the one player mode. To play with a partner, select the two player mode.
+
+-  Under the one player mode, you will be playing connect 3, aka Tic-Tac-Toe.
+   There are two levels of difficulties against the AI, "Easy" and "Genius." The easy mode is against
+   an AI whose moves are random. The genius mode implements a minimax algorithm that calculates the
+   best move for the AI. Select your mode of choice.
+
+-  Under the two player mode, you have the option of playing connect 3 or connect 4 (Tic-Tac-Toe on
+   a 5x5 board and you must get 4 in a row.) Select the connect game of your choice.
+
+3. In each game, you (and your partner in the two player mode) can undo as many moves as you would
+   like.
+
+4. To win the game, you must win best 3 out of 5 rounds.
+
+   After each round is over, you will not be allowed to click any of the connect board buttons
+   anymore. Should you attempt to, toast messages will prompt you to click the "new round" button.
+   Please click the button to start a new round. The TextView will display how many rounds player 1
+   and player 2 each have won, as well as the number of rounds that resulted in draws.
+
+   After a player has won the game, or there is a tie (5/5 rounds played, no one won), again,
+   you will not be able to click the "new round" button nor any of the connect board buttons.
+   Should you click, toast messages will appear instructing you to reset the game.
 
 
 # Functionalities Implemented
