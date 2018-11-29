@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Stack;
+
 import phase1.gamecenter.R;
 
 public class ConnectFourMainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -73,6 +75,11 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
      */
     private int roundsPlayed;
 
+    /**
+     * The stack that stocks all previous moves
+     */
+    private Stack<Integer> moveStack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +89,8 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
         draws = findViewById(R.id.draws);
         Button buttonReset = findViewById(R.id.button_reset);
         Button gameReset = findViewById(R.id.button_reset_game);
+        Button undoButton = findViewById(R.id.undoButton);
+        this.moveStack = new Stack<>();
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
@@ -97,6 +106,8 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
         buttonResetListener(buttonReset);
         //reset the GAME
         gameResetListener(gameReset);
+        ///
+        addUndoButtonListener(undoButton);
     }
 
     /**
@@ -157,6 +168,18 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
         });
     }
 
+    /**
+     * Activate the undo button.
+     */
+    private void addUndoButtonListener(Button undoButton) {
+        undoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                undoMove();
+            }
+        });
+    }
+
     @Override
     public void onClick(View v) {
         if (gameOver()) {
@@ -185,11 +208,13 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
             v.setTextColor(Color.parseColor("#00ffffff"));
             v.setBackgroundResource(R.drawable.sunglass_smiley);
             v.setText("X");
+            this.moveStack.push(v.getId());
         } else {
             //v.setTextColor(Color.parseColor("#FFE79024"));
             v.setTextColor(Color.parseColor("#00ffffff"));
             v.setBackgroundResource(R.drawable.crazy_face);
             v.setText("O");
+            this.moveStack.push(v.getId());
         }
         moves++;
         if (matchOver()) {
@@ -443,6 +468,30 @@ public class ConnectFourMainActivity extends AppCompatActivity implements View.O
         scorePlayer1.setText("Player 1: " + player1RoundsWon);
         scorePlayer2.setText("Player 2: " + player2RoundsWon);
         draws.setText("Draws: " + ties);
+    }
+
+    /**
+     * undo the most recent move if the max undo times has not been reached
+     */
+    private void undoMove() {
+        if(!matchOver()){
+            if(moveStack.size() > 0){
+                int id = this.moveStack.pop();
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        if (buttons[i][j].getId() == id){
+                            buttons[i][j].setText("");
+                            buttons[i][j].setBackgroundResource(R.drawable.circle_button);
+                            if (player1Turn){
+                                player1Turn = false;
+                            } else{
+                                player1Turn = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**
