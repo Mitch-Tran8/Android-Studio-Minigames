@@ -244,7 +244,7 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
      * undo the most recent move if the max undo times has not been reached
      */
     private void undoMove() {
-        if(moves < 9){
+        if(!matchOver(3, buttons) && moves < 9){
             if(moveStack.size() > 0){
                 int id = this.moveStack.pop();
                 for (int i = 0; i < 3; i++) {
