@@ -131,7 +131,6 @@ public class MatchedBoardManager extends FileManager implements BoardManager {
             tiles.add(new MatchedTile(tileNum));
         }
         Collections.shuffle(tiles);
-        puzzleSolved();
         this.board = new MatchedBoard(tiles, complexity);
     }
 
