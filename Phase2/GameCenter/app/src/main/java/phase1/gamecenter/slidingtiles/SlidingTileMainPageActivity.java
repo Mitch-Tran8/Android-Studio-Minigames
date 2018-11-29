@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -14,9 +16,7 @@ import java.util.ArrayList;
 
 import phase1.gamecenter.registrationinfo.EmailAndScore;
 import phase1.gamecenter.GameCenterMainActivity;
-import phase1.gamecenter.LeaderboardActivity;
 import phase1.gamecenter.R;
-import phase1.gamecenter.registrationinfo.UserScoreBoardActivity;
 
 
 /**
@@ -28,16 +28,16 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
      * The buttons to display
      */
     Button startButton;
+    Button howToPlayButton;
 
     /**
-     * the user's randings button
+     * The view and textViews to be displayed
      */
-    Button userRankingsButton;
+    TextView instructionsTitle;
+    TextView instructionsBody;
+    View instructionsView;
+    ImageButton exitInstructionsButton;
 
-    /**
-     * the leaderboard button
-     */
-    Button leaderboardButton;
 
     /**
      * Emails and scores of userList
@@ -64,10 +64,19 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
         user_id = i.getStringExtra("user_id");
         setContentView(R.layout.activity_sliding_tile_main_page);
         startButton = findViewById(R.id.start_game_button);
-        leaderboardButton = findViewById(R.id.LeaderboardButton);
-        userRankingsButton = findViewById(R.id.UserRankingButton);
+        howToPlayButton = findViewById(R.id.howToPlayButton);
+        instructionsBody = findViewById(R.id.instructionsBody);
+        instructionsTitle = findViewById(R.id.instructions_title3);
+        instructionsView = findViewById(R.id.view3);
+        exitInstructionsButton = findViewById(R.id.exitInstructionsButton);
 
-        /**
+        instructionsBody.setVisibility(View.GONE);
+        instructionsView.setVisibility(View.GONE);
+        instructionsTitle.setVisibility(View.GONE);
+        exitInstructionsButton.setVisibility(View.GONE);
+
+
+        /*
          * Activate start button
          */
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -79,38 +88,50 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
             }
         });
 
-        /**
-         * Activate current user rankings button
+        /*
+         * Activate the how to play button
          */
-        leaderboardButton.setOnClickListener(new View.OnClickListener() {
+        howToPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(SlidingTileMainPageActivity.this, LeaderboardActivity.class);
-                i.putExtra("name", "slidingtiles");
-                startActivity(i);
+                if(instructionsView.getVisibility() == View.GONE) {
+                    instructionsView.setVisibility(View.VISIBLE);
+                    instructionsTitle.setVisibility(View.VISIBLE);
+                    instructionsBody.setVisibility(View.VISIBLE);
+                    exitInstructionsButton.setVisibility(View.VISIBLE);
+                } else {
+                    instructionsTitle.setVisibility(View.GONE);
+                    instructionsView.setVisibility(View.GONE);
+                    instructionsBody.setVisibility(View.GONE);
+                    exitInstructionsButton.setVisibility(View.GONE);
+                }
             }
         });
 
-        /**
-         * Activate leaderboard rankings button
+        /*
+         * Activate the exit instructions button
          */
-        userRankingsButton.setOnClickListener(new View.OnClickListener() {
+        exitInstructionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(SlidingTileMainPageActivity.this, UserScoreBoardActivity.class);
-                i.putExtra("game", "slidingtiles");
-                i.putExtra("user_id", user_id );
-                startActivity(i);
-
+                instructionsTitle.setVisibility(View.GONE);
+                instructionsView.setVisibility(View.GONE);
+                instructionsBody.setVisibility(View.GONE);
+                exitInstructionsButton.setVisibility(View.GONE);
             }
         });
+
     }
+
 
     /**
      * Back button from the game to the main page
-     */
+         */
     @Override
     public void onBackPressed() {
+        GameCenterMainActivity gameCentre= new GameCenterMainActivity();
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
         Intent intent = new Intent(SlidingTileMainPageActivity.this, GameCenterMainActivity.class);
         startActivity(intent);
     }

@@ -1,4 +1,4 @@
-package phase1.gamecenter;
+package phase1.gamecenter.registrationinfo;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
@@ -16,6 +16,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+
+import phase1.gamecenter.R;
 
 public class LeaderboardActivity extends AppCompatActivity {
     /**

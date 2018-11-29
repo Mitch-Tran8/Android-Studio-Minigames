@@ -77,13 +77,13 @@ public class MatchedTile implements Tile {
                 background = R.drawable.colour_3;
                 break;
             case 7:
-                background = R.drawable.colour_5;
+                background = R.drawable.colour_4;
                 break;
             case 8:
-                background = R.drawable.colour_5;
+                background = R.drawable.colour_4;
                 break;
             case 9:
-                background = R.drawable.colour_5;
+                background = R.drawable.colour_4;
                 break;
             case 10:
                 background = R.drawable.colour_6;

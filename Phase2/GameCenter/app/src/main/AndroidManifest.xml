@@ -41,7 +41,6 @@
         <activity android:name=".connectnumbers.ConnectThreeMainActivity" />
         <activity android:name=".connectnumbers.ConnectThreePlayersActivity" />
         <activity android:name=".connectnumbers.ConnectThreeDifficultyActivity" />
-        <activity android:name=".connectnumbers.ConnectThreeActivity" />
 
 
         <activity android:name=".LeaderboardActivity"/>

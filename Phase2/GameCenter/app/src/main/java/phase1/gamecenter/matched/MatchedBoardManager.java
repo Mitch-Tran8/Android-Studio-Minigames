@@ -119,9 +119,12 @@ public class MatchedBoardManager extends FileManager implements BoardManager {
         } else if (complexity == 4) {
             tileNum = 9;
             numTiles = 26;
-        } else {
+        } else if (complexity == 5){
             tileNum = 25;
-            numTiles = 51;
+            numTiles = 50;
+        } else {
+            tileNum = 14;
+            numTiles = 50;
         }
 
         for (++tileNum; tileNum != numTiles; tileNum++) {

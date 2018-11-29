@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import android.widget.TextView;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -154,6 +153,7 @@ public class MatchedGameActivity extends FileManager implements GameActivity {
     protected void gameOver() {
         String score = Integer.toString(boardManager.getScore());
         updateScoreboard(boardManager.getScore());
+        updateLeaderBoard(boardManager.getScore());
         if(boardManager.getScore() < boardManager.getScoreReq()) {
             Toast toast = Toast.makeText(MatchedGameActivity.this, "Time's up! Try again to unlock the next level. Your score: " + score, Toast.LENGTH_LONG);
             toast.setGravity(0,10,10);
@@ -161,7 +161,7 @@ public class MatchedGameActivity extends FileManager implements GameActivity {
             saveToFile(MatchedBoardManager.TEMP_SAVE_FILENAME, boardManager);
             Intent tmp = new Intent(MatchedGameActivity.this, MatchedRoundsActivity.class);
             boardManager.setRound(boardManager.getRound() - 1);
-            tmp.putExtra("round", boardManager.getRound());
+            tmp.putExtra("rounds", boardManager.getRound());
             System.out.println("lost "+ (boardManager.getRound()));
             startActivity(tmp);
         } else {
@@ -179,12 +179,22 @@ public class MatchedGameActivity extends FileManager implements GameActivity {
     }
 
     /**
-     * updates the score board
-     * @param score the score
+     * update the user's scoreboard on firebase
+     * @param score
      */
+
     public void updateScoreboard(int score) {
-        ScoreBoardUpdater sbu = new ScoreBoardUpdater(score,"Colour tiles");
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(score,"Colour Tiles");
         sbu.updateUserScoreBoard();
+    }
+
+    /**
+     * update scoreboard for leaderboard on firebase
+     *
+     */
+    private void updateLeaderBoard(int score){
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(score, "Colour Tiles");
+        sbu.updateLeaderBoard();
     }
 
     /**

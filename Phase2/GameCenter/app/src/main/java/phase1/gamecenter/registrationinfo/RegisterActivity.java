@@ -160,11 +160,11 @@ public class RegisterActivity extends AppCompatActivity {
      * @param user_id
      */
     private void createScoreBoards(String user_id){
-        DatabaseReference stRef = databaseReference.child(user_id).child("Game Collection").child("Sliding tiles").child("userscores");
+        DatabaseReference stRef = databaseReference.child(user_id).child("Game Collection").child("Sliding Tiles").child("userscores");
         for (int i = 1; i < 6; i++){
             stRef.child("score"+ String.valueOf(i)).setValue(0);
         }
-        DatabaseReference ctRef = databaseReference.child(user_id).child("Game Collection").child("Colour tiles").child("userscores");
+        DatabaseReference ctRef = databaseReference.child(user_id).child("Game Collection").child("Colour Tiles").child("userscores");
         for (int i = 1; i < 6; i++){
             ctRef.child("score"+ String.valueOf(i)).setValue(0);}
 

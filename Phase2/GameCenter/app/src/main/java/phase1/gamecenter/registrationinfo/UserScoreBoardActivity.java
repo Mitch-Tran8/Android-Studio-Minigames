@@ -21,7 +21,7 @@ import java.util.HashMap;
 import phase1.gamecenter.R;
 
 /**
- * UserScoreBoard Activity. The user's personal scoreboard.
+ * UserScoreBoardActivity. The user's personal scoreboard.
  */
 
 public class UserScoreBoardActivity extends AppCompatActivity {
@@ -34,14 +34,14 @@ public class UserScoreBoardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_score_board);
-        getUserScores("Colour tiles");
+        getUserScores("Colour Tiles");
 
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.getPosition() == 0){getUserScores("Colour tiles");}
-                else if (tab.getPosition() == 1){getUserScores("Sliding tiles");}
+                if (tab.getPosition() == 0){getUserScores("Colour Tiles");}
+                else if (tab.getPosition() == 1){getUserScores("Sliding Tiles");}
             }
 
             @Override
