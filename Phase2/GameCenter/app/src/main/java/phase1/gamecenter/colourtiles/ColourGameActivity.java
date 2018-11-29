@@ -168,8 +168,9 @@ public class  ColourGameActivity extends AppCompatActivity implements Observer {
             saveToFile(ColourBoardManager.TEMP_SAVE_FILENAME);
             Intent tmp = new Intent(ColourGameActivity.this, ColourTileRoundsActivity.class);
             boardManager.setRound(boardManager.getRound() - 1);
-            tmp.putExtra("round", boardManager.getRound());
+            tmp.putExtra("rounds", boardManager.getRound());
             System.out.println("lost "+ (boardManager.getRound()));
+            finish();
             startActivity(tmp);
         } else {
             Toast toast = Toast.makeText(ColourGameActivity.this, "Time's up! you've unlocked the next level. :D" +
@@ -181,6 +182,7 @@ public class  ColourGameActivity extends AppCompatActivity implements Observer {
             saveToFile(ColourBoardManager.TEMP_SAVE_FILENAME);
             tmp.putExtra("rounds", boardManager.getRound());
             System.out.println("won "+ (boardManager.getRound()));
+            finish();
             startActivity(tmp);
 
         }
@@ -306,4 +308,6 @@ public class  ColourGameActivity extends AppCompatActivity implements Observer {
     public void update(Observable o, Object arg) {
         display();
     }
+
+
 }
