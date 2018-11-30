@@ -15,7 +15,11 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     protected boolean player1Turn = true;
 
     /**
-     * The number of moves made on the connect three board.
+     * The number of moves made on the connect three board or connect four board. One move
+     * represents when either player 1 or player 2 mark an empty spot with an "X" or "O" in the two
+     * player game modes or when player 1 and the AI have consecutively marked an empty spot in the
+     * single player game modes.
+     *
      */
     protected int moves;
 

@@ -89,6 +89,7 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
                 moves = 0;
                 maxUndoTimes = 3;
                 maxPlayer2UndoTimes = 3;
+                moveStack = new Stack<>();
                 roundsPlayed = 0;
                 player1Turn = true;
                 player1points = 0;
@@ -121,6 +122,7 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
                     moves = 0;
                     maxUndoTimes = 3;
                     maxPlayer2UndoTimes = 3;
+                    moveStack = new Stack<>();
                     player1Turn = true;
                 } else {
                     if (player1RoundsWon == 3) {
@@ -272,7 +274,7 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
                                 buttons[i][j].setText("");
                                 buttons[i][j].setBackgroundResource(R.drawable.circle_button);
                                 player1Turn = false;
-                                --maxPlayer2UndoTimes;
+                                maxPlayer2UndoTimes--;
                             }
                         }
                     }
@@ -284,12 +286,12 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
                                 buttons[i][j].setText("");
                                 buttons[i][j].setBackgroundResource(R.drawable.circle_button);
                                 player1Turn = true;
-                                --maxUndoTimes;
+                                maxUndoTimes--;
                             }
                         }
                     }
                 }
-            }   --moves;
+            }   moves--;
         }
     }
 

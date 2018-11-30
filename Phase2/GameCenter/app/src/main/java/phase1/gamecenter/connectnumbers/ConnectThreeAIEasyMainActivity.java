@@ -75,6 +75,7 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
                 }
                 moves = 0;
                 maxUndoTimes = 1;
+                moveStack = new Stack<>();
                 roundsPlayed = 0;
                 player1Turn = true;
                 player1points = 0;
@@ -104,6 +105,7 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
                     }
                     moves = 0;
                     maxUndoTimes = 1;
+                    moveStack = new Stack<>();
                     player1Turn = true;
                 } else {
                     if (player1RoundsWon == 3) {
@@ -273,8 +275,8 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
                         }
                     }
                 }
-                --moves;
-                --maxUndoTimes;
+                moves--;
+                maxUndoTimes--;
             }
         }
     }
