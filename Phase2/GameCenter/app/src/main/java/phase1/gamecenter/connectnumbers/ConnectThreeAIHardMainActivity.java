@@ -275,7 +275,7 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
         }
         return bestMove;
     }
-    boolean noMovesLeft(String[][]board){
+    public boolean movesLeft(String[][]board){
         for (int i = 0; i<3; i++)
             for (int j = 0; j<3; j++)
                 if (board[i][j].equals(""))
@@ -295,7 +295,7 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
         else if (score == -10){
             return score + depth;
         }
-        else if (!noMovesLeft(board)){
+        else if (!movesLeft(board)){
             return 0;
         }
 
@@ -334,7 +334,7 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
     /**
      * Evaluates the current connect three board to see if the game is over and returns the value.
      */
-    private int evaluateBoard(String[][] board) {
+    public int evaluateBoard(String[][] board) {
         // check whether or not there is 3 in a row
         for (int i = 0; i < 3; i++){
             if (board[i][0].equals(board[i][1]) && board[i][0].equals(board[i][2]) &&

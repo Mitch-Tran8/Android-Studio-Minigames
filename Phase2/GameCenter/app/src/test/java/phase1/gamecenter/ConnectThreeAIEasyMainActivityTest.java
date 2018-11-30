@@ -4,9 +4,7 @@ import org.junit.Test;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import phase1.gamecenter.connectnumbers.ConnectFourMainActivity;
 import phase1.gamecenter.connectnumbers.ConnectThreeAIEasyMainActivity;
-import phase1.gamecenter.connectnumbers.ConnectThreeAIHardMainActivity;
 
 import static junit.framework.Assert.assertEquals;
 
