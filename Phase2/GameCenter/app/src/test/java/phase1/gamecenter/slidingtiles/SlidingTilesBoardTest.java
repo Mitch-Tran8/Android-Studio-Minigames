@@ -107,4 +107,22 @@ public class SlidingTilesBoardTest {
         assertTrue(iter1.hasNext());
         assertNotNull(iter1.next());
     }
+
+    @Test
+    public void getNumberTiles(){
+        List<NumberTile> numberTiles = new ArrayList<>();
+        NumberTile tile = new NumberTile(1, 0);
+        numberTiles.add(tile);
+        numberTiles.add(new NumberTile(2, 1));
+        numberTiles.add(new NumberTile(3, 2));
+        numberTiles.add(new NumberTile(4, 3));
+        numberTiles.add(new NumberTile(5, 4));
+        numberTiles.add(new NumberTile(6, 5));
+        numberTiles.add(new NumberTile(7, 6));
+        numberTiles.add(new NumberTile(8, 7));
+        numberTiles.add(new NumberTile(9, 8));
+        SlidingTilesBoard slidingTilesBoard = new SlidingTilesBoard(numberTiles);
+        assertTrue(slidingTilesBoard.getNumberTiles()[0][0] == tile);
+
+    }
 }
