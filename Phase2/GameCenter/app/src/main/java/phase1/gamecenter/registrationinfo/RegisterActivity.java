@@ -166,7 +166,7 @@ public class RegisterActivity extends AppCompatActivity {
             ctRef.child("score" + String.valueOf(i)).setValue(0);
         }
 
-        DatabaseReference conRef = databaseReference.child(user_id).child("Game Collection").child("Connect34").child("userscores");
+        DatabaseReference conRef = databaseReference.child(user_id).child("Game Collection").child("Connect 34").child("userscores");
 
         for (int i = 1; i < 6; i++) {
             conRef.child("score" + String.valueOf(i)).setValue(0);
