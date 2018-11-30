@@ -140,5 +140,20 @@ public class MatchedBoardTest {
     @Test
     public void iterator() {
 
+        List<MatchedTile> MatchedTiles = new ArrayList<>();
+        MatchedTiles.add(new MatchedTile(1));
+        MatchedTiles.add(new MatchedTile(2));
+        MatchedTiles.add(new MatchedTile(3));
+        MatchedTiles.add(new MatchedTile(4));
+        MatchedTiles.add(new MatchedTile(5));
+        MatchedTiles.add(new MatchedTile(6));
+        MatchedTiles.add(new MatchedTile(7));
+        MatchedTiles.add(new MatchedTile(8));
+        MatchedTiles.add(new MatchedTile(9));
+
+        Iterator<MatchedTile> iter1 = MatchedTiles.iterator();
+        assertTrue(iter1.hasNext());
+        assertNotNull(iter1.next());
+
     }
 }
