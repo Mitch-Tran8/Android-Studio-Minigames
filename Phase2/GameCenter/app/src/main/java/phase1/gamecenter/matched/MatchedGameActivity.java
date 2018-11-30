@@ -163,16 +163,29 @@ public class MatchedGameActivity extends FileManager implements GameActivity {
             System.out.println("lost "+ (boardManager.getRound()));
             startActivity(tmp);
         } else {
-            Toast toast = Toast.makeText(MatchedGameActivity.this, "Time's up! you've unlocked the next level. :D" +
-                    " your score: " + score, Toast.LENGTH_LONG);
-            toast.setGravity(0,10,10);
-            toast.show();
-            Intent tmp = new Intent(MatchedGameActivity.this, MatchedRoundsActivity.class);
-            boardManager.setRound(boardManager.getRound() + 1);
-            saveToFile(MatchedBoardManager.TEMP_SAVE_FILENAME, boardManager);
-            tmp.putExtra("rounds", boardManager.getRound());
-            System.out.println("won "+ (boardManager.getRound()));
-            startActivity(tmp);
+            if(boardManager.getRound()!=12) {
+                Toast toast = Toast.makeText(MatchedGameActivity.this, "Time's up! you've unlocked the next level. :D" +
+                        " your score: " + score, Toast.LENGTH_LONG);
+                toast.setGravity(0, 10, 10);
+                toast.show();
+                Intent tmp = new Intent(MatchedGameActivity.this, MatchedRoundsActivity.class);
+                boardManager.setRound(boardManager.getRound() + 1);
+                saveToFile(MatchedBoardManager.TEMP_SAVE_FILENAME, boardManager);
+                tmp.putExtra("rounds", boardManager.getRound());
+                System.out.println("won " + (boardManager.getRound()));
+                startActivity(tmp);
+            } else {
+                Toast toast = Toast.makeText(MatchedGameActivity.this, "Time's up! You beat the game :D" +
+                        " your score: " + score, Toast.LENGTH_LONG);
+                toast.setGravity(0, 10, 10);
+                toast.show();
+                Intent tmp = new Intent(MatchedGameActivity.this, MatchedRoundsActivity.class);
+                boardManager.setRound(boardManager.getRound() -1);
+                saveToFile(MatchedBoardManager.TEMP_SAVE_FILENAME, boardManager);
+                tmp.putExtra("rounds", boardManager.getRound());
+                System.out.println("won " + (boardManager.getRound()));
+                startActivity(tmp);
+            }
         }
     }
 
