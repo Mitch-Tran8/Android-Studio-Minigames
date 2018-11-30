@@ -1,22 +1,22 @@
 # Team Members:
 
-#### Daeun Chung
+#### Daeun Chung (git log: dauen)
     decw578@gmail.com
     289-939-2394
 
-#### Lena Zhao
+#### Lena Zhao (git log: lena)
     lena.zhao@outlook.com
     647-915-2997
 
-#### Michelle Cheung
+#### Michelle Cheung (git log: michelle cheung)
     mcheung2525@gmail.com
     647-721-1894
 
-#### Mitchell Tran
+#### Mitchell Tran (git log: mitchell)
     mitchelltran8@gmailcom
     647-721-2918
 
-#### Nour Mokdad
+#### Nour Mokdad (git log: nour)
     nour.mokdad@mail.utoronto.ca
     416-320-5595
 
@@ -51,29 +51,11 @@ promptly and find a time to reschedule or recap.
     -Mitchell Tran
     -Nour Mokdad
 
-    October 2018
+    October 2018 + November 2018
 
 
-# Task Designation:
+# Task Designation/Contributions/Meeting Minutes
 
    ### See group google doc below:
 
-    https://docs.google.com/document/d/1uvl_A9Mzd16-k33wG8BdCQEfyLrYiBgthAzRdVYWLxE/edit?usp=sharing
-
-   ### Summary of group google doc:
-
-   **Daeun & Nour & Lena**
- - User Account
- - User Account Manger
- - Game State
-
-  **Mitchell & Michelle**
- - Scoring System
- - Game ScoreBoard
- - User ScoreBoard
-
-  **Everyone**
- - Game Complexity
- - Undo
- - Auto-Save
- - Count Moves and Generate Scores
+https://docs.google.com/document/d/1JhS6rN8jRZ8OyAdsksyjkH5eiuLCOChYxKdVUx9BYUQ/edit?ts=5be9e0fb
