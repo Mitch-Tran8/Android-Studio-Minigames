@@ -25,10 +25,13 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
      */
     private TextView scorePlayer2;
 
+    /**
+     * the max times for player 2 to undo their moves.
+     */
     private int maxPlayer2UndoTimes;
 
     /**
-     * set the number of rounds that have been played for testing purpose
+     * set the number of undos for player 2 for testing purpose
      *
      * @param maxUndo setting the maxiumum number of undos.
      */
@@ -59,9 +62,11 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
                 buttons[i][j].setText("");
             }
         }
-
+        //reset to NEW ROUND using button
         buttonResetListener(buttonReset);
+        //reset the GAME using button
         gameResetListener(gameReset);
+        ///undo move using button
         addUndoButtonListener(undoButton);
     }
 
@@ -98,7 +103,7 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
     /**
      * On click listener for the reset match button -> make a new match.
      *
-     * @param buttonReset
+     * @param buttonReset match reset button
      */
     @Override
     protected void buttonResetListener(Button buttonReset) {

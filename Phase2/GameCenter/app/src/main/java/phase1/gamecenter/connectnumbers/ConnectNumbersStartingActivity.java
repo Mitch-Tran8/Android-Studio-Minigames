@@ -10,9 +10,6 @@ import phase1.gamecenter.R;
 
 public class ConnectNumbersStartingActivity extends AppCompatActivity {
 
-    Button onePlayer;
-    Button twoPlayers;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
