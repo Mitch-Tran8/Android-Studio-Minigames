@@ -38,6 +38,8 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
         Button buttonReset = findViewById(R.id.button_reset);
         Button gameReset = findViewById(R.id.button_reset_game);
         Button undoButton = findViewById(R.id.undoButton);
+        maxUndoTimes = 8;
+        isValidUndo = false;
         this.moveStack = new Stack<>();
         moves = 9;
 
@@ -73,6 +75,8 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
                     }
                 }
                 moves = 9;
+                maxUndoTimes = 8;
+                isValidUndo = false;
                 turns = 0;
                 player1Turn = true;
                 roundsPlayed = 0;
@@ -101,6 +105,8 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
                         }
                     }
                     moves = 9;
+                    maxUndoTimes = 8;
+                    isValidUndo = false;
                     turns = 0;
                     player1Turn = true;
                 } else {
@@ -140,7 +146,9 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                undoMove();
+                if (isValidUndo()){
+                    undoMove();
+                }
             }
         });
     }
@@ -233,6 +241,19 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
     }
 
     /**
+     * returns if undo is valid
+     *
+     * @return if undo is valid
+     */
+
+    public boolean isValidUndo() {
+        if (maxUndoTimes > 0) {
+            return true;
+        }
+        return isValidUndo;
+    }
+
+    /**
      * undo the most recent move if the max undo times has not been reached
      */
     protected void undoMove() {
@@ -259,6 +280,7 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
                     }
                 }
                 --turns;
+                --maxUndoTimes;
             }
         }
     }

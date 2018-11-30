@@ -41,6 +41,8 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
         Button buttonReset = findViewById(R.id.button_reset);
         Button gameReset = findViewById(R.id.button_reset_game);
         Button undoButton = findViewById(R.id.undoButton);
+        maxUndoTimes = 1;
+        isValidUndo = false;
         this.moveStack = new Stack<>();
 
         for (int i = 0; i < 3; i++) {
@@ -76,6 +78,8 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
                     }
                 }
                 moves = 0;
+                maxUndoTimes = 1;
+                isValidUndo = false;
                 roundsPlayed = 0;
                 player1Turn = true;
                 player1points = 0;
@@ -104,6 +108,8 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
                         }
                     }
                     moves = 0;
+                    maxUndoTimes = 1;
+                    isValidUndo = false;
                     player1Turn = true;
                 } else {
                     if (player1RoundsWon == 3) {
@@ -125,7 +131,9 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                undoMove();
+                if (isValidUndo()){
+                    undoMove();
+                }
             }
         });
     }
@@ -238,6 +246,19 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
     }
 
     /**
+     * returns if undo is valid
+     *
+     * @return if undo is valid
+     */
+
+    public boolean isValidUndo() {
+        if (maxUndoTimes > 0) {
+            return true;
+        }
+        return isValidUndo;
+    }
+
+    /**
      * undo the most recent move if the max undo times has not been reached
      */
     protected void undoMove() {
@@ -262,6 +283,7 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
                     }
                 }
                 --moves;
+                --maxUndoTimes;
             }
         }
     }
