@@ -128,10 +128,10 @@ public class MatchedBoardManager extends FileManager implements BoardManager {
             numTiles = 26;
         } else if (complexity == 5) {
             tileNum = 25;
-            numTiles = 50;
+            numTiles = 51;
         } else {
             tileNum = 14;
-            numTiles = 50;
+            numTiles = 51;
         }
 
         for (++tileNum; tileNum != numTiles; tileNum++) {
@@ -139,6 +139,9 @@ public class MatchedBoardManager extends FileManager implements BoardManager {
         }
         Collections.shuffle(tiles);
         this.board = new MatchedBoard(tiles, complexity);
+        if (this.puzzleSolved()){
+            puzzleSolved();
+        }
     }
 
     /**
@@ -329,11 +332,11 @@ public class MatchedBoardManager extends FileManager implements BoardManager {
         if (board.getNUM_ROWS() == 3) {
             background = new Random().nextInt(8) + 1;
         } else if (board.getNUM_ROWS() == 4) {
-            background = new Random().nextInt(24) + 10;
+            background = new Random().nextInt(16) + 10;
         } else if (board.getNUM_ROWS() == 5) {
-            background = new Random().nextInt(50) + 26;
+            background = new Random().nextInt(25) + 26;
         } else {
-            background = new Random().nextInt(49) + 26;
+            background = new Random().nextInt(25) + 26;
         }
         return new MatchedTile(background);
     }

@@ -87,7 +87,7 @@ public class MatchedRoundsActivity extends FileManager {
             }
         });
 
-        switch (win) {
+        switch (10) {
             case 2:
                 activateRound2Button();
                 break;
@@ -302,7 +302,7 @@ public class MatchedRoundsActivity extends FileManager {
         round4Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToRound(5, 4, 0, 20);
+                switchToRound(4, 4, 0, 20);
             }
 
         });
@@ -318,7 +318,7 @@ public class MatchedRoundsActivity extends FileManager {
         round3Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToRound(4, 3, 0, 20);
+                switchToRound(3, 3, 0, 20);
             }
 
         });
