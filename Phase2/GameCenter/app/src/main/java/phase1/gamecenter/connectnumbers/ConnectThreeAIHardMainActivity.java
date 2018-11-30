@@ -38,7 +38,6 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
         Button gameReset = findViewById(R.id.button_reset_game);
         Button undoButton = findViewById(R.id.undoButton);
         maxUndoTimes = 8;
-        isValidUndo = false;
         this.moveStack = new Stack<>();
         moves = 9;
 
@@ -76,7 +75,6 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
                 }
                 moves = 9;
                 maxUndoTimes = 8;
-                isValidUndo = false;
                 turns = 0;
                 player1Turn = true;
                 roundsPlayed = 0;
@@ -107,7 +105,6 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
                     }
                     moves = 9;
                     maxUndoTimes = 8;
-                    isValidUndo = false;
                     turns = 0;
                     player1Turn = true;
                 } else {
@@ -248,10 +245,7 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
      */
 
     public boolean isValidUndo() {
-        if (maxUndoTimes > 0) {
-            return true;
-        }
-        return isValidUndo;
+        return (maxUndoTimes > 0);
     }
 
     /**

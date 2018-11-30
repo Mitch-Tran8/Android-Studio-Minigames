@@ -27,6 +27,15 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
 
     private int maxPlayer2UndoTimes;
 
+    /**
+     * set the number of rounds that have been played for testing purpose
+     *
+     * @param maxUndo setting the maxiumum number of undos.
+     */
+    public void setMaxPlayer2UndoTimes(int maxUndo) {
+        this.maxPlayer2UndoTimes = maxUndo;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +48,6 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
         Button undoButton = findViewById(R.id.undoButton);
         maxUndoTimes = 3;
         maxPlayer2UndoTimes = 3;
-        isValidUndo = false;
         this.moveStack = new Stack<>();
 
         for (int i = 0; i < 3; i++) {
@@ -76,7 +84,6 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
                 moves = 0;
                 maxUndoTimes = 3;
                 maxPlayer2UndoTimes = 3;
-                isValidUndo = false;
                 roundsPlayed = 0;
                 player1Turn = true;
                 player1points = 0;
@@ -109,7 +116,6 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
                     moves = 0;
                     maxUndoTimes = 3;
                     maxPlayer2UndoTimes = 3;
-                    isValidUndo = false;
                     player1Turn = true;
                 } else {
                     if (player1RoundsWon == 3) {
@@ -244,10 +250,7 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
      */
 
     public boolean isValidUndo() {
-        if (player1Turn && maxPlayer2UndoTimes > 0 || !player1Turn && maxUndoTimes > 0) {
-                return true;
-        }
-        return isValidUndo;
+        return (player1Turn && maxPlayer2UndoTimes > 0 || !player1Turn && maxUndoTimes > 0);
     }
 
     /**

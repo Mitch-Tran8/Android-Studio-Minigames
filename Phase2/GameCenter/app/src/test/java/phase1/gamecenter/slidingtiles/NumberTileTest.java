@@ -186,12 +186,6 @@ public class NumberTileTest {
     }
 
     @Test
-    public void testTileEmptyConstructor() {
-        NumberTile testerNumberTile = new NumberTile();
-        assertEquals(0, testerNumberTile.getId());
-    }
-
-    @Test
     public void testTileEmptyConstructor2() {
         NumberTile testerNumberTile = new NumberTile(-1, "3x3");
         assertEquals(0, testerNumberTile.getId());

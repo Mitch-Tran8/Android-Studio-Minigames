@@ -39,7 +39,6 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
         Button gameReset = findViewById(R.id.button_reset_game);
         Button undoButton = findViewById(R.id.undoButton);
         maxUndoTimes = 1;
-        isValidUndo = false;
         this.moveStack = new Stack<>();
 
         for (int i = 0; i < 3; i++) {
@@ -76,7 +75,6 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
                 }
                 moves = 0;
                 maxUndoTimes = 1;
-                isValidUndo = false;
                 roundsPlayed = 0;
                 player1Turn = true;
                 player1points = 0;
@@ -106,7 +104,6 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
                     }
                     moves = 0;
                     maxUndoTimes = 1;
-                    isValidUndo = false;
                     player1Turn = true;
                 } else {
                     if (player1RoundsWon == 3) {
@@ -249,10 +246,7 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
      */
 
     public boolean isValidUndo() {
-        if (maxUndoTimes > 0) {
-            return true;
-        }
-        return isValidUndo;
+        return (maxUndoTimes > 0);
     }
 
     /**
