@@ -16,7 +16,7 @@
         android:background="@drawable/edit_text_style"
         android:backgroundTint="#F27059"
         android:fontFamily="@font/andika"
-        android:text="Baby"
+        android:text="Easy"
         android:textAllCaps="false"
         android:textColor="#F2B0A4"
         android:textSize="30sp"

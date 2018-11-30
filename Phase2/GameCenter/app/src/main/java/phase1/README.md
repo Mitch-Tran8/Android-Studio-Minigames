@@ -83,25 +83,40 @@ round that you played, and there is a save button in the actual game play to sav
 
 -  Under the one player mode, you will be playing connect 3, aka Tic-Tac-Toe.
    There are two levels of difficulties against the AI, "Easy" and "Genius." The easy mode is against
-   an AI whose moves are random. The genius mode implements a minimax algorithm that calculates the
-   best move for the AI. Select your mode of choice.
+   an AI whose moves are selected using random choice by selecting two random integers. The genius
+   mode implements a minimax algorithm that calculates the best move for the AI. Select your mode of
+   choice.
+
 
 -  Under the two player mode, you have the option of playing connect 3 or connect 4 (Tic-Tac-Toe on
    a 5x5 board and you must get 4 in a row.) Select the connect game of your choice.
 
-3. In each game, you (and your partner in the two player mode) can undo as many moves as you would
-   like.
+3. In each game, you (and your partner in the two player mode) are given the option to undo your
+   moves. In the one player mode, when you undo your move, the move made by the AI after you will
+   also be undone. The "Easy" AI only allows for one undo, while the "Genius" AI allows for 10
+   undos. In the connect 3 two player game, you and your partner are given 3 undos each and in the
+   connect 4 two player game, you are each given 5 undos.
 
 4. To win the game, you must win best 3 out of 5 rounds.
 
-   After each round is over, you will not be allowed to click any of the connect board buttons
+   After each match is over, you will not be allowed to click any of the connect board buttons
    anymore. Should you attempt to, toast messages will prompt you to click the "new round" button.
    Please click the button to start a new round. The TextView will display how many rounds player 1
    and player 2 each have won, as well as the number of rounds that resulted in draws.
 
+   Scores are determined for the logged in player (Player 1) after a match is finished and depending
+   on the game, the score achieved will be different. The amount of points gained or lost is based
+   off of the difficulty of the game and the result. If player 1 wins a "Easy" AI connect three
+   game, they will receive 2 points and if they lose they will lose 10 points. While, winning a "
+   Hard" AI connect three game will result in gaining 20 points, while a loss only results in losing
+   2 points. Winning and losing the connect 3 two player game will give you 10 points and -6 points
+   respectively. Gaining 15 and losing 4 is the result for winning and losing the two player connect
+   four game respectively.
+
    After a player has won the game, or there is a tie (5/5 rounds played, no one won), again,
    you will not be able to click the "new round" button nor any of the connect board buttons.
    Should you click, toast messages will appear instructing you to reset the game.
+
 
 
 # Functionalities Implemented
