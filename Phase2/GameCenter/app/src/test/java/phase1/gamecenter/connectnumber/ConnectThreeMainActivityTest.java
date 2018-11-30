@@ -182,4 +182,54 @@ public class ConnectThreeMainActivityTest {
         assertEquals(1, testerActivity.getRoundsPlayed());
     }
 
+    @Test
+    public void testIsValidUndoIsTrueCondition1(){
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
+        testerActivity.setMaxUndoTimes(3);
+        testerActivity.setPlayer1Turn(false);
+        assertEquals(true, testerActivity.isValidUndo());
+    }
+
+    @Test
+    public void testIsValidUndoIsTrueCondition2(){
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
+        testerActivity.setMaxPlayer2UndoTimes(3);
+        testerActivity.setPlayer1Turn(true);
+        assertEquals(true, testerActivity.isValidUndo());
+    }
+
+    @Test
+    public void testIsValidUndoIsFalseCondition1(){
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
+        testerActivity.setMaxUndoTimes(0);
+        testerActivity.setPlayer1Turn(false);
+        assertEquals(false, testerActivity.isValidUndo());
+    }
+
+    @Test
+    public void testIsValidUndoIsFalseCondition2(){
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
+        testerActivity.setMaxPlayer2UndoTimes(0);
+        testerActivity.setPlayer1Turn(true);
+        assertEquals(false, testerActivity.isValidUndo());
+    }
+
+    @Test
+    public void testIsValidUndoIsFalseCondition3(){
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
+        testerActivity.setMaxPlayer2UndoTimes(3);
+        testerActivity.setMaxUndoTimes(0);
+        testerActivity.setPlayer1Turn(false);
+        assertEquals(false, testerActivity.isValidUndo());
+    }
+
+    @Test
+    public void testIsValidUndoIsFalseCondition4(){
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
+        testerActivity.setMaxPlayer2UndoTimes(0);
+        testerActivity.setMaxUndoTimes(3);
+        testerActivity.setPlayer1Turn(true);
+        assertEquals(false, testerActivity.isValidUndo());
+    }
+
 }

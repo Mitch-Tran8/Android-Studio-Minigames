@@ -70,11 +70,6 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     protected int maxUndoTimes;
 
     /**
-     * whether the moves can be undone - whether the maxUndoTimes has been reached
-     */
-    protected boolean isValidUndo;
-
-    /**
      * set the number of rounds player 1 has won only for testing purpose
      *
      * @param round amount of rounds to be set
@@ -134,6 +129,24 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
      */
     public int getTies() {
         return ties;
+    }
+
+    /**
+     * set the number of rounds that have been played for testing purpose
+     *
+     * @param bool setting if it is currently player one's turn
+     */
+    public void setPlayer1Turn(boolean bool) {
+        this.player1Turn = bool;
+    }
+
+    /**
+     * set the number of rounds that have been played for testing purpose
+     *
+     * @param maxUndo setting the maxiumum number of undos.
+     */
+    public void setMaxUndoTimes(int maxUndo) {
+        this.maxUndoTimes = maxUndo;
     }
 
     /**
@@ -257,6 +270,5 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     abstract boolean isValidUndo();
 
     abstract void undoMove();
-
 
 }

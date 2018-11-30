@@ -24,5 +24,19 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
         assertEquals(-10, testerActivity.getPlayer1Points());
     }
 
+    @Test
+    public void testIsValidUndoIsTrueCondition1(){
+        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        testerActivity.setMaxUndoTimes(1);
+        assertEquals(true, testerActivity.isValidUndo());
+    }
+
+    @Test
+    public void testIsValidUndoIsFalseCondition1(){
+        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        testerActivity.setMaxUndoTimes(0);
+        assertEquals(false, testerActivity.isValidUndo());
+    }
+
 }
 
