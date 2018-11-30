@@ -18,6 +18,7 @@ public interface GameActivity extends Observer, Serializable {
 
     /**
      * Create the buttons for displaying the tiles.
+     *
      * @param context the context
      */
     void createTileButtons(Context context);

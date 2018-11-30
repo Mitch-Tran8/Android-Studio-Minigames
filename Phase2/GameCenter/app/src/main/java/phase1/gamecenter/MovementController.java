@@ -25,17 +25,20 @@ public class MovementController {
 
     /**
      * Set the slidingTileBoardManager that MovementController is acting upon.
+     *
      * @param slidingTileBoardManager the slidingTileBoardManager being controlled
      */
     public void setSlidingTileBoardManager(SlidingTileBoardManager slidingTileBoardManager) {
         this.slidingTileBoardManager = slidingTileBoardManager;
     }
+
     public void setBoardManager(MatchedBoardManager boardManager) {
         this.matchedBoardManager = boardManager;
     }
 
     /**
      * Processing a tap movement.
+     *
      * @param context
      * @param position
      * @param display
@@ -43,7 +46,7 @@ public class MovementController {
     public void processTapMovement(Context context, int position, boolean display) {
 
         // tap movements on the board manager
-        if(slidingTileBoardManager != null) {
+        if (slidingTileBoardManager != null) {
             if (slidingTileBoardManager.isValidTap(position)) {
                 slidingTileBoardManager.touchMove(position);
                 if (slidingTileBoardManager.puzzleSolved()) {
@@ -59,7 +62,7 @@ public class MovementController {
         else {
 
             if (matchedBoardManager.hasFirstTap()) {
-                if (matchedBoardManager.isValidTap(position)){
+                if (matchedBoardManager.isValidTap(position)) {
                     matchedBoardManager.touchMove(position);
 
                     if (matchedBoardManager.puzzleSolved()) {
@@ -67,12 +70,11 @@ public class MovementController {
 //                        String score = Integer.toString(matchedBoardManager.getScore());
 
                         Toast toast = Toast.makeText(context, "It's a match!", Toast.LENGTH_LONG);
-                        toast.setGravity(0,50,50);
+                        toast.setGravity(0, 50, 50);
                         toast.show();
                     }
                     matchedBoardManager.setFirstTap(0);
-                    }
-                else {
+                } else {
                     Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();
                     matchedBoardManager.setFirstTap(0);
                 }

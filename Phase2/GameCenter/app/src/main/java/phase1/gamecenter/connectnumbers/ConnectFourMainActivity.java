@@ -55,6 +55,7 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
 
     /**
      * On click listener for the game reset button -> reset the game.
+     *
      * @param gameReset the reset game button.
      */
     protected void gameResetListener(Button gameReset) {
@@ -81,6 +82,7 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
 
     /**
      * On click listener for the reset button -> create a new match
+     *
      * @param buttonReset the new match button
      */
     protected void buttonResetListener(Button buttonReset) {
@@ -319,17 +321,17 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
      * undo the most recent move if the max undo times has not been reached
      */
     protected void undoMove() {
-        if(!matchOver(5, buttons) && moves < 25){
-            if(moveStack.size() > 0){
+        if (!matchOver(5, buttons) && moves < 25) {
+            if (moveStack.size() > 0) {
                 int id = this.moveStack.pop();
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {
-                        if (buttons[i][j].getId() == id){
+                        if (buttons[i][j].getId() == id) {
                             buttons[i][j].setText("");
                             buttons[i][j].setBackgroundResource(R.drawable.circle_button);
-                            if (player1Turn){
+                            if (player1Turn) {
                                 player1Turn = false;
-                            } else{
+                            } else {
                                 player1Turn = true;
                             }
                         }
@@ -359,9 +361,8 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
 
     /**
      * update scoreboard for leaderboard on firebase
-     *
      */
-    private void updateLeaderBoard(){
+    private void updateLeaderBoard() {
         ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect34");
         sbu.updateLeaderBoard();
     }

@@ -94,7 +94,7 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
         howToPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(instructionsView.getVisibility() == View.GONE) {
+                if (instructionsView.getVisibility() == View.GONE) {
                     instructionsView.setVisibility(View.VISIBLE);
                     instructionsTitle.setVisibility(View.VISIBLE);
                     instructionsBody.setVisibility(View.VISIBLE);
@@ -126,10 +126,10 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
 
     /**
      * Back button from the game to the main page
-         */
+     */
     @Override
     public void onBackPressed() {
-        GameCenterMainActivity gameCentre= new GameCenterMainActivity();
+        GameCenterMainActivity gameCentre = new GameCenterMainActivity();
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         Intent intent = new Intent(SlidingTileMainPageActivity.this, GameCenterMainActivity.class);

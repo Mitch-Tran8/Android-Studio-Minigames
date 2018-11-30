@@ -213,6 +213,6 @@ public class MatchedTile implements Tile {
 
     @Override
     public int compareTo(@NonNull Object o) {
-        return ((MatchedTile)o).id - this.id;
+        return ((MatchedTile) o).id - this.id;
     }
 }

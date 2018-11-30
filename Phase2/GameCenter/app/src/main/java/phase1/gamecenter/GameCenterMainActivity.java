@@ -78,7 +78,6 @@ public class GameCenterMainActivity extends AppCompatActivity {
     private String user_id;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent i = getIntent();
@@ -102,7 +101,7 @@ public class GameCenterMainActivity extends AppCompatActivity {
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(menuView.getVisibility() == View.GONE) {
+                if (menuView.getVisibility() == View.GONE) {
                     menuView.setVisibility(View.VISIBLE);
                     logoutButton.setVisibility(View.VISIBLE);
                 } else {

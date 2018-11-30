@@ -50,17 +50,21 @@ public class MatchedBoard extends Observable implements Board {
 
     /**
      * returns the NUM_ROWS
+     *
      * @return the NUM_ROWS
      */
-    int getNUM_ROWS(){
+    int getNUM_ROWS() {
         return this.NUM_ROWS;
     }
 
     /**
      * returns the NUM_COLS
+     *
      * @return NUM_COLS
      */
-    int getNUM_COLS() {return this.NUM_COLS;}
+    int getNUM_COLS() {
+        return this.NUM_COLS;
+    }
 
     /**
      * Return the tile at (row, col)
@@ -75,6 +79,7 @@ public class MatchedBoard extends Observable implements Board {
 
     /**
      * returns the tiles
+     *
      * @return tiles
      */
     public MatchedTile[][] getTiles() {
@@ -85,7 +90,7 @@ public class MatchedBoard extends Observable implements Board {
     /*
      * sets the tile
      */
-    void setTile(int row, int col, MatchedTile newTile){
+    void setTile(int row, int col, MatchedTile newTile) {
         this.tiles[row][col] = newTile;
         setChanged();
         notifyObservers();
@@ -94,14 +99,14 @@ public class MatchedBoard extends Observable implements Board {
     /*
      * replace tiles in row with tiles in the row above
      */
-    void replaceRow(int currRow, int thirdCol){
+    void replaceRow(int currRow, int thirdCol) {
         MatchedTile copy1 = tiles[currRow - 1][thirdCol];
-        MatchedTile copy2 = tiles[currRow - 1][thirdCol-1];
-        MatchedTile copy3 = tiles[currRow - 1][thirdCol-1];
+        MatchedTile copy2 = tiles[currRow - 1][thirdCol - 1];
+        MatchedTile copy3 = tiles[currRow - 1][thirdCol - 1];
 
         tiles[currRow][thirdCol] = copy1;
-        tiles[currRow][thirdCol-1] = copy2;
-        tiles[currRow][thirdCol-2] = copy3;
+        tiles[currRow][thirdCol - 1] = copy2;
+        tiles[currRow][thirdCol - 2] = copy3;
         setChanged();
         notifyObservers();
     }

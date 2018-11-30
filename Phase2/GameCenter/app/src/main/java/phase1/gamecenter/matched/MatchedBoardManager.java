@@ -80,8 +80,8 @@ public class MatchedBoardManager extends FileManager implements BoardManager {
         originalSeconds = second;
         minutes = minute;
         setScoreReq(round);
-        matchedRow= new Stack();
-        matchedCol= new Stack();
+        matchedRow = new Stack();
+        matchedCol = new Stack();
         setUpBoard(complexity, tiles);
         this.firstTap = 0;
     }
@@ -95,20 +95,27 @@ public class MatchedBoardManager extends FileManager implements BoardManager {
 
     /**
      * getter for the current round that the user is playing
+     *
      * @return int round
      */
-    public int getRound(){return round;}
+    public int getRound() {
+        return round;
+    }
 
     /**
      * sets the round
+     *
      * @param round the round
      */
-    public void setRound(int round){this.round = round;}
+    public void setRound(int round) {
+        this.round = round;
+    }
 
     /**
      * sets up the board
+     *
      * @param complexity the complexity
-     * @param tiles the tiles
+     * @param tiles      the tiles
      */
     private void setUpBoard(int complexity, List<MatchedTile> tiles) {
         int tileNum;
@@ -119,7 +126,7 @@ public class MatchedBoardManager extends FileManager implements BoardManager {
         } else if (complexity == 4) {
             tileNum = 9;
             numTiles = 26;
-        } else if (complexity == 5){
+        } else if (complexity == 5) {
             tileNum = 25;
             numTiles = 50;
         } else {
@@ -136,9 +143,10 @@ public class MatchedBoardManager extends FileManager implements BoardManager {
 
     /**
      * sets the required score for each round before the user can make it to the next round
+     *
      * @param round the round
      */
-     void setScoreReq(int round) {
+    void setScoreReq(int round) {
         switch (round) {
             case 1:
                 this.scoreReq = 20;
@@ -176,13 +184,16 @@ public class MatchedBoardManager extends FileManager implements BoardManager {
         }
     }
 
-    public int getScoreReq(){return scoreReq;}
+    public int getScoreReq() {
+        return scoreReq;
+    }
 
     /**
      * set the board of this boardmanager only for testing purpose
+     *
      * @param board new board to be set
      */
-    public void setBoard(MatchedBoard board){
+    public void setBoard(MatchedBoard board) {
         this.board = board;
     }
 
@@ -250,9 +261,13 @@ public class MatchedBoardManager extends FileManager implements BoardManager {
                     if (matchedNum == 3) {
                         matchedRow.push(currCol);
                         matchedRow.push(currRow);
-                        if(originalSeconds == 20){score+=3;}
-                        else if(originalSeconds==40){score+=2;}
-                        else{score+=1;}
+                        if (originalSeconds == 20) {
+                            score += 3;
+                        } else if (originalSeconds == 40) {
+                            score += 2;
+                        } else {
+                            score += 1;
+                        }
                         return true;
                     }
                 }
@@ -267,6 +282,7 @@ public class MatchedBoardManager extends FileManager implements BoardManager {
 
     /**
      * Helper function to puzzleSolved, returns whether all tiles of each column are of the same colour
+     *
      * @return whether all tiles of each column are of the same colour
      */
     private boolean colSolved() {
@@ -282,9 +298,13 @@ public class MatchedBoardManager extends FileManager implements BoardManager {
                     if (matchedNum == 3) {
                         matchedCol.push(currRow);
                         matchedCol.push(currCol);
-                        if(originalSeconds == 20){score+=3;}
-                        else if(originalSeconds==40){score+=2;}
-                        else{score+=1;}
+                        if (originalSeconds == 20) {
+                            score += 3;
+                        } else if (originalSeconds == 40) {
+                            score += 2;
+                        } else {
+                            score += 1;
+                        }
                         return true;
                     }
                 } else {
@@ -293,7 +313,7 @@ public class MatchedBoardManager extends FileManager implements BoardManager {
                 }
             }
             currCol++;
-            matchedNum =0;
+            matchedNum = 0;
         }
         return false;
     }
@@ -301,16 +321,16 @@ public class MatchedBoardManager extends FileManager implements BoardManager {
 
     /**
      * helper function to addNewTiles to generate a random tile
+     *
      * @return a randomized colour tile
      */
-    private MatchedTile generateTile(){
+    private MatchedTile generateTile() {
         int background;
-        if (board.getNUM_ROWS() == 3){
+        if (board.getNUM_ROWS() == 3) {
             background = new Random().nextInt(8) + 1;
-        }
-        else if (board.getNUM_ROWS() == 4){
+        } else if (board.getNUM_ROWS() == 4) {
             background = new Random().nextInt(24) + 10;
-        }else if(board.getNUM_ROWS() == 5){
+        } else if (board.getNUM_ROWS() == 5) {
             background = new Random().nextInt(50) + 26;
         } else {
             background = new Random().nextInt(49) + 26;
@@ -390,6 +410,7 @@ public class MatchedBoardManager extends FileManager implements BoardManager {
 
     /**
      * sets the first tap's position to position
+     *
      * @param position the position
      */
     public void setFirstTap(int position) {

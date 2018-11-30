@@ -76,23 +76,6 @@ public class SlidingTilesBoardManagerUnitTest {
         assertEquals(3, testerSlidingTileBoardManager2.getNumOfMoves());
     }
 
-/*    @Test
-    public void testPuzzleSolved() {
-        List<NumberTile> tiles = new ArrayList<NumberTile>();
-        tiles.add(new NumberTile(0, "3x3"));
-        tiles.add(new NumberTile(1, "3x3"));
-        tiles.add(new NumberTile(2, "3x3"));
-        tiles.add(new NumberTile(3, "3x3"));
-        tiles.add(new NumberTile(4, "3x3"));
-        tiles.add(new NumberTile(5, "3x3"));
-        tiles.add(new NumberTile(6, "3x3"));
-        tiles.add(new NumberTile(7, "3x3"));
-        tiles.add(new NumberTile(8, "3x3"));
-        SlidingTilesBoard testerBoard = new SlidingTilesBoard(tiles);
-        SlidingTileBoardManager testerBoardManager = new SlidingTileBoardManager(testerBoard, 39);
-        assertEquals(true, testerBoardManager.puzzleSolved());
-    }*/
-
     @Test
     public void testUpdateScore3x3() {
         List<NumberTile> numberTiles = new ArrayList<NumberTile>();
@@ -139,7 +122,7 @@ public class SlidingTilesBoardManagerUnitTest {
         numberTiles.add(new NumberTile(8, "3x3"));
         SlidingTilesBoard testerSlidingTilesBoard = new SlidingTilesBoard(numberTiles);
         SlidingTileBoardManager testerSlidingTileBoardManager = new SlidingTileBoardManager(testerSlidingTilesBoard, 39);
-        assertEquals(false, testerSlidingTileBoardManager.isValidTap(3));
+        assertFalse(testerSlidingTileBoardManager.isValidTap(3));
     }
 
 
@@ -157,7 +140,7 @@ public class SlidingTilesBoardManagerUnitTest {
         numberTiles.add(new NumberTile(8, "3x3"));
         SlidingTilesBoard testerSlidingTilesBoard = new SlidingTilesBoard(numberTiles);
         SlidingTileBoardManager testerSlidingTileBoardManager = new SlidingTileBoardManager(testerSlidingTilesBoard, 39);
-        assertEquals(true, testerSlidingTileBoardManager.isValidUndo());
+        assertTrue(testerSlidingTileBoardManager.isValidUndo());
     }
 
     @Test

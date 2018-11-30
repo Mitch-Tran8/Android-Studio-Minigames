@@ -87,19 +87,43 @@ public class MatchedRoundsActivity extends FileManager {
             }
         });
 
-        switch(win){
-            case 2: activateRound2Button();break;
-            case 3: activateRound3Button();break;
-            case 4: activateRound4Button();break;
-            case 5: activateRound5Button();break;
-            case 6: activateRound6Button();break;
-            case 7: activateRound7Button();break;
-            case 8: activateRound8Button();break;
-            case 9: activateRound9Button();break;
-            case 10: activateRound10Button();break;
-            case 11: activateRound11Button();break;
-            case 12: activateRound12Button();break;
-            default: activateRound1Button();break;
+        switch (win) {
+            case 2:
+                activateRound2Button();
+                break;
+            case 3:
+                activateRound3Button();
+                break;
+            case 4:
+                activateRound4Button();
+                break;
+            case 5:
+                activateRound5Button();
+                break;
+            case 6:
+                activateRound6Button();
+                break;
+            case 7:
+                activateRound7Button();
+                break;
+            case 8:
+                activateRound8Button();
+                break;
+            case 9:
+                activateRound9Button();
+                break;
+            case 10:
+                activateRound10Button();
+                break;
+            case 11:
+                activateRound11Button();
+                break;
+            case 12:
+                activateRound12Button();
+                break;
+            default:
+                activateRound1Button();
+                break;
 
         }
     }
@@ -113,7 +137,7 @@ public class MatchedRoundsActivity extends FileManager {
         round12Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToRound(12,6, 0, 59);
+                switchToRound(12, 6, 0, 59);
 
             }
         });
@@ -128,7 +152,7 @@ public class MatchedRoundsActivity extends FileManager {
         round11Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToRound(11,6, 1, 20);
+                switchToRound(11, 6, 1, 20);
             }
         });
     }
@@ -143,7 +167,7 @@ public class MatchedRoundsActivity extends FileManager {
         round1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToRound(1,3, 0, 59);
+                switchToRound(1, 3, 0, 59);
             }
 
         });
@@ -158,7 +182,7 @@ public class MatchedRoundsActivity extends FileManager {
             @Override
             public void onClick(View v) {
 
-                if(instructionsView.getVisibility() == View.GONE) {
+                if (instructionsView.getVisibility() == View.GONE) {
                     instructionsView.setVisibility(View.VISIBLE);
                     instructionsTitle.setVisibility(View.VISIBLE);
                     instructionsBody.setVisibility(View.VISIBLE);
@@ -181,7 +205,7 @@ public class MatchedRoundsActivity extends FileManager {
         round10Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToRound(10,6, 1, 59);
+                switchToRound(10, 6, 1, 59);
             }
 
         });
@@ -197,7 +221,7 @@ public class MatchedRoundsActivity extends FileManager {
         round9Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToRound(9,5, 2, 0);
+                switchToRound(9, 5, 2, 0);
             }
 
         });
@@ -214,7 +238,7 @@ public class MatchedRoundsActivity extends FileManager {
         round8Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToRound(8,5, 2, 0);
+                switchToRound(8, 5, 2, 0);
             }
 
         });
@@ -230,7 +254,7 @@ public class MatchedRoundsActivity extends FileManager {
         round7Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToRound(7,5, 0, 20);
+                switchToRound(7, 5, 0, 20);
             }
 
         });
@@ -246,7 +270,7 @@ public class MatchedRoundsActivity extends FileManager {
         round6Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToRound(6,4, 0, 20);
+                switchToRound(6, 4, 0, 20);
             }
 
         });
@@ -262,7 +286,7 @@ public class MatchedRoundsActivity extends FileManager {
         round5Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToRound(5,4, 0, 20);
+                switchToRound(5, 4, 0, 20);
             }
 
         });
@@ -278,7 +302,7 @@ public class MatchedRoundsActivity extends FileManager {
         round4Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToRound(5,4, 0, 20);
+                switchToRound(5, 4, 0, 20);
             }
 
         });
@@ -294,7 +318,7 @@ public class MatchedRoundsActivity extends FileManager {
         round3Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToRound(4,3, 0, 20);
+                switchToRound(4, 3, 0, 20);
             }
 
         });

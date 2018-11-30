@@ -66,6 +66,8 @@ public class SlidingTilesBoard extends Observable implements Board {
         return numberTiles[row][col];
     }
 
+    public NumberTile[][] getNumberTiles(){ return this.numberTiles;};
+
     /**
      * Swap the numberTiles at (row1, col1) and (row2, col2)
      *

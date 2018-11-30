@@ -122,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
                             createScoreBoards(user_id);
 
 
-                                    Log.d(RegisterActivity.class.getSimpleName(), "Authentication successful");
+                            Log.d(RegisterActivity.class.getSimpleName(), "Authentication successful");
 
                             Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(i);
@@ -137,11 +137,9 @@ public class RegisterActivity extends AppCompatActivity {
             } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches() && !password.matches(passwordPattern)) {
                 emailField.setError("Please enter a valid email address!");
                 passwordField.setError("Password must be at least 6 characters long and contain at least one letter and one number.");
-            }
-            else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 emailField.setError("Please enter a valid email address!");
-            }
-            else if(!password.matches(passwordPattern)) {
+            } else if (!password.matches(passwordPattern)) {
                 passwordField.setError("Password must be at least 6 characters long and contain at least one letter and one number.");
             }
         }
@@ -157,21 +155,24 @@ public class RegisterActivity extends AppCompatActivity {
 
     /**
      * creates the scoreboards for the user in firebase.
+     *
      * @param user_id
      */
-    private void createScoreBoards(String user_id){
+    private void createScoreBoards(String user_id) {
         DatabaseReference stRef = databaseReference.child(user_id).child("Game Collection").child("Sliding Tiles").child("userscores");
-        for (int i = 1; i < 6; i++){
-            stRef.child("score"+ String.valueOf(i)).setValue(0);
+        for (int i = 1; i < 6; i++) {
+            stRef.child("score" + String.valueOf(i)).setValue(0);
         }
         DatabaseReference ctRef = databaseReference.child(user_id).child("Game Collection").child("Colour Tiles").child("userscores");
-        for (int i = 1; i < 6; i++){
-            ctRef.child("score"+ String.valueOf(i)).setValue(0);}
+        for (int i = 1; i < 6; i++) {
+            ctRef.child("score" + String.valueOf(i)).setValue(0);
+        }
 
         DatabaseReference conRef = databaseReference.child(user_id).child("Game Collection").child("Connect34").child("userscores");
 
-        for (int i = 1; i < 6; i++){
-            conRef.child("score"+ String.valueOf(i)).setValue(0);
-    }
+        for (int i = 1; i < 6; i++) {
+            conRef.child("score" + String.valueOf(i)).setValue(0);
+        }
 
-}}
+    }
+}

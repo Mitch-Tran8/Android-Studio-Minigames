@@ -63,6 +63,7 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
 
     /**
      * On click listener for the game reset button -> reset the game.
+     *
      * @param gameReset game reset button.
      */
     protected void gameResetListener(Button gameReset) {
@@ -88,6 +89,7 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
 
     /**
      * On click listener for the reset match button -> make a new match.
+     *
      * @param buttonReset
      */
     protected void buttonResetListener(Button buttonReset) {
@@ -106,7 +108,7 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
                 } else {
                     if (player1RoundsWon == 3) {
                         Toast.makeText(getApplicationContext(), "Game Over. Player 1 wins! Please start a new game.", Toast.LENGTH_LONG).show();
-                    } else if (opponentRoundsWon == 3){
+                    } else if (opponentRoundsWon == 3) {
                         Toast.makeText(getApplicationContext(), "Game Over. AI wins! Please start a new game.", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getApplicationContext(), "Game Over. TIE! Please start a new game.", Toast.LENGTH_LONG).show();
@@ -150,8 +152,8 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
      *
      * @param v The button pressed by the current player.
      */
-    private void processMove (Button v) {
-        if (((Button) v).getText().toString().equals("")){
+    private void processMove(Button v) {
+        if (((Button) v).getText().toString().equals("")) {
             ((Button) v).setText("X");
             this.moveStack.push(v.getId());
 
@@ -161,13 +163,12 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
                     Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_LONG).show();
                     updateRoundsWon();
                 }
-            }
-            else {
+            } else {
                 player1Turn = false;
                 int i;
                 int j;
-                if (moves < 4){
-                        do {
+                if (moves < 4) {
+                    do {
                         i = RANDOM.nextInt(3);
                         j = RANDOM.nextInt(3);
                     } while (!buttons[i][j].getText().toString().equals(""));
@@ -189,7 +190,7 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
             tie();
             Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
             updateRoundsWon();
-        }else {
+        } else {
             player1Turn = true;
         }
     }
@@ -222,12 +223,12 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
      * undo the most recent move if the max undo times has not been reached
      */
     protected void undoMove() {
-        if(!matchOver(3, buttons) && moves < 5){
-            if(moveStack.size() > 0){
+        if (!matchOver(3, buttons) && moves < 5) {
+            if (moveStack.size() > 0) {
                 int id = this.moveStack.pop();
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {
-                        if (buttons[i][j].getId() == id){
+                        if (buttons[i][j].getId() == id) {
                             buttons[i][j].setText("");
                             buttons[i][j].setBackgroundResource(R.drawable.circle_button);
                         }
@@ -236,7 +237,7 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
                 int id2 = this.moveStack.pop();
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {
-                        if (buttons[i][j].getId() == id2){
+                        if (buttons[i][j].getId() == id2) {
                             buttons[i][j].setText("");
                             buttons[i][j].setBackgroundResource(R.drawable.circle_button);
                         }
@@ -263,9 +264,8 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
 
     /**
      * update scoreboard for leaderboard on firebase
-     *
      */
-    private void updateLeaderBoard(){
+    private void updateLeaderBoard() {
         ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect34");
         sbu.updateLeaderBoard();
     }

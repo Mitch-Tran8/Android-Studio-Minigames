@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import android.widget.TextView;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -111,7 +112,7 @@ public class MatchedGameActivity extends FileManager implements GameActivity {
     /**
      * helper function to set the timer
      */
-    void setTheTimer(){
+    void setTheTimer() {
 
         //Declare the timer
         Timer t = new Timer();
@@ -131,12 +132,11 @@ public class MatchedGameActivity extends FileManager implements GameActivity {
                         tv.setText(String.format("%s:%s", String.valueOf(minutes), String.valueOf(seconds)));
                         seconds -= 1;
 
-                        if(seconds == 0 && minutes != 0) {
-                            seconds=60;
-                            minutes=minutes-1;
+                        if (seconds == 0 && minutes != 0) {
+                            seconds = 60;
+                            minutes = minutes - 1;
                             tv.setText(String.format("%s:%s", String.valueOf(minutes), String.valueOf(seconds)));
-                        }
-                        else if (seconds == 0){
+                        } else if (seconds == 0) {
                             gameOver();
                         }
                     }
@@ -152,51 +152,52 @@ public class MatchedGameActivity extends FileManager implements GameActivity {
         String score = Integer.toString(boardManager.getScore());
         updateScoreboard(boardManager.getScore());
         updateLeaderBoard(boardManager.getScore());
-        if(boardManager.getScore() < boardManager.getScoreReq()) {
+        if (boardManager.getScore() < boardManager.getScoreReq()) {
             Toast toast = Toast.makeText(MatchedGameActivity.this, "Time's up! Try again to unlock the next level. Your score: " + score, Toast.LENGTH_LONG);
-            toast.setGravity(0,10,10);
+            toast.setGravity(0, 10, 10);
             toast.show();
             saveToFile(MatchedBoardManager.TEMP_SAVE_FILENAME, boardManager);
             Intent tmp = new Intent(MatchedGameActivity.this, MatchedRoundsActivity.class);
             boardManager.setRound(boardManager.getRound() - 1);
             tmp.putExtra("rounds", boardManager.getRound());
-            System.out.println("lost "+ (boardManager.getRound()));
+            System.out.println("lost " + (boardManager.getRound()));
             startActivity(tmp);
         } else {
             Toast toast = Toast.makeText(MatchedGameActivity.this, "Time's up! you've unlocked the next level. :D" +
                     " your score: " + score, Toast.LENGTH_LONG);
-            toast.setGravity(0,10,10);
+            toast.setGravity(0, 10, 10);
             toast.show();
             Intent tmp = new Intent(MatchedGameActivity.this, MatchedRoundsActivity.class);
             boardManager.setRound(boardManager.getRound() + 1);
             saveToFile(MatchedBoardManager.TEMP_SAVE_FILENAME, boardManager);
             tmp.putExtra("rounds", boardManager.getRound());
-            System.out.println("won "+ (boardManager.getRound()));
+            System.out.println("won " + (boardManager.getRound()));
             startActivity(tmp);
         }
     }
 
     /**
      * update the user's scoreboard on firebase
+     *
      * @param score
      */
 
     public void updateScoreboard(int score) {
-        ScoreBoardUpdater sbu = new ScoreBoardUpdater(score,"Colour Tiles");
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(score, "Colour Tiles");
         sbu.updateUserScoreBoard();
     }
 
     /**
      * update scoreboard for leaderboard on firebase
-     *
      */
-    private void updateLeaderBoard(int score){
+    private void updateLeaderBoard(int score) {
         ScoreBoardUpdater sbu = new ScoreBoardUpdater(score, "Colour Tiles");
         sbu.updateLeaderBoard();
     }
 
     /**
      * Create the buttons for displaying the tiles.
+     *
      * @param context the context
      */
     public void createTileButtons(Context context) {

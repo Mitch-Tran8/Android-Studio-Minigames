@@ -119,6 +119,7 @@ public class MatchedBoardTest {
         assertEquals(board.getTile(0,0).getBackground(), newTile2.getBackground());
 
     }
+
     @Test
     public void toStringTest(){
         List<MatchedTile> tiles = new ArrayList<>();

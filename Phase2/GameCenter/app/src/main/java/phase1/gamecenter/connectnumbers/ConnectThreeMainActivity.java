@@ -56,6 +56,7 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
 
     /**
      * On click listener for the game reset button -> reset the game.
+     *
      * @param gameReset game reset button.
      */
     @Override
@@ -83,6 +84,7 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
 
     /**
      * On click listener for the reset match button -> make a new match.
+     *
      * @param buttonReset
      */
     @Override
@@ -105,7 +107,7 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
                         updateScoreboard();
                         updateLeaderBoard();
                         Toast.makeText(getApplicationContext(), "Game Over. Player 1 wins! Please start a new game.", Toast.LENGTH_LONG).show();
-                    } else if (opponentRoundsWon == 3){
+                    } else if (opponentRoundsWon == 3) {
                         Toast.makeText(getApplicationContext(), "Game Over. Player 2 wins! Please start a new game.", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getApplicationContext(), "Game Over. TIE! Please start a new game.", Toast.LENGTH_LONG).show();
@@ -210,17 +212,17 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
      * undo the most recent move if the max undo times has not been reached
      */
     protected void undoMove() {
-        if(!matchOver(3, buttons) && moves < 9){
-            if(moveStack.size() > 0){
+        if (!matchOver(3, buttons) && moves < 9) {
+            if (moveStack.size() > 0) {
                 int id = this.moveStack.pop();
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {
-                        if (buttons[i][j].getId() == id){
+                        if (buttons[i][j].getId() == id) {
                             buttons[i][j].setText("");
                             buttons[i][j].setBackgroundResource(R.drawable.circle_button);
-                            if (player1Turn){
+                            if (player1Turn) {
                                 player1Turn = false;
-                            } else{
+                            } else {
                                 player1Turn = true;
                             }
                         }
@@ -250,9 +252,8 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
 
     /**
      * update scoreboard for leaderboard on firebase
-     *
      */
-    private void updateLeaderBoard(){
+    private void updateLeaderBoard() {
         ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect34");
         sbu.updateLeaderBoard();
     }
