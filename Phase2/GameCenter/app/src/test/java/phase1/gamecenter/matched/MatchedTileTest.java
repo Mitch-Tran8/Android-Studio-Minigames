@@ -125,4 +125,150 @@ public class MatchedTileTest {
         MatchedTile testerTile = new MatchedTile(25);
         assertEquals(25, testerTile.getId());
     }
+
+    @Test
+    public void testTile26() {
+        MatchedTile testerTile = new MatchedTile(26);
+        assertEquals(26, testerTile.getId());
+    }
+    @Test
+    public void testTile27() {
+        MatchedTile testerTile = new MatchedTile(27);
+        assertEquals(27, testerTile.getId());
+    }
+    @Test
+    public void testTile28() {
+        MatchedTile testerTile = new MatchedTile(28);
+        assertEquals(28, testerTile.getId());
+    }
+    @Test
+    public void testTile29() {
+        MatchedTile testerTile = new MatchedTile(29);
+        assertEquals(29, testerTile.getId());
+    }
+
+    @Test
+    public void testTile30() {
+        MatchedTile testerTile = new MatchedTile(30);
+        assertEquals(30, testerTile.getId());
+    }
+
+    @Test
+    public void testTile31() {
+        MatchedTile testerTile = new MatchedTile(31);
+        assertEquals(31, testerTile.getId());
+    }
+
+    @Test
+    public void testTile32() {
+        MatchedTile testerTile = new MatchedTile(32);
+        assertEquals(32, testerTile.getId());
+    }
+
+    @Test
+    public void testTile33() {
+        MatchedTile testerTile = new MatchedTile(33);
+        assertEquals(33, testerTile.getId());
+    }
+
+    @Test
+    public void testTile34() {
+        MatchedTile testerTile = new MatchedTile(34);
+        assertEquals(34, testerTile.getId());
+    }
+
+    @Test
+    public void testTile35() {
+        MatchedTile testerTile = new MatchedTile(35);
+        assertEquals(35, testerTile.getId());
+    }
+
+    @Test
+    public void testTile36() {
+        MatchedTile testerTile = new MatchedTile(36);
+        assertEquals(36, testerTile.getId());
+    }
+
+    @Test
+    public void testTile37() {
+        MatchedTile testerTile = new MatchedTile(37);
+        assertEquals(37, testerTile.getId());
+    }
+
+    @Test
+    public void testTile38() {
+        MatchedTile testerTile = new MatchedTile(38);
+        assertEquals(38, testerTile.getId());
+    }
+
+    @Test
+    public void testTile39() {
+        MatchedTile testerTile = new MatchedTile(39);
+        assertEquals(39, testerTile.getId());
+    }
+
+    @Test
+    public void testTile40() {
+        MatchedTile testerTile = new MatchedTile(40);
+        assertEquals(40, testerTile.getId());
+    }
+
+    @Test
+    public void testTile41() {
+        MatchedTile testerTile = new MatchedTile(41);
+        assertEquals(41, testerTile.getId());
+    }
+    @Test
+    public void testTile42() {
+        MatchedTile testerTile = new MatchedTile(42);
+        assertEquals(42, testerTile.getId());
+    }
+
+    @Test
+    public void testTile43() {
+        MatchedTile testerTile = new MatchedTile(43);
+        assertEquals(43, testerTile.getId());
+    }
+
+    @Test
+    public void testTile44() {
+        MatchedTile testerTile = new MatchedTile(44);
+        assertEquals(44, testerTile.getId());
+    }
+
+    @Test
+    public void testTile45() {
+        MatchedTile testerTile = new MatchedTile(45);
+        assertEquals(45, testerTile.getId());
+    }
+
+    @Test
+    public void testTile46() {
+        MatchedTile testerTile = new MatchedTile(46);
+        assertEquals(46, testerTile.getId());
+    }
+
+    @Test
+    public void testTile47() {
+        MatchedTile testerTile = new MatchedTile(47);
+        assertEquals(47, testerTile.getId());
+    }
+
+    @Test
+    public void testTile48() {
+        MatchedTile testerTile = new MatchedTile(48);
+        assertEquals(48, testerTile.getId());
+    }
+
+    @Test
+    public void testTile49() {
+        MatchedTile testerTile = new MatchedTile(49);
+        assertEquals(49, testerTile.getId());
+    }
+
+    @Test
+    public void testTile50() {
+        MatchedTile testerTile = new MatchedTile(50);
+        assertEquals(50, testerTile.getId());
+    }
 }

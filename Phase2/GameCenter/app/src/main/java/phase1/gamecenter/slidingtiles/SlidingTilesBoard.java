@@ -2,13 +2,12 @@ package phase1.gamecenter.slidingtiles;
 
 import android.support.annotation.NonNull;
 
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 
-import phase1.gamecenter.Board;
+import phase1.gamecenter.interfaces.Board;
 
 /**
  * The sliding numberTiles board.

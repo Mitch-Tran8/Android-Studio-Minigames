@@ -3,7 +3,7 @@ package phase1.gamecenter.slidingtiles;
 import android.support.annotation.NonNull;
 
 import phase1.gamecenter.R;
-import phase1.gamecenter.Tile;
+import phase1.gamecenter.interfaces.Tile;
 
 
 /**

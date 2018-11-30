@@ -30,18 +30,19 @@ public class BoardComplexity extends FileManager {
      * button for four by four board.
      */
     Button fourButton;
+
     /**
      * button for five by five board.
      */
     Button fiveButton;
+
     /**
      * button for three by three board.
      */
     Button threeButton;
+
     /**
      * The current user's Id
-     *
-     * @param user_id
      */
     private String user_id;
 

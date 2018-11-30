@@ -8,13 +8,10 @@ package phase1.gamecenter.matched;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -24,7 +21,7 @@ import java.util.TimerTask;
 
 import phase1.gamecenter.CustomAdapter;
 import phase1.gamecenter.FileManager;
-import phase1.gamecenter.GameActivity;
+import phase1.gamecenter.interfaces.GameActivity;
 import phase1.gamecenter.GestureDetectGridView;
 import phase1.gamecenter.R;
 import phase1.gamecenter.ScoreBoardUpdater;
@@ -72,7 +69,7 @@ public class MatchedGameActivity extends FileManager implements GameActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boardManager = loadFromFileMatched();
+        boardManager = loadFromFileMatched(MatchedStartingActivity.TEMP_SAVE_FILENAME);
         createTileButtons(this);
         setContentView(R.layout.activity_colourmain);
 
@@ -115,10 +112,12 @@ public class MatchedGameActivity extends FileManager implements GameActivity {
      * helper function to set the timer
      */
     void setTheTimer(){
+
         //Declare the timer
         Timer t = new Timer();
         seconds = boardManager.getSeconds();
         minutes = boardManager.getMinutes();
+
         //Set the schedule function and rate
         t.scheduleAtFixedRate(new TimerTask() {
 
@@ -144,7 +143,6 @@ public class MatchedGameActivity extends FileManager implements GameActivity {
                 });
             }
         }, 0, 1000);
-
     }
 
     /**

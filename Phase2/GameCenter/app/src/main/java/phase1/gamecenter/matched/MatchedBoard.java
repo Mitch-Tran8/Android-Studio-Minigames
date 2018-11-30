@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 
-import phase1.gamecenter.Board;
+import phase1.gamecenter.interfaces.Board;
 
 /**
  * The sliding tiles board.
@@ -35,7 +35,7 @@ public class MatchedBoard extends Observable implements Board {
      *
      * @param tiles the tiles for the board
      */
-    MatchedBoard(List<MatchedTile> tiles, int complexity) {
+    public MatchedBoard(List<MatchedTile> tiles, int complexity) {
         NUM_ROWS = complexity;
         NUM_COLS = complexity;
         this.tiles = new MatchedTile[NUM_ROWS][NUM_COLS];

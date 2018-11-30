@@ -1,4 +1,4 @@
-package phase1.gamecenter;
+package phase1.gamecenter.connectnumber;
 
 import org.junit.Test;
 

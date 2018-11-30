@@ -1,14 +1,12 @@
-package phase1.gamecenter;
+package phase1.gamecenter.connectnumber;
 
 import org.junit.Test;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
-import phase1.gamecenter.connectnumbers.ConnectThreeAIEasyMainActivity;
+import phase1.gamecenter.connectnumbers.ConnectThreeMainActivity;
 
 import static junit.framework.Assert.assertEquals;
 
-public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
+public class ConnectThreeMainActivityTest {
 
     @Test
     public void testCheckRowsTrue() {
@@ -17,7 +15,7 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
                 {"X", "X", "X"},
                 {"", "O", ""},
         };
-        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         assertEquals(true, testerActivity.checkRows(testerBoard));
     }
 
@@ -28,7 +26,7 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
                 {"X", "X", "O"},
                 {"O", "O", ""},
         };
-        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         assertEquals(false, testerActivity.checkRows(testerBoard));
     }
 
@@ -39,7 +37,7 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
                 {"X", "X", "O"},
                 {"O", "X", "X"},
         };
-        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         assertEquals(true, testerActivity.checkColumns(testerBoard));
     }
 
@@ -50,7 +48,7 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
                 {"X", "X", "O"},
                 {"O", "O", "X"},
         };
-        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         assertEquals(false, testerActivity.checkColumns(testerBoard));
     }
 
@@ -61,7 +59,7 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
                 {"X", "O", "O"},
                 {"O", "O", "X"},
         };
-        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         assertEquals(true, testerActivity.checkAscendingDiagonals(testerBoard));
     }
 
@@ -72,7 +70,7 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
                 {"X", "", "O"},
                 {"", "O", "X"},
         };
-        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         assertEquals(false, testerActivity.checkAscendingDiagonals(testerBoard));
     }
 
@@ -83,7 +81,7 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
                 {"X", "O", "O"},
                 {"O", "O", "O"},
         };
-        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         assertEquals(true, testerActivity.checkDescendingDiagonals(testerBoard));
     }
 
@@ -94,34 +92,34 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
                 {"X", "", "O"},
                 {"O", "O", ""},
         };
-        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         assertEquals(false, testerActivity.checkDescendingDiagonals(testerBoard));
     }
 
     @Test
     public void testCheckPlayer1RoundsWonGameOverIsTrue(){
-        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         testerActivity.setPlayer1RoundsWon(3);
         assertEquals(true, testerActivity.gameOver());
     }
 
     @Test
     public void testCheckOpponentRoundsWonGameOverIsTrue(){
-        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         testerActivity.setOpponentRoundsWon(3);
         assertEquals(true, testerActivity.gameOver());
     }
 
     @Test
     public void testCheckRoundsWonGameOverIsTrue(){
-        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         testerActivity.setRoundsPlayed(5);
         assertEquals(true, testerActivity.gameOver());
     }
 
     @Test
     public void testCheckGameOverIsFalse(){
-        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         testerActivity.setPlayer1RoundsWon(0);
         testerActivity.setOpponentRoundsWon(0);
         testerActivity.setRoundsPlayed(0);
@@ -130,59 +128,57 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
 
     @Test
     public void testPlayer1WinsPlayer1PointsChange(){
-        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         testerActivity.player1Wins();
         assertEquals(5, testerActivity.getPlayer1Points());
     }
 
     @Test
     public void testPlayer1WinsPlayer1RoundChange(){
-        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         testerActivity.player1Wins();
         assertEquals(1, testerActivity.getPlayer1RoundsWon());
     }
 
     @Test
     public void testPlayer1WinsRoundsPlayedChange(){
-        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         testerActivity.player1Wins();
         assertEquals(1, testerActivity.getRoundsPlayed());
     }
 
     @Test
     public void testPLayer2WinsPlayer1PointsChange(){
-        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         testerActivity.opponentWins();
         assertEquals(-3, testerActivity.getPlayer1Points());
     }
 
     @Test
     public void testPlayer2WinsPlayer2RoundChange(){
-        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         testerActivity.opponentWins();
         assertEquals(1, testerActivity.getOpponentRoundsWon());
     }
 
     @Test
     public void testPlayer2WinsRoundsPlayedChange(){
-        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         testerActivity.opponentWins();
         assertEquals(1, testerActivity.getRoundsPlayed());
     }
 
     @Test
     public void testTieRoundChange(){
-        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         testerActivity.tie();
         assertEquals(1, testerActivity.getTies());
     }
 
     @Test
     public void testTieRoundsPlayedChange(){
-        ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
+        ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         testerActivity.tie();
         assertEquals(1, testerActivity.getRoundsPlayed());
     }
-
 }
-
