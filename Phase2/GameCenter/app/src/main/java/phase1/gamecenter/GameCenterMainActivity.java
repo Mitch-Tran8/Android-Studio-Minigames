@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import phase1.gamecenter.connectnumbers.ConnectNumbersStartingActivity;
 import phase1.gamecenter.matched.MatchedStartingActivity;
 import phase1.gamecenter.registrationinfo.LeaderboardActivity;
+import phase1.gamecenter.registrationinfo.LoginActivity;
 import phase1.gamecenter.registrationinfo.UserScoreBoardActivity;
 import phase1.gamecenter.slidingtiles.SlidingTileMainPageActivity;
 
@@ -145,6 +146,8 @@ public class GameCenterMainActivity extends AppCompatActivity {
                 setContentView(R.layout.activity_game_center_main);
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(GameCenterMainActivity.this, "Logout Succesful", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(GameCenterMainActivity.this, LoginActivity.class);
+                startActivity(i);
             }
         });
 
