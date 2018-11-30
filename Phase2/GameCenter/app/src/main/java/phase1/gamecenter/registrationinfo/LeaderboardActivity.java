@@ -112,34 +112,34 @@ public class LeaderboardActivity extends AppCompatActivity {
         TextView title = findViewById(R.id.LeaderBoardTitle);
         title.setText(game + "Rankings");
 
-        TextView name1 = findViewById(R.id.text1);
+        TextView name1 = findViewById(R.id.user1);
         name1.setText(String.valueOf(leaderBoardScores.get(0).first));
 
-        TextView name2 = findViewById(R.id.text2);
+        TextView name2 = findViewById(R.id.user2);
         name2.setText(String.valueOf(leaderBoardScores.get(1).first));
 
-        TextView name3 = findViewById(R.id.text3);
+        TextView name3 = findViewById(R.id.user3);
         name3.setText(String.valueOf(leaderBoardScores.get(2).first));
 
-        TextView name4 = findViewById(R.id.text4);
+        TextView name4 = findViewById(R.id.user4);
         name4.setText(String.valueOf(leaderBoardScores.get(3).first));
 
-        TextView name5 = findViewById(R.id.text5);
+        TextView name5 = findViewById(R.id.user5);
         name5.setText(String.valueOf(leaderBoardScores.get(4).first));
 
-        TextView score1 = findViewById(R.id.user1);
+        TextView score1 = findViewById(R.id.text1);
         score1.setText(String.valueOf(leaderBoardScores.get(0).second));
 
-        TextView score2 = findViewById(R.id.user2);
+        TextView score2 = findViewById(R.id.text2);
         score2.setText(String.valueOf(leaderBoardScores.get(1).second));
 
-        TextView score3 = findViewById(R.id.user3);
+        TextView score3 = findViewById(R.id.text3);
         score3.setText(String.valueOf(leaderBoardScores.get(2).second));
 
-        TextView score4 = findViewById(R.id.user4);
+        TextView score4 = findViewById(R.id.text3);
         score4.setText(String.valueOf(leaderBoardScores.get(3).second));
 
-        TextView score5 = findViewById(R.id.user5);
+        TextView score5 = findViewById(R.id.text5);
         score5.setText(String.valueOf(leaderBoardScores.get(4).second));
     }
 
