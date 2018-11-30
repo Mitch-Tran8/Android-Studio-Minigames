@@ -261,15 +261,14 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
      */
 
     public boolean isValidUndo() {
-        return (player1Turn && maxPlayer2UndoTimes > 0 && !matchOver(3, buttons)||
-                !player1Turn && maxUndoTimes > 0 && !matchOver(3, buttons));
+        return (player1Turn && maxPlayer2UndoTimes > 0 && !matchOver(3, buttons) && moves < 9||
+                !player1Turn && maxUndoTimes > 0 && !matchOver(3, buttons) && moves < 9);
     }
 
     /**
      * undo the most recent move if the max undo times has not been reached
      */
     protected void undoMove() {
-        if (!matchOver(3, buttons) && moves < 9) {
             if (moveStack.size() > 0) {
                 if (player1Turn) {
                     int id = this.moveStack.pop();
@@ -298,7 +297,6 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
                 }
             }
             moves--;
-        }
     }
 
     /**
