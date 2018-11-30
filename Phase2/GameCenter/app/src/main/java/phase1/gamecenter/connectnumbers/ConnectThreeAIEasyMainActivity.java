@@ -252,14 +252,13 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
      */
 
     public boolean isValidUndo() {
-        return (maxUndoTimes > 0 && !matchOver(3, buttons));
+        return (maxUndoTimes > 0 && !matchOver(3, buttons) && moves < 5);
     }
 
     /**
      * undo the most recent move if the max undo times has not been reached
      */
     protected void undoMove() {
-        if (!matchOver(3, buttons) && moves < 5) {
             if (moveStack.size() > 0) {
                 int id = this.moveStack.pop();
                 for (int i = 0; i < 3; i++) {
@@ -283,7 +282,6 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
                 maxUndoTimes--;
             }
         }
-    }
 
     @Override
     public void onBackPressed() {

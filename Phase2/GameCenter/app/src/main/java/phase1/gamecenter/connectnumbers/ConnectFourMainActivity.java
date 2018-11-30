@@ -138,6 +138,10 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
             public void onClick(View view) {
                 if (isValidUndo()) {
                     undoMove();
+                    Toast.makeText(getApplicationContext(), "Successful undo!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Match over - invalid undo!", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -358,14 +362,14 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
      * @return if undo is valid
      */
     public boolean isValidUndo() {
-        return (player1Turn && maxPlayer2UndoTimes > 0 || !player1Turn && maxUndoTimes > 0);
+        return (!matchOver(5, buttons) && moves < 13 &&  player1Turn && maxPlayer2UndoTimes > 0)
+                || (!matchOver(5, buttons) && moves < 13 && !player1Turn && maxUndoTimes > 0);
     }
 
     /**
      * undo the most recent move if the max undo times has not been reached
      */
     protected void undoMove() {
-        if (!matchOver(5, buttons) && moves < 25) {
             if (moveStack.size() > 0) {
                 if (player1Turn) {
                     int id = this.moveStack.pop();
@@ -395,7 +399,6 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
             }
             moves--;
         }
-    }
 
     /**
      * Return to the connect numbers starting page.

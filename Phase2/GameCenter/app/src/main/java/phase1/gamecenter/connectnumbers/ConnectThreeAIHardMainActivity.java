@@ -255,14 +255,13 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
      */
 
     public boolean isValidUndo() {
-        return (maxUndoTimes > 0 && !matchOver(3, buttons));
+        return (maxUndoTimes > 0 && !matchOver(3, buttons) && moves < 5);
     }
 
     /**
      * undo the most recent move if the max undo times has not been reached
      */
     protected void undoMove() {
-        if (!matchOver(3, buttons) || turns < 5) {
             if (moveStack.size() > 0) {
                 int id = this.moveStack.pop();
                 for (int i = 0; i < 3; i++) {
@@ -288,7 +287,6 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
                 maxUndoTimes--;
             }
         }
-    }
 
     /**
      * Return the best move bestMove for the AI to execute.
