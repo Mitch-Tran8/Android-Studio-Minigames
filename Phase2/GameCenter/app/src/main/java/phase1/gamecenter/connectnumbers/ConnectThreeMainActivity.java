@@ -187,6 +187,24 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
     }
 
     /**
+     * Player 1 wins the match, update scores.
+     */
+    public void player1Wins() {
+        player1points = player1points + 10;
+        player1RoundsWon++;
+        roundsPlayed++;
+    }
+
+    /**
+     * Opponent wins the match, update scores.
+     */
+    public void opponentWins() {
+        player1points = player1points - 6;
+        opponentRoundsWon++;
+        roundsPlayed++;
+    }
+
+    /**
      * Displays the toast message when the game is over.
      */
     protected void gameOverMessage() {

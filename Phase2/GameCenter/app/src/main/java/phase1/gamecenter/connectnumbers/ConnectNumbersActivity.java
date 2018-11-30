@@ -143,20 +143,12 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     /**
      * Player 1 wins the match, update scores.
      */
-    public void player1Wins() {
-        player1points = player1points + 5;
-        player1RoundsWon++;
-        roundsPlayed++;
-    }
+    abstract void player1Wins();
 
     /**
      * Opponent wins the match, update scores.
      */
-    public void opponentWins() {
-        player1points = player1points - 3;
-        opponentRoundsWon++;
-        roundsPlayed++;
-    }
+    abstract void opponentWins();
 
     /**
      * Return whether the connect game is over, that is, if a player has won three rounds or

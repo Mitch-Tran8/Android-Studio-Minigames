@@ -181,6 +181,24 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
     }
 
     /**
+     * Player 1 wins the match, update scores.
+     */
+    public void player1Wins() {
+        player1points = player1points + 15;
+        player1RoundsWon++;
+        roundsPlayed++;
+    }
+
+    /**
+     * Opponent wins the match, update scores.
+     */
+    public void opponentWins() {
+        player1points = player1points - 4;
+        opponentRoundsWon++;
+        roundsPlayed++;
+    }
+
+    /**
      * Displays the toast message when the game is over.
      */
     protected void gameOverMessage() {

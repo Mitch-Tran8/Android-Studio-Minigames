@@ -196,6 +196,24 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
     }
 
     /**
+     * Player 1 wins the match, update scores.
+     */
+    public void player1Wins() {
+        player1points = player1points + 2;
+        player1RoundsWon++;
+        roundsPlayed++;
+    }
+
+    /**
+     * Opponent wins the match, update scores.
+     */
+    public void opponentWins() {
+        player1points = player1points - 10;
+        opponentRoundsWon++;
+        roundsPlayed++;
+    }
+
+    /**
      * Displays the toast message when the game is over.
      */
     protected void gameOverMessage() {
