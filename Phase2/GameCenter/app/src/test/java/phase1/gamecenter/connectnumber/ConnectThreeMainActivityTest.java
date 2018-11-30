@@ -130,7 +130,7 @@ public class ConnectThreeMainActivityTest {
     public void testPlayer1WinsPlayer1PointsChange(){
         ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         testerActivity.player1Wins();
-        assertEquals(5, testerActivity.getPlayer1Points());
+        assertEquals(10, testerActivity.getPlayer1Points());
     }
 
     @Test
@@ -151,7 +151,7 @@ public class ConnectThreeMainActivityTest {
     public void testPLayer2WinsPlayer1PointsChange(){
         ConnectThreeMainActivity testerActivity = new ConnectThreeMainActivity();
         testerActivity.opponentWins();
-        assertEquals(-3, testerActivity.getPlayer1Points());
+        assertEquals(-6, testerActivity.getPlayer1Points());
     }
 
     @Test
@@ -181,4 +181,5 @@ public class ConnectThreeMainActivityTest {
         testerActivity.tie();
         assertEquals(1, testerActivity.getRoundsPlayed());
     }
+
 }

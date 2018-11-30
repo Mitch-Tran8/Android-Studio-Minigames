@@ -132,7 +132,7 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
     public void testPlayer1WinsPlayer1PointsChange(){
         ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
         testerActivity.player1Wins();
-        assertEquals(5, testerActivity.getPlayer1Points());
+        assertEquals(2, testerActivity.getPlayer1Points());
     }
 
     @Test
@@ -153,7 +153,7 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
     public void testPLayer2WinsPlayer1PointsChange(){
         ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
         testerActivity.opponentWins();
-        assertEquals(-3, testerActivity.getPlayer1Points());
+        assertEquals(-8, testerActivity.getPlayer1Points());
     }
 
     @Test
