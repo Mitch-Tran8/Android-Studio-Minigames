@@ -66,7 +66,8 @@ Each round has a required score inorder to proceed to the next round.
 5. If you achieved the required score, you will be taken back to the main rounds page, a message
 will be displayed, and the next round button will be unlocked.
 If you did not achieve the required score, you will be taken back to the main page, and a message
-that says "try again" will be displayed. Every time you win/lose a round, the game will be autosaved.
+that says "try again" will be displayed. Every time you win/lose a round, the game is temporarily saved.
+To save your unlocked levels, you must click on save in the rounds/levels page.
 
 6. If you load a saved game, The round which you played last will be saved as well as the arrangement
 of the tiles, and the time. There is a save progress button on the rounds page to save the last
