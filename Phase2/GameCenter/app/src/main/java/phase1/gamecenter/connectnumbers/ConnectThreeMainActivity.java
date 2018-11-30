@@ -140,7 +140,7 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isValidUndo()){
+                if (isValidUndo()) {
                     undoMove();
                 }
             }
@@ -271,8 +271,7 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
                             }
                         }
                     }
-                }
-                else {
+                } else {
                     int id = this.moveStack.pop();
                     for (int i = 0; i < 3; i++) {
                         for (int j = 0; j < 3; j++) {
@@ -302,7 +301,7 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
      * update user's scoreboard on firebase
      */
     private void updateScoreboard() {
-        ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect34");
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect 34");
         sbu.updateUserScoreBoard();
     }
 
@@ -310,7 +309,7 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
      * update scoreboard for leaderboard on firebase
      */
     private void updateLeaderBoard() {
-        ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect34");
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect 34");
         sbu.updateLeaderBoard();
     }
 

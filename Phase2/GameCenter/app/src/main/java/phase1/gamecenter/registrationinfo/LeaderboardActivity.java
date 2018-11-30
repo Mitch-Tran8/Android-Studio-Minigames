@@ -47,7 +47,7 @@ public class LeaderboardActivity extends AppCompatActivity {
                 } else if (tab.getPosition() == 1) {
                     getLeaderBoardScores("Sliding Tiles");
                 } else {
-                    getLeaderBoardScores("Connect34");
+                    getLeaderBoardScores("Connect 34");
                 }
 
             }
@@ -65,14 +65,6 @@ public class LeaderboardActivity extends AppCompatActivity {
 
     }
 
-    private void onTab(int position) {
-        if (position == 0) {
-            getLeaderBoardScores("Colour Tiles");
-        } else if (position == 1) {
-            getLeaderBoardScores("Sliding Tiles");
-        }
-
-    }
 
     /**
      * gets the scores from firebase and sets it as a list to userScores.

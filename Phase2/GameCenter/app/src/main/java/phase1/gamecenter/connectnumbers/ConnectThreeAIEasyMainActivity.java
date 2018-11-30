@@ -125,7 +125,7 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isValidUndo()){
+                if (isValidUndo()) {
                     undoMove();
                 }
             }
@@ -289,7 +289,7 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
      * update user's scoreboard on firebase
      */
     private void updateScoreboard() {
-        ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect34");
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect 34");
         sbu.updateUserScoreBoard();
     }
 
@@ -297,7 +297,7 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
      * update scoreboard for leaderboard on firebase
      */
     private void updateLeaderBoard() {
-        ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect34");
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect 34");
         sbu.updateLeaderBoard();
     }
 

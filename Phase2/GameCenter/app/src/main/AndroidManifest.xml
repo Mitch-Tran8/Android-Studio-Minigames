@@ -30,7 +30,7 @@
         <activity android:name=".matched.MatchedStartingActivity" />
         <activity android:name=".slidingtiles.DifficultyLevel" />
         <activity android:name=".registrationinfo.UserScoreBoardActivity"></activity>
-        <activity android:name=".matched.MatchedRoundsActivity"/>
+        <activity android:name=".matched.MatchedRoundsActivity" />
         <activity android:name=".connectnumbers.ConnectFourMainActivity" />
         <activity android:name=".connectnumbers.ConnectNumbersStartingActivity" />
         <activity android:name=".connectnumbers.ConnectNumbersSelectActivity" />
@@ -38,9 +38,7 @@
         <activity android:name=".connectnumbers.ConnectThreeAIHardMainActivity" />
         <activity android:name=".connectnumbers.ConnectThreeMainActivity" />
         <activity android:name=".connectnumbers.ConnectThreeDifficultyActivity" />
-
-
-        <activity android:name=".registrationinfo.LeaderboardActivity"/>
+        <activity android:name=".registrationinfo.LeaderboardActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

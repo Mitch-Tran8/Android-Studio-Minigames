@@ -1,24 +1,67 @@
 # Team Members:
 
-#### Daeun Chung (git log: dauen)
+#### Daeun Chung (git log: dec)
     decw578@gmail.com
     289-939-2394
+    Contributions:
+        Phase1:
+        GameCenter Set Up
+        Sliding Tiles Game - saving
+        Sliding Tiles Complexity
+
+        Phase 2:
+        Autosave in Matched
+        Score update to firebase, fetch from firebase.
+        UserScoreBoard and Leaderboard.
+
+
 
 #### Lena Zhao (git log: lena)
     xinxin.zhao@mail.utoronto.ca
     647-915-2997
+    Contributions:
+        Phase1:
+        GameCenter Set Up
+        Sliding Tiles Undo
+
+        Phase 2:
+        Create Matched Game
+
 
 #### Michelle Cheung (git log: michelle cheung)
     mcheung2525@gmail.com
     647-721-1894
+    Contributions:
+        Phase1:
+        Sliding Tiles count moves
+        Sliding Tiles/GameCenter Scoreboard
+
+        Phase 2:
+        Create Connect Numbers Game
+
 
 #### Mitchell Tran (git log: mitchell)
     mitchelltran8@gmailcom
     647-721-2918
+    Contributions:
+        Phase1:
+        Sliding Tiles count moves
+        Sliding Tiles/GameCenter Scoreboard
+
+        Phase 2:
+        Create Connect Numbers Game
+
 
 #### Nour Mokdad (git log: nour)
     nour.mokdad@mail.utoronto.ca
     416-320-5595
+    Contributions:
+        Phase1:
+        GameCenter Set Up
+        Sliding Tiles Game - saving
+
+        Phase 2:
+        Create Matched Game
 
 
 # Team Communication Tools:
@@ -45,7 +88,7 @@ promptly and find a time to reschedule or recap.
 
    We hereby have read the team contract and agree to abide by its terms.
 
-    -Daeun Chung
+    -Da Eun Chung
     -Lena Zhao
     -Michelle Cheung
     -Mitchell Tran

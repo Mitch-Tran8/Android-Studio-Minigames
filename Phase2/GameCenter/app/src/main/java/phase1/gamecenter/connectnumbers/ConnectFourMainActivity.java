@@ -138,7 +138,7 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isValidUndo()){
+                if (isValidUndo()) {
                     undoMove();
                 }
             }
@@ -370,7 +370,7 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
     protected void undoMove() {
         if (!matchOver(5, buttons) && moves < 25) {
             if (moveStack.size() > 0) {
-                if (player1Turn){
+                if (player1Turn) {
                     int id = this.moveStack.pop();
                     for (int i = 0; i < 5; i++) {
                         for (int j = 0; j < 5; j++) {
@@ -382,8 +382,7 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
                             }
                         }
                     }
-                }
-                else {
+                } else {
                     int id = this.moveStack.pop();
                     for (int i = 0; i < 5; i++) {
                         for (int j = 0; j < 5; j++) {
@@ -396,7 +395,8 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
                         }
                     }
                 }
-            }   --moves;
+            }
+            --moves;
         }
     }
 
@@ -413,7 +413,7 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
      * update user's scoreboard on firebase
      */
     private void updateScoreboard() {
-        ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect34");
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect 34");
         sbu.updateUserScoreBoard();
     }
 
@@ -421,7 +421,7 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
      * update scoreboard for leaderboard on firebase
      */
     private void updateLeaderBoard() {
-        ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect34");
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect 34");
         sbu.updateLeaderBoard();
     }
 
