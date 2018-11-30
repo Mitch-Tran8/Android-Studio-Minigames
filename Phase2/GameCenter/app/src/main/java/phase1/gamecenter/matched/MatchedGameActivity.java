@@ -135,8 +135,7 @@ public class MatchedGameActivity extends FileManager implements GameActivity {
                             seconds=60;
                             minutes=minutes-1;
                             tv.setText(String.format("%s:%s", String.valueOf(minutes), String.valueOf(seconds)));
-                        }
-                        else if (seconds == 0){
+                        } else if (seconds == 0) {
                             gameOver();
                         }
                     }
@@ -152,7 +151,7 @@ public class MatchedGameActivity extends FileManager implements GameActivity {
         String score = Integer.toString(boardManager.getScore());
         updateScoreboard(boardManager.getScore());
         updateLeaderBoard(boardManager.getScore());
-        if(boardManager.getScore() < boardManager.getScoreReq()) {
+        if (boardManager.getScore() < boardManager.getScoreReq()) {
             Toast toast = Toast.makeText(MatchedGameActivity.this, "Time's up! Try again to unlock the next level. Your score: " + score, Toast.LENGTH_LONG);
             toast.setGravity(0,10,10);
             toast.show();
@@ -160,7 +159,6 @@ public class MatchedGameActivity extends FileManager implements GameActivity {
             Intent tmp = new Intent(MatchedGameActivity.this, MatchedRoundsActivity.class);
             boardManager.setRound(boardManager.getRound() - 1);
             tmp.putExtra("rounds", boardManager.getRound());
-            System.out.println("lost "+ (boardManager.getRound()));
             startActivity(tmp);
         } else {
             if(boardManager.getRound()!=12) {
@@ -203,7 +201,7 @@ public class MatchedGameActivity extends FileManager implements GameActivity {
      * update scoreboard for leaderboard on firebase
      *
      */
-    private void updateLeaderBoard(int score){
+    private void updateLeaderBoard(int score) {
         ScoreBoardUpdater sbu = new ScoreBoardUpdater(score, "Colour Tiles");
         sbu.updateLeaderBoard();
     }

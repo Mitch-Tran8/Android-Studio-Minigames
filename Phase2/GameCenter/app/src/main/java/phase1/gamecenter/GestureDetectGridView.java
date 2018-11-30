@@ -109,6 +109,7 @@ public class GestureDetectGridView extends GridView {
         this.slidingTileBoardManager = slidingTileBoardManager;
         mController.setSlidingTileBoardManager(slidingTileBoardManager);
     }
+
     public void setBoardManager(MatchedBoardManager boardManager) {
         this.matchedBoardManager = boardManager;
         mController.setBoardManager(boardManager);

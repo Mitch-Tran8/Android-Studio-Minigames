@@ -49,6 +49,7 @@ public abstract class FileManager extends AppCompatActivity {
 
     /**
      * Load the sliding tiles board manager from fileName.
+     *
      * @param fileName the name of the file
      */
     protected SlidingTileBoardManager loadFromFileSlidingTiles(String fileName) {
@@ -90,9 +91,10 @@ public abstract class FileManager extends AppCompatActivity {
 
     /**
      * loads the rounds
+     *
      * @return the rounds
      */
-    public int loadRounds(){
+    public int loadRounds() {
         try {
             InputStream inputStream = this.openFileInput("rounds.ser");
             if (inputStream != null) {
@@ -127,7 +129,7 @@ public abstract class FileManager extends AppCompatActivity {
     /*
      * saves rounds
      */
-    public void saveRounds(String fileName, int rounds){
+    public void saveRounds(String fileName, int rounds) {
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(
                     this.openFileOutput(fileName, MODE_PRIVATE));

@@ -153,7 +153,7 @@ public class ConnectFourMainActivityTest {
     public void testPlayer1WinsPlayer1PointsChange(){
         ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
         testerActivity.player1Wins();
-        assertEquals(5, testerActivity.getPlayer1Points());
+        assertEquals(15, testerActivity.getPlayer1Points());
     }
 
     @Test
@@ -174,7 +174,7 @@ public class ConnectFourMainActivityTest {
     public void testPLayer2WinsPlayer1PointsChange(){
         ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
         testerActivity.opponentWins();
-        assertEquals(-3, testerActivity.getPlayer1Points());
+        assertEquals(-4, testerActivity.getPlayer1Points());
     }
 
     @Test

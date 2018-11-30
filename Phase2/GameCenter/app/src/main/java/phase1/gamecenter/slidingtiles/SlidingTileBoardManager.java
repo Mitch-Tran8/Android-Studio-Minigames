@@ -74,7 +74,6 @@ public class SlidingTileBoardManager extends FileManager implements BoardManager
 
     /**
      * Manage a slidingTilesBoard that has been pre-populated.
-     *
      */
     public SlidingTileBoardManager(SlidingTilesBoard slidingTilesBoard, int score) {
         this.slidingTilesBoard = slidingTilesBoard;
@@ -155,14 +154,14 @@ public class SlidingTileBoardManager extends FileManager implements BoardManager
     /**
      * set numOfMoves
      */
-    public void setNumOfMoves(int num){
+    public void setNumOfMoves(int num) {
         this.numOfMoves = num;
     }
 
     /**
      * get maxUndoTimes
      */
-    public int getMaxUndoTimes(){
+    public int getMaxUndoTimes() {
         return this.maxUndoTimes;
     }
 
@@ -259,7 +258,7 @@ public class SlidingTileBoardManager extends FileManager implements BoardManager
      *
      * @return the row of the blank tile in the slidingTilesBoard
      */
-    public int getBlankTileRow(List<NumberTile> numberTiles) { //UNIT TEST OKAY CONFIRMED
+    public int getBlankTileRow(List<NumberTile> numberTiles) {
         int blankTileIndex = indexBlankTile(numberTiles);
 
         if (numberTiles.size() == 9) {
@@ -297,10 +296,15 @@ public class SlidingTileBoardManager extends FileManager implements BoardManager
                 return 5;
             }
         }
-        return 0; //never will be this case...
+        return 0;
     }
 
-    public int indexBlankTile(List<NumberTile> numberTiles) { //UNIT TEST CONFIRMED WORKS OKAY
+    /**
+     * returns the index of the blanktile
+     * @param numberTiles the numberTiles list
+     * @return the index of the blanktile
+     */
+    public int indexBlankTile(List<NumberTile> numberTiles) {
         int blankTileIndex;
         int i = 0;
 
@@ -327,6 +331,7 @@ public class SlidingTileBoardManager extends FileManager implements BoardManager
 
     /**
      * returns the number of columns the slidingTilesBoard manager is managing
+     *
      * @return number of columns
      */
     public int getColumns() {
@@ -335,9 +340,12 @@ public class SlidingTileBoardManager extends FileManager implements BoardManager
 
     /**
      * returns the number of rows the slidingTilesBoard manager is managing
+     *
      * @return number of rows
      */
-    public int getRows(){return rows;}
+    public int getRows() {
+        return rows;
+    }
 
     /**
      * returns the number of moves made
@@ -360,7 +368,7 @@ public class SlidingTileBoardManager extends FileManager implements BoardManager
         int lastId = 1;
 
         for (Object numberTile : slidingTilesBoard) {
-            if (((NumberTile)numberTile).getId() == lastId) {
+            if (((NumberTile) numberTile).getId() == lastId) {
                 lastId++;
             } else {
                 solved = false;
@@ -391,7 +399,6 @@ public class SlidingTileBoardManager extends FileManager implements BoardManager
     /**
      * update scoreboard for the user for sliding tiles
      */
-
     private void updateScoreboard() {
         ScoreBoardUpdater sbu = new ScoreBoardUpdater(getScore(), "Sliding Tiles");
         sbu.updateUserScoreBoard();
@@ -399,9 +406,8 @@ public class SlidingTileBoardManager extends FileManager implements BoardManager
 
     /**
      * update scoreboard for leaderboard of sliding tiles
-     *
      */
-    private void updateLeaderBoard(){
+    private void updateLeaderBoard() {
         ScoreBoardUpdater sbu = new ScoreBoardUpdater(getScore(), "Sliding Tiles");
         sbu.updateLeaderBoard();
     }

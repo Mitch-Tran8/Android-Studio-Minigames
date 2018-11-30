@@ -17,10 +17,11 @@ public class LogoutActivity extends AppCompatActivity {
 
     /**
      * button that leads user to the login page after they signed out.
+     *
      * @param loginPageButton
      */
     Button loginPageButton;
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

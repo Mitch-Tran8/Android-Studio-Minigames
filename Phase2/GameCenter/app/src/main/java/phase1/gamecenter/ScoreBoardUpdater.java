@@ -19,12 +19,12 @@ public class ScoreBoardUpdater {
     int userScore;
     String gameName;
 
-    public ScoreBoardUpdater(int score, String name){
+    public ScoreBoardUpdater(int score, String name) {
         userScore = score;
         gameName = name;
     }
 
-    public void updateUserScoreBoard(){
+    public void updateUserScoreBoard() {
 
         final String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(user_id).child("Game Collection").child(gameName);
@@ -36,7 +36,7 @@ public class ScoreBoardUpdater {
                 ArrayList<Long> scores = new ArrayList<Long>();
                 ArrayList<Long> newScores = new ArrayList<Long>();
                 HashMap<String, Long> map = (HashMap<String, Long>) dataSnapshot.getValue();
-                for (HashMap.Entry <String, Long> entry: map.entrySet()){
+                for (HashMap.Entry<String, Long> entry : map.entrySet()) {
                     scores.add(entry.getValue());
                 }
                 Collections.sort(scores, Collections.reverseOrder());
@@ -46,13 +46,14 @@ public class ScoreBoardUpdater {
                     if (compare < longScore) {
                         newScores.add(longScore);
                         newScores.add(compare);
-                        for (int a = i+1 ; a < scores.size(); a++){
+                        for (int a = i + 1; a < scores.size(); a++) {
                             Long comp = scores.get(a);
                             newScores.add(comp);
                         }
                         break;
+                    } else {
+                        newScores.add(compare);
                     }
-                    else {newScores.add(compare);}
                 }
 
                 for (int i = 0; i < scores.size(); i++) {
@@ -69,7 +70,7 @@ public class ScoreBoardUpdater {
         });
     }
 
-    public void updateLeaderBoard(){
+    public void updateLeaderBoard() {
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Leaderboards").child(gameName);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -77,7 +78,7 @@ public class ScoreBoardUpdater {
                 ArrayList<Pair<String, Integer>> leaderScores = new ArrayList<Pair<String, Integer>>();
                 ArrayList<Pair<String, Integer>> newLeaderScores = new ArrayList<Pair<String, Integer>>();
                 String userName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-                for (DataSnapshot ds: dataSnapshot.getChildren()){
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     Integer score = ds.child("score").getValue(int.class);
                     String user = ds.child("user").getValue(String.class);
                     Pair<String, Integer> pair = new Pair(user, score);
@@ -93,20 +94,21 @@ public class ScoreBoardUpdater {
                     }
                 });
 
-                for (int i = 0; i < leaderScores.size(); i++){
+                for (int i = 0; i < leaderScores.size(); i++) {
                     Pair<String, Integer> curPair = leaderScores.get(i);
                     Integer compare = leaderScores.get(i).second;
                     if (compare < userScore) {
                         Pair<String, Integer> newPair = new Pair(userName, userScore);
                         newLeaderScores.add(newPair);
                         newLeaderScores.add(curPair);
-                        for (int a = i+1 ; a < leaderScores.size(); a++){
+                        for (int a = i + 1; a < leaderScores.size(); a++) {
                             Pair addPair = leaderScores.get(a);
                             newLeaderScores.add(addPair);
                         }
                         break;
+                    } else {
+                        newLeaderScores.add(curPair);
                     }
-                    else {newLeaderScores.add(curPair);}
                 }
 
                 for (int i = 0; i < leaderScores.size(); i++) {

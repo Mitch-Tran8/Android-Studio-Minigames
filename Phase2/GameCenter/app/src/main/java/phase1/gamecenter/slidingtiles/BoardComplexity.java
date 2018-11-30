@@ -101,7 +101,7 @@ public class BoardComplexity extends FileManager {
          */
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 Intent tmp = new Intent(BoardComplexity.this, SlidingTilesGameActivity.class);
                 tmp.putExtra("user_id", user_id);
                 startActivity(tmp);

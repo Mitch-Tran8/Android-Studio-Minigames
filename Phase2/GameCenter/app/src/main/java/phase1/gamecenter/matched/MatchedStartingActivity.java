@@ -23,7 +23,6 @@ public class MatchedStartingActivity extends FileManager {
     public static final String TEMP_SAVE_FILENAME = "matched_file_tmp.ser";
 
     /**
-     *
      * The instructions button
      */
     Button instructionsButton;
@@ -35,13 +34,11 @@ public class MatchedStartingActivity extends FileManager {
 
     /**
      * The instructions title
-     *
      */
     TextView instructionsTitle;
 
     /**
      * The instructions body
-     *
      */
     TextView instructionsBody;
 
@@ -69,7 +66,7 @@ public class MatchedStartingActivity extends FileManager {
         instructionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(instructionsView.getVisibility() == View.GONE) {
+                if (instructionsView.getVisibility() == View.GONE) {
                     instructionsView.setVisibility(View.VISIBLE);
                     instructionsTitle.setVisibility(View.VISIBLE);
                     instructionsBody.setVisibility(View.VISIBLE);

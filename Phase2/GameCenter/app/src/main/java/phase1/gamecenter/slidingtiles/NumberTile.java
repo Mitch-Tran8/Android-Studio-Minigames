@@ -50,7 +50,9 @@ public class NumberTile implements Tile {
         this.background = background;
     }
 
-    public NumberTile(){}
+    public NumberTile() {
+    }
+
     /**
      * A tile with a background id; look up and set the id.
      *
@@ -150,6 +152,6 @@ public class NumberTile implements Tile {
 
     @Override
     public int compareTo(@NonNull Object o) {
-        return ((NumberTile)o).id - this.id;
+        return ((NumberTile) o).id - this.id;
     }
 }

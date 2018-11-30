@@ -72,46 +72,65 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
 
     /**
      * set the number of rounds player 1 has won only for testing purpose
+     *
      * @param round amount of rounds to be set
      */
-    public void setPlayer1RoundsWon(int round){ this.player1RoundsWon = round;}
+    public void setPlayer1RoundsWon(int round) {
+        this.player1RoundsWon = round;
+    }
 
     /**
      * get the number of rounds player 1 has won only for testing purpose
      */
-    public int getPlayer1RoundsWon(){ return player1RoundsWon;}
+    public int getPlayer1RoundsWon() {
+        return player1RoundsWon;
+    }
 
     /**
      * set the number of rounds player 1 has won only for testing purpose
+     *
      * @param round amount of rounds to be set
      */
-    public void setOpponentRoundsWon(int round){ this.opponentRoundsWon = round;}
+    public void setOpponentRoundsWon(int round) {
+        this.opponentRoundsWon = round;
+    }
 
     /**
      * get the number of rounds player 1 has won only for testing purpose
      */
-    public int getOpponentRoundsWon(){ return opponentRoundsWon;}
+    public int getOpponentRoundsWon() {
+        return opponentRoundsWon;
+    }
 
     /**
      * set the number of rounds that have been played for testing purpose
+     *
      * @param round amount of rounds to be set
      */
-    public void setRoundsPlayed(int round){ this.roundsPlayed = round;}
+    public void setRoundsPlayed(int round) {
+        this.roundsPlayed = round;
+    }
 
     /**
      * get the number of rounds that have been played for testing purpose
      */
-    public int getRoundsPlayed(){ return roundsPlayed;}
+    public int getRoundsPlayed() {
+        return roundsPlayed;
+    }
 
     /**
      * get the number of rounds player 1 has won only for testing purpose
      */
-    public int getPlayer1Points(){ return player1points;}
+    public int getPlayer1Points() {
+        return player1points;
+    }
 
     /**
      * get the number of rounds that have been played for testing purpose
      */
-    public int getTies(){ return ties;}
+    public int getTies() {
+        return ties;
+    }
 
     /**
      * Tie in the game.
@@ -124,20 +143,12 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     /**
      * Player 1 wins the match, update scores.
      */
-    public void player1Wins() {
-        player1points = player1points + 5;
-        player1RoundsWon++;
-        roundsPlayed++;
-    }
+    abstract void player1Wins();
 
     /**
      * Opponent wins the match, update scores.
      */
-    public void opponentWins() {
-        player1points = player1points - 3;
-        opponentRoundsWon++;
-        roundsPlayed++;
-    }
+    abstract void opponentWins();
 
     /**
      * Return whether the connect game is over, that is, if a player has won three rounds or
@@ -162,12 +173,14 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
 
     /**
      * On click listener for the game reset button -> reset the game.
+     *
      * @param gameReset game reset button.
      */
     abstract void gameResetListener(Button gameReset);
 
     /**
      * On click listener for the reset match button -> make a new match.
+     *
      * @param buttonReset
      */
     abstract void buttonResetListener(Button buttonReset);
@@ -183,7 +196,7 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 3 in a row.
      */
-    public boolean checkRows(String[][] board){
+    public boolean checkRows(String[][] board) {
         for (int i = 0; i < 3; i++) {
             if (board[i][0].equals(board[i][1]) && board[i][0].equals(board[i][2]) &&
                     !board[i][0].equals("")) {
@@ -199,7 +212,7 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 3 in a column
      */
-    public boolean checkColumns(String[][] board){
+    public boolean checkColumns(String[][] board) {
         for (int i = 0; i < 3; i++) {
             if (board[0][i].equals(board[1][i]) && board[0][i].equals(board[2][i]) &&
                     !board[0][i].equals("")) {
@@ -215,7 +228,7 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 3 in a ascending diagonal.
      */
-    public boolean checkAscendingDiagonals(String[][] board){
+    public boolean checkAscendingDiagonals(String[][] board) {
         return (board[0][2].equals(board[1][1]) &&
                 board[0][2].equals(board[2][0]) &&
                 !board[0][2].equals(""));
@@ -227,7 +240,7 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
      * @param board String[][] with the current moves on the board (X's and O's)
      * @return whether or not there is a 3 in a descending diagonal.
      */
-    public boolean checkDescendingDiagonals(String[][] board){
+    public boolean checkDescendingDiagonals(String[][] board) {
         return (board[0][0].equals(board[1][1]) &&
                 board[0][0].equals(board[2][2]) &&
                 !board[0][0].equals(""));

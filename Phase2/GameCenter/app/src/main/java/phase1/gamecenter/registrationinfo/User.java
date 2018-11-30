@@ -22,8 +22,8 @@ public class User<T> {
      * A new user.
      * Precondition?
      *
-     * @param email    the tiles for the board
-     * @param name     the user's name
+     * @param email the tiles for the board
+     * @param name  the user's name
      */
     public User(String email, String name) {
         this.email = email;
@@ -47,6 +47,7 @@ public class User<T> {
 
     /**
      * returns the name of user
+     *
      * @return name
      */
 
@@ -56,6 +57,7 @@ public class User<T> {
 
     /**
      * sets user name
+     *
      * @param name
      */
     public void setName(String name) {

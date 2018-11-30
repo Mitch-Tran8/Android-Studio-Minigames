@@ -56,9 +56,9 @@ public class SlidingTilesGameActivity extends FileManager implements GameActivit
      * saves the game every 3 moves
      */
 
-    public void autoSave(){
+    public void autoSave() {
         int numMoves = slidingTileBoardManager.getNumOfMoves();
-        if(numMoves %3 ==0){
+        if (numMoves % 3 == 0) {
             saveToFile(BoardComplexity.TEMP_SAVE_FILENAME, slidingTileBoardManager);
         }
     }
@@ -185,6 +185,6 @@ public class SlidingTilesGameActivity extends FileManager implements GameActivit
     public void onBackPressed() {
         Intent intent = new Intent(SlidingTilesGameActivity.this, SlidingTileMainPageActivity.class);
         startActivity(intent);
-}
+    }
 }
 

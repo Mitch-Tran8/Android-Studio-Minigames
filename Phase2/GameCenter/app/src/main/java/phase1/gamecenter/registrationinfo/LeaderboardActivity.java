@@ -38,9 +38,13 @@ public class LeaderboardActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.getPosition() == 0){getLeaderBoardScores("Colour Tiles");}
-                else if (tab.getPosition() == 1){getLeaderBoardScores("Sliding Tiles");}
-                else{getLeaderBoardScores("Connect34");}
+                if (tab.getPosition() == 0) {
+                    getLeaderBoardScores("Colour Tiles");
+                } else if (tab.getPosition() == 1) {
+                    getLeaderBoardScores("Sliding Tiles");
+                } else {
+                    getLeaderBoardScores("Connect34");
+                }
 
             }
 
@@ -57,25 +61,25 @@ public class LeaderboardActivity extends AppCompatActivity {
 
     }
 
-    private void onTab(int position){
-        if (position == 0){
+    private void onTab(int position) {
+        if (position == 0) {
             getLeaderBoardScores("Colour Tiles");
+        } else if (position == 1) {
+            getLeaderBoardScores("Sliding Tiles");
         }
-
-        else if (position == 1){getLeaderBoardScores("Sliding Tiles");}
 
     }
 
     /**
      * gets the scores from firebase and sets it as a list to userScores.
      */
-    private void getLeaderBoardScores(final String game){
+    private void getLeaderBoardScores(final String game) {
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Leaderboards").child(game);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<Pair<String, Integer>> leaderScores = new ArrayList<Pair<String, Integer>>();
-                for (DataSnapshot ds: dataSnapshot.getChildren()){
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     Integer score = ds.child("score").getValue(int.class);
                     String user = ds.child("user").getValue(String.class);
                     Pair<String, Integer> pair = new Pair(user, score);
@@ -104,7 +108,7 @@ public class LeaderboardActivity extends AppCompatActivity {
         });
     }
 
-    private void setUpRankings(String game){
+    private void setUpRankings(String game) {
 
         TextView title = findViewById(R.id.LeaderBoardTitle);
         title.setText(game + "Rankings");

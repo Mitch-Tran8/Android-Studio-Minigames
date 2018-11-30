@@ -19,6 +19,26 @@
 
 9.  After you have registered you will be taken back to the login page.
 
+
+### Running Instrumented Unittests
+
+- We were able to write some instrumented unittests to test activity classes that only have views and
+button listeners that lead to a another page.
+
+- Please ensure in build.gradle (Module:app), you have the following testImplementation in
+dependencies: androidTestImplementation 'com.android.support.test:rules:1.0.2' (if not, please add).
+
+- Also ensure under buildTypes, you have: debug { testCoverageEnabled true }
+
+- To run, click the Gradle bar on the right hand side of the screen. Go under app -> tasks ->
+verification -> click on createDebugCoverageReport. Gradle will take a while to build as it is
+in the process of testing (note: it is quite a slow process, takes around 8-9 minutes).
+
+- Once Gradle is done testing and building, go under Project -> Game Center -> app -> reports ->
+coverage -> debug -> you should see an index.html file created. Gradle has created the code coverage
+report for the instrumented tests in the form of the html file. Right click to open in browser and
+you will see the coverage separated by package. Click on each package to view each class.
+
 ### To play sliding tiles:
 
 1.  Select the sliding numberTiles game.
