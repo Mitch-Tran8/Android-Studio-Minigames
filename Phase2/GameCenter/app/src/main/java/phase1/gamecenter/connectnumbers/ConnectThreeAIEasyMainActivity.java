@@ -75,6 +75,7 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
                 }
                 moves = 0;
                 maxUndoTimes = 1;
+                moveStack = new Stack<>();
                 roundsPlayed = 0;
                 player1Turn = true;
                 player1points = 0;
@@ -104,6 +105,7 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
                     }
                     moves = 0;
                     maxUndoTimes = 1;
+                    moveStack = new Stack<>();
                     player1Turn = true;
                 } else {
                     if (player1RoundsWon == 3) {
@@ -127,6 +129,10 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
             public void onClick(View view) {
                 if (isValidUndo()) {
                     undoMove();
+                    Toast.makeText(getApplicationContext(), "Successful undo!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Match over - invalid undo!", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -246,7 +252,7 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
      */
 
     public boolean isValidUndo() {
-        return (maxUndoTimes > 0);
+        return (maxUndoTimes > 0 && !matchOver(3, buttons));
     }
 
     /**
@@ -273,8 +279,8 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
                         }
                     }
                 }
-                --moves;
-                --maxUndoTimes;
+                moves--;
+                maxUndoTimes--;
             }
         }
     }

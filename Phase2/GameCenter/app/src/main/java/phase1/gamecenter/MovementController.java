@@ -9,7 +9,7 @@ import phase1.gamecenter.slidingtiles.SlidingTileBoardManager;
 /**
  * Controls movements on SlidingTileBoardManager
  */
-public class MovementController {
+class MovementController {
 
     /**
      * The SlidingTileBoardManager that MovementController is controlling.
@@ -20,7 +20,7 @@ public class MovementController {
     /**
      * The MovementController
      */
-    public MovementController() {
+    MovementController() {
     }
 
     /**
@@ -28,22 +28,21 @@ public class MovementController {
      *
      * @param slidingTileBoardManager the slidingTileBoardManager being controlled
      */
-    public void setSlidingTileBoardManager(SlidingTileBoardManager slidingTileBoardManager) {
+    void setSlidingTileBoardManager(SlidingTileBoardManager slidingTileBoardManager) {
         this.slidingTileBoardManager = slidingTileBoardManager;
     }
 
-    public void setBoardManager(MatchedBoardManager boardManager) {
+    void setBoardManager(MatchedBoardManager boardManager) {
         this.matchedBoardManager = boardManager;
     }
 
     /**
      * Processing a tap movement.
      *
-     * @param context
-     * @param position
-     * @param display
+     * @param context  the context
+     * @param position the position
      */
-    public void processTapMovement(Context context, int position, boolean display) {
+    void processTapMovement(Context context, int position) {
 
         // tap movements on the board manager
         if (slidingTileBoardManager != null) {
@@ -66,9 +65,6 @@ public class MovementController {
                     matchedBoardManager.touchMove(position);
 
                     if (matchedBoardManager.puzzleSolved()) {
-//                        matchedBoardManager.addNewTiles();
-//                        String score = Integer.toString(matchedBoardManager.getScore());
-
                         Toast toast = Toast.makeText(context, "It's a match!", Toast.LENGTH_LONG);
                         toast.setGravity(0, 50, 50);
                         toast.show();

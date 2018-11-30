@@ -89,6 +89,7 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
                 moves = 0;
                 maxUndoTimes = 3;
                 maxPlayer2UndoTimes = 3;
+                moveStack = new Stack<>();
                 roundsPlayed = 0;
                 player1Turn = true;
                 player1points = 0;
@@ -121,6 +122,7 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
                     moves = 0;
                     maxUndoTimes = 3;
                     maxPlayer2UndoTimes = 3;
+                    moveStack = new Stack<>();
                     player1Turn = true;
                 } else {
                     if (player1RoundsWon == 3) {
@@ -147,6 +149,10 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
             public void onClick(View view) {
                 if (isValidUndo()) {
                     undoMove();
+                    Toast.makeText(getApplicationContext(), "Successful undo!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Match over - invalid undo!", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -255,7 +261,8 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
      */
 
     public boolean isValidUndo() {
-        return (player1Turn && maxPlayer2UndoTimes > 0 || !player1Turn && maxUndoTimes > 0);
+        return (player1Turn && maxPlayer2UndoTimes > 0 && !matchOver(3, buttons)||
+                !player1Turn && maxUndoTimes > 0 && !matchOver(3, buttons));
     }
 
     /**
@@ -264,7 +271,7 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
     protected void undoMove() {
         if (!matchOver(3, buttons) && moves < 9) {
             if (moveStack.size() > 0) {
-                if (player1Turn){
+                if (player1Turn) {
                     int id = this.moveStack.pop();
                     for (int i = 0; i < 3; i++) {
                         for (int j = 0; j < 3; j++) {
@@ -272,7 +279,7 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
                                 buttons[i][j].setText("");
                                 buttons[i][j].setBackgroundResource(R.drawable.circle_button);
                                 player1Turn = false;
-                                --maxPlayer2UndoTimes;
+                                maxPlayer2UndoTimes--;
                             }
                         }
                     }
@@ -284,12 +291,13 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
                                 buttons[i][j].setText("");
                                 buttons[i][j].setBackgroundResource(R.drawable.circle_button);
                                 player1Turn = true;
-                                --maxUndoTimes;
+                                maxUndoTimes--;
                             }
                         }
                     }
                 }
-            }   --moves;
+            }
+            moves--;
         }
     }
 

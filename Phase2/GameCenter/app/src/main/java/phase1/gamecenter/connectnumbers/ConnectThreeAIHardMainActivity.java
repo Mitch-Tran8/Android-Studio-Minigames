@@ -24,6 +24,10 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
      */
     private TextView aiPlayer;
 
+    /**
+     * The number of turns that have been made on the connect three board, one turn represents when
+     * either player 1 or the AI mark an empty spot on the connect three board with an "X" or "O".
+     */
     private int turns;
 
 
@@ -39,7 +43,7 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
         Button undoButton = findViewById(R.id.undoButton);
         maxUndoTimes = 8;
         this.moveStack = new Stack<>();
-        moves = 9;
+        turns = 9;
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -73,9 +77,10 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
                         buttons[i][j].setText("");
                     }
                 }
-                moves = 9;
+                moveStack = new Stack<>();
+                turns = 9;
                 maxUndoTimes = 8;
-                turns = 0;
+                moves = 0;
                 player1Turn = true;
                 roundsPlayed = 0;
                 player1points = 0;
@@ -103,9 +108,10 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
                             buttons[i][j].setText("");
                         }
                     }
-                    moves = 9;
+                    moveStack = new Stack<>();
+                    turns = 9;
                     maxUndoTimes = 8;
-                    turns = 0;
+                    moves = 0;
                     player1Turn = true;
                 } else {
                     if (player1RoundsWon == 3) {
@@ -146,6 +152,10 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
             public void onClick(View view) {
                 if (isValidUndo()) {
                     undoMove();
+                    Toast.makeText(getApplicationContext(), "Successful undo!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Match over - invalid undo!", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -162,7 +172,7 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
         if (((Button) v).getText().toString().equals("")) {
             ((Button) v).setText("X"); // human move
             this.moveStack.push(v.getId());
-            --moves;
+            turns--;
             if (matchOver(3, buttons)) {
                 if (player1Turn) {
                     player1Wins();
@@ -171,11 +181,11 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
                 }
             } else {
                 player1Turn = false;
-                if (turns < 4) {
+                if (moves < 4) {
                     Button button = findViewById(findBestMove()); // AI's turn
                     button.setText("O");
                     this.moveStack.push(button.getId());
-                    --moves;
+                    turns--;
                     if (matchOver(3, buttons)) {
                         if (!player1Turn) {
                             opponentWins();
@@ -186,8 +196,8 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
                 }
             }
         }
-        turns++;
-        if (turns == 5) {
+        moves++;
+        if (moves == 5) {
             tie();
             Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
             updateRoundsWon();
@@ -245,7 +255,7 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
      */
 
     public boolean isValidUndo() {
-        return (maxUndoTimes > 0);
+        return (maxUndoTimes > 0 && !matchOver(3, buttons));
     }
 
     /**
@@ -260,7 +270,7 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
                         if (buttons[i][j].getId() == id) {
                             buttons[i][j].setText("");
                             buttons[i][j].setBackgroundResource(R.drawable.circle_button);
-                            moves++;
+                            turns++;
                         }
                     }
                 }
@@ -270,12 +280,12 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
                         if (buttons[i][j].getId() == id2) {
                             buttons[i][j].setText("");
                             buttons[i][j].setBackgroundResource(R.drawable.circle_button);
-                            moves++;
+                            turns++;
                         }
                     }
                 }
-                --turns;
-                --maxUndoTimes;
+                moves--;
+                maxUndoTimes--;
             }
         }
     }
@@ -296,9 +306,9 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
             for (int j = 0; j < 3; j++) {
                 if (board[i][j].equals("")) {
                     board[i][j] = "O"; // only ever evaluate for AI player2
-                    --moves;
+                    turns--;
                     int currentValue = minimax(board, 0, false);
-                    --moves;
+                    turns--;
                     board[i][j] = "";
                     if (currentValue > best) {
                         best = currentValue;
@@ -339,9 +349,9 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
                 for (int j = 0; j < 3; j++) {
                     if (board[i][j].equals("")) {
                         board[i][j] = "O";
-                        --moves;
+                        turns--;
                         bestValue = Math.max(bestValue, minimax(board, depth + 1, false));
-                        ++moves;
+                        turns++;
                         board[i][j] = "";
                     }
                 }
@@ -353,9 +363,9 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
                 for (int j = 0; j < 3; j++) {
                     if (board[i][j].equals("")) {
                         board[i][j] = "X";
-                        --moves;
+                        turns--;
                         bestValue = Math.min(bestValue, minimax(board, depth + 1, true));
-                        ++moves;
+                        turns++;
                         board[i][j] = "";
                     }
                 }
