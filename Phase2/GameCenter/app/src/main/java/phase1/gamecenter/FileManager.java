@@ -15,7 +15,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import phase1.gamecenter.matched.MatchedBoardManager;
-import phase1.gamecenter.slidingtiles.BoardComplexity;
 import phase1.gamecenter.slidingtiles.SlidingTileBoardManager;
 
 /**

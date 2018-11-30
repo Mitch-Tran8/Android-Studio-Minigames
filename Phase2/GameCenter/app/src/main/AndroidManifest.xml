@@ -29,7 +29,6 @@
         <activity android:name=".matched.MatchedGameActivity" />
         <activity android:name=".matched.MatchedStartingActivity" />
         <activity android:name=".slidingtiles.DifficultyLevel" />
-        <activity android:name=".registrationinfo.LogoutActivity" />
         <activity android:name=".registrationinfo.UserScoreBoardActivity"></activity>
         <activity android:name=".matched.MatchedRoundsActivity" />
         <activity android:name=".connectnumbers.ConnectFourMainActivity" />

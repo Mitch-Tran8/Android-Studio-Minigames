@@ -1,15 +1,14 @@
 package phase1.gamecenter.connectnumbers;
 
-import java.util.Random;
-import java.util.Stack;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Random;
+import java.util.Stack;
 
 import phase1.gamecenter.R;
 import phase1.gamecenter.ScoreBoardUpdater;
@@ -17,15 +16,13 @@ import phase1.gamecenter.ScoreBoardUpdater;
 public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity implements View.OnClickListener {
 
     /**
-     * 2D array of buttons, representing the connect three game board.
-     */
-    private Button[][] buttons = new Button[3][3];
-
-    /**
      * a variable representing a random call.
      */
     private static final Random RANDOM = new Random();
-
+    /**
+     * 2D array of buttons, representing the connect three game board.
+     */
+    private Button[][] buttons = new Button[3][3];
     /**
      * TextView that shows the number of rounds the AI has won.
      */
@@ -41,6 +38,8 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
         Button buttonReset = findViewById(R.id.button_reset);
         Button gameReset = findViewById(R.id.button_reset_game);
         Button undoButton = findViewById(R.id.undoButton);
+        maxUndoTimes = 1;
+        isValidUndo = false;
         this.moveStack = new Stack<>();
 
         for (int i = 0; i < 3; i++) {
@@ -76,6 +75,8 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
                     }
                 }
                 moves = 0;
+                maxUndoTimes = 1;
+                isValidUndo = false;
                 roundsPlayed = 0;
                 player1Turn = true;
                 player1points = 0;
@@ -104,6 +105,8 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
                         }
                     }
                     moves = 0;
+                    maxUndoTimes = 1;
+                    isValidUndo = false;
                     player1Turn = true;
                 } else {
                     if (player1RoundsWon == 3) {
@@ -125,7 +128,9 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                undoMove();
+                if (isValidUndo()){
+                    undoMove();
+                }
             }
         });
     }
@@ -238,6 +243,19 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
     }
 
     /**
+     * returns if undo is valid
+     *
+     * @return if undo is valid
+     */
+
+    public boolean isValidUndo() {
+        if (maxUndoTimes > 0) {
+            return true;
+        }
+        return isValidUndo;
+    }
+
+    /**
      * undo the most recent move if the max undo times has not been reached
      */
     protected void undoMove() {
@@ -262,6 +280,7 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
                     }
                 }
                 --moves;
+                --maxUndoTimes;
             }
         }
     }

@@ -1,17 +1,10 @@
 package phase1.gamecenter.connectnumbers;
 
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Stack;
-
-import phase1.gamecenter.R;
 
 
 public abstract class ConnectNumbersActivity extends AppCompatActivity {
@@ -69,6 +62,17 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
      * The stack that stocks all previous moves
      */
     protected Stack<Integer> moveStack;
+
+    /**
+     * the max times for the user to undo their moves, which can be manually modified by user.
+     * otherwise is set as 3 by default
+     */
+    protected int maxUndoTimes;
+
+    /**
+     * whether the moves can be undone - whether the maxUndoTimes has been reached
+     */
+    protected boolean isValidUndo;
 
     /**
      * set the number of rounds player 1 has won only for testing purpose
@@ -249,6 +253,8 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     abstract void gameOverMessage();
 
     abstract void updateRoundsWon();
+
+    abstract boolean isValidUndo();
 
     abstract void undoMove();
 

@@ -8,40 +8,37 @@ import android.widget.Button;
 import phase1.gamecenter.FileManager;
 import phase1.gamecenter.R;
 
-
+/**
+ * the difficulty level page activity
+ */
 public class DifficultyLevel extends FileManager {
-
-    /**
-     * the button to confirm user's desired undo moves
-     */
-    Button easyButton;
-
-    /**
-     * the button to confirm the user would like unlimited undo moves - until the initial game
-     * state is reached
-     */
-    Button okButton;
-
-    /**
-     * the button to confirm the user would like unlimited undo moves - until the initial game
-     * state is reached
-     */
-    Button spicyButton;
-
-    /**
-     * the board manager
-     */
-    SlidingTileBoardManager slidingTileBoardManager;
-
-    /**
-     * The current user's Id
-     */
-    private String user_id;
 
     /**
      * A temporary save file.
      */
     public static final String TEMP_SAVE_FILENAME = "save_file_tmp.ser";
+    /**
+     * the button to confirm user's desired undo moves
+     */
+    Button easyButton;
+    /**
+     * the button to confirm the user would like unlimited undo moves - until the initial game
+     * state is reached
+     */
+    Button okButton;
+    /**
+     * the button to confirm the user would like unlimited undo moves - until the initial game
+     * state is reached
+     */
+    Button spicyButton;
+    /**
+     * the board manager
+     */
+    SlidingTileBoardManager slidingTileBoardManager;
+    /**
+     * The current user's Id
+     */
+    private String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

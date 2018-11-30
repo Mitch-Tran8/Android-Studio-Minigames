@@ -10,20 +10,20 @@ public class EmailAndScore implements Serializable {
     /**
      * The game score
      */
-    public int gameScore;
+    private int gameScore;
 
     /**
      * The email
      */
-    public String email;
+    private String email;
 
     /**
      * The email and score
      *
-     * @param
-     * @param gameScore
+     * @param email     the email
+     * @param gameScore the game score
      */
-    public EmailAndScore(String email, int gameScore) {
+    EmailAndScore(String email, int gameScore) {
         this.email = email;
         this.gameScore = gameScore;
     }
@@ -33,7 +33,7 @@ public class EmailAndScore implements Serializable {
      *
      * @return the user's email
      */
-    public String getUserEmail() {
+    String getUserEmail() {
         return this.email;
     }
 
@@ -42,7 +42,7 @@ public class EmailAndScore implements Serializable {
      *
      * @return the user's game score
      */
-    public int getGameScore() {
+    int getGameScore() {
         return this.gameScore;
     }
 }

@@ -7,7 +7,7 @@ import phase1.gamecenter.interfaces.Tile;
 
 
 /**
- * A MatchedTile in a sliding tiles puzzle.
+ * A NumberTile in a sliding tiles puzzle.
  */
 public class NumberTile implements Tile {
 
@@ -22,43 +22,22 @@ public class NumberTile implements Tile {
     private int id;
 
     /**
-     * Return the background id.
-     *
-     * @return the background id
-     */
-    public int getBackground() {
-        return background;
-    }
-
-    /**
-     * Return the tile id.
-     *
-     * @return the tile id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
      * A MatchedTile with id and background. The background may not have a corresponding image.
      *
      * @param id         the id
      * @param background the background
      */
-    public NumberTile(int id, int background) {
+    NumberTile(int id, int background) {
         this.id = id;
         this.background = background;
-    }
-
-    public NumberTile() {
     }
 
     /**
      * A tile with a background id; look up and set the id.
      *
-     * @param backgroundId
+     * @param backgroundId the background id
      */
-    public NumberTile(int backgroundId, String complexity) {
+    NumberTile(int backgroundId, String complexity) {
         id = backgroundId + 1;
         // This looks so ugly.
         switch (backgroundId + 1) {
@@ -148,6 +127,24 @@ public class NumberTile implements Tile {
             default:
                 background = R.drawable.tile_16;
         }
+    }
+
+    /**
+     * Return the background id.
+     *
+     * @return the background id
+     */
+    public int getBackground() {
+        return background;
+    }
+
+    /**
+     * Return the tile id.
+     *
+     * @return the tile id
+     */
+    public int getId() {
+        return id;
     }
 
     @Override

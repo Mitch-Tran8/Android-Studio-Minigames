@@ -1,14 +1,13 @@
 package phase1.gamecenter.matched;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Stack;
 import java.util.Random;
+import java.util.Stack;
 
-import phase1.gamecenter.interfaces.BoardManager;
 import phase1.gamecenter.FileManager;
+import phase1.gamecenter.interfaces.BoardManager;
 
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
@@ -16,20 +15,17 @@ import phase1.gamecenter.FileManager;
 public class MatchedBoardManager extends FileManager implements BoardManager {
 
     /**
+     * A temporary save file.
+     */
+    static final String TEMP_SAVE_FILENAME = "matched_file_tmp.ser";
+    /**
      * The board being managed.
      */
     private MatchedBoard board;
-
     /**
      * the score
      */
     private int score;
-
-    /**
-     * A temporary save file.
-     */
-    static final String TEMP_SAVE_FILENAME = "matched_file_tmp.ser";
-
     /**
      * the first tap
      */
@@ -94,6 +90,15 @@ public class MatchedBoardManager extends FileManager implements BoardManager {
     }
 
     /**
+     * set the board of this boardmanager only for testing purpose
+     *
+     * @param board new board to be set
+     */
+    public void setBoard(MatchedBoard board) {
+        this.board = board;
+    }
+
+    /**
      * getter for the current round that the user is playing
      *
      * @return int round
@@ -139,9 +144,18 @@ public class MatchedBoardManager extends FileManager implements BoardManager {
         }
         Collections.shuffle(tiles);
         this.board = new MatchedBoard(tiles, complexity);
-        if (this.puzzleSolved()){
+        if (this.puzzleSolved()) {
             puzzleSolved();
         }
+    }
+
+    /**
+     * returns the required score
+     *
+     * @return the required score
+     */
+    public int getScoreReq() {
+        return scoreReq;
     }
 
     /**
@@ -185,19 +199,6 @@ public class MatchedBoardManager extends FileManager implements BoardManager {
                 this.score = 50;
                 break;
         }
-    }
-
-    public int getScoreReq() {
-        return scoreReq;
-    }
-
-    /**
-     * set the board of this boardmanager only for testing purpose
-     *
-     * @param board new board to be set
-     */
-    public void setBoard(MatchedBoard board) {
-        this.board = board;
     }
 
     /**
@@ -433,8 +434,6 @@ public class MatchedBoardManager extends FileManager implements BoardManager {
 
         int firstTapRow = firstTap / board.getNUM_ROWS();
         int firstTapCol = firstTap % board.getNUM_ROWS();
-
-//        return (row != firstTapRow && col != firstTapCol);
 
         if (row == firstTapRow && col == firstTapCol) {
             return false;

@@ -17,7 +17,7 @@
 
 
 #### Lena Zhao (git log: lena)
-    lena.zhao@outlook.com
+    xinxin.zhao@mail.utoronto.ca
     647-915-2997
     Contributions:
         Phase1:

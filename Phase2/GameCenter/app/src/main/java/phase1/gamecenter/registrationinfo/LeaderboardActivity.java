@@ -1,9 +1,9 @@
 package phase1.gamecenter.registrationinfo;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Pair;
 import android.widget.TextView;
 
@@ -19,7 +19,11 @@ import java.util.Comparator;
 
 import phase1.gamecenter.R;
 
+/**
+ * the leader board activity
+ */
 public class LeaderboardActivity extends AppCompatActivity {
+
     /**
      * an arraylist of the scores in leaderboard
      */
@@ -108,6 +112,9 @@ public class LeaderboardActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * sets up the rankings
+     */
     private void setUpRankings(String game) {
 
         TextView title = findViewById(R.id.LeaderBoardTitle);

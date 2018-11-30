@@ -2,7 +2,6 @@ package phase1.gamecenter.connectnumbers;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -38,6 +37,8 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
         Button buttonReset = findViewById(R.id.button_reset);
         Button gameReset = findViewById(R.id.button_reset_game);
         Button undoButton = findViewById(R.id.undoButton);
+        maxUndoTimes = 8;
+        isValidUndo = false;
         this.moveStack = new Stack<>();
         moves = 9;
 
@@ -61,6 +62,7 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
 
     /**
      * On click listener for the game reset button -> reset the game.
+     *
      * @param gameReset game reset button.
      */
     protected void gameResetListener(Button gameReset) {
@@ -73,6 +75,8 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
                     }
                 }
                 moves = 9;
+                maxUndoTimes = 8;
+                isValidUndo = false;
                 turns = 0;
                 player1Turn = true;
                 roundsPlayed = 0;
@@ -87,6 +91,7 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
 
     /**
      * On click listener for the reset match button -> make a new match.
+     *
      * @param buttonReset
      */
     protected void buttonResetListener(Button buttonReset) {
@@ -101,12 +106,14 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
                         }
                     }
                     moves = 9;
+                    maxUndoTimes = 8;
+                    isValidUndo = false;
                     turns = 0;
                     player1Turn = true;
                 } else {
                     if (player1RoundsWon == 3) {
                         Toast.makeText(getApplicationContext(), "Game Over. Player 1 wins! Please start a new game.", Toast.LENGTH_LONG).show();
-                    } else if (opponentRoundsWon == 3){
+                    } else if (opponentRoundsWon == 3) {
                         Toast.makeText(getApplicationContext(), "Game Over. AI wins! Please start a new game.", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getApplicationContext(), "Game Over. TIE! Please start a new game.", Toast.LENGTH_LONG).show();
@@ -140,7 +147,9 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                undoMove();
+                if (isValidUndo()){
+                    undoMove();
+                }
             }
         });
     }
@@ -151,27 +160,27 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
      *
      * @param v The button pressed by the current player.
      */
-    private void processMove (Button v) {
+    private void processMove(Button v) {
         // if button already has been played, don't do anything
-        if (((Button) v).getText().toString().equals("")){
+        if (((Button) v).getText().toString().equals("")) {
             ((Button) v).setText("X"); // human move
             this.moveStack.push(v.getId());
             --moves;
-            if (matchOver(3, buttons)){
-                if (player1Turn){
+            if (matchOver(3, buttons)) {
+                if (player1Turn) {
                     player1Wins();
                     Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_LONG).show();
                     updateRoundsWon();
                 }
-            }else {
+            } else {
                 player1Turn = false;
-                if (turns < 4){
+                if (turns < 4) {
                     Button button = findViewById(findBestMove()); // AI's turn
                     button.setText("O");
                     this.moveStack.push(button.getId());
                     --moves;
-                    if (matchOver(3, buttons)){
-                        if (!player1Turn){
+                    if (matchOver(3, buttons)) {
+                        if (!player1Turn) {
                             opponentWins();
                             Toast.makeText(this, "AI wins!", Toast.LENGTH_LONG).show();
                             updateRoundsWon();
@@ -180,12 +189,12 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
                 }
             }
         }
-        turns ++;
-        if (turns == 5){
-                tie();
-                Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
+        turns++;
+        if (turns == 5) {
+            tie();
+            Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
             updateRoundsWon();
-            }else {
+        } else {
             player1Turn = true;
         }
     }
@@ -233,15 +242,28 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
     }
 
     /**
+     * returns if undo is valid
+     *
+     * @return if undo is valid
+     */
+
+    public boolean isValidUndo() {
+        if (maxUndoTimes > 0) {
+            return true;
+        }
+        return isValidUndo;
+    }
+
+    /**
      * undo the most recent move if the max undo times has not been reached
      */
     protected void undoMove() {
-        if(!matchOver(3, buttons) || turns < 5){
-            if(moveStack.size() > 0){
+        if (!matchOver(3, buttons) || turns < 5) {
+            if (moveStack.size() > 0) {
                 int id = this.moveStack.pop();
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {
-                        if (buttons[i][j].getId() == id){
+                        if (buttons[i][j].getId() == id) {
                             buttons[i][j].setText("");
                             buttons[i][j].setBackgroundResource(R.drawable.circle_button);
                             moves++;
@@ -251,7 +273,7 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
                 int id2 = this.moveStack.pop();
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {
-                        if (buttons[i][j].getId() == id2){
+                        if (buttons[i][j].getId() == id2) {
                             buttons[i][j].setText("");
                             buttons[i][j].setBackgroundResource(R.drawable.circle_button);
                             moves++;
@@ -259,6 +281,7 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
                     }
                 }
                 --turns;
+                --maxUndoTimes;
             }
         }
     }
@@ -277,7 +300,7 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if (board[i][j].equals("")){
+                if (board[i][j].equals("")) {
                     board[i][j] = "O"; // only ever evaluate for AI player2
                     --moves;
                     int currentValue = minimax(board, 0, false);
@@ -293,9 +316,10 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
         }
         return bestMove;
     }
-    public boolean movesLeft(String[][]board){
-        for (int i = 0; i<3; i++)
-            for (int j = 0; j<3; j++)
+
+    public boolean movesLeft(String[][] board) {
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
                 if (board[i][j].equals(""))
                     return true;
         return false;
@@ -304,16 +328,14 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
     /**
      * Return the best value bestValue using a minimax algorithm.
      */
-    private int minimax (String[][] board, int depth, boolean isMax) {
+    private int minimax(String[][] board, int depth, boolean isMax) {
         int score = evaluateBoard(board);
 
-        if (score == 10){
+        if (score == 10) {
             return score - depth;
-        }
-        else if (score == -10){
+        } else if (score == -10) {
             return score + depth;
-        }
-        else if (!movesLeft(board)){
+        } else if (!movesLeft(board)) {
             return 0;
         }
 
@@ -324,22 +346,21 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
                     if (board[i][j].equals("")) {
                         board[i][j] = "O";
                         --moves;
-                        bestValue = Math.max(bestValue, minimax(board, depth+1, false));
+                        bestValue = Math.max(bestValue, minimax(board, depth + 1, false));
                         ++moves;
                         board[i][j] = "";
                     }
                 }
             }
             return bestValue;
-        }
-        else {
+        } else {
             int bestValue = 1000;
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
                     if (board[i][j].equals("")) {
                         board[i][j] = "X";
                         --moves;
-                        bestValue = Math.min(bestValue, minimax(board,depth+1, true));
+                        bestValue = Math.min(bestValue, minimax(board, depth + 1, true));
                         ++moves;
                         board[i][j] = "";
                     }
@@ -354,37 +375,35 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
      */
     public int evaluateBoard(String[][] board) {
         // check whether or not there is 3 in a row
-        for (int i = 0; i < 3; i++){
+        for (int i = 0; i < 3; i++) {
             if (board[i][0].equals(board[i][1]) && board[i][0].equals(board[i][2]) &&
                     !board[i][0].equals("")) {
-                if (board[i][0].equals("O")){
+                if (board[i][0].equals("O")) {
                     return +10;
-                }
-                else if (board[i][0].equals("X")){
+                } else if (board[i][0].equals("X")) {
                     return -10;
                 }
             }
         }
         // check whether or not there is 3 in a column
-        for (int i = 0; i < 3; i++){
+        for (int i = 0; i < 3; i++) {
             if (board[0][i].equals(board[1][i]) && board[0][i].equals(board[2][i]) &&
                     !board[0][i].equals("")) {
-                if (board[0][i].equals("O")){
+                if (board[0][i].equals("O")) {
                     return +10;
+                } else if (board[0][i].equals("X")) {
+                    return -10;
                 }
-                else if (board[0][i].equals("X")){
-                    return -10;}
             }
         }
 
         // check whether or not there is 3 in an ascending diagonal pattern
         if (board[0][2].equals(board[1][1]) &&
                 board[0][2].equals(board[2][0]) &&
-                !board[0][2].equals("")){
-            if (board[0][2].equals("O")){
+                !board[0][2].equals("")) {
+            if (board[0][2].equals("O")) {
                 return +10;
-            }
-            else if (board[0][2].equals("X")){
+            } else if (board[0][2].equals("X")) {
                 return -10;
             }
         }
@@ -392,11 +411,10 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
         // check whether or not there is 3 in an descending diagonal pattern
         if (board[0][0].equals(board[1][1]) &&
                 board[0][0].equals(board[2][2]) &&
-                !board[0][0].equals("")){
-            if (board[0][0].equals("O")){
+                !board[0][0].equals("")) {
+            if (board[0][0].equals("O")) {
                 return +10;
-            }
-            else if (board[0][0].equals("X")){
+            } else if (board[0][0].equals("X")) {
                 return -10;
             }
         }
@@ -419,9 +437,8 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
 
     /**
      * update scoreboard for leaderboard on firebase
-     *
      */
-    private void updateLeaderBoard(){
+    private void updateLeaderBoard() {
         ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect34");
         sbu.updateLeaderBoard();
     }
