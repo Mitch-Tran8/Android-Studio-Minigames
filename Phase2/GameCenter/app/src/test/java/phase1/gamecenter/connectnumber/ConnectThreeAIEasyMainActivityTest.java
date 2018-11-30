@@ -21,7 +21,7 @@ public class ConnectThreeAIEasyMainActivityTest extends AppCompatActivity{
     public void testPLayer2WinsPlayer1PointsChange(){
         ConnectThreeAIEasyMainActivity testerActivity = new ConnectThreeAIEasyMainActivity();
         testerActivity.opponentWins();
-        assertEquals(-8, testerActivity.getPlayer1Points());
+        assertEquals(-10, testerActivity.getPlayer1Points());
     }
 
 }
