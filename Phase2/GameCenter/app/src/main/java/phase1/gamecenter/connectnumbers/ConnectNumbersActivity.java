@@ -64,11 +64,15 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     protected Stack<Integer> moveStack;
 
     /**
-     * get the number of rounds player 1 has won only for testing purpose
+     * the max times for the user to undo their moves, which can be manually modified by user.
+     * otherwise is set as 3 by default
      */
-    public int getPlayer1RoundsWon() {
-        return player1RoundsWon;
-    }
+    protected int maxUndoTimes;
+
+    /**
+     * whether the moves can be undone - whether the maxUndoTimes has been reached
+     */
+    protected boolean isValidUndo;
 
     /**
      * set the number of rounds player 1 has won only for testing purpose
@@ -82,8 +86,8 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     /**
      * get the number of rounds player 1 has won only for testing purpose
      */
-    public int getOpponentRoundsWon() {
-        return opponentRoundsWon;
+    public int getPlayer1RoundsWon() {
+        return player1RoundsWon;
     }
 
     /**
@@ -96,10 +100,10 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     }
 
     /**
-     * get the number of rounds that have been played for testing purpose
+     * get the number of rounds player 1 has won only for testing purpose
      */
-    public int getRoundsPlayed() {
-        return roundsPlayed;
+    public int getOpponentRoundsWon() {
+        return opponentRoundsWon;
     }
 
     /**
@@ -109,6 +113,13 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
      */
     public void setRoundsPlayed(int round) {
         this.roundsPlayed = round;
+    }
+
+    /**
+     * get the number of rounds that have been played for testing purpose
+     */
+    public int getRoundsPlayed() {
+        return roundsPlayed;
     }
 
     /**
@@ -242,6 +253,8 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     abstract void gameOverMessage();
 
     abstract void updateRoundsWon();
+
+    abstract boolean isValidUndo();
 
     abstract void undoMove();
 

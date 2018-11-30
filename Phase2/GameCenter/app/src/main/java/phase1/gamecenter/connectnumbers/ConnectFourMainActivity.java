@@ -25,6 +25,8 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
      */
     private TextView scorePlayer2;
 
+    private int maxPlayer2UndoTimes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +37,9 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
         Button buttonReset = findViewById(R.id.button_reset);
         Button gameReset = findViewById(R.id.button_reset_game);
         Button undoButton = findViewById(R.id.undoButton);
+        maxUndoTimes = 5;
+        maxPlayer2UndoTimes = 5;
+        isValidUndo = false;
         this.moveStack = new Stack<>();
 
         for (int i = 0; i < 5; i++) {
@@ -68,6 +73,9 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
                     }
                 }
                 moves = 0;
+                maxUndoTimes = 5;
+                maxPlayer2UndoTimes = 5;
+                isValidUndo = false;
                 roundsPlayed = 0;
                 player1Turn = true;
                 player1points = 0;
@@ -97,6 +105,9 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
                         }
                     }
                     moves = 0;
+                    maxUndoTimes = 5;
+                    maxPlayer2UndoTimes = 5;
+                    isValidUndo = false;
                     player1Turn = true;
                 } else {
                     if (player1RoundsWon == 3) {
@@ -120,7 +131,9 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                undoMove();
+                if (isValidUndo()){
+                    undoMove();
+                }
             }
         });
     }
@@ -335,27 +348,51 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
     }
 
     /**
+     * returns if undo is valid
+     *
+     * @return if undo is valid
+     */
+
+    public boolean isValidUndo() {
+        if (player1Turn && maxPlayer2UndoTimes > 0 || !player1Turn && maxUndoTimes > 0) {
+            return true;
+        }
+        return isValidUndo;
+    }
+
+    /**
      * undo the most recent move if the max undo times has not been reached
      */
     protected void undoMove() {
         if (!matchOver(5, buttons) && moves < 25) {
             if (moveStack.size() > 0) {
-                int id = this.moveStack.pop();
-                for (int i = 0; i < 3; i++) {
-                    for (int j = 0; j < 3; j++) {
-                        if (buttons[i][j].getId() == id) {
-                            buttons[i][j].setText("");
-                            buttons[i][j].setBackgroundResource(R.drawable.circle_button);
-                            if (player1Turn) {
+                if (player1Turn){
+                    int id = this.moveStack.pop();
+                    for (int i = 0; i < 5; i++) {
+                        for (int j = 0; j < 5; j++) {
+                            if (buttons[i][j].getId() == id) {
+                                buttons[i][j].setText("");
+                                buttons[i][j].setBackgroundResource(R.drawable.circle_button);
                                 player1Turn = false;
-                            } else {
-                                player1Turn = true;
+                                --maxPlayer2UndoTimes;
                             }
                         }
                     }
                 }
-                --moves;
-            }
+                else {
+                    int id = this.moveStack.pop();
+                    for (int i = 0; i < 5; i++) {
+                        for (int j = 0; j < 5; j++) {
+                            if (buttons[i][j].getId() == id) {
+                                buttons[i][j].setText("");
+                                buttons[i][j].setBackgroundResource(R.drawable.circle_button);
+                                player1Turn = true;
+                                --maxUndoTimes;
+                            }
+                        }
+                    }
+                }
+            }   --moves;
         }
     }
 
