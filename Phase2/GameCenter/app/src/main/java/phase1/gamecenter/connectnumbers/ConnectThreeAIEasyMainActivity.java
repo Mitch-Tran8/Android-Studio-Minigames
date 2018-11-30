@@ -194,7 +194,7 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
         }
 
         moves++;
-        if (moves == 5) {
+        if (moves == 5 && !matchOver(3, buttons)) {
             tie();
             Toast.makeText(this, "Tied!", Toast.LENGTH_LONG).show();
             updateRoundsWon();
