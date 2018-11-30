@@ -7,9 +7,8 @@ https://github.com/DaveNOTDavid/sample-puzzle/blob/master/app/src/main/java/com/
 This extension of GridView contains built in logic for handling swipes between buttons
  */
 
-import android.annotation.TargetApi;
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -20,38 +19,51 @@ import phase1.gamecenter.slidingtiles.SlidingTileBoardManager;
 
 public class GestureDetectGridView extends GridView {
     public static final int SWIPE_MIN_DISTANCE = 100;
-    public static final int SWIPE_MAX_OFF_PATH = 100;
-    public static final int SWIPE_THRESHOLD_VELOCITY = 100;
     private GestureDetector gDetector;
     private MovementController mController;
     private boolean mFlingConfirmed = false;
     private float mTouchX;
     private float mTouchY;
-    private SlidingTileBoardManager slidingTileBoardManager;
-    private MatchedBoardManager matchedBoardManager;
 
+    /**
+     * the gesteure detected gridview
+     *
+     * @param context the context
+     */
     public GestureDetectGridView(Context context) {
         super(context);
         init(context);
     }
 
+    /**
+     * the gesteure detected gridview
+     *
+     * @param context the context
+     * @param attrs   the attribute set
+     *                \
+     */
     public GestureDetectGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
+    /**
+     * the gesteure detected gridview
+     *
+     * @param context      the context
+     * @param attrs        the attribute set
+     * @param defStyleAttr the style attribute
+     */
     public GestureDetectGridView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP) // API 21
-    public GestureDetectGridView(Context context, AttributeSet attrs, int defStyleAttr,
-                                 int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init(context);
-    }
-
+    /**
+     * the initiator
+     *
+     * @param context the context
+     */
     private void init(final Context context) {
         mController = new MovementController();
         gDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
@@ -60,7 +72,7 @@ public class GestureDetectGridView extends GridView {
             public boolean onSingleTapConfirmed(MotionEvent event) {
                 int position = GestureDetectGridView.this.pointToPosition
                         (Math.round(event.getX()), Math.round(event.getY()));
-                mController.processTapMovement(context, position, true);
+                mController.processTapMovement(context, position);
 
                 return true;
             }
@@ -73,6 +85,13 @@ public class GestureDetectGridView extends GridView {
         });
     }
 
+    /**
+     * Return true to steal motion events from the children and have them dispatched to
+     * this ViewGroup
+     *
+     * @param ev the motion event
+     * @return true to steal motion events from the children
+     */
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         int action = ev.getActionMasked();
@@ -100,18 +119,31 @@ public class GestureDetectGridView extends GridView {
         return super.onInterceptTouchEvent(ev);
     }
 
+    /**
+     * @param ev the motion event
+     * @return whether the motion event is proceeded
+     */
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         return gDetector.onTouchEvent(ev);
     }
 
+    /**
+     * sets up the sliding tiles board manager
+     *
+     * @param slidingTileBoardManager the slidingtile board manager
+     */
     public void setSlidingTileBoardManager(SlidingTileBoardManager slidingTileBoardManager) {
-        this.slidingTileBoardManager = slidingTileBoardManager;
         mController.setSlidingTileBoardManager(slidingTileBoardManager);
     }
 
+    /**
+     * sets up the matched board manager
+     *
+     * @param boardManager the matched board manager
+     */
     public void setBoardManager(MatchedBoardManager boardManager) {
-        this.matchedBoardManager = boardManager;
         mController.setBoardManager(boardManager);
     }
 }

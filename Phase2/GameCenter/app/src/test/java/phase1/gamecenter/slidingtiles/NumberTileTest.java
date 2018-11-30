@@ -6,6 +6,7 @@ import phase1.gamecenter.slidingtiles.NumberTile;
 import static org.junit.Assert.assertEquals;
 
 public class NumberTileTest {
+
     private NumberTile testingNumberTile = new NumberTile(4,3);
     private NumberTile testingNumberTile2 = new NumberTile(5,4);
 

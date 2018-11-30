@@ -19,7 +19,6 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
      * represents when either player 1 or player 2 mark an empty spot with an "X" or "O" in the two
      * player game modes or when player 1 and the AI have consecutively marked an empty spot in the
      * single player game modes.
-     *
      */
     protected int moves;
 
@@ -69,6 +68,13 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     protected int maxUndoTimes;
 
     /**
+     * get the number of rounds player 1 has won only for testing purpose
+     */
+    public int getPlayer1RoundsWon() {
+        return player1RoundsWon;
+    }
+
+    /**
      * set the number of rounds player 1 has won only for testing purpose
      *
      * @param round amount of rounds to be set
@@ -78,10 +84,10 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     }
 
     /**
-     * get the number of rounds player 1 has won only for testing purpose
+     * get the number of rounds the opponent has won only for testing purpose
      */
-    public int getPlayer1RoundsWon() {
-        return player1RoundsWon;
+    public int getOpponentRoundsWon() {
+        return opponentRoundsWon;
     }
 
     /**
@@ -94,10 +100,10 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     }
 
     /**
-     * get the number of rounds the opponent has won only for testing purpose
+     * get the number of rounds that have been played for testing purpose
      */
-    public int getOpponentRoundsWon() {
-        return opponentRoundsWon;
+    public int getRoundsPlayed() {
+        return roundsPlayed;
     }
 
     /**
@@ -107,13 +113,6 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
      */
     public void setRoundsPlayed(int round) {
         this.roundsPlayed = round;
-    }
-
-    /**
-     * get the number of rounds that have been played for testing purpose
-     */
-    public int getRoundsPlayed() {
-        return roundsPlayed;
     }
 
     /**

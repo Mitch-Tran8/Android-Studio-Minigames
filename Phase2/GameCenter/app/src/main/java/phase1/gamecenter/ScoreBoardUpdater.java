@@ -15,15 +15,29 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 
+/**
+ * the score board updater
+ */
 public class ScoreBoardUpdater {
-    int userScore;
-    String gameName;
+
+    /**
+     * the user score
+     */
+    private int userScore;
+
+    /*
+     * the game name
+     */
+    private String gameName;
 
     public ScoreBoardUpdater(int score, String name) {
         userScore = score;
         gameName = name;
     }
 
+    /**
+     * updates the user score board
+     */
     public void updateUserScoreBoard() {
 
         final String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -41,6 +55,7 @@ public class ScoreBoardUpdater {
                 }
                 Collections.sort(scores, Collections.reverseOrder());
 
+                // add new scores
                 for (int i = 0; i < scores.size(); i++) {
                     Long compare = scores.get(i);
                     if (compare < longScore) {
@@ -56,6 +71,7 @@ public class ScoreBoardUpdater {
                     }
                 }
 
+                // sets the score
                 for (int i = 0; i < scores.size(); i++) {
                     String position = "score" + String.valueOf(i + 1);
                     ref.child("userscores").child(position).setValue(newScores.get(i));
@@ -70,6 +86,9 @@ public class ScoreBoardUpdater {
         });
     }
 
+    /**
+     * updates the leader board
+     */
     public void updateLeaderBoard() {
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Leaderboards").child(gameName);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -94,6 +113,7 @@ public class ScoreBoardUpdater {
                     }
                 });
 
+                // add the new scores
                 for (int i = 0; i < leaderScores.size(); i++) {
                     Pair<String, Integer> curPair = leaderScores.get(i);
                     Integer compare = leaderScores.get(i).second;
@@ -111,6 +131,7 @@ public class ScoreBoardUpdater {
                     }
                 }
 
+                // set scores
                 for (int i = 0; i < leaderScores.size(); i++) {
                     String position = "score" + String.valueOf(i + 1);
                     String positionName = newLeaderScores.get(i).first;

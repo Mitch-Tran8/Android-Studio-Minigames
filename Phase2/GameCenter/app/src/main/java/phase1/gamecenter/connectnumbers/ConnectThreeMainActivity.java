@@ -266,7 +266,7 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
     protected void undoMove() {
         if (!matchOver(3, buttons) && moves < 9) {
             if (moveStack.size() > 0) {
-                if (player1Turn){
+                if (player1Turn) {
                     int id = this.moveStack.pop();
                     for (int i = 0; i < 3; i++) {
                         for (int j = 0; j < 3; j++) {
@@ -291,7 +291,8 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
                         }
                     }
                 }
-            }   moves--;
+            }
+            moves--;
         }
     }
 
