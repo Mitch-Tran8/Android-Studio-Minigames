@@ -25,6 +25,20 @@ public class ConnectFourMainActivityTest {
     }
 
     @Test
+    public void testCheckRowsTrueScenario2() {
+        String[][] testerBoard = {
+                {"O", "X", "O", "X", "X"},
+                {"O", "X", "O", "X", "X"},
+                {"", "X", "X", "X", "X"},
+                {"", "", "", "", ""},
+                {"", "", "", "", ""},
+
+        };
+        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
+        assertEquals(true, testerActivity.checkRows(testerBoard));
+    }
+
+    @Test
     public void testCheckRowsFalse() {
         String[][] testerBoard = {
                 {"O", "X", "O", "X", "O"},
@@ -66,6 +80,19 @@ public class ConnectFourMainActivityTest {
     }
 
     @Test
+    public void testCheckColumnsTrueScenario2() {
+        String[][] testerBoard = {
+                {"O", "", "O", "X", "O"},
+                {"", "X", "", "", ""},
+                {"O", "X", "O", "X", ""},
+                {"X", "X", "X", "0", ""},
+                {"", "X", "", "", "", },
+        };
+        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
+        assertEquals(true, testerActivity.checkColumns(testerBoard));
+    }
+
+    @Test
     public void testCheckAscendingDiagonalsFalse() {
         String[][] testerBoard = {
                 {"O", "X", "O", "X", "O"},
@@ -92,6 +119,46 @@ public class ConnectFourMainActivityTest {
         assertEquals(true, testerActivity.checkAscendingDiagonals(testerBoard));
     }
 
+    @Test
+    public void testCheckAscendingDiagonalsTrueScenario2() {
+        String[][] testerBoard = {
+                {"O", "X", "O", "X", "O"},
+                {"", "X", "O", "X", ""},
+                {"O", "O", "X", "X", ""},
+                {"O", "X", "X", "0", ""},
+                {"X", "", "", "", "", },
+        };
+        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
+        assertEquals(true, testerActivity.checkAscendingDiagonals(testerBoard));
+    }
+
+
+    @Test
+    public void testCheckAscendingDiagonalsTrueScenario3() {
+        String[][] testerBoard = {
+                {"O", "X", "O", "X", "X"},
+                {"", "X", "O", "X", ""},
+                {"O", "O", "X", "X", ""},
+                {"O", "X", "X", "0", ""},
+                {"", "", "", "", "", },
+        };
+        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
+        assertEquals(true, testerActivity.checkAscendingDiagonals(testerBoard));
+    }
+
+
+    @Test
+    public void testCheckAscendingDiagonalsTrueScenario4() {
+        String[][] testerBoard = {
+                {"O", "X", "O", "X", ""},
+                {"", "X", "O", "", "X"},
+                {"O", "O", "", "X", ""},
+                {"O", "", "X", "0", ""},
+                {"", "X", "", "", "", },
+        };
+        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
+        assertEquals(true, testerActivity.checkAscendingDiagonals(testerBoard));
+    }
 
     @Test
     public void testCheckDescendingDiagonalsTrue() {
@@ -107,6 +174,47 @@ public class ConnectFourMainActivityTest {
     }
 
     @Test
+    public void testCheckDescendingDiagonalsTrueScenario2() {
+        String[][] testerBoard = {
+                {"", "X", "O", "O", "O"},
+                {"", "O", "O", "", ""},
+                {"O", "O", "O", "X", ""},
+                {"O", "X", "X", "O", ""},
+                {"", "", "", "", "O", },
+        };
+        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
+        assertEquals(true, testerActivity.checkDescendingDiagonals(testerBoard));
+    }
+
+    @Test
+    public void testCheckDescendingDiagonalsTrueScenario3() {
+        String[][] testerBoard = {
+                {"", "X", "O", "O", "O"},
+                {"", "O", "X", "", ""},
+                {"O", "O", "O", "X", ""},
+                {"O", "X", "X", "O", "X"},
+                {"", "", "", "", "", },
+        };
+        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
+        assertEquals(true, testerActivity.checkDescendingDiagonals(testerBoard));
+    }
+
+
+    @Test
+    public void testCheckDescendingDiagonalsTrueScenario4() {
+        String[][] testerBoard = {
+                {"", "", "O", "O", "O"},
+                {"O", "O", "X", "", ""},
+                {"O", "O", "O", "X", ""},
+                {"O", "X", "O", "O", "X"},
+                {"", "", "", "O", "", },
+        };
+        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
+        assertEquals(true, testerActivity.checkDescendingDiagonals(testerBoard));
+    }
+
+
+    @Test
     public void testCheckDescendingDiagonalsFalse() {
         String[][] testerBoard = {
                 {"O", "X", "O", "O", "O"},
@@ -119,35 +227,6 @@ public class ConnectFourMainActivityTest {
         assertEquals(false, testerActivity.checkDescendingDiagonals(testerBoard));
     }
 
-    @Test
-    public void testCheckPlayer1RoundsWonGameOverIsTrue(){
-        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
-        testerActivity.setPlayer1RoundsWon(3);
-        assertEquals(true, testerActivity.gameOver());
-    }
-
-    @Test
-    public void testCheckOpponentRoundsWonGameOverIsTrue(){
-        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
-        testerActivity.setOpponentRoundsWon(3);
-        assertEquals(true, testerActivity.gameOver());
-    }
-
-    @Test
-    public void testCheckRoundsWonGameOverIsTrue(){
-        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
-        testerActivity.setRoundsPlayed(5);
-        assertEquals(true, testerActivity.gameOver());
-    }
-
-    @Test
-    public void testCheckGameOverIsFalse(){
-        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
-        testerActivity.setPlayer1RoundsWon(0);
-        testerActivity.setOpponentRoundsWon(0);
-        testerActivity.setRoundsPlayed(0);
-        assertEquals(false, testerActivity.gameOver());
-    }
 
     @Test
     public void testPlayer1WinsPlayer1PointsChange(){
@@ -157,52 +236,10 @@ public class ConnectFourMainActivityTest {
     }
 
     @Test
-    public void testPlayer1WinsPlayer1RoundChange(){
-        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
-        testerActivity.player1Wins();
-        assertEquals(1, testerActivity.getPlayer1RoundsWon());
-    }
-
-    @Test
-    public void testPlayer1WinsRoundsPlayedChange(){
-        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
-        testerActivity.player1Wins();
-        assertEquals(1, testerActivity.getRoundsPlayed());
-    }
-
-    @Test
     public void testPLayer2WinsPlayer1PointsChange(){
         ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
         testerActivity.opponentWins();
         assertEquals(-4, testerActivity.getPlayer1Points());
-    }
-
-    @Test
-    public void testPlayer2WinsPlayer2RoundChange(){
-        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
-        testerActivity.opponentWins();
-        assertEquals(1, testerActivity.getOpponentRoundsWon());
-    }
-
-    @Test
-    public void testPlayer2WinsRoundsPlayedChange(){
-        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
-        testerActivity.opponentWins();
-        assertEquals(1, testerActivity.getRoundsPlayed());
-    }
-
-    @Test
-    public void testTieRoundChange(){
-        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
-        testerActivity.tie();
-        assertEquals(1, testerActivity.getTies());
-    }
-
-    @Test
-    public void testTieRoundsPlayedChange(){
-        ConnectFourMainActivity testerActivity = new ConnectFourMainActivity();
-        testerActivity.tie();
-        assertEquals(1, testerActivity.getRoundsPlayed());
     }
 
 }

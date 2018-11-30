@@ -10,53 +10,46 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Observable;
-
-import android.widget.TextView;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
 import phase1.gamecenter.CustomAdapter;
 import phase1.gamecenter.FileManager;
-import phase1.gamecenter.interfaces.GameActivity;
 import phase1.gamecenter.GestureDetectGridView;
 import phase1.gamecenter.R;
 import phase1.gamecenter.ScoreBoardUpdater;
+import phase1.gamecenter.interfaces.GameActivity;
 
 /**
- * The game activity with the goal to connect the biggest possible blob of colour tiles.
+ * The game activity with the goal to connect 3 tiles of the same colour by row or column.
  */
 public class MatchedGameActivity extends FileManager implements GameActivity {
-
-    /**
-     * The board manager.
-     */
-    private MatchedBoardManager boardManager;
-
-    /**
-     * The board.
-     */
-    private MatchedBoard board;
-
-    /**
-     * The buttons to display.
-     */
-    private ArrayList<Button> tileButtons;
-
-    /**
-     * Grid View and calculated column height and width based on device size
-     */
-    private GestureDetectGridView gridView;
 
     /**
      * the column width and height
      */
     private static int columnWidth, columnHeight;
-
+    /**
+     * The board manager.
+     */
+    private MatchedBoardManager boardManager;
+    /**
+     * The board.
+     */
+    private MatchedBoard board;
+    /**
+     * The buttons to display.
+     */
+    private ArrayList<Button> tileButtons;
+    /**
+     * Grid View and calculated column height and width based on device size
+     */
+    private GestureDetectGridView gridView;
     /**
      * the initial seconds
      */
@@ -160,28 +153,39 @@ public class MatchedGameActivity extends FileManager implements GameActivity {
             Intent tmp = new Intent(MatchedGameActivity.this, MatchedRoundsActivity.class);
             boardManager.setRound(boardManager.getRound() - 1);
             tmp.putExtra("rounds", boardManager.getRound());
-            System.out.println("lost " + (boardManager.getRound()));
             startActivity(tmp);
         } else {
-            Toast toast = Toast.makeText(MatchedGameActivity.this, "Time's up! you've unlocked the next level. :D" +
-                    " your score: " + score, Toast.LENGTH_LONG);
-            toast.setGravity(0, 10, 10);
-            toast.show();
-            Intent tmp = new Intent(MatchedGameActivity.this, MatchedRoundsActivity.class);
-            boardManager.setRound(boardManager.getRound() + 1);
-            saveToFile(MatchedBoardManager.TEMP_SAVE_FILENAME, boardManager);
-            tmp.putExtra("rounds", boardManager.getRound());
-            System.out.println("won " + (boardManager.getRound()));
-            startActivity(tmp);
+            if (boardManager.getRound() != 12) {
+                Toast toast = Toast.makeText(MatchedGameActivity.this, "Time's up! you've unlocked the next level. :D" +
+                        " your score: " + score, Toast.LENGTH_LONG);
+                toast.setGravity(0, 10, 10);
+                toast.show();
+                Intent tmp = new Intent(MatchedGameActivity.this, MatchedRoundsActivity.class);
+                boardManager.setRound(boardManager.getRound() + 1);
+                saveToFile(MatchedBoardManager.TEMP_SAVE_FILENAME, boardManager);
+                tmp.putExtra("rounds", boardManager.getRound());
+                System.out.println("won " + (boardManager.getRound()));
+                startActivity(tmp);
+            } else {
+                Toast toast = Toast.makeText(MatchedGameActivity.this, "Time's up! You beat the game :D" +
+                        " your score: " + score, Toast.LENGTH_LONG);
+                toast.setGravity(0, 10, 10);
+                toast.show();
+                Intent tmp = new Intent(MatchedGameActivity.this, MatchedRoundsActivity.class);
+                boardManager.setRound(boardManager.getRound() - 1);
+                saveToFile(MatchedBoardManager.TEMP_SAVE_FILENAME, boardManager);
+                tmp.putExtra("rounds", boardManager.getRound());
+                System.out.println("won " + (boardManager.getRound()));
+                startActivity(tmp);
+            }
         }
     }
 
     /**
      * update the user's scoreboard on firebase
      *
-     * @param score
+     * @param score the score
      */
-
     public void updateScoreboard(int score) {
         ScoreBoardUpdater sbu = new ScoreBoardUpdater(score, "Colour Tiles");
         sbu.updateUserScoreBoard();

@@ -34,14 +34,14 @@ public class User<T> {
     /**
      * Returns the user's email.
      */
-    public String getEmail() {
+    String getEmail() {
         return email;
     }
 
     /**
      * Sets the user's email.
      */
-    public void setUserEmail(String email) {
+    void setUserEmail(String email) {
         this.email = email;
     }
 
@@ -58,7 +58,7 @@ public class User<T> {
     /**
      * sets user name
      *
-     * @param name
+     * @param name the name
      */
     public void setName(String name) {
         this.name = name;

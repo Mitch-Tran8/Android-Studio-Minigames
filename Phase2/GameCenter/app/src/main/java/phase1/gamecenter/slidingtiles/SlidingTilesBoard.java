@@ -35,7 +35,7 @@ public class SlidingTilesBoard extends Observable implements Board {
      *
      * @param numberTiles the numberTiles for the board
      */
-    public SlidingTilesBoard(List<NumberTile> numberTiles) {
+    SlidingTilesBoard(List<NumberTile> numberTiles) {
         super();
         Iterator<NumberTile> iter = numberTiles.iterator();
 
@@ -51,7 +51,7 @@ public class SlidingTilesBoard extends Observable implements Board {
      *
      * @return the number of numberTiles on the board
      */
-    public int numTiles() {
+    int numTiles() {
         return NUM_COLS * NUM_ROWS;
     }
 
@@ -62,11 +62,15 @@ public class SlidingTilesBoard extends Observable implements Board {
      * @param col the tile column
      * @return the tile at (row, col)
      */
-    public NumberTile getTile(int row, int col) {
+    NumberTile getTile(int row, int col) {
         return numberTiles[row][col];
     }
 
-    public NumberTile[][] getNumberTiles(){ return this.numberTiles;};
+    NumberTile[][] getNumberTiles() {
+        return this.numberTiles;
+    }
+
+    ;
 
     /**
      * Swap the numberTiles at (row1, col1) and (row2, col2)
@@ -108,8 +112,8 @@ public class SlidingTilesBoard extends Observable implements Board {
      */
     private class BoardIterator implements Iterator<NumberTile> {
 
-        private int nextColumn = 0;
         int row = 0;
+        private int nextColumn = 0;
 
         @Override
         public boolean hasNext() {

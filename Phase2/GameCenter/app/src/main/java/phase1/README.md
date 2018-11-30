@@ -32,7 +32,7 @@ dependencies: androidTestImplementation 'com.android.support.test:rules:1.0.2' (
 
 - To run, click the Gradle bar on the right hand side of the screen. Go under app -> tasks ->
 verification -> click on createDebugCoverageReport. Gradle will take a while to build as it is
-in the process of testing (note: it is quite a slow process, takes around 8-9 minutes).
+in the process of testing (note: it is quite a slow process, takes around 10-15 minutes or so).
 
 - Once Gradle is done testing and building, go under Project -> Game Center -> app -> reports ->
 coverage -> debug -> you should see an index.html file created. Gradle has created the code coverage
@@ -144,3 +144,13 @@ round that you played, and there is a save button in the actual game play to sav
   top 5 scores of a specific game and the corresponding users that attained the scores.
 
 - Both the user scoreboard and game scoreboard are updated after each game.
+
+### Firebase Information
+
+To access our firebase data base:
+https://firebase.google.com/
+login: group0675@gmail.com, password: csc207group
+after you login, click "Go to console" on the top right corner
+select the console named "phase1"
+All of our users are under "authentication"
+and all of the data is saved to the realtime database.

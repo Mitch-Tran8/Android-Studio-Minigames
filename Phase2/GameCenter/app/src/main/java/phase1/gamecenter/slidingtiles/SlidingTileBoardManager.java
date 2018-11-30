@@ -1,14 +1,13 @@
 package phase1.gamecenter.slidingtiles;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
-import phase1.gamecenter.interfaces.BoardManager;
 import phase1.gamecenter.FileManager;
 import phase1.gamecenter.ScoreBoardUpdater;
+import phase1.gamecenter.interfaces.BoardManager;
 
 /*
  * Reference to this website for how to determine if boards are solvable or not:
@@ -21,41 +20,34 @@ import phase1.gamecenter.ScoreBoardUpdater;
 public class SlidingTileBoardManager extends FileManager implements BoardManager {
 
     /**
-     * The slidingTilesBoard being managed.
-     */
-    private SlidingTilesBoard slidingTilesBoard;
-
-    /**
-     * Score of the slidingTilesBoard.
-     */
-    private int score;
-
-    /**
      * The number of moves that has been made to this slidingTilesBoard
      */
     protected int numOfMoves;
-
-    /**
-     * The stack that stocks all previous moves
-     */
-    private Stack<int[]> moveStack;
-
-    /**
-     * complexity of the slidingTilesBoard
-     */
-    private String complexity;
-
-    /**
-     * the times the user has used the undo function
-     */
-    private int undoneTimes;
-
     /**
      * the max times for the user to undo their moves, which can be manually modified by user.
      * otherwise is set as 3 by default
      */
     protected int maxUndoTimes;
-
+    /**
+     * The slidingTilesBoard being managed.
+     */
+    private SlidingTilesBoard slidingTilesBoard;
+    /**
+     * Score of the slidingTilesBoard.
+     */
+    private int score;
+    /**
+     * The stack that stocks all previous moves
+     */
+    private Stack<int[]> moveStack;
+    /**
+     * complexity of the slidingTilesBoard
+     */
+    private String complexity;
+    /**
+     * the times the user has used the undo function
+     */
+    private int undoneTimes;
     /**
      * whether the moves can be undone - whether the maxUndoTimes has been reached
      */
@@ -143,19 +135,10 @@ public class SlidingTileBoardManager extends FileManager implements BoardManager
                 return true;
             }
 
-            if (inversions % 2 == 0 && blankTileRow % 2 == 1) { //even inversions + odd BT row
-                return true;
-            }
+            return inversions % 2 == 0 && blankTileRow % 2 == 1;
         }
 
         return false;
-    }
-
-    /**
-     * set numOfMoves
-     */
-    public void setNumOfMoves(int num) {
-        this.numOfMoves = num;
     }
 
     /**
@@ -166,12 +149,10 @@ public class SlidingTileBoardManager extends FileManager implements BoardManager
     }
 
     /**
-     * set complexity
-     *
-     * @param complex the complexity of the game
+     * sets the maximum undo times
      */
-    public void setComplexity(String complex) {
-        this.complexity = complex;
+    public void setMaxUndoTimes(int times) {
+        maxUndoTimes = times;
     }
 
     /**
@@ -181,6 +162,15 @@ public class SlidingTileBoardManager extends FileManager implements BoardManager
      */
     public String getComplexity() {
         return complexity;
+    }
+
+    /**
+     * set complexity
+     *
+     * @param complex the complexity of the game
+     */
+    public void setComplexity(String complex) {
+        this.complexity = complex;
     }
 
     /**
@@ -301,6 +291,7 @@ public class SlidingTileBoardManager extends FileManager implements BoardManager
 
     /**
      * returns the index of the blanktile
+     *
      * @param numberTiles the numberTiles list
      * @return the index of the blanktile
      */
@@ -355,6 +346,13 @@ public class SlidingTileBoardManager extends FileManager implements BoardManager
 
     public int getNumOfMoves() {
         return numOfMoves;
+    }
+
+    /**
+     * set numOfMoves
+     */
+    public void setNumOfMoves(int num) {
+        this.numOfMoves = num;
     }
 
     /**
@@ -464,13 +462,6 @@ public class SlidingTileBoardManager extends FileManager implements BoardManager
                 isValidUndo = false;
             }
         }
-    }
-
-    /**
-     * sets the maximum undo times
-     */
-    public void setMaxUndoTimes(int times) {
-        maxUndoTimes = times;
     }
 
     /**

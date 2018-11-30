@@ -1,15 +1,14 @@
 package phase1.gamecenter.connectnumbers;
 
-import java.util.Random;
-import java.util.Stack;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Random;
+import java.util.Stack;
 
 import phase1.gamecenter.R;
 import phase1.gamecenter.ScoreBoardUpdater;
@@ -17,15 +16,13 @@ import phase1.gamecenter.ScoreBoardUpdater;
 public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity implements View.OnClickListener {
 
     /**
-     * 2D array of buttons, representing the connect three game board.
-     */
-    private Button[][] buttons = new Button[3][3];
-
-    /**
      * a variable representing a random call.
      */
     private static final Random RANDOM = new Random();
-
+    /**
+     * 2D array of buttons, representing the connect three game board.
+     */
+    private Button[][] buttons = new Button[3][3];
     /**
      * TextView that shows the number of rounds the AI has won.
      */

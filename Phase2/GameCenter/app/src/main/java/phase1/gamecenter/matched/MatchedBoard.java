@@ -10,7 +10,7 @@ import java.util.Observable;
 import phase1.gamecenter.interfaces.Board;
 
 /**
- * The sliding tiles board.
+ * The matched game board.
  */
 public class MatchedBoard extends Observable implements Board {
 
@@ -35,7 +35,7 @@ public class MatchedBoard extends Observable implements Board {
      *
      * @param tiles the tiles for the board
      */
-    public MatchedBoard(List<MatchedTile> tiles, int complexity) {
+    MatchedBoard(List<MatchedTile> tiles, int complexity) {
         NUM_ROWS = complexity;
         NUM_COLS = complexity;
         this.tiles = new MatchedTile[NUM_ROWS][NUM_COLS];
@@ -145,13 +145,13 @@ public class MatchedBoard extends Observable implements Board {
     }
 
     /**
-     * The sliding tiles board iterator.
+     * The matched game board iterator.
      * Subclass to the board class.
      */
     private class BoardIterator implements Iterator<MatchedTile> {
 
-        private int nextColumn = 0;
         int row = 0;
+        private int nextColumn = 0;
 
         @Override
         public boolean hasNext() {

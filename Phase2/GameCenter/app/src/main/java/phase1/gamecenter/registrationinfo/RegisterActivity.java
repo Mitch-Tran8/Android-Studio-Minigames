@@ -21,6 +21,8 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Objects;
+
 import phase1.gamecenter.R;
 
 
@@ -29,6 +31,11 @@ import phase1.gamecenter.R;
  */
 public class RegisterActivity extends AppCompatActivity {
 
+    /**
+     * Regex expression for password strength: must be at least 6 characters long and have one letter
+     * and on number.
+     */
+    String passwordPattern = "(?=.*[0-9])(?=.*[a-zA-Z])[0-9a-zA-Z]{6,}";
     /**
      * the user chooses a name, saved as nameField
      */
@@ -41,12 +48,6 @@ public class RegisterActivity extends AppCompatActivity {
      * user's email
      */
     private EditText emailField;
-
-    /**
-     * the button that allows user to register, sends information to firebase
-     */
-    private Button register_button;
-
     /**
      * Firebase auth
      */
@@ -60,13 +61,6 @@ public class RegisterActivity extends AppCompatActivity {
      */
     private DatabaseReference databaseReference;
 
-
-    /**
-     * Regex expression for password strength: must be at least 6 characters long and have one letter
-     * and on number.
-     */
-    String passwordPattern = "(?=.*[0-9])(?=.*[a-zA-Z])[0-9a-zA-Z]{6,}";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,9 +72,13 @@ public class RegisterActivity extends AppCompatActivity {
         nameField = (EditText) findViewById(R.id.nameField);
         passwordField = (EditText) findViewById(R.id.passwordField);
         emailField = (EditText) findViewById(R.id.emailField);
-        register_button = (Button) findViewById(R.id.register_button);
+        /*
+      the button that allows user to register, sends information to firebase
+     */ /**
+         * the button that allows user to register, sends information to firebase
+         */Button register_button = (Button) findViewById(R.id.register_button);
 
-        /**
+        /*
          * Activate the register button
          */
         register_button.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(email)) {
             if (Patterns.EMAIL_ADDRESS.matcher(email).matches() && password.matches(passwordPattern)) {
 
-                /**
+                /*
                  * create new user
                  */
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -111,7 +109,7 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<com.google.firebase.auth.AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            String user_id = mAuth.getCurrentUser().getUid();
+                            String user_id = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
                             FirebaseUser currUser = mAuth.getCurrentUser();
                             UserProfileChangeRequest changeRequest = new UserProfileChangeRequest.Builder().setDisplayName(name).build();
                             currUser.updateProfile(changeRequest);
@@ -156,7 +154,7 @@ public class RegisterActivity extends AppCompatActivity {
     /**
      * creates the scoreboards for the user in firebase.
      *
-     * @param user_id
+     * @param user_id the user id
      */
     private void createScoreBoards(String user_id) {
         DatabaseReference stRef = databaseReference.child(user_id).child("Game Collection").child("Sliding Tiles").child("userscores");
