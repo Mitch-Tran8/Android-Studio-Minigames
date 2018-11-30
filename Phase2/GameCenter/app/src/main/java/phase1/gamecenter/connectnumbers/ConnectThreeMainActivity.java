@@ -149,6 +149,10 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
             public void onClick(View view) {
                 if (isValidUndo()) {
                     undoMove();
+                    Toast.makeText(getApplicationContext(), "Successful undo!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Match over - invalid undo!", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -257,7 +261,8 @@ public class ConnectThreeMainActivity extends ConnectNumbersActivity implements 
      */
 
     public boolean isValidUndo() {
-        return (player1Turn && maxPlayer2UndoTimes > 0 || !player1Turn && maxUndoTimes > 0);
+        return (player1Turn && maxPlayer2UndoTimes > 0 && !matchOver(3, buttons)||
+                !player1Turn && maxUndoTimes > 0 && !matchOver(3, buttons));
     }
 
     /**
