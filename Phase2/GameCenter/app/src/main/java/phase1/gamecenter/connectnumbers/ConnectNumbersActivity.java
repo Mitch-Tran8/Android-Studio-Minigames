@@ -10,10 +10,6 @@ import java.util.Stack;
 public abstract class ConnectNumbersActivity extends AppCompatActivity {
 
     /**
-     * 2D array of buttons, representing the connect three game board.
-     */
-    //protected Button[][] buttons;
-    /**
      * Boolean representing if it is player 1's turn.
      */
     protected boolean player1Turn = true;
@@ -64,8 +60,7 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     protected Stack<Integer> moveStack;
 
     /**
-     * the max times for the user to undo their moves, which can be manually modified by user.
-     * otherwise is set as 3 by default
+     * the max times for the user to undo their moves.
      */
     protected int maxUndoTimes;
 
@@ -86,7 +81,7 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     }
 
     /**
-     * set the number of rounds player 1 has won only for testing purpose
+     * set the number of rounds the opponent has won only for testing purpose
      *
      * @param round amount of rounds to be set
      */
@@ -95,7 +90,7 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     }
 
     /**
-     * get the number of rounds player 1 has won only for testing purpose
+     * get the number of rounds the opponent has won only for testing purpose
      */
     public int getOpponentRoundsWon() {
         return opponentRoundsWon;
@@ -118,21 +113,21 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     }
 
     /**
-     * get the number of rounds player 1 has won only for testing purpose
+     * get the score of player 1 for testing purpose
      */
     public int getPlayer1Points() {
         return player1points;
     }
 
     /**
-     * get the number of rounds that have been played for testing purpose
+     * get the number of ties for testing purpose
      */
     public int getTies() {
         return ties;
     }
 
     /**
-     * set the number of rounds that have been played for testing purpose
+     * set the current turn to player 1 or not player 1 for testing purpose
      *
      * @param bool setting if it is currently player one's turn
      */
@@ -141,7 +136,7 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     }
 
     /**
-     * set the number of rounds that have been played for testing purpose
+     * set the max number of undos for testing purpose
      *
      * @param maxUndo setting the maxiumum number of undos.
      */
@@ -177,6 +172,12 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
         return (player1RoundsWon == 3 || opponentRoundsWon == 3 || roundsPlayed == 5);
     }
 
+    /**
+     * Return whether the connect match is over, that is, if the player or opponent have won the
+     * match by matching 3 in a row, column or diagonal.
+     *
+     * @return whether the match is over.
+     */
     protected boolean matchOver(int size, Button[][] buttonsArray) {
         String[][] board = new String[size][size];
 
@@ -263,12 +264,26 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
                 !board[0][0].equals(""));
     }
 
+    /**
+     * Displays the toast message when the game is over.
+     */
     abstract void gameOverMessage();
 
+    /**
+     * Update TextView with the scores of each player.
+     */
     abstract void updateRoundsWon();
 
+    /**
+     * returns if undo is valid
+     *
+     * @return if undo is valid
+     */
     abstract boolean isValidUndo();
 
+    /**
+     * undo the most recent move if the max undo times has not been reached
+     */
     abstract void undoMove();
 
 }

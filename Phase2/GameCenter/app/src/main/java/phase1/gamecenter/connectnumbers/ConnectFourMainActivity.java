@@ -25,17 +25,10 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
      */
     private TextView scorePlayer2;
 
-    private int maxPlayer2UndoTimes;
-
     /**
-     * set the number of rounds that have been played for testing purpose
-     *
-     * @param maxUndo setting the maxiumum number of undos.
+     * the max times for player 2 to undo their moves.
      */
-    public void setMaxPlayer2UndoTimes(int maxUndo) {
-        this.maxPlayer2UndoTimes = maxUndo;
-    }
-
+    private int maxPlayer2UndoTimes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +54,11 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
             }
         }
 
+        //reset to NEW ROUND using button
         buttonResetListener(buttonReset);
+        //reset the GAME using button
         gameResetListener(gameReset);
+        ///undo move using button
         addUndoButtonListener(undoButton);
     }
 
@@ -98,7 +94,7 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
     /**
      * On click listener for the reset button -> create a new match
      *
-     * @param buttonReset the new match button
+     * @param buttonReset match reset button
      */
     protected void buttonResetListener(Button buttonReset) {
         buttonReset.setOnClickListener(new View.OnClickListener() {
@@ -359,7 +355,6 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
      *
      * @return if undo is valid
      */
-
     public boolean isValidUndo() {
         return (player1Turn && maxPlayer2UndoTimes > 0 || !player1Turn && maxUndoTimes > 0);
     }
@@ -424,6 +419,5 @@ public class ConnectFourMainActivity extends ConnectNumbersActivity implements V
         ScoreBoardUpdater sbu = new ScoreBoardUpdater(player1points, "Connect 34");
         sbu.updateLeaderBoard();
     }
-
 
 }

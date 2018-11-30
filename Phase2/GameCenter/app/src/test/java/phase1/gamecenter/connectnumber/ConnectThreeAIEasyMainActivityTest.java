@@ -2,7 +2,6 @@ package phase1.gamecenter.connectnumber;
 
 import org.junit.Test;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import phase1.gamecenter.connectnumbers.ConnectThreeAIEasyMainActivity;
 

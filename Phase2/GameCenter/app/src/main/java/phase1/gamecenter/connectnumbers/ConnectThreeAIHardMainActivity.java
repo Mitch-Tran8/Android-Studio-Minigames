@@ -55,7 +55,7 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
         buttonResetListener(buttonReset);
         //reset the GAME using button
         gameResetListener(gameReset);
-        ///
+        ///undo move using button
         addUndoButtonListener(undoButton);
     }
 
@@ -90,7 +90,7 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
     /**
      * On click listener for the reset match button -> make a new match.
      *
-     * @param buttonReset
+     * @param buttonReset match reset button
      */
     protected void buttonResetListener(Button buttonReset) {
         buttonReset.setOnClickListener(new View.OnClickListener() {
