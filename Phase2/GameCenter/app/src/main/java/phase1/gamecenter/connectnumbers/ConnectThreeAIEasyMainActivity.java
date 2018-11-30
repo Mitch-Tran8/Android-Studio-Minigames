@@ -127,12 +127,13 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isValidUndo()) {
-                    undoMove();
-                    Toast.makeText(getApplicationContext(), "Successful undo!", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "Match over - invalid undo!", Toast.LENGTH_LONG).show();
+                if (!matchOver(3, buttons) && moves < 5) {
+                    if (isValidUndo()) {
+                        undoMove();
+                        Toast.makeText(getApplicationContext(), "Successful undo!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Match over - invalid undo!", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
@@ -252,7 +253,7 @@ public class ConnectThreeAIEasyMainActivity extends ConnectNumbersActivity imple
      */
 
     public boolean isValidUndo() {
-        return (maxUndoTimes > 0 && !matchOver(3, buttons) && moves < 5);
+        return (maxUndoTimes > 0);
     }
 
     /**
