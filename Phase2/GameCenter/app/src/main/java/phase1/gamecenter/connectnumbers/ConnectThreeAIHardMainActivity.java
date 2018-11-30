@@ -152,6 +152,10 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
             public void onClick(View view) {
                 if (isValidUndo()) {
                     undoMove();
+                    Toast.makeText(getApplicationContext(), "Successful undo!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Match over - invalid undo!", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -251,7 +255,7 @@ public class ConnectThreeAIHardMainActivity extends ConnectNumbersActivity imple
      */
 
     public boolean isValidUndo() {
-        return (maxUndoTimes > 0);
+        return (maxUndoTimes > 0 && !matchOver(3, buttons));
     }
 
     /**
