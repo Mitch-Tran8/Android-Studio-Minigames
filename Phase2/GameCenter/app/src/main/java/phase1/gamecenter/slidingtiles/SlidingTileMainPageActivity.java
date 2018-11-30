@@ -1,8 +1,8 @@
 package phase1.gamecenter.slidingtiles;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -14,9 +14,9 @@ import com.google.firebase.auth.FirebaseUser;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import phase1.gamecenter.registrationinfo.EmailAndScore;
 import phase1.gamecenter.GameCenterMainActivity;
 import phase1.gamecenter.R;
+import phase1.gamecenter.registrationinfo.EmailAndScore;
 
 
 /**
@@ -25,11 +25,14 @@ import phase1.gamecenter.R;
 public class SlidingTileMainPageActivity extends AppCompatActivity implements Serializable {
 
     /**
+     * Emails and scores of userList
+     */
+    public ArrayList<EmailAndScore> userList;
+    /**
      * The buttons to display
      */
     Button startButton;
     Button howToPlayButton;
-
     /**
      * The view and textViews to be displayed
      */
@@ -37,13 +40,6 @@ public class SlidingTileMainPageActivity extends AppCompatActivity implements Se
     TextView instructionsBody;
     View instructionsView;
     ImageButton exitInstructionsButton;
-
-
-    /**
-     * Emails and scores of userList
-     */
-    public ArrayList<EmailAndScore> userList;
-
     /**
      * The current user's Id
      */

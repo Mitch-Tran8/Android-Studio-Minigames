@@ -30,7 +30,6 @@
         <activity android:name=".matched.MatchedGameActivity" />
         <activity android:name=".matched.MatchedStartingActivity" />
         <activity android:name=".slidingtiles.DifficultyLevel" />
-        <activity android:name=".registrationinfo.LogoutActivity" />
         <activity android:name=".registrationinfo.UserScoreBoardActivity"></activity>
         <activity android:name=".matched.MatchedRoundsActivity"/>
         <activity android:name=".connectnumbers.ConnectFourMainActivity" />
@@ -47,6 +46,7 @@
         <activity android:name=".FileManager" />
         <activity android:name=".slidingtiles.SlidingTileBoardManager" />
         <activity android:name=".matched.MatchedBoardManager" />
+        <activity android:name=".registrationinfo.LeaderboardActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

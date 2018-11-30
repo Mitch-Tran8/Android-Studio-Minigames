@@ -13,9 +13,9 @@ import java.util.Observable;
 
 import phase1.gamecenter.CustomAdapter;
 import phase1.gamecenter.FileManager;
-import phase1.gamecenter.interfaces.GameActivity;
 import phase1.gamecenter.GestureDetectGridView;
 import phase1.gamecenter.R;
+import phase1.gamecenter.interfaces.GameActivity;
 
 /**
  * The game activity.
@@ -23,25 +23,21 @@ import phase1.gamecenter.R;
 public class SlidingTilesGameActivity extends FileManager implements GameActivity {
 
     /**
+     * the column width and height
+     */
+    private static int columnWidth, columnHeight;
+    /**
      * The board manager.
      */
     private SlidingTileBoardManager slidingTileBoardManager;
-
     /**
      * The buttons to display.
      */
     private ArrayList<Button> tileButtons;
-
-
     /**
      * Grid View and calculated column height and width based on device size
      */
     private GestureDetectGridView gridView;
-
-    /**
-     * the column width and height
-     */
-    private static int columnWidth, columnHeight;
 
     /**
      * Set up the background image for each button based on the master list

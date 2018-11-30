@@ -1,17 +1,10 @@
 package phase1.gamecenter.connectnumbers;
 
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Stack;
-
-import phase1.gamecenter.R;
 
 
 public abstract class ConnectNumbersActivity extends AppCompatActivity {
@@ -71,6 +64,13 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     protected Stack<Integer> moveStack;
 
     /**
+     * get the number of rounds player 1 has won only for testing purpose
+     */
+    public int getPlayer1RoundsWon() {
+        return player1RoundsWon;
+    }
+
+    /**
      * set the number of rounds player 1 has won only for testing purpose
      *
      * @param round amount of rounds to be set
@@ -82,8 +82,8 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     /**
      * get the number of rounds player 1 has won only for testing purpose
      */
-    public int getPlayer1RoundsWon() {
-        return player1RoundsWon;
+    public int getOpponentRoundsWon() {
+        return opponentRoundsWon;
     }
 
     /**
@@ -96,10 +96,10 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
     }
 
     /**
-     * get the number of rounds player 1 has won only for testing purpose
+     * get the number of rounds that have been played for testing purpose
      */
-    public int getOpponentRoundsWon() {
-        return opponentRoundsWon;
+    public int getRoundsPlayed() {
+        return roundsPlayed;
     }
 
     /**
@@ -109,13 +109,6 @@ public abstract class ConnectNumbersActivity extends AppCompatActivity {
      */
     public void setRoundsPlayed(int round) {
         this.roundsPlayed = round;
-    }
-
-    /**
-     * get the number of rounds that have been played for testing purpose
-     */
-    public int getRoundsPlayed() {
-        return roundsPlayed;
     }
 
     /**

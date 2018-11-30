@@ -10,52 +10,46 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Observable;
-
-import android.widget.TextView;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import phase1.gamecenter.CustomAdapter;
 import phase1.gamecenter.FileManager;
-import phase1.gamecenter.interfaces.GameActivity;
 import phase1.gamecenter.GestureDetectGridView;
 import phase1.gamecenter.R;
 import phase1.gamecenter.ScoreBoardUpdater;
+import phase1.gamecenter.interfaces.GameActivity;
 
 /**
- * The game activity with the goal to connect the biggest possible blob of colour tiles.
+ * The game activity with the goal to connect 3 tiles of the same colour by row or column.
  */
 public class MatchedGameActivity extends FileManager implements GameActivity {
-
-    /**
-     * The board manager.
-     */
-    private MatchedBoardManager boardManager;
-
-    /**
-     * The board.
-     */
-    private MatchedBoard board;
-
-    /**
-     * The buttons to display.
-     */
-    private ArrayList<Button> tileButtons;
-
-    /**
-     * Grid View and calculated column height and width based on device size
-     */
-    private GestureDetectGridView gridView;
 
     /**
      * the column width and height
      */
     private static int columnWidth, columnHeight;
-
+    /**
+     * The board manager.
+     */
+    private MatchedBoardManager boardManager;
+    /**
+     * The board.
+     */
+    private MatchedBoard board;
+    /**
+     * The buttons to display.
+     */
+    private ArrayList<Button> tileButtons;
+    /**
+     * Grid View and calculated column height and width based on device size
+     */
+    private GestureDetectGridView gridView;
     /**
      * the initial seconds
      */
@@ -111,7 +105,7 @@ public class MatchedGameActivity extends FileManager implements GameActivity {
     /**
      * helper function to set the timer
      */
-    void setTheTimer(){
+    void setTheTimer() {
 
         //Declare the timer
         Timer t = new Timer();
@@ -131,9 +125,9 @@ public class MatchedGameActivity extends FileManager implements GameActivity {
                         tv.setText(String.format("%s:%s", String.valueOf(minutes), String.valueOf(seconds)));
                         seconds -= 1;
 
-                        if(seconds == 0 && minutes != 0) {
-                            seconds=60;
-                            minutes=minutes-1;
+                        if (seconds == 0 && minutes != 0) {
+                            seconds = 60;
+                            minutes = minutes - 1;
                             tv.setText(String.format("%s:%s", String.valueOf(minutes), String.valueOf(seconds)));
                         } else if (seconds == 0) {
                             gameOver();
@@ -153,7 +147,7 @@ public class MatchedGameActivity extends FileManager implements GameActivity {
         updateLeaderBoard(boardManager.getScore());
         if (boardManager.getScore() < boardManager.getScoreReq()) {
             Toast toast = Toast.makeText(MatchedGameActivity.this, "Time's up! Try again to unlock the next level. Your score: " + score, Toast.LENGTH_LONG);
-            toast.setGravity(0,10,10);
+            toast.setGravity(0, 10, 10);
             toast.show();
             saveToFile(MatchedBoardManager.TEMP_SAVE_FILENAME, boardManager);
             Intent tmp = new Intent(MatchedGameActivity.this, MatchedRoundsActivity.class);
@@ -161,7 +155,7 @@ public class MatchedGameActivity extends FileManager implements GameActivity {
             tmp.putExtra("rounds", boardManager.getRound());
             startActivity(tmp);
         } else {
-            if(boardManager.getRound()!=12) {
+            if (boardManager.getRound() != 12) {
                 Toast toast = Toast.makeText(MatchedGameActivity.this, "Time's up! you've unlocked the next level. :D" +
                         " your score: " + score, Toast.LENGTH_LONG);
                 toast.setGravity(0, 10, 10);
@@ -178,7 +172,7 @@ public class MatchedGameActivity extends FileManager implements GameActivity {
                 toast.setGravity(0, 10, 10);
                 toast.show();
                 Intent tmp = new Intent(MatchedGameActivity.this, MatchedRoundsActivity.class);
-                boardManager.setRound(boardManager.getRound() -1);
+                boardManager.setRound(boardManager.getRound() - 1);
                 saveToFile(MatchedBoardManager.TEMP_SAVE_FILENAME, boardManager);
                 tmp.putExtra("rounds", boardManager.getRound());
                 System.out.println("won " + (boardManager.getRound()));
@@ -189,17 +183,16 @@ public class MatchedGameActivity extends FileManager implements GameActivity {
 
     /**
      * update the user's scoreboard on firebase
-     * @param score
+     *
+     * @param score the score
      */
-
     public void updateScoreboard(int score) {
-        ScoreBoardUpdater sbu = new ScoreBoardUpdater(score,"Colour Tiles");
+        ScoreBoardUpdater sbu = new ScoreBoardUpdater(score, "Colour Tiles");
         sbu.updateUserScoreBoard();
     }
 
     /**
      * update scoreboard for leaderboard on firebase
-     *
      */
     private void updateLeaderBoard(int score) {
         ScoreBoardUpdater sbu = new ScoreBoardUpdater(score, "Colour Tiles");
@@ -208,6 +201,7 @@ public class MatchedGameActivity extends FileManager implements GameActivity {
 
     /**
      * Create the buttons for displaying the tiles.
+     *
      * @param context the context
      */
     public void createTileButtons(Context context) {

@@ -1,23 +1,15 @@
 package phase1.gamecenter.slidingtiles;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 import phase1.gamecenter.FileManager;
 import phase1.gamecenter.R;
 
 /**
- * MatchedBoard Complexity Activity
+ * SlidingTilesBoard Complexity Activity
  */
 public class BoardComplexity extends FileManager {
 
@@ -40,17 +32,14 @@ public class BoardComplexity extends FileManager {
      * button for three by three board.
      */
     Button threeButton;
-
-    /**
-     * The current user's Id
-     */
-    private String user_id;
-
     /**
      * The load button
      */
     Button loadButton;
-
+    /**
+     * The current user's Id
+     */
+    private String user_id;
     /**
      * the board manager
      */

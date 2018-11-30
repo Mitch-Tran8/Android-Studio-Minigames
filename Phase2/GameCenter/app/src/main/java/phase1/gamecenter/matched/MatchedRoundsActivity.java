@@ -1,19 +1,11 @@
 package phase1.gamecenter.matched;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 import phase1.gamecenter.FileManager;
 import phase1.gamecenter.R;
@@ -27,24 +19,10 @@ public class MatchedRoundsActivity extends FileManager {
      * A temporary save file.
      */
     public static final String TEMP_SAVE_FILENAME = "matched_file_tmp.ser";
-
     /**
-     * The round buttons to be displayed
+     * The save progress button
      */
-    private Button round1Button;
-    private Button round2Button;
-    private Button round3Button;
-    private Button round4Button;
-    private Button round5Button;
-    private Button round6Button;
-    private Button round7Button;
-    private Button round8Button;
-    private Button round9Button;
-    private Button round10Button;
-    private Button round11Button;
-    private Button round12Button;
-
-
+    Button saveProgress;
     /**
      * The componenets of the instructions button to be displayed
      */
@@ -52,12 +30,6 @@ public class MatchedRoundsActivity extends FileManager {
     private Button instructionsButton;
     private TextView instructionsBody;
     private View instructionsView;
-
-    /**
-     * The save progress button
-     */
-    Button saveProgress;
-
     /**
      * the board manager
      */
@@ -87,7 +59,10 @@ public class MatchedRoundsActivity extends FileManager {
             }
         });
 
-        switch (10) {
+        /*
+         * activates corresponding buttons from record
+         */
+        switch (win) {
             case 2:
                 activateRound2Button();
                 break;
@@ -129,51 +104,6 @@ public class MatchedRoundsActivity extends FileManager {
     }
 
     /**
-     * Activate the buttons for round 12 and all the buttons before it
-     */
-    private void activateRound12Button() {
-        activateRound11Button();
-        round12Button = findViewById(R.id.round12_button);
-        round12Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToRound(12, 6, 0, 59);
-
-            }
-        });
-    }
-
-    /**
-     * Activate the button for round 11 and all the buttons before it
-     */
-    private void activateRound11Button() {
-        activateRound10Button();
-        round11Button = findViewById(R.id.round11_button);
-        round11Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToRound(11, 6, 1, 20);
-            }
-        });
-    }
-
-    private void activateRound1Button() {
-
-        round1Button = findViewById(R.id.round1_button);
-
-        /*
-         * Activate the button for round 1
-         */
-        round1Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToRound(1, 3, 0, 59);
-            }
-
-        });
-    }
-
-    /**
      * Activate how to play button
      */
     private void activateInstructionsButton() {
@@ -196,11 +126,40 @@ public class MatchedRoundsActivity extends FileManager {
     }
 
     /**
+     * Activate the buttons for round 12 and all the buttons before it
+     */
+    private void activateRound12Button() {
+        activateRound11Button();
+        Button round12Button = findViewById(R.id.round12_button);
+        round12Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToRound(12, 6, 0, 59);
+
+            }
+        });
+    }
+
+    /**
+     * Activate the button for round 11 and all the buttons before it
+     */
+    private void activateRound11Button() {
+        activateRound10Button();
+        Button round11Button = findViewById(R.id.round11_button);
+        round11Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToRound(11, 6, 1, 20);
+            }
+        });
+    }
+
+    /**
      * Activate the button for round 10 and keep all the other buttons before it activated
      */
     private void activateRound10Button() {
         activateRound9Button();
-        round10Button = findViewById(R.id.round10_button);
+        Button round10Button = findViewById(R.id.round10_button);
 
         round10Button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -216,7 +175,7 @@ public class MatchedRoundsActivity extends FileManager {
      */
     private void activateRound9Button() {
         activateRound8Button();
-        round9Button = findViewById(R.id.round9_button);
+        Button round9Button = findViewById(R.id.round9_button);
 
         round9Button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -233,7 +192,7 @@ public class MatchedRoundsActivity extends FileManager {
     private void activateRound8Button() {
         activateRound7Button();
 
-        round8Button = findViewById(R.id.round8_button);
+        Button round8Button = findViewById(R.id.round8_button);
 
         round8Button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -249,7 +208,7 @@ public class MatchedRoundsActivity extends FileManager {
      */
     private void activateRound7Button() {
         activateRound6Button();
-        round7Button = findViewById(R.id.round7_button);
+        Button round7Button = findViewById(R.id.round7_button);
 
         round7Button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -265,7 +224,7 @@ public class MatchedRoundsActivity extends FileManager {
      */
     private void activateRound6Button() {
         activateRound5Button();
-        round6Button = findViewById(R.id.round6_button);
+        Button round6Button = findViewById(R.id.round6_button);
 
         round6Button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -281,7 +240,7 @@ public class MatchedRoundsActivity extends FileManager {
      */
     private void activateRound5Button() {
         activateRound4Button();
-        round5Button = findViewById(R.id.round5_button);
+        Button round5Button = findViewById(R.id.round5_button);
 
         round5Button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -297,7 +256,7 @@ public class MatchedRoundsActivity extends FileManager {
      */
     private void activateRound4Button() {
         activateRound3Button();
-        round4Button = findViewById(R.id.round4_button);
+        Button round4Button = findViewById(R.id.round4_button);
 
         round4Button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -313,12 +272,50 @@ public class MatchedRoundsActivity extends FileManager {
      */
     private void activateRound3Button() {
         activateRound2Button();
-        round3Button = findViewById(R.id.round3_button);
+        Button round3Button = findViewById(R.id.round3_button);
 
         round3Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switchToRound(3, 3, 0, 20);
+            }
+
+        });
+    }
+
+    /**
+     * Activate the button for round 2 and keep all the other buttons before it activated
+     */
+    public void activateRound2Button() {
+
+        activateRound1Button();
+        Button round2Button = findViewById(R.id.round2_button);
+
+        round2Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToRound(2, 3, 0, 40);
+            }
+
+        });
+    }
+
+    /**
+     * Activate the button for round 1
+     */
+    private void activateRound1Button() {
+        /*
+         * The round buttons to be displayed
+         */
+        Button round1Button = findViewById(R.id.round1_button);
+
+        /*
+         * Activate the button for round 1
+         */
+        round1Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToRound(1, 3, 0, 59);
             }
 
         });
@@ -339,23 +336,6 @@ public class MatchedRoundsActivity extends FileManager {
         instructionsBody.setVisibility(View.GONE);
 
 
-    }
-
-    /**
-     * Activate the button for round 2 and keep all the other buttons before it activated
-     */
-    public void activateRound2Button() {
-
-        activateRound1Button();
-        round2Button = findViewById(R.id.round2_button);
-
-        round2Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToRound(2, 3, 0, 40);
-            }
-
-        });
     }
 
     /**

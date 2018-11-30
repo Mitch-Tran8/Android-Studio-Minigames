@@ -13,7 +13,7 @@ import phase1.gamecenter.R;
 
 
 /**
- * The initial activity for the sliding puzzle tile game.
+ * The initial activity for the matched game.
  */
 public class MatchedStartingActivity extends FileManager {
 
@@ -55,6 +55,9 @@ public class MatchedStartingActivity extends FileManager {
         addStartButtonListener();
         addLoadButtonListener();
 
+        /*
+         * sets up the instruction buttons and views
+         */
         instructionsButton = findViewById(R.id.instructions_button2);
         instructionsView = findViewById(R.id.view2);
         instructionsTitle = findViewById(R.id.instructions_title2);
