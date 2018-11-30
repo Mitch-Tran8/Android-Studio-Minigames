@@ -32,7 +32,7 @@ dependencies: androidTestImplementation 'com.android.support.test:rules:1.0.2' (
 
 - To run, click the Gradle bar on the right hand side of the screen. Go under app -> tasks ->
 verification -> click on createDebugCoverageReport. Gradle will take a while to build as it is
-in the process of testing (note: it is quite a slow process, takes around 8-9 minutes).
+in the process of testing (note: it is quite a slow process, takes around 10-15 minutes or so).
 
 - Once Gradle is done testing and building, go under Project -> Game Center -> app -> reports ->
 coverage -> debug -> you should see an index.html file created. Gradle has created the code coverage
