@@ -1,13 +1,12 @@
 package phase1.gamecenter.slidingtiles;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
-import phase1.gamecenter.BoardManager;
+import phase1.gamecenter.interfaces.BoardManager;
 import phase1.gamecenter.FileManager;
 import phase1.gamecenter.ScoreBoardUpdater;
 
@@ -368,11 +367,7 @@ public class SlidingTileBoardManager extends FileManager implements BoardManager
             }
         }
         if (solved) {
-            try {
-                createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            createNewFile(BoardComplexity.TEMP_SAVE_FILENAME);
             updateScore(solved);
             updateScoreboard();
             updateLeaderBoard();

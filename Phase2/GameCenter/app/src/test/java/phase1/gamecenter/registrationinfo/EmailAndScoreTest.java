@@ -1,4 +1,4 @@
-package phase1.gamecenter;
+package phase1.gamecenter.registrationinfo;
 
 import org.junit.Test;
 

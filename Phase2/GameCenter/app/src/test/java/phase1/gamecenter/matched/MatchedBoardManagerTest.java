@@ -16,9 +16,10 @@ public class MatchedBoardManagerTest {
     private MatchedBoardManager testerBoardManager4 = new MatchedBoardManager(4, 4, 1, 59);
     private MatchedBoardManager testerBoardManager5 = new MatchedBoardManager(5, 4, 0, 59);
     private MatchedBoardManager testerBoardManager6 = new MatchedBoardManager(6, 4, 1, 59);
-    private MatchedBoardManager testerBoardManager7 = new MatchedBoardManager(7, 5, 0, 59);
-    private MatchedBoardManager testerBoardManager8 = new MatchedBoardManager(8, 5, 0, 59);
-    private MatchedBoardManager testerBoardManager9 = new MatchedBoardManager(9, 5, 1, 59);
+//    private MatchedBoardManager testerBoardManager7 = new MatchedBoardManager(7, 5, 0, 59);
+//    private MatchedBoardManager testerBoardManager8 = new MatchedBoardManager(8, 5, 0, 59);
+//    private MatchedBoardManager testerBoardManager9 = new MatchedBoardManager(9, 5, 1, 59);
+//    private MatchedBoardManager testerBoardManager10 = new MatchedBoardManager(10, 6, 2, 59);
 
     @Test
     public void testGetBoard_3() {
@@ -309,11 +310,10 @@ public class MatchedBoardManagerTest {
         tiles.add(new MatchedTile(7));
         tiles.add(new MatchedTile(8));
         tiles.add(new MatchedTile(9));
-        List<MatchedTile> tiles2 = tiles;
         MatchedBoard testerBoard = new MatchedBoard(tiles, 3);
 
         testerBoardManager1.setBoard(testerBoard);
-
+        testerBoardManager1.setRound(1);
         assertEquals(testerBoardManager1.getRound(), 1);
     }
 

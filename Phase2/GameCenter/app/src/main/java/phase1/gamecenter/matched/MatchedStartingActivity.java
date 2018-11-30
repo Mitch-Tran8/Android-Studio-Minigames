@@ -125,7 +125,7 @@ public class MatchedStartingActivity extends FileManager {
     @Override
     protected void onResume() {
         super.onResume();
-        loadFromFileMatched();
+        loadFromFileMatched(TEMP_SAVE_FILENAME);
     }
 
     /**

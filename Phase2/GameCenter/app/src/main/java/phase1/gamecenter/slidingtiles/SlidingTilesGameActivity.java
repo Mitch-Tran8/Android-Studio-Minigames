@@ -13,7 +13,7 @@ import java.util.Observable;
 
 import phase1.gamecenter.CustomAdapter;
 import phase1.gamecenter.FileManager;
-import phase1.gamecenter.GameActivity;
+import phase1.gamecenter.interfaces.GameActivity;
 import phase1.gamecenter.GestureDetectGridView;
 import phase1.gamecenter.R;
 

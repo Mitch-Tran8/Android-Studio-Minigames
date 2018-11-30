@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Stack;
 import java.util.Random;
 
-import phase1.gamecenter.BoardManager;
+import phase1.gamecenter.interfaces.BoardManager;
 import phase1.gamecenter.FileManager;
 
 /**
@@ -213,19 +213,11 @@ public class MatchedBoardManager extends FileManager implements BoardManager {
         if (solvedRow) {
             addNewTiles();
             puzzleSolved();
-            try {
-                createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            createNewFile(TEMP_SAVE_FILENAME);
         } else if (solvedCol) {
             addNewColTiles();
             puzzleSolved();
-            try {
-                createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            createNewFile(TEMP_SAVE_FILENAME);
         }
 
         return solvedRow || solvedCol;

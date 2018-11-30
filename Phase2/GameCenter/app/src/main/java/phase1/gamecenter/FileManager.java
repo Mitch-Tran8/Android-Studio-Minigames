@@ -1,3 +1,7 @@
+/*
+ * this class only contains methods that handles .ser files so it is excluded from testing
+ */
+
 package phase1.gamecenter;
 
 import android.support.v7.app.AppCompatActivity;
@@ -14,16 +18,18 @@ import phase1.gamecenter.matched.MatchedBoardManager;
 import phase1.gamecenter.slidingtiles.BoardComplexity;
 import phase1.gamecenter.slidingtiles.SlidingTileBoardManager;
 
+/**
+ * the file manager that manages all the file creation, loading and saving
+ */
 public abstract class FileManager extends AppCompatActivity {
 
     /**
-     * Load the board manager from fileName.
-     *
+     * Load the matched board manager from fileName.
      */
-    protected MatchedBoardManager loadFromFileMatched() {
+    protected MatchedBoardManager loadFromFileMatched(String fileName) {
 
         try {
-            InputStream inputStream = this.openFileInput(phase1.gamecenter.matched.MatchedStartingActivity.TEMP_SAVE_FILENAME);
+            InputStream inputStream = this.openFileInput(fileName);
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
                 MatchedBoardManager boardManager = (MatchedBoardManager) input.readObject();
@@ -42,8 +48,7 @@ public abstract class FileManager extends AppCompatActivity {
     }
 
     /**
-     * Load the board manager from fileName.
-     *
+     * Load the sliding tiles board manager from fileName.
      * @param fileName the name of the file
      */
     protected SlidingTileBoardManager loadFromFileSlidingTiles(String fileName) {
@@ -83,6 +88,10 @@ public abstract class FileManager extends AppCompatActivity {
         }
     }
 
+    /**
+     * loads the rounds
+     * @return the rounds
+     */
     public int loadRounds(){
         try {
             InputStream inputStream = this.openFileInput("rounds.ser");
@@ -106,9 +115,13 @@ public abstract class FileManager extends AppCompatActivity {
     /*
      * creates a new file
      */
-    protected void createNewFile() throws IOException {
-        File file = new File(BoardComplexity.TEMP_SAVE_FILENAME);
-        file.createNewFile();
+    protected void createNewFile(String fileName) {
+        File file = new File(fileName);
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /*

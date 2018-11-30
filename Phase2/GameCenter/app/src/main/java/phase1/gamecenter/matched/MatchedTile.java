@@ -3,7 +3,7 @@ package phase1.gamecenter.matched;
 import android.support.annotation.NonNull;
 
 import phase1.gamecenter.R;
-import phase1.gamecenter.Tile;
+import phase1.gamecenter.interfaces.Tile;
 
 /**
  * A MatchedTile in a sliding tiles puzzle.
@@ -208,7 +208,6 @@ public class MatchedTile implements Tile {
             case 50:
                 background = R.drawable.colour_20;
                 break;
-
         }
     }
 
