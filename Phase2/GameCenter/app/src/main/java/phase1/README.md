@@ -1,3 +1,7 @@
+#PLEASE READ: On line 48 in UserScoreBoardActivity, the code reads: getUserScores("Connect34");
+#add a space between the Connect and the 34 so it looks like this: getUserScores("Connect 34");
+#Thank you <3
+
 # How to Set Up and Run
 
 1.  From MarkUs, copy the repository <URL>.
