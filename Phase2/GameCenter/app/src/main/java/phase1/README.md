@@ -90,7 +90,8 @@ round that you played, and there is a save button in the actual game play to sav
    an AI whose moves are selected using random choice by selecting two random integers. The genius
    mode implements a minimax algorithm that calculates the best move for the AI. Select your mode of
    choice.
-
+- once you've won three of the five rounds, click on another tile to update the scoreboard and for
+    a game over message to be displayed.
 
 -  Under the two player mode, you have the option of playing connect 3 or connect 4 (Tic-Tac-Toe on
    a 5x5 board and you must get 4 in a row.) Select the connect game of your choice.
@@ -107,6 +108,7 @@ round that you played, and there is a save button in the actual game play to sav
    anymore. Should you attempt to, toast messages will prompt you to click the "new round" button.
    Please click the button to start a new round. The TextView will display how many rounds player 1
    and player 2 each have won, as well as the number of rounds that resulted in draws.
+
 
    Scores are determined for the logged in player (Player 1) after a match is finished and depending
    on the game, the score achieved will be different. The amount of points gained or lost is based
